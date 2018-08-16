@@ -1,0 +1,584 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:6075" /> 
+  <meta name="DC.Description.Abstract" content="The original ACAP specification included a vendor registry now used in
+other protocols. This document updates the description of this
+registry, removing the need for a direct normative reference to ACAP,
+and removing ambiguity." /> 
+  <meta name="DC.Creator" content="Dave Cridland &lt;dave.cridland@isode.com&gt;" /> 
+  <meta name="DC.Date.Issued" content="December, 2010" /> 
+  <meta name="DC.Title" content="The Internet Assigned Number Authority (IANA) Application Configuration Access Protocol (ACAP) Vendor Subtrees Registry" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 6075 - The Internet Assigned Number Authority (IANA) Application Configuration Access Protocol (ACAP) Vendor Subtrees Registry</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgblue" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc6075.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc6075" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-cridland-acap-vendor-registry" title="draft-cridland-acap-vendor-registry">draft-cridland-...</a>] [<a href="https://datatracker.ietf.org/doc/rfc6075" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc6075" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc6075" title="Side-by-side diff">Diff2</a>] </span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> PROPOSED STANDARD</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <pre>Internet Engineering Task Force (IETF)                       D. Cridland
+Request for Comments: 6075                                 Isode Limited
+Updates: <a href="https://tools.ietf.org/html/rfc2244">2244</a>                                              December 2010
+Category: Standards Track
+ISSN: 2070-1721
+
+
+The Internet Assigned Number Authority (IANA) Application Configuration
+            Access Protocol (ACAP) Vendor Subtrees Registry
+
+Abstract
+
+   The original Application Configuration Access Protocol (ACAP)
+   specification included a vendor registry now used in other protocols.
+   This document updates the description of this registry, removing the
+   need for a direct normative reference to ACAP and removing ambiguity.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in <a href="https://tools.ietf.org/html/rfc5741#section-2">Section&nbsp;2 of RFC 5741</a>.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   <a href="http://www.rfc-editor.org/info/rfc6075">http://www.rfc-editor.org/info/rfc6075</a>.
+
+Copyright Notice
+
+   Copyright (c) 2010 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+
+<span class="grey">Cridland                     Standards Track                    [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc6075#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6075">RFC 6075</a>              ACAP Vendor Subtrees Registry        December 2010</span>
+
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc6075#section-1">1</a>.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-2">2</a>
+   <a href="https://tools.ietf.org/html/rfc6075#section-2">2</a>.  Conventions Used in This Document . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-2">2</a>
+   <a href="https://tools.ietf.org/html/rfc6075#section-3">3</a>.  The Vendor Subtree Registry . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-3">3</a>
+     <a href="https://tools.ietf.org/html/rfc6075#section-3.1">3.1</a>.  Internationalization  . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-3">3</a>
+     <a href="https://tools.ietf.org/html/rfc6075#section-3.2">3.2</a>.  Formal Syntax . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-4">4</a>
+     <a href="https://tools.ietf.org/html/rfc6075#section-3.3">3.3</a>.  Examples  . . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-4">4</a>
+     <a href="https://tools.ietf.org/html/rfc6075#section-3.4">3.4</a>.  Changes from <a href="https://tools.ietf.org/html/rfc2244">RFC 2244</a> . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-5">5</a>
+   <a href="https://tools.ietf.org/html/rfc6075#section-4">4</a>.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-5">5</a>
+     <a href="https://tools.ietf.org/html/rfc6075#section-4.1">4.1</a>.  Example Registration  . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-6">6</a>
+   <a href="https://tools.ietf.org/html/rfc6075#section-5">5</a>.  Security Considerations . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-6">6</a>
+   <a href="https://tools.ietf.org/html/rfc6075#section-6">6</a>.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-6">6</a>
+   <a href="https://tools.ietf.org/html/rfc6075#section-7">7</a>.  References  . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-6">6</a>
+     <a href="https://tools.ietf.org/html/rfc6075#section-7.1">7.1</a>.  Normative References  . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-6">6</a>
+     <a href="https://tools.ietf.org/html/rfc6075#section-7.2">7.2</a>.  Informative References  . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6075#page-7">7</a>
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc6075#section-1">1</a>. Introduction</h2></span>
+
+   The [<a href="https://tools.ietf.org/html/rfc6075#ref-ACAP" title="&quot;ACAP -- Application Configuration Access Protocol&quot;">ACAP</a>] specification includes the specification and creation of
+   the ACAP Vendor Registry, and this registry has subsequently been
+   reused by several specifications, including both [<a href="https://tools.ietf.org/html/rfc6075#ref-ANNOTATE" title="&quot;Internet Message Access Protocol - ANNOTATE Extension&quot;">ANNOTATE</a>] and
+   [<a href="https://tools.ietf.org/html/rfc6075#ref-METADATA" title="&quot;The IMAP METADATA Extension&quot;">METADATA</a>], and is proving to be a useful mechanism for namespacing
+   various names to within a specific vendor's scope.
+
+   The use of textual rather than numeric identifiers for vendors
+   benefits engineers and operators who are diagnosing protocol problems
+   by allowing them some possibility of identifying the origin of a
+   vendor attribute without having to look it up in a registry (although
+   that remains a necessary fallback).  As such, engineers and operators
+   already have to be familiar with international technical English to
+   diagnose textual protocol problems, the restriction to ASCII may help
+   and is not believed to harm that intended use.  Exposure of vendor
+   attributes directly in end-user user interfaces was not an intended
+   use of the registry.
+
+   This document merely updates the registry to reduce ambiguity in the
+   original specification and dissociates it from the original document
+   in all but name, allowing easier referencing.  It replaces <a href="https://tools.ietf.org/html/rfc6075#section-7.4">Section</a>
+   <a href="https://tools.ietf.org/html/rfc6075#section-7.4">7.4</a> and portions of <a href="https://tools.ietf.org/html/rfc6075#section-4">Section 4</a>, particularly <a href="https://tools.ietf.org/html/rfc6075#section-4.3">Section 4.3</a>, of [<a href="https://tools.ietf.org/html/rfc6075#ref-ACAP" title="&quot;ACAP -- Application Configuration Access Protocol&quot;">ACAP</a>].
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc6075#section-2">2</a>. Conventions Used in This Document</h2></span>
+
+   The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
+   document are to be interpreted as described in [<a href="https://tools.ietf.org/html/rfc6075#ref-KEYWORDS" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">KEYWORDS</a>].
+
+
+
+
+
+<span class="grey">Cridland                     Standards Track                    [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc6075#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6075">RFC 6075</a>              ACAP Vendor Subtrees Registry        December 2010</span>
+
+
+   The formal syntax is to be considered normative and is specified
+   using [<a href="https://tools.ietf.org/html/rfc6075#ref-ABNF" title="&quot;Augmented BNF for Syntax Specifications: ABNF&quot;">ABNF</a>].  Where a formal syntax and the prose are in conflict,
+   the formal syntax takes precedence.
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc6075#section-3">3</a>. The Vendor Subtree Registry</h2></span>
+
+   A Vendor Token is a UTF-8 string that begins with &quot;vendor.&quot; and that
+   is followed by the name of the company or product.  This name MUST
+   NOT contain any slash character, period, or the percent and asterisk
+   characters typically used as wildcards.
+
+   Following this may be names, separated from the Vendor Token by a
+   period, which need not be registered, thus forming a complete Vendor
+   Name.
+
+<span class="h3"><h3><a class="selflink" name="section-3.1" href="https://tools.ietf.org/html/rfc6075#section-3.1">3.1</a>. Internationalization</h3></span>
+
+   Vendor Tokens are able to contain any valid Unicode codepoint,
+   encoded as [<a href="https://tools.ietf.org/html/rfc6075#ref-UTF-8" title="&quot;UTF-8, a transformation format of ISO 10646&quot;">UTF-8</a>], except the special characters.  Since the
+   publication of [<a href="https://tools.ietf.org/html/rfc6075#ref-ACAP" title="&quot;ACAP -- Application Configuration Access Protocol&quot;">ACAP</a>], however, concerns have been raised on the
+   handling and comparison of full Unicode strings; therefore, this
+   specification restricts the current registrations to the ASCII subset
+   of UTF-8.
+
+   Furthermore, characters such as ASCII control characters, most
+   whitespace, and quotes are likely to be confusing and have been
+   similarly restricted.
+
+   Therefore, this document allows only ASCII letters, digits, the
+   hyphen, and space to be used in registrations (the &lt;iana-vendor-tag&gt;
+   ABNF production in <a href="https://tools.ietf.org/html/rfc6075#section-3.2">Section 3.2</a>).
+
+   At the time of publication of this document, no existing
+   registrations violate the new restricted syntax on characters allowed
+   in registrations.  [<a href="https://tools.ietf.org/html/rfc6075#ref-ACAP" title="&quot;ACAP -- Application Configuration Access Protocol&quot;">ACAP</a>] required all Vendor Tokens to be registered
+   with IANA, so the new restriction is not believed to introduce any
+   interoperability issue.
+
+   Finally, note that this document does not change the requirement on
+   processors to accept other non-ASCII Unicode codepoints in Vendor
+   Tokens (the &lt;possible-vendor-tag&gt; ABNF production in <a href="https://tools.ietf.org/html/rfc6075#section-3.2">Section 3.2</a>).
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Cridland                     Standards Track                    [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc6075#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6075">RFC 6075</a>              ACAP Vendor Subtrees Registry        December 2010</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-3.2" href="https://tools.ietf.org/html/rfc6075#section-3.2">3.2</a>. Formal Syntax</h3></span>
+
+   This syntax draws upon productions found within [<a href="https://tools.ietf.org/html/rfc6075#ref-ABNF" title="&quot;Augmented BNF for Syntax Specifications: ABNF&quot;">ABNF</a>] and [<a href="https://tools.ietf.org/html/rfc6075#ref-UTF-8" title="&quot;UTF-8, a transformation format of ISO 10646&quot;">UTF-8</a>].
+   Productions replace those in Section 4.3 of [<a href="https://tools.ietf.org/html/rfc6075#ref-ACAP" title="&quot;ACAP -- Application Configuration Access Protocol&quot;">ACAP</a>].
+
+   vendor-name         = vendor-token *(&quot;.&quot; name-component)
+
+   name-component      = *(name-char / UTF8-2 / UTF8-3 / UTF8-4)
+
+   name-char           = %x01-24 / %x26-29 / %x2B-2D / %x30-7F
+                     ;; ASCII-range characters not including &quot;.&quot;,
+                     ;; &quot;/&quot;, &quot;%&quot;, or &quot;*&quot;.
+
+   vendor-token        = &quot;vendor.&quot; vendor-tag
+                     ;; MUST be registered with IANA
+
+   vendor-tag          = iana-vendor-tag / possible-vendor-tag
+
+   iana-vendor-tag     = 1*(ALPHA / DIGIT / SP / &quot;-&quot;)
+                     ;; This production represents
+                     ;; allowed forms for registrations
+                     ;; under the rules specified in this
+                     ;; document.
+
+   possible-vendor-tag = name-component
+                     ;; This production represents what
+                     ;; applications and specifications
+                     ;; MUST be able to accept.
+
+<span class="h3"><h3><a class="selflink" name="section-3.3" href="https://tools.ietf.org/html/rfc6075#section-3.3">3.3</a>. Examples</h3></span>
+
+   A company Example, Ltd. might register the Subtree &quot;vendor.example&quot;.
+   This means it may use &quot;vendor.example&quot;, or any name at all beginning
+   &quot;vendor.example.&quot;, such as &quot;vendor.example.product&quot;.
+
+   These names might be used in several protocols, and are reserved in
+   all the relevant protocols, so &quot;vendor.example&quot; might be an ACAP
+   [<a href="https://tools.ietf.org/html/rfc6075#ref-ACAP" title="&quot;ACAP -- Application Configuration Access Protocol&quot;">ACAP</a>] dataset class name, and &quot;/vendor/vendor.example&quot; might be a
+   tree of IMAP ANNOTATE entries [<a href="https://tools.ietf.org/html/rfc6075#ref-ANNOTATE" title="&quot;Internet Message Access Protocol - ANNOTATE Extension&quot;">ANNOTATE</a>].
+
+   Example, Ltd. is free to use either &quot;vendor.example&quot;, and group
+   specific products under it using the relevant protocol's hierarchy --
+   perhaps &quot;/shared/vendor/vendor.example/product&quot; annotation
+   [<a href="https://tools.ietf.org/html/rfc6075#ref-ANNOTATE" title="&quot;Internet Message Access Protocol - ANNOTATE Extension&quot;">ANNOTATE</a>], or using more specific names, such as &quot;/shared/vendor/
+   vendor.example.product&quot; annotation.
+
+   Note that the solidus (&quot;/&quot;) characters in the examples above are
+   protocol delimiters that are themselves not part of the Vendor Token.
+
+
+
+<span class="grey">Cridland                     Standards Track                    [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc6075#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6075">RFC 6075</a>              ACAP Vendor Subtrees Registry        December 2010</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-3.4" href="https://tools.ietf.org/html/rfc6075#section-3.4">3.4</a>. Changes from <a href="https://tools.ietf.org/html/rfc2244">RFC 2244</a></h3></span>
+
+   This non-normative section details changes from the original
+   specification of the registry in <a href="https://tools.ietf.org/html/rfc2244">RFC 2244</a>.
+
+   o  Vendor Tokens are restricted to ASCII for registration purposes.
+
+   o  Clarifications that &quot;vendor.&lt;company/product name&gt;&quot; means
+      &quot;vendor.company name&quot; or &quot;vendor.product name&quot; - &quot;vendor.company/
+      product&quot; is and always has been illegal.
+
+   o  Made &quot;vendor.company&quot; a name in its own right - <a href="https://tools.ietf.org/html/rfc2244">RFC 2244</a> only
+      refers to a prefix of &quot;vendor.company.&quot;.
+
+   o  Added example registration, in line with [<a href="https://tools.ietf.org/html/rfc6075#ref-EXAMPLES" title="&quot;Reserved Top Level DNS Names&quot;">EXAMPLES</a>].
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc6075#section-4">4</a>. IANA Considerations</h2></span>
+
+   This specification updates the IANA registry named the ACAP &quot;Vendor
+   Subtrees&quot; registry.  IANA has updated the registry to point at this
+   document.
+
+   Vendors may reserve a portion of the ACAP namespace, which is also
+   used as the namespace for several other protocols, for private use.
+   Vendor Names are reserved for use by that company or product,
+   wherever used, once registered.  Registration is on a first come,
+   first served basis.  Whenever possible, private attributes and
+   classes should be eschewed in favour of improving interoperable
+   protocols.
+
+   Vendors may only use names conforming to iana-vendor-tag at the
+   current time; future revisions of this specification may change this.
+
+   To: iana@iana.org
+   Subject: Registration of ACAP Vendor Subtree
+
+   Private Prefix: vendor.name
+
+   Person and email address to contact for further information:
+
+   (company names and addresses should be included where appropriate)
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Cridland                     Standards Track                    [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc6075#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6075">RFC 6075</a>              ACAP Vendor Subtrees Registry        December 2010</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-4.1" href="https://tools.ietf.org/html/rfc6075#section-4.1">4.1</a>. Example Registration</h3></span>
+
+   IANA is requested to add the following registration, for use by
+   specification authors in examples, similarly to the domains specified
+   in [<a href="https://tools.ietf.org/html/rfc6075#ref-EXAMPLES" title="&quot;Reserved Top Level DNS Names&quot;">EXAMPLES</a>]:
+
+   To: iana@iana.org
+   Subject: Registration of ACAP Vendor Subtree
+
+   Private Prefix: vendor.example
+
+   Person and email address to contact for further information:
+
+   Dave Cridland &lt;dave.cridland@isode.com&gt;
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc6075#section-5">5</a>. Security Considerations</h2></span>
+
+   There are no known security issues with this registry.  Individual
+   protocols using Vendor Subtree names may have security issues, and
+   the introduction of Unicode has, in itself, security implications --
+   the restriction of this is thought to mitigate these.
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc6075#section-6">6</a>. Acknowledgements</h2></span>
+
+   Thanks must go to Chris Newman, John Myers, and the other designers
+   of ACAP for the initial creation of the registry.  Thanks also to
+   Alexey Melnikov for advice on this revision.
+
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc6075#section-7">7</a>. References</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-7.1" href="https://tools.ietf.org/html/rfc6075#section-7.1">7.1</a>. Normative References</h3></span>
+
+   [<a name="ref-ABNF" id="ref-ABNF">ABNF</a>]     Crocker, D. and P. Overell, &quot;Augmented BNF for Syntax
+              Specifications: ABNF&quot;, STD 68, <a href="https://tools.ietf.org/html/rfc5234">RFC 5234</a>, January 2008.
+
+   [<a name="ref-ACAP" id="ref-ACAP">ACAP</a>]     Newman, C. and J. Myers, &quot;ACAP -- Application
+              Configuration Access Protocol&quot;, <a href="https://tools.ietf.org/html/rfc2244">RFC 2244</a>, November 1997.
+
+   [<a name="ref-KEYWORDS" id="ref-KEYWORDS">KEYWORDS</a>]
+              Bradner, S., &quot;Key words for use in RFCs to Indicate
+              Requirement Levels&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>, March 1997.
+
+   [<a name="ref-UTF-8" id="ref-UTF-8">UTF-8</a>]    Yergeau, F., &quot;UTF-8, a transformation format of ISO
+              10646&quot;, STD 63, <a href="https://tools.ietf.org/html/rfc3629">RFC 3629</a>, November 2003.
+
+
+
+
+
+
+<span class="grey">Cridland                     Standards Track                    [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc6075#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6075">RFC 6075</a>              ACAP Vendor Subtrees Registry        December 2010</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-7.2" href="https://tools.ietf.org/html/rfc6075#section-7.2">7.2</a>. Informative References</h3></span>
+
+   [<a name="ref-ANNOTATE" id="ref-ANNOTATE">ANNOTATE</a>]
+              Daboo, C. and R. Gellens, &quot;Internet Message Access
+              Protocol - ANNOTATE Extension&quot;, <a href="https://tools.ietf.org/html/rfc5257">RFC 5257</a>, June 2008.
+
+   [<a name="ref-EXAMPLES" id="ref-EXAMPLES">EXAMPLES</a>]
+              Eastlake 3rd, D. and A. Panitz, &quot;Reserved Top Level DNS
+              Names&quot;, <a href="https://tools.ietf.org/html/bcp32">BCP 32</a>, <a href="https://tools.ietf.org/html/rfc2606">RFC 2606</a>, June 1999.
+
+   [<a name="ref-METADATA" id="ref-METADATA">METADATA</a>]
+              Daboo, C., &quot;The IMAP METADATA Extension&quot;, <a href="https://tools.ietf.org/html/rfc5464">RFC 5464</a>,
+              February 2009.
+
+Author's Address
+
+   Dave Cridland
+   Isode Limited
+   5 Castle Business Village
+   36, Station Road
+   Hampton, Middlesex  TW12 2BX
+   GB
+
+   EMail: dave.cridland@isode.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cridland                     Standards Track                    [Page 7]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

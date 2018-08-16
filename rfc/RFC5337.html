@@ -1,0 +1,1229 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:5337" /> 
+  <meta name="DC.Description.Abstract" content="Delivery status notifications (DSNs) are critical to the correct
+operation of an email system. However, the existing draft standard is
+presently limited to US-ASCII text in the machine readable portions of
+the protocol. This specification adds a new address type for
+international email addresses so an original recipient address with
+non-US-ASCII characters can be correctly preserved even after
+downgrading. This also provides updated content return media types for
+delivery status notifications and message disposition notifications to
+support use of the new address type.  This document experimentally
+extends RFC 3461, RFC 3464 and RFC 3798." /> 
+  <meta name="DC.Creator" content="Melnikov, Alexey" /> 
+  <meta name="DC.Creator" content="Newman, Chris" /> 
+  <meta name="DC.Date.Issued" content="September, 2008" /> 
+  <meta name="DC.Title" content="Internationalized Delivery Status and Disposition Notifications" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 5337 - Internationalized Delivery Status and Disposition Notifications</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgbrown" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc5337.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc5337" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-ietf-eai-dsn" title="draft-ietf-eai-dsn">draft-ietf-eai-dsn</a>] [<a href="https://datatracker.ietf.org/doc/rfc5337" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc5337" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc5337" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5337">Errata</a>]</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo">Obsoleted by: <a href="https://tools.ietf.org/html/rfc6533">6533</a> EXPERIMENTAL</span>
+   <br /> 
+   <span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span>
+   <br /> 
+   <pre>Network Working Group                                          C. Newman
+Request for Comments: 5337                              Sun Microsystems
+Updates: <a href="https://tools.ietf.org/html/rfc3461">3461</a>, <a href="https://tools.ietf.org/html/rfc3464">3464</a>, <a href="https://tools.ietf.org/html/rfc3798">3798</a>                               A. Melnikov, Ed.
+Category: Experimental                                         Isode Ltd
+                                                          September 2008
+
+
+    <span class="h1"><h1>Internationalized Delivery Status and Disposition Notifications</h1></span>
+
+Status of This Memo
+
+   This memo defines an Experimental Protocol for the Internet
+   community.  It does not specify an Internet standard of any kind.
+   Discussion and suggestions for improvement are requested.
+   Distribution of this memo is unlimited.
+
+Abstract
+
+   Delivery status notifications (DSNs) are critical to the correct
+   operation of an email system.  However, the existing Draft Standards
+   (<a href="https://tools.ietf.org/html/rfc3461">RFC 3461</a>, <a href="https://tools.ietf.org/html/rfc3462">RFC 3462</a>, <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a>) are presently limited to US-ASCII text
+   in the machine-readable portions of the protocol.  This specification
+   adds a new address type for international email addresses so an
+   original recipient address with non-US-ASCII characters can be
+   correctly preserved even after downgrading.  This also provides
+   updated content return media types for delivery status notifications
+   and message disposition notifications to support use of the new
+   address type.
+
+   This document experimentally extends <a href="https://tools.ietf.org/html/rfc3461">RFC 3461</a>, <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a>, and <a href="https://tools.ietf.org/html/rfc3798">RFC</a>
+   <a href="https://tools.ietf.org/html/rfc3798">3798</a>.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                      [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc5337#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc5337#section-1">1</a>.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5337#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc5337#section-2">2</a>.  Conventions Used in This Document  . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5337#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc5337#section-3">3</a>.  UTF-8 Address Type . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5337#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc5337#section-4">4</a>.  UTF-8 Delivery Status Notifications  . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5337#page-6">6</a>
+     <a href="https://tools.ietf.org/html/rfc5337#section-4.1">4.1</a>.  Additional Requirements on SMTP Servers  . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5337#page-8">8</a>
+   <a href="https://tools.ietf.org/html/rfc5337#section-5">5</a>.  UTF-8 Message Disposition Notifications  . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5337#page-9">9</a>
+   <a href="https://tools.ietf.org/html/rfc5337#section-6">6</a>.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc5337#page-10">10</a>
+     <a href="https://tools.ietf.org/html/rfc5337#section-6.1">6.1</a>.  UTF-8 Mail Address Type Registration . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc5337#page-10">10</a>
+     <a href="https://tools.ietf.org/html/rfc5337#section-6.2">6.2</a>.  Update to 'smtp' Diagnostic Type Registration  . . . . . . <a href="https://tools.ietf.org/html/rfc5337#page-11">11</a>
+     <a href="https://tools.ietf.org/html/rfc5337#section-6.3">6.3</a>.  message/global-headers . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc5337#page-11">11</a>
+     <a href="https://tools.ietf.org/html/rfc5337#section-6.4">6.4</a>.  message/global-delivery-status . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc5337#page-12">12</a>
+     <a href="https://tools.ietf.org/html/rfc5337#section-6.5">6.5</a>.  message/global-disposition-notification  . . . . . . . . . <a href="https://tools.ietf.org/html/rfc5337#page-13">13</a>
+   <a href="https://tools.ietf.org/html/rfc5337#section-7">7</a>.  Security Considerations  . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc5337#page-15">15</a>
+   <a href="https://tools.ietf.org/html/rfc5337#section-8">8</a>.  References . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc5337#page-15">15</a>
+     <a href="https://tools.ietf.org/html/rfc5337#section-8.1">8.1</a>.  Normative References . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc5337#page-15">15</a>
+     <a href="https://tools.ietf.org/html/rfc5337#section-8.2">8.2</a>.  Informative References . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc5337#page-16">16</a>
+   <a href="https://tools.ietf.org/html/rfc5337#appendix-A">Appendix A</a>.  Acknowledgements  . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc5337#page-17">17</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                      [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc5337#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc5337#section-1">1</a>. Introduction</h2></span>
+
+   When an email message is transmitted using the UTF8SMTP [<a href="https://tools.ietf.org/html/rfc5336" title="&quot;SMTP Extension for Internationalized Email Addresses&quot;">RFC5336</a>]
+   extension and Internationalized Email Headers [<a href="https://tools.ietf.org/html/rfc5335" title="&quot;Internationalized Email Headers&quot;">RFC5335</a>], it is
+   sometimes necessary to return that message or generate a Message
+   Disposition Notification (MDN) [<a href="https://tools.ietf.org/html/rfc3798" title="&quot;Message Disposition Notification&quot;">RFC3798</a>].  As a message sent to
+   multiple recipients can generate a status and disposition
+   notification for each recipient, it is helpful if a client can
+   correlate these notifications based on the recipient address it
+   provided; thus, preservation of the original recipient is important.
+   This specification describes how to preserve the original recipient
+   and updates the MDN and DSN formats to support the new address types.
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc5337#section-2">2</a>. Conventions Used in This Document</h2></span>
+
+   The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
+   document are to be interpreted as described in [<a href="https://tools.ietf.org/html/rfc2119" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">RFC2119</a>].
+
+   The formal syntax use the Augmented Backus-Naur Form (ABNF) [<a href="https://tools.ietf.org/html/rfc5234" title="&quot;Augmented BNF for Syntax Specifications: ABNF&quot;">RFC5234</a>]
+   notation including the core rules defined in <a href="https://tools.ietf.org/html/rfc5234#appendix-B">Appendix&nbsp;B of RFC 5234</a>
+   [<a href="https://tools.ietf.org/html/rfc5234" title="&quot;Augmented BNF for Syntax Specifications: ABNF&quot;">RFC5234</a>] and the UTF-8 syntax rules in <a href="https://tools.ietf.org/html/rfc3629#section-4">Section&nbsp;4 of [RFC3629]</a>.
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc5337#section-3">3</a>. UTF-8 Address Type</h2></span>
+
+   An Extensible Message Format for Delivery Status Notifications
+   [<a href="https://tools.ietf.org/html/rfc3464" title="&quot;An Extensible Message Format for Delivery Status Notifications&quot;">RFC3464</a>] defines the concept of an address type.  The address format
+   introduced in Internationalized Email Headers [<a href="https://tools.ietf.org/html/rfc5335" title="&quot;Internationalized Email Headers&quot;">RFC5335</a>] is a new
+   address type.  The syntax for the new address type in the context of
+   status notifications is specified at the end of this section.
+
+   An SMTP [<a href="https://tools.ietf.org/html/rfc2821" title="&quot;Simple Mail Transfer Protocol&quot;">RFC2821</a>] server that advertises both the UTF8SMTP extension
+   [<a href="https://tools.ietf.org/html/rfc5336" title="&quot;SMTP Extension for Internationalized Email Addresses&quot;">RFC5336</a>] and the DSN extension [<a href="https://tools.ietf.org/html/rfc3461" title="&quot;Simple Mail Transfer Protocol (SMTP) Service Extension for Delivery Status Notifications (DSNs)&quot;">RFC3461</a>] MUST accept a UTF-8 address
+   type in the ORCPT parameter including 8-bit UTF-8 characters.  This
+   address type also includes a 7-bit encoding suitable for use in a
+   message/delivery-status body part or an ORCPT parameter sent to an
+   SMTP server that does not advertise UTF8SMTP.
+
+   This address type has 3 forms: utf-8-addr-xtext, utf-8-addr-unitext,
+   and utf-8-address.  The first 2 forms are 7-bit safe.
+
+   The utf-8-address form is only suitable for use in newly defined
+   protocols capable of native representation of 8-bit characters.  That
+   is, the utf-8-address form MUST NOT be used in the ORCPT parameter
+   when the SMTP server doesn't advertise support for UTF8SMTP or the
+   SMTP server supports UTF8SMTP, but the address contains US-ASCII
+   characters not permitted in the ORCPT parameter (e.g., the ORCPT
+   parameter forbids unencoded SP and the = character), or in a 7-bit
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                      [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc5337#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+   transport environment including a message/delivery-status Original-
+   Recipient or Final-Recipient field.  In the former case, the utf-8-
+   addr-xtext form (see below) MUST be used instead; in the latter case,
+   the utf-8-addr-unitext form MUST be used.  The utf-8-address form MAY
+   be used in the ORCPT parameter when the SMTP server also advertises
+   support for UTF8SMTP and the address doesn't contain any US-ASCII
+   characters not permitted in the ORCPT parameter.  It SHOULD be used
+   in a message/global-delivery-status Original-Recipient or Final-
+   Recipient DSN field, or in an Original-Recipient header field
+   [<a href="https://tools.ietf.org/html/rfc3798" title="&quot;Message Disposition Notification&quot;">RFC3798</a>] if the message is a UTF8SMTP message.
+
+   In addition, the utf-8-addr-unitext form can be used anywhere where
+   the utf-8-address form is allowed.
+
+   When using in the ORCPT parameter, the UTF-8 address type requires
+   that US-ASCII CTLs, SP, \, +, and = be encoded using xtext encoding
+   as described in [<a href="https://tools.ietf.org/html/rfc3461" title="&quot;Simple Mail Transfer Protocol (SMTP) Service Extension for Delivery Status Notifications (DSNs)&quot;">RFC3461</a>].  This is described by the utf-8-addr-xtext
+   form in the ABNF below.  Unicode characters MAY be included in a
+   UTF-8 address type using a &quot;\x{HEXPOINT}&quot; syntax
+   (EmbeddedUnicodeChar), where HEXPOINT is 2 to 6 hexadecimal digits.
+   When sending data to a UTF8SMTP-capable server, native UTF-8
+   characters SHOULD be used instead of the EmbeddedUnicodeChar syntax
+   described in details below.  When sending data to an SMTP server that
+   does not advertise UTF8SMTP, then the EmbeddedUnicodeChar syntax MUST
+   be used instead of UTF-8.
+
+   When the ORCPT parameter is placed in a message/
+   global-delivery-status Original-Recipient field, the utf-8-addr-xtext
+   form of the UTF-8 address type SHOULD be converted to the utf-8-
+   address form (see the ABNF below) by removing all xtext encoding
+   first (which will result in the utf-8-addr-unitext form), followed by
+   removal of the unitext encoding.  However, if an address is labeled
+   with the UTF-8 address type but does not conform to utf-8 syntax,
+   then it MUST be copied into the message/global-delivery-status field
+   without alteration.
+
+   The ability to encode characters with the EmbeddedUnicodeChar
+   encodings should be viewed as a transitional mechanism.  It is hoped
+   that as systems lacking support for UTF8SMTP become less common over
+   time, these encodings can eventually be phased out.
+
+   In the ABNF below, all productions not defined in this document are
+   defined in <a href="https://tools.ietf.org/html/rfc5234#appendix-B">Appendix&nbsp;B of [RFC5234]</a>, in <a href="https://tools.ietf.org/html/rfc3629#section-4">Section&nbsp;4 of [RFC3629]</a>, or in
+   [<a href="https://tools.ietf.org/html/rfc3464" title="&quot;An Extensible Message Format for Delivery Status Notifications&quot;">RFC3464</a>].
+
+
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                      [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc5337#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+  utf-8-type-addr     = &quot;utf-8;&quot; utf-8-enc-addr
+
+  utf-8-address       = uMailbox [ 1*WSP &quot;&lt;&quot; Mailbox &quot;&gt;&quot; ]
+    ; uMailbox is defined in [<a href="https://tools.ietf.org/html/rfc5336" title="&quot;SMTP Extension for Internationalized Email Addresses&quot;">RFC5336</a>].
+    ; Mailbox is defined in [<a href="https://tools.ietf.org/html/rfc2821" title="&quot;Simple Mail Transfer Protocol&quot;">RFC2821</a>].
+
+  utf-8-enc-addr      = utf-8-addr-xtext /
+                        utf-8-addr-unitext /
+                        utf-8-address
+
+  utf-8-addr-xtext    = xtext
+                    ; xtext is defined in [<a href="https://tools.ietf.org/html/rfc3461" title="&quot;Simple Mail Transfer Protocol (SMTP) Service Extension for Delivery Status Notifications (DSNs)&quot;">RFC3461</a>].
+                    ; When xtext encoding is removed,
+                    ; the syntax MUST conform to
+                    ; utf-8-addr-unitext.
+
+  utf-8-addr-unitext  = 1*(QUCHAR / EmbeddedUnicodeChar)
+                      ; MUST follow utf-8-address ABNF when
+                      ; dequoted
+
+  QUCHAR              = %x21-2a / %x2c-3c / %x3e-5b / %x5d-7e /
+                        UTF8-2 / UTF8-3 / UTF8-4
+                      ; US-ASCII printable characters except
+                      ; CTLs, SP, '\', '+' and '=', plus
+                      ; other Unicode characters in UTF-8
+
+  EmbeddedUnicodeChar =   %x5C.78 &quot;{&quot; HEXPOINT &quot;}&quot;
+                      ; starts with &quot;\x&quot;
+
+  HEXPOINT = &quot;5C&quot; / (HEXDIG8 HEXDIG) /    ; 2 digit forms
+             ( NZHEXDIG 2(HEXDIG) ) /     ; 3 digit forms
+             ( NZDHEXDIG 3(HEXDIG) ) /
+             ( &quot;D&quot; %x30-37 2(HEXDIG) ) /
+                      ; 4 digit forms excluding surrogate
+             ( NZHEXDIG 4(HEXDIG) ) /     ; 5 digit forms
+                     ( &quot;10&quot; 4*HEXDIG )    ; 6 digit forms
+             ; represents either &quot;\&quot; or a Unicode code point outside the
+             ; US-ASCII repertoire
+
+  HEXDIG8             = %x38-39 / &quot;A&quot; / &quot;B&quot; / &quot;C&quot; / &quot;D&quot; / &quot;E&quot; / &quot;F&quot;
+                      ; HEXDIG excluding 0-7
+  NZHEXDIG            = %x31-39 / &quot;A&quot; / &quot;B&quot; / &quot;C&quot; / &quot;D&quot; / &quot;E&quot; / &quot;F&quot;
+                      ; HEXDIG excluding &quot;0&quot;
+  NZDHEXDIG           = %x31-39 / &quot;A&quot; / &quot;B&quot; / &quot;C&quot; / &quot;E&quot; / &quot;F&quot;
+                      ; HEXDIG excluding &quot;0&quot; and &quot;D&quot;
+
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                      [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc5337#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc5337#section-4">4</a>. UTF-8 Delivery Status Notifications</h2></span>
+
+   A traditional delivery status notification [<a href="https://tools.ietf.org/html/rfc3464" title="&quot;An Extensible Message Format for Delivery Status Notifications&quot;">RFC3464</a>] comes in a
+   three-part multipart/report [<a href="https://tools.ietf.org/html/rfc3462" title="&quot;The Multipart/Report Content Type for the Reporting of Mail System Administrative Messages&quot;">RFC3462</a>] container, where the first part
+   is human-readable text describing the error, the second part is a
+   7-bit-only message/delivery-status, and the optional third part is
+   used for content (message/rfc822) or header (text/rfc822-headers)
+   return.  As the present DSN format does not permit returning of
+   undeliverable UTF8SMTP messages, three new media types are needed.
+
+   The first type, message/global-delivery-status, has the syntax of
+   message/delivery-status with three modifications.  First, the charset
+   for message/global-delivery-status is UTF-8, and thus any field MAY
+   contain UTF-8 characters when appropriate (see the ABNF below).  In
+   particular, the Diagnostic-Code field MAY contain UTF-8 as described
+   in UTF8SMTP [<a href="https://tools.ietf.org/html/rfc5336" title="&quot;SMTP Extension for Internationalized Email Addresses&quot;">RFC5336</a>]; the Diagnostic-Code field SHOULD be in
+   i-default language [<a href="https://tools.ietf.org/html/rfc5337#ref-DEFAULTLANG" title="&quot;IETF Policy on Character Sets and Languages&quot;">DEFAULTLANG</a>].  Second, systems generating a
+   message/global-delivery-status body part SHOULD use the utf-8-address
+   form of the UTF-8 address type for all addresses containing
+   characters outside the US-ASCII repertoire.  These systems SHOULD up-
+   convert the utf-8-addr-xtext or the utf-8-addr-unitext form of a
+   UTF-8 address type in the ORCPT parameter to the utf-8-address form
+   of a UTF-8 address type in the Original-Recipient field.  Third, a
+   new optional field called Localized-Diagnostic is added.  Each
+   instance includes a language tag [<a href="https://tools.ietf.org/html/rfc5337#ref-LANGTAGS" title="&quot;Tags for Identifying Languages&quot;">LANGTAGS</a>] and contains text in the
+   specified language.  This is equivalent to the text part of the
+   Diagnostic-Code field.  All instances of Localized-Diagnostic MUST
+   use different language tags.  The ABNF for message/
+   global-delivery-status is specified below.
+
+   In the ABNF below, all productions not defined in this document are
+   defined in <a href="https://tools.ietf.org/html/rfc5234#appendix-B">Appendix&nbsp;B of [RFC5234]</a>, in <a href="https://tools.ietf.org/html/rfc3629#section-4">Section&nbsp;4 of [RFC3629]</a>, or in
+   [<a href="https://tools.ietf.org/html/rfc3464" title="&quot;An Extensible Message Format for Delivery Status Notifications&quot;">RFC3464</a>].
+
+   utf-8-delivery-status-content = per-message-fields
+                         1*( CRLF utf-8-per-recipient-fields )
+        ; &quot;per-message-fields&quot; remains unchanged from the definition
+            ; in <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a>, except for the &quot;extension-field&quot;
+            ; which is updated below.
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                      [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc5337#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+    utf-8-per-recipient-fields =
+         [ original-recipient-field CRLF ]
+         final-recipient-field CRLF
+         action-field CRLF
+         status-field CRLF
+         [ remote-mta-field CRLF ]
+         [ diagnostic-code-field CRLF
+           *(localized-diagnostic-text-field CRLF) ]
+         [ last-attempt-date-field CRLF ]
+         [ will-retry-until-field CRLF ]
+         *( extension-field CRLF )
+     ; All fields except for &quot;original-recipient-field&quot;,
+     ; &quot;final-recipient-field&quot;, &quot;diagnostic-code-field&quot;
+     ; and &quot;extension-field&quot; remain unchanged from
+     ; the definition in <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a>.
+
+   generic-address =/ utf-8-enc-addr
+     ; Only allowed with the &quot;utf-8&quot; address-type.
+     ;
+     ; This indirectly updates &quot;original-recipient-field&quot;
+     ; and &quot;final-recipient-field&quot;
+
+   diagnostic-code-field =
+        &quot;Diagnostic-Code&quot; &quot;:&quot; diagnostic-type &quot;;&quot; *text-fixed
+
+   localized-diagnostic-text-field =
+        &quot;Localized-Diagnostic&quot; &quot;:&quot; Language-Tag &quot;;&quot; *utf8-text
+     ; &quot;Language-Tag&quot; is a language tag as defined in [<a href="https://tools.ietf.org/html/rfc5337#ref-LANGTAGS" title="&quot;Tags for Identifying Languages&quot;">LANGTAGS</a>].
+
+   extension-field =/ extension-field-name &quot;:&quot; *utf8-text
+
+   text-fixed = %d1-9 /      ; Any Unicode character except for NUL,
+               %d11 /       ; CR and LF, encoded in UTF-8
+               %d12 /
+               %d14-127
+     ; Same as &lt;text&gt; from [<a href="https://tools.ietf.org/html/rfc2822" title="&quot;Internet Message Format&quot;">RFC2822</a>], but without &lt;obs-text&gt;.
+     ; If/when <a href="https://tools.ietf.org/html/rfc2822">RFC 2822</a> is updated to disallow &lt;obs-text&gt;,
+     ; this should become just &lt;text&gt;
+     ; Also, if/when <a href="https://tools.ietf.org/html/rfc2822">RFC 2822</a> is updated to disallow control characters
+     ; this should become a reference to RFC 2822upd instead.
+
+   utf8-text = text-fixed / UTF8-non-ascii
+
+   UTF8-non-ascii   = UTF8-2 / UTF8-3 / UTF8-4
+
+
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                      [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc5337#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+   The second type, used for returning the content, is message/global
+   which is similar to message/rfc822, except it contains a message with
+   UTF-8 headers.  This media type is described in [<a href="https://tools.ietf.org/html/rfc5335" title="&quot;Internationalized Email Headers&quot;">RFC5335</a>].
+
+   The third type, used for returning the headers, is message/
+   global-headers and contains only the UTF-8 header fields of a message
+   (all lines prior to the first blank line in a UTF8SMTP message).
+   Unlike message/global, this body part provides no difficulties for
+   the present infrastructure.
+
+   Note that as far as multipart/report [<a href="https://tools.ietf.org/html/rfc3462" title="&quot;The Multipart/Report Content Type for the Reporting of Mail System Administrative Messages&quot;">RFC3462</a>] container is
+   concerned, message/global-delivery-status, message/global, and
+   message/global-headers MUST be treated as equivalent to message/
+   delivery-status, message/rfc822, and text/rfc822-headers.  That is,
+   implementations processing multipart/report MUST expect any
+   combinations of the 6 MIME types mentioned above inside a multipart/
+   report MIME type.
+
+   All three new types will typically use the &quot;8bit&quot; Content-Transfer-
+   Encoding.  (In the event all content is 7-bit, the equivalent
+   traditional types for delivery status notifications MAY be used.  For
+   example, if information in message/global-delivery-status part can be
+   represented without any loss of information as message/
+   delivery-status, then the message/delivery-status body part may be
+   used.)  Note that [<a href="https://tools.ietf.org/html/rfc5335" title="&quot;Internationalized Email Headers&quot;">RFC5335</a>] relaxed restriction from MIME [<a href="https://tools.ietf.org/html/rfc2046" title="&quot;Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types&quot;">RFC2046</a>]
+   regarding use of Content-Transfer-Encoding in new &quot;message&quot; subtypes.
+   This specification explicitly allows use of Content-Transfer-Encoding
+   in message/global-headers and message/global-delivery-status.  This
+   is not believed to be problematic as these new MIME types are
+   intended primarily for use by newer systems with full support for
+   8-bit MIME and UTF-8 headers.
+
+<span class="h3"><h3><a class="selflink" name="section-4.1" href="https://tools.ietf.org/html/rfc5337#section-4.1">4.1</a>. Additional Requirements on SMTP Servers</h3></span>
+
+   If an SMTP server that advertises both UTF8SMTP and DSN needs to
+   return an undeliverable UTF8SMTP message, then it MUST NOT downgrade
+   [<a href="https://tools.ietf.org/html/rfc5337#ref-DOWNGRADE" title="&quot;Downgrading mechanism for Email Address Internationalization&quot;">DOWNGRADE</a>] the UTF8SMTP message when generating the corresponding
+   multipart/report.  If the return path SMTP server does not support
+   UTF8SMTP, then the undeliverable body part and headers MUST be
+   encoded using a 7-bit Content-Transfer-Encoding such as &quot;base64&quot; or
+   &quot;quoted-printable&quot; [<a href="https://tools.ietf.org/html/rfc2045" title="&quot;Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies&quot;">RFC2045</a>], as detailed in <a href="https://tools.ietf.org/html/rfc5337#section-4">Section 4</a>.  Otherwise,
+   &quot;8bit&quot; Content-Transfer-Encoding can be used.
+
+
+
+
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                      [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc5337#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc5337#section-5">5</a>. UTF-8 Message Disposition Notifications</h2></span>
+
+   Message Disposition Notifications [<a href="https://tools.ietf.org/html/rfc3798" title="&quot;Message Disposition Notification&quot;">RFC3798</a>] have a similar design and
+   structure to DSNs.  As a result, they use the same basic return
+   format.  When generating an MDN for a UTF-8 header message, the third
+   part of the multipart/report contains the returned content (message/
+   global) or header (message/global-headers), same as for DSNs.  The
+   second part of the multipart/report uses a new media type, message/
+   global-disposition-notification, which has the syntax of message/
+   disposition-notification with two modifications.  First, the charset
+   for message/global-disposition-notification is UTF-8, and thus any
+   field MAY contain UTF-8 characters when appropriate (see the ABNF
+   below).  (In particular, the failure-field, the error-field, and the
+   warning-field MAY contain UTF-8.  These fields SHOULD be in i-default
+   language [<a href="https://tools.ietf.org/html/rfc5337#ref-DEFAULTLANG" title="&quot;IETF Policy on Character Sets and Languages&quot;">DEFAULTLANG</a>].)  Second, systems generating a message/
+   global-disposition-notification body part (typically a mail user
+   agent) SHOULD use the UTF-8 address type for all addresses containing
+   characters outside the US-ASCII repertoire.
+
+   The MDN specification also defines the Original-Recipient header
+   field, which is added with a copy of the contents of ORCPT at
+   delivery time.  When generating an Original-Recipient header field, a
+   delivery agent writing a UTF-8 header message in native format SHOULD
+   convert the utf-8-addr-xtext or the utf-8-addr-unitext form of a
+   UTF-8 address type in the ORCPT parameter to the corresponding utf-8-
+   address form.
+
+   The MDN specification also defines the Disposition-Notification-To
+   header, which is an address header and thus follows the same 8-bit
+   rules as other address headers such as &quot;From&quot; and &quot;To&quot; when used in a
+   UTF-8 header message.
+
+     ; ABNF for &quot;original-recipient-header&quot;, &quot;original-recipient-field&quot;,
+     ; and &quot;final-recipient-field&quot; from <a href="https://tools.ietf.org/html/rfc3798">RFC 3798</a> is implicitly updated
+     ; as they use the updated &quot;generic-address&quot; as defined in
+     ; <a href="https://tools.ietf.org/html/rfc5337#section-4">Section 4</a> of this document.
+
+   failure-field = &quot;Failure&quot; &quot;:&quot; *utf8-text
+     ; &quot;utf8-text&quot; is defined in <a href="https://tools.ietf.org/html/rfc5337#section-4">Section 4</a> of this document.
+
+   error-field = &quot;Error&quot; &quot;:&quot; *utf8-text
+     ; &quot;utf8-text&quot; is defined in <a href="https://tools.ietf.org/html/rfc5337#section-4">Section 4</a> of this document.
+
+   warning-field = &quot;Warning&quot; &quot;:&quot; *utf8-text
+     ; &quot;utf8-text&quot; is defined in <a href="https://tools.ietf.org/html/rfc5337#section-4">Section 4</a> of this document.
+
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                      [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc5337#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc5337#section-6">6</a>. IANA Considerations</h2></span>
+
+   This specification does not create any new IANA registries.  However,
+   the following items have been registered as a result of this
+   document.
+
+<span class="h3"><h3><a class="selflink" name="section-6.1" href="https://tools.ietf.org/html/rfc5337#section-6.1">6.1</a>. UTF-8 Mail Address Type Registration</h3></span>
+
+   The mail address type registry was created by <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a>.  The
+   registration template response follows:
+
+   (a) The proposed address-type name.
+
+       UTF-8
+
+   (b) The syntax for mailbox addresses of this type, specified using
+       BNF, regular expressions, ASN.1, or other non-ambiguous language.
+
+       See <a href="https://tools.ietf.org/html/rfc5337#section-3">Section 3</a>.
+
+   (c) If addresses of this type are not composed entirely of graphic
+       characters from the US-ASCII repertoire, a specification for how
+       they are to be encoded as graphic US-ASCII characters in a DSN
+       Original-Recipient or Final-Recipient DSN field.
+
+       This address type has 3 forms (as defined in <a href="https://tools.ietf.org/html/rfc5337#section-3">Section 3</a>): utf-8-
+       addr-xtext, utf-8-addr-unitext, and utf-8-address.  The first 2
+       forms are 7-bit safe.
+
+   The utf-8-address form MUST NOT be used
+
+   1.  in the ORCPT parameter when the SMTP server doesn't advertise
+       support for UTF8SMTP;
+
+   2.  or the SMTP server supports UTF8SMTP, but the address contains
+       US-ASCII characters not permitted in the ORCPT parameter (e.g.,
+       the ORCPT parameter forbids SP and the = characters);
+
+   3.  or in a 7-bit transport environment including a message/
+       delivery-status Original-Recipient or Final-Recipient field.
+
+   The utf-8-addr-xtext form MUST be used instead in the first case; the
+   utf-8-addr-unitext form MUST be used in the other two cases.  The
+   utf-8-address form MAY be used in the ORCPT parameter when the SMTP
+   server also advertises support for UTF8SMTP and the address doesn't
+   contain any US-ASCII characters not permitted in the ORCPT parameter;
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                     [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc5337#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+   in a message/global-delivery-status Original-Recipient or Final-
+   Recipient DSN field; or in an Original-Recipient header field
+   [<a href="https://tools.ietf.org/html/rfc3798" title="&quot;Message Disposition Notification&quot;">RFC3798</a>] if the message is a UTF8SMTP message.
+
+   In addition, the utf-8-addr-unitext form can be used anywhere where
+   the utf-8-address form is allowed.
+
+<span class="h3"><h3><a class="selflink" name="section-6.2" href="https://tools.ietf.org/html/rfc5337#section-6.2">6.2</a>. Update to 'smtp' Diagnostic Type Registration</h3></span>
+
+   The mail diagnostic type registry was created by <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a>.  The
+   registration for the 'smtp' diagnostic type should be updated to
+   reference <a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a> in addition to <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a>.
+
+   When the 'smtp' diagnostic type is used in the context of a message/
+   delivery-status body part, it remains as presently defined.  When the
+   'smtp' diagnostic type is used in the context of a message/
+   global-delivery-status body part, the codes remain the same, but the
+   text portion MAY contain UTF-8 characters.
+
+<span class="h3"><h3><a class="selflink" name="section-6.3" href="https://tools.ietf.org/html/rfc5337#section-6.3">6.3</a>. message/global-headers</h3></span>
+
+   Type name:  message
+
+   Subtype name:  global-headers
+
+   Required parameters:  none
+
+   Optional parameters:  none
+
+   Encoding considerations:  This media type contains Internationalized
+      Email Headers [<a href="https://tools.ietf.org/html/rfc5335" title="&quot;Internationalized Email Headers&quot;">RFC5335</a>] with no message body.  Whenever possible,
+      the 8-bit content transfer encoding SHOULD be used.  When this
+      media type passes through a 7-bit-only SMTP infrastructure it MAY
+      be encoded with the base64 or quoted-printable content transfer
+      encoding.
+
+   Security considerations:  See <a href="https://tools.ietf.org/html/rfc5337#section-7">Section 7</a>.
+
+   Interoperability considerations:  It is important that this media
+      type is not converted to a charset other than UTF-8.  As a result,
+      implementations MUST NOT include a charset parameter with this
+      media type.  Although it might be possible to downconvert this
+      media type to the text/rfc822-header media type, such conversion
+      is discouraged as it loses information.
+
+   Published specification:  <a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                     [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc5337#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+   Applications that use this media type:  UTF8SMTP servers and email
+      clients that support multipart/report generation or parsing.
+
+   Additional information:
+
+   Magic number(s):  none
+
+   File extension(s):  In the event this is saved to a file, the
+      extension &quot;.u8hdr&quot; is suggested.
+
+   Macintosh file type code(s):  The 'TEXT' type code is suggested as
+      files of this type are typically used for diagnostic purposes and
+      suitable for analysis in a UTF-8 aware text editor.  A uniform
+      type identifier (UTI) of &quot;public.utf8-email-message-header&quot; is
+      suggested.  This type conforms to &quot;public.utf8-plain-text&quot; and
+      &quot;public.plain-text&quot;.
+
+   Person &amp; email address to contact for further information:  See the
+      Authors' Addresses section of this document.
+
+   Intended usage:  COMMON
+
+   Restrictions on usage:  This media type contains textual data in the
+      UTF-8 charset.  It typically contains octets with the 8th bit set.
+      As a result, a transfer encoding is required when a 7-bit
+      transport is used.
+
+   Author:  See the Authors' Addresses section of this document.
+
+   Change controller:  IETF Standards Process
+
+<span class="h3"><h3><a class="selflink" name="section-6.4" href="https://tools.ietf.org/html/rfc5337#section-6.4">6.4</a>. message/global-delivery-status</h3></span>
+
+   Type name:  message
+
+   Subtype name:  global-delivery-status
+
+   Required parameters:  none
+
+   Optional parameters:  none
+
+   Encoding considerations:  This media type contains delivery status
+      notification attributes in the UTF-8 charset.  The 8-bit content
+      transfer encoding MUST be used with this content-type, unless it
+      is sent over a 7-bit transport environment in which case quoted-
+      printable or base64 may be necessary.
+
+   Security considerations:  See <a href="https://tools.ietf.org/html/rfc5337#section-7">Section 7</a>
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                     [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-13" id="page-13" href="https://tools.ietf.org/html/rfc5337#page-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+   Interoperability considerations:  This media type provides
+      functionality similar to the message/delivery-status content-type
+      for email message return information.  Clients of the previous
+      format will need to be upgraded to interpret the new format;
+      however, the new media type makes it simple to identify the
+      difference.
+
+   Published specification:  <a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>
+
+   Applications that use this media type:  SMTP servers and email
+      clients that support delivery status notification generation or
+      parsing.
+
+   Additional information:
+
+   Magic number(s):  none
+
+   File extension(s):  The extension &quot;.u8dsn&quot; is suggested.
+
+   Macintosh file type code(s):  A uniform type identifier (UTI) of
+      &quot;public.utf8-email-message-delivery-status&quot; is suggested.  This
+      type conforms to &quot;public.utf8-plain-text&quot;.
+
+   Person &amp; email address to contact for further information:  See the
+      Authors' Addresses section of this document.
+
+   Intended usage:  COMMON
+
+   Restrictions on usage:  This is expected to be the second part of a
+      multipart/report.
+
+   Author:  See the Authors' Addresses section of this document.
+
+   Change controller:  IETF Standards Process
+
+<span class="h3"><h3><a class="selflink" name="section-6.5" href="https://tools.ietf.org/html/rfc5337#section-6.5">6.5</a>. message/global-disposition-notification</h3></span>
+
+   Type name:  message
+
+   Subtype name:  global-disposition-notification
+
+   Required parameters:  none
+
+   Optional parameters:  none
+
+
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                     [Page 13]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-14" id="page-14" href="https://tools.ietf.org/html/rfc5337#page-14" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+   Encoding considerations:  This media type contains disposition
+      notification attributes in the UTF-8 charset.  The 8-bit content
+      transfer encoding MUST be used with this content-type, unless it
+      is sent over a 7-bit transport environment in which case quoted-
+      printable or base64 may be necessary.
+
+   Security considerations:  See <a href="https://tools.ietf.org/html/rfc5337#section-7">Section 7</a>.
+
+   Interoperability considerations:  This media type provides
+      functionality similar to the message/disposition-notification
+      content-type for email message disposition information.  Clients
+      of the previous format will need to be upgraded to interpret the
+      new format; however, the new media type makes it simple to
+      identify the difference.
+
+   Published specification:  <a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>
+
+   Applications that use this media type:  Email clients or servers that
+      support message disposition notification generation or parsing.
+
+   Additional information:
+
+   Magic number(s):  none
+
+   File extension(s):  The extension &quot;.u8mdn&quot; is suggested.
+
+   Macintosh file type code(s):  A uniform type identifier (UTI) of
+      &quot;public.utf8-email-message-disposition-notification&quot; is suggested.
+      This type conforms to &quot;public.utf8-plain-text&quot;.
+
+   Person &amp; email address to contact for further information:  See the
+      Authors' Addresses section of this document.
+
+   Intended usage:  COMMON
+
+   Restrictions on usage:  This is expected to be the second part of a
+      multipart/report.
+
+   Author:  See the Authors' Addresses section of this document.
+
+   Change controller:  IETF Standards Process
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                     [Page 14]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-15" id="page-15" href="https://tools.ietf.org/html/rfc5337#page-15" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc5337#section-7">7</a>. Security Considerations</h2></span>
+
+   Automated use of report types without authentication presents several
+   security issues.  Forging negative reports presents the opportunity
+   for denial-of-service attacks when the reports are used for automated
+   maintenance of directories or mailing lists.  Forging positive
+   reports may cause the sender to incorrectly believe a message was
+   delivered when it was not.
+
+   Malicious users can generate report structures designed to trigger
+   coding flaws in report parsers.  Report parsers need to use secure
+   coding techniques to avoid the risk of buffer overflow or denial-of-
+   service attacks against parser coding mistakes.  Code reviews of such
+   parsers are also recommended.
+
+   Malicious users of the email system regularly send messages with
+   forged envelope return paths, and these messages trigger delivery
+   status reports that result in a large amount of unwanted traffic on
+   the Internet.  Many users choose to ignore delivery status
+   notifications because they are usually the result of &quot;blowback&quot; from
+   forged messages and thus never notice when messages they sent go
+   undelivered.  As a result, support for correlation of delivery status
+   and message disposition notification messages with sent-messages has
+   become a critical feature of mail clients and possibly mail stores if
+   the email infrastructure is to remain reliable.  In the short term,
+   simply correlating message-IDs may be sufficient to distinguish true
+   status notifications from those resulting from forged originator
+   addresses.  But in the longer term, including cryptographic signature
+   material that can securely associate the status notification with the
+   original message is advisable.
+
+   As this specification permits UTF-8 in additional fields, the
+   security considerations of UTF-8 [<a href="https://tools.ietf.org/html/rfc3629" title="&quot;UTF-8, a transformation format of ISO 10646&quot;">RFC3629</a>] apply.
+
+<span class="h2"><h2><a class="selflink" name="section-8" href="https://tools.ietf.org/html/rfc5337#section-8">8</a>. References</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-8.1" href="https://tools.ietf.org/html/rfc5337#section-8.1">8.1</a>. Normative References</h3></span>
+
+   [<a name="ref-RFC2119" id="ref-RFC2119">RFC2119</a>]      Bradner, S., &quot;Key words for use in RFCs to Indicate
+                  Requirement Levels&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>, March 1997.
+
+   [<a name="ref-RFC2821" id="ref-RFC2821">RFC2821</a>]      Klensin, J., &quot;Simple Mail Transfer Protocol&quot;,
+                  <a href="https://tools.ietf.org/html/rfc2821">RFC 2821</a>, April 2001.
+
+   [<a name="ref-RFC2822" id="ref-RFC2822">RFC2822</a>]      Resnick, P., &quot;Internet Message Format&quot;, <a href="https://tools.ietf.org/html/rfc2822">RFC 2822</a>,
+                  April 2001.
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                     [Page 15]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-16" id="page-16" href="https://tools.ietf.org/html/rfc5337#page-16" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+   [<a name="ref-RFC3461" id="ref-RFC3461">RFC3461</a>]      Moore, K., &quot;Simple Mail Transfer Protocol (SMTP)
+                  Service Extension for Delivery Status Notifications
+                  (DSNs)&quot;, <a href="https://tools.ietf.org/html/rfc3461">RFC 3461</a>, January 2003.
+
+   [<a name="ref-RFC3462" id="ref-RFC3462">RFC3462</a>]      Vaudreuil, G., &quot;The Multipart/Report Content Type for
+                  the Reporting of Mail System Administrative Messages&quot;,
+                  <a href="https://tools.ietf.org/html/rfc3462">RFC 3462</a>, January 2003.
+
+   [<a name="ref-RFC3464" id="ref-RFC3464">RFC3464</a>]      Moore, K. and G. Vaudreuil, &quot;An Extensible Message
+                  Format for Delivery Status Notifications&quot;, <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a>,
+                  January 2003.
+
+   [<a name="ref-RFC3629" id="ref-RFC3629">RFC3629</a>]      Yergeau, F., &quot;UTF-8, a transformation format of ISO
+                  10646&quot;, STD 63, <a href="https://tools.ietf.org/html/rfc3629">RFC 3629</a>, November 2003.
+
+   [<a name="ref-RFC3798" id="ref-RFC3798">RFC3798</a>]      Hansen, T. and G. Vaudreuil, &quot;Message Disposition
+                  Notification&quot;, <a href="https://tools.ietf.org/html/rfc3798">RFC 3798</a>, May 2004.
+
+   [<a name="ref-RFC5234" id="ref-RFC5234">RFC5234</a>]      Crocker, D. and P. Overell, &quot;Augmented BNF for Syntax
+                  Specifications: ABNF&quot;, STD 68, <a href="https://tools.ietf.org/html/rfc5234">RFC 5234</a>, January 2008.
+
+   [<a name="ref-RFC5335" id="ref-RFC5335">RFC5335</a>]      Yang, A., Ed., &quot;Internationalized Email Headers&quot;,
+                  <a href="https://tools.ietf.org/html/rfc5335">RFC 5335</a>, September 2008.
+
+   [<a name="ref-RFC5336" id="ref-RFC5336">RFC5336</a>]      Yao, J., Ed. and W. Mao, Ed., &quot;SMTP Extension for
+                  Internationalized Email Addresses&quot;, <a href="https://tools.ietf.org/html/rfc5336">RFC 5336</a>,
+                  September 2008.
+
+   [<a name="ref-LANGTAGS" id="ref-LANGTAGS">LANGTAGS</a>]     Phillips, A. and M. Davis, &quot;Tags for Identifying
+                  Languages&quot;, <a href="https://tools.ietf.org/html/rfc4646">RFC 4646</a>, September 2006.
+
+   [<a name="ref-DEFAULTLANG" id="ref-DEFAULTLANG">DEFAULTLANG</a>]  Alvestrand, H., &quot;IETF Policy on Character Sets and
+                  Languages&quot;, <a href="https://tools.ietf.org/html/rfc2277">RFC 2277</a>, January 1998.
+
+<span class="h3"><h3><a class="selflink" name="section-8.2" href="https://tools.ietf.org/html/rfc5337#section-8.2">8.2</a>. Informative References</h3></span>
+
+   [<a name="ref-RFC2045" id="ref-RFC2045">RFC2045</a>]      Freed, N. and N. Borenstein, &quot;Multipurpose Internet
+                  Mail Extensions (MIME) Part One: Format of Internet
+                  Message Bodies&quot;, <a href="https://tools.ietf.org/html/rfc2045">RFC 2045</a>, November 1996.
+
+   [<a name="ref-RFC2046" id="ref-RFC2046">RFC2046</a>]      Freed, N. and N. Borenstein, &quot;Multipurpose Internet
+                  Mail Extensions (MIME) Part Two: Media Types&quot;,
+                  <a href="https://tools.ietf.org/html/rfc2046">RFC 2046</a>, November 1996.
+
+   [<a name="ref-DOWNGRADE" id="ref-DOWNGRADE">DOWNGRADE</a>]    Fujiwara, K. and Y. Yoneya, &quot;Downgrading mechanism for
+                  Email Address Internationalization&quot;, Work in Progress,
+                  July 2008.
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                     [Page 16]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-17" id="page-17" href="https://tools.ietf.org/html/rfc5337#page-17" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+<span class="h2"><h2><a class="selflink" name="appendix-A" href="https://tools.ietf.org/html/rfc5337#appendix-A">Appendix A</a>. Acknowledgements</h2></span>
+
+   Many thanks for input provided by Pete Resnick, James Galvin, Ned
+   Freed, John Klensin, Harald Alvestrand, Frank Ellermann, SM, and
+   members of the EAI WG to help solidify this proposal.
+
+Authors' Addresses
+
+   Chris Newman
+   Sun Microsystems
+   800 Royal Oaks
+   Monrovia, CA  91016-6347
+   US
+
+   EMail: chris.newman@sun.com
+
+
+   Alexey Melnikov (editor)
+   Isode Ltd
+   5 Castle Business Village
+   36 Station Road
+   Hampton, Middlesex  TW12 2BX
+   UK
+
+   EMail: Alexey.Melnikov@isode.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Newman &amp; Melnikov             Experimental                     [Page 17]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-18" id="page-18" href="https://tools.ietf.org/html/rfc5337#page-18" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5337">RFC 5337</a>             Internationalized DSN and MDNs       September 2008</span>
+
+
+Full Copyright Statement
+
+   Copyright (C) The IETF Trust (2008).
+
+   This document is subject to the rights, licenses and restrictions
+   contained in <a href="https://tools.ietf.org/html/bcp78">BCP 78</a>, and except as set forth therein, the authors
+   retain all their rights.
+
+   This document and the information contained herein are provided on an
+   &quot;AS IS&quot; basis and THE CONTRIBUTOR, THE ORGANIZATION HE/SHE REPRESENTS
+   OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY, THE IETF TRUST AND
+   THE INTERNET ENGINEERING TASK FORCE DISCLAIM ALL WARRANTIES, EXPRESS
+   OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF
+   THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
+   WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Intellectual Property
+
+   The IETF takes no position regarding the validity or scope of any
+   Intellectual Property Rights or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; nor does it represent that it has
+   made any independent effort to identify any such rights.  Information
+   on the procedures with respect to rights in RFC documents can be
+   found in <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and <a href="https://tools.ietf.org/html/bcp79">BCP 79</a>.
+
+   Copies of IPR disclosures made to the IETF Secretariat and any
+   assurances of licenses to be made available, or the result of an
+   attempt made to obtain a general license or permission for the use of
+   such proprietary rights by implementers or users of this
+   specification can be obtained from the IETF on-line IPR repository at
+   <a href="http://www.ietf.org/ipr">http://www.ietf.org/ipr</a>.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights that may cover technology that may be required to implement
+   this standard.  Please address the information to the IETF at
+   ietf-ipr@ietf.org.
+
+
+
+
+
+
+
+
+
+
+
+
+Newman &amp; Melnikov             Experimental                     [Page 18]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

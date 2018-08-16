@@ -1,0 +1,936 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:3642" /> 
+  <meta name="DC.Description.Abstract" content="The Generic String Encoding Rules (GSER) describe a human readable
+text encoding for an Abstract Syntax Notation One (ASN.1) value of any
+ASN.1 type. Specifications making use of GSER may wish to provide an
+equivalent Augmented Backus-Naur Form (ABNF) description of the GSER
+encoding for a particular ASN.1 type as a convenience for
+implementors. This document supports such specifications by providing
+equivalent ABNF for the GSER encodings for ASN.1 types that commonly
+occur in Lightweight Directory Access Protocol (LDAP) syntaxes." /> 
+  <meta name="DC.Creator" content="Steven Legg &lt;steven.legg@adacel.com.au&gt;" /> 
+  <meta name="DC.Date.Issued" content="October, 2003" /> 
+  <meta name="DC.Title" content="Common Elements of Generic String Encoding Rules (GSER) Encodings" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 3642 - Common Elements of Generic String Encoding Rules (GSER) Encodings</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgorange" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc3642.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc3642" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-legg-ldap-gser-abnf" title="draft-legg-ldap-gser-abnf">draft-legg-ldap...</a>] [<a href="https://datatracker.ietf.org/doc/rfc3642" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc3642" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc3642" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=3642">Errata</a>]</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> INFORMATIONAL</span>
+   <br /> 
+   <span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span>
+   <br /> 
+   <pre>Network Working Group                                            S. Legg
+Request for Comments: 3642                           Adacel Technologies
+Category: Informational                                     October 2003
+
+
+   <span class="h1"><h1>Common Elements of Generic String Encoding Rules (GSER) Encodings</h1></span>
+
+Status of this Memo
+
+   This memo provides information for the Internet community.  It does
+   not specify an Internet standard of any kind.  Distribution of this
+   memo is unlimited.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2003).  All Rights Reserved.
+
+Abstract
+
+   The Generic String Encoding Rules (GSER) describe a human readable
+   text encoding for an Abstract Syntax Notation One (ASN.1) value of
+   any ASN.1 type.  Specifications making use of GSER may wish to
+   provide an equivalent Augmented Backus-Naur Form (ABNF) description
+   of the GSER encoding for a particular ASN.1 type as a convenience for
+   implementors.  This document supports such specifications by
+   providing equivalent ABNF for the GSER encodings for ASN.1 types that
+   commonly occur in Lightweight Directory Access Protocol (LDAP)
+   syntaxes.
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc3642#section-1">1</a>.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc3642#page-2">2</a>
+   <a href="https://tools.ietf.org/html/rfc3642#section-2">2</a>.  Conventions. . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc3642#page-2">2</a>
+   <a href="https://tools.ietf.org/html/rfc3642#section-3">3</a>.  Separators . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc3642#page-2">2</a>
+   <a href="https://tools.ietf.org/html/rfc3642#section-4">4</a>.  ASN.1 Built-in Types . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc3642#page-2">2</a>
+   <a href="https://tools.ietf.org/html/rfc3642#section-5">5</a>.  ASN.1 Restricted String Types. . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc3642#page-7">7</a>
+   <a href="https://tools.ietf.org/html/rfc3642#section-6">6</a>.  Directory ASN.1 Types. . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc3642#page-9">9</a>
+   <a href="https://tools.ietf.org/html/rfc3642#section-7">7</a>.  Security Considerations. . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc3642#page-10">10</a>
+   <a href="https://tools.ietf.org/html/rfc3642#section-8">8</a>.  References . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc3642#page-10">10</a>
+       <a href="https://tools.ietf.org/html/rfc3642#section-8.1">8.1</a>.  Normative References . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc3642#page-10">10</a>
+       <a href="https://tools.ietf.org/html/rfc3642#section-8.2">8.2</a>.  Informative References . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc3642#page-11">11</a>
+   <a href="https://tools.ietf.org/html/rfc3642#section-9">9</a>.  Intellectual Property Notice . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc3642#page-12">12</a>
+   <a href="https://tools.ietf.org/html/rfc3642#section-10">10</a>. Author's Address . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc3642#page-12">12</a>
+   <a href="https://tools.ietf.org/html/rfc3642#section-11">11</a>. Full Copyright Statement . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc3642#page-13">13</a>
+
+
+
+
+
+
+
+<span class="grey">Legg                         Informational                      [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc3642#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc3642">RFC 3642</a>           Common Elements of GSER Encodings        October 2003</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc3642#section-1">1</a>. Introduction</h2></span>
+
+   The Generic String Encoding Rules (GSER) [<a href="https://tools.ietf.org/html/rfc3642#ref-7" title="&quot;Generic String Encoding Rules (GSER) for ASN.1 Types&quot;">7</a>] define a human readable
+   text encoding, based on ASN.1 [<a href="https://tools.ietf.org/html/rfc3642#ref-8">8</a>] value notation, for an ASN.1 value
+   of any ASN.1 type.  Specifications making use of GSER may wish to
+   provide a non-normative equivalent ABNF [<a href="https://tools.ietf.org/html/rfc3642#ref-3" title="&quot;Augmented BNF for Syntax Specifications: ABNF&quot;">3</a>] description of the GSER
+   encoding for a particular ASN.1 type as a convenience for
+   implementors unfamiliar with ASN.1.  This document supports such
+   specifications by providing equivalent ABNF for the GSER encodings
+   for ASN.1 types that commonly occur in LDAP [<a href="https://tools.ietf.org/html/rfc3642#ref-10" title="&quot;Lightweight Directory Access Protocol (v3): Technical Specification&quot;">10</a>] or X.500 [<a href="https://tools.ietf.org/html/rfc3642#ref-11" title=" Information Technology - Open Systems Interconnection - The Directory: Overview of concepts">11</a>]
+   attribute and assertion syntaxes, as well as equivalent ABNF for the
+   GSER encodings for the ASN.1 built-in types.
+
+   The ABNF given in this document does not replace or alter GSER in any
+   way.  If there is a discrepancy between the ABNF specified here and
+   the encoding defined by GSER [<a href="https://tools.ietf.org/html/rfc3642#ref-7" title="&quot;Generic String Encoding Rules (GSER) for ASN.1 Types&quot;">7</a>], then GSER is to be taken as
+   definitive.
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc3642#section-2">2</a>. Conventions</h2></span>
+
+   The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, and &quot;MAY&quot; in this document are
+   to be interpreted as described in <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a> [<a href="https://tools.ietf.org/html/rfc3642#ref-1" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">1</a>].  The key word
+   &quot;OPTIONAL&quot; is exclusively used with its ASN.1 meaning.
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc3642#section-3">3</a>. Separators</h2></span>
+
+   Certain separators are commonly used in constructing equivalent ABNF
+   for SET and SEQUENCE types.
+
+      sp  =  *%x20  ; zero, one or more space characters
+      msp = 1*%x20  ; one or more space characters
+
+      sep = [ &quot;,&quot; ]
+
+   The &lt;sep&gt; rule is used in the ABNF description of the encoding for
+   ASN.1 SET or SEQUENCE types where all the components are either
+   OPTIONAL or DEFAULT.  It encodes to an empty string if and only if
+   the immediately preceding character in the encoding is &quot;{&quot;, i.e., it
+   is only empty for the first optional component actually present in
+   the SET or SEQUENCE value being encoded.
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc3642#section-4">4</a>. ASN.1 Built-in Types</h2></span>
+
+   This section describes the GSER encoding of values of the ASN.1
+   built-in types, except for the restricted character string types.
+
+
+
+
+
+<span class="grey">Legg                         Informational                      [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc3642#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc3642">RFC 3642</a>           Common Elements of GSER Encodings        October 2003</span>
+
+
+   The &lt;BIT-STRING&gt; rule describes the GSER encoding of values of the
+   BIT STRING type without a named bit list.
+
+      BIT-STRING = bstring / hstring
+
+   If the number of bits in a BIT STRING value is a multiple of four the
+   &lt;hstring&gt; form of &lt;BIT-STRING&gt; MAY be used.  Otherwise, the &lt;bstring&gt;
+   form of &lt;BIT-STRING&gt; is used.  The &lt;bstring&gt; rule encodes each bit as
+   the character &quot;0&quot; or &quot;1&quot; in order from the first bit to the last bit.
+   The &lt;hstring&gt; rule encodes each group of four bits as a hexadecimal
+   number where the first bit is the most significant.  An odd number of
+   hexadecimal digits is permitted.
+
+      hstring           = squote *hexadecimal-digit squote %x48 ; '...'H
+      hexadecimal-digit = %x30-39 /  ; &quot;0&quot; to &quot;9&quot;
+                          %x41-46    ; &quot;A&quot; to &quot;F&quot;
+
+      bstring           = squote *binary-digit squote %x42  ; '...'B
+      binary-digit      = &quot;0&quot; / &quot;1&quot;
+
+      squote            =  %x27  ; ' (single quote)
+
+   The &lt;BOOLEAN&gt; rule describes the GSER encoding of values of the
+   BOOLEAN type.
+
+      BOOLEAN = %x54.52.55.45 /   ; &quot;TRUE&quot;
+                %x46.41.4C.53.45  ; &quot;FALSE&quot;
+
+   The &lt;CHARACTER-STRING&gt; rule describes the GSER encoding of values of
+   the associated type for the unrestricted CHARACTER STRING type.
+
+      CHARACTER-STRING = &quot;{&quot; sp id-identification msp Identification &quot;,&quot;
+                             sp id-data-value msp OCTET-STRING
+                             sp &quot;}&quot;
+
+      id-identification = %x69.64.65.6E.74.69.66.69.63.61.74.69.6F.6E
+                             ; &quot;identification&quot;
+      id-data-value     = %x64.61.74.61.2D.76.61.6C.75.65 ; &quot;data-value&quot;
+
+      Identification = ( id-syntaxes &quot;:&quot; Syntaxes ) /
+                       ( id-syntax &quot;:&quot; OBJECT-IDENTIFIER ) /
+                       ( id-presentation-context-id &quot;:&quot; INTEGER ) /
+                       ( id-context-negotiation &quot;:&quot;
+                            ContextNegotiation ) /
+                       ( id-transfer-syntax &quot;:&quot; OBJECT-IDENTIFIER ) /
+                       ( id-fixed &quot;:&quot; NULL )
+
+
+
+
+
+<span class="grey">Legg                         Informational                      [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc3642#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc3642">RFC 3642</a>           Common Elements of GSER Encodings        October 2003</span>
+
+
+      id-syntaxes                = %x73.79.6E.74.61.78.65.73
+                                      ; &quot;syntaxes&quot;
+      id-syntax                  = %x73.79.6E.74.61.78 ; &quot;syntax&quot;
+      id-presentation-context-id = %x70.72.65.73.65.6E.74.61.74.69.6F.6E
+                                      %x2D.63.6F.6E.74.65.78.74.2D.69.64
+                                      ; &quot;presentation-context-id&quot;
+      id-context-negotiation     = %x63.6F.6E.74.65.78.74.2D.6E.65.67.6F
+                                      %x74.69.61.74.69.6F.6E
+                                      ; &quot;context-negotiation&quot;
+      id-transfer-syntax         = %x74.72.61.6E.73.66.65.72.2D.73.79.6E
+                                      %x74.61.78 ; &quot;transfer-syntax&quot;
+      id-fixed                   = %x66.69.78.65.64 ; &quot;fixed&quot;
+
+      Syntaxes = &quot;{&quot; sp id-abstract msp OBJECT-IDENTIFIER &quot;,&quot;
+                     sp id-transfer msp OBJECT-IDENTIFIER
+                     sp &quot;}&quot;
+      id-abstract = %x61.62.73.74.72.61.63.74 ; &quot;abstract&quot;
+      id-transfer = %x74.72.61.6E.73.66.65.72 ; &quot;transfer&quot;
+
+      ContextNegotiation = &quot;{&quot; sp id-presentation-context-id msp
+                                     INTEGER &quot;,&quot;
+                               sp id-transfer-syntax msp
+                                     OBJECT-IDENTIFIER
+                               sp &quot;}&quot;
+
+   The &lt;INTEGER&gt; rule describes the GSER encoding of values of the
+   INTEGER type without a named number list.  The &lt;INTEGER-0-MAX&gt; rule
+   describes the GSER encoding of values of the constrained type INTEGER
+   (0..MAX).  The &lt;INTEGER-1-MAX&gt; rule describes the GSER encoding of
+   values of the constrained type INTEGER (1..MAX).
+
+      INTEGER         = &quot;0&quot; / positive-number / (&quot;-&quot; positive-number)
+      INTEGER-0-MAX   = &quot;0&quot; / positive-number
+      INTEGER-1-MAX   = positive-number
+      positive-number = non-zero-digit *decimal-digit
+      decimal-digit   = %x30-39  ; &quot;0&quot; to &quot;9&quot;
+      non-zero-digit  = %x31-39  ; &quot;1&quot; to &quot;9&quot;
+
+   The &lt;EMBEDDED-PDV&gt; rule describes the GSER encoding of values of the
+   associated type for the EMBEDDED PDV type.
+
+      EMBEDDED-PDV = &quot;{&quot; sp id-identification msp Identification &quot;,&quot;
+                         sp id-data-value msp OCTET-STRING
+                         sp &quot;}&quot;
+
+   The &lt;EXTERNAL&gt; rule describes the GSER encoding of values of the
+   associated type for the EXTERNAL type.
+
+
+
+
+<span class="grey">Legg                         Informational                      [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc3642#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc3642">RFC 3642</a>           Common Elements of GSER Encodings        October 2003</span>
+
+
+      EXTERNAL = &quot;{&quot; [ sp id-direct-reference msp
+                             OBJECT-IDENTIFIER &quot;,&quot; ]
+                     [ sp id-indirect-reference msp INTEGER &quot;,&quot; ]
+                     [ sp id-data-value-descriptor msp
+                             ObjectDescriptor &quot;,&quot; ]
+                       sp id-encoding msp Encoding
+                       sp &quot;}&quot;
+
+      id-direct-reference      = %x64.69.72.65.63.74.2D.72.65.66.65.72
+                                    %x65.6E.63.65
+                                    ; &quot;direct-reference&quot;
+      id-indirect-reference    = %x69.6E.64.69.72.65.63.74.2D.72.65.66
+                                    %x65.72.65.6E.63.65
+                                    ; &quot;indirect-reference&quot;
+      id-data-value-descriptor = %x64.61.74.61.2D.76.61.6C.75.65.2D.64
+                                    %x65.73.63.72.69.70.74.6F.72
+                                    ; &quot;data-value-descriptor&quot;
+      id-encoding              = %x65.6E.63.6F.64.69.6E.67
+                                    ; &quot;encoding&quot;
+
+      Encoding = ( id-single-ASN1-type &quot;:&quot; Value ) /
+                 ( id-octet-aligned &quot;:&quot; OCTET-STRING ) /
+                 ( id-arbitrary &quot;:&quot; BIT-STRING )
+
+      id-single-ASN1-type = %x73.69.6E.67.6C.65.2D.41.53.4E.31.2D.74.79
+                               %x70.65
+                               ; &quot;single-ASN1-type&quot;
+      id-octet-aligned    = %x6F.63.74.65.74.2D.61.6C.69.67.6E.65.64
+                               ; &quot;octet-aligned&quot;
+
+      id-arbitrary        = %x61.72.62.69.74.72.61.72.79
+                               ; &quot;arbitrary&quot;
+
+   The &lt;Value&gt; rule is defined by GSER [<a href="https://tools.ietf.org/html/rfc3642#ref-7" title="&quot;Generic String Encoding Rules (GSER) for ASN.1 Types&quot;">7</a>].  It represents the GSER
+   encoding of a single value of the ASN.1 type identified by the
+   direct-reference and/or indirect-reference components.
+
+   The &lt;NULL&gt; rule describes the GSER encoding of values of the NULL
+   type.
+
+      NULL = %x4E.55.4C.4C  ; &quot;NULL&quot;
+
+   The &lt;OBJECT-IDENTIFIER&gt; rule describes the GSER encoding of values of
+   the OBJECT IDENTIFIER type.
+
+      OBJECT-IDENTIFIER = numeric-oid / descr
+      numeric-oid       = oid-component 1*( &quot;.&quot; oid-component )
+      oid-component     = &quot;0&quot; / positive-number
+
+
+
+<span class="grey">Legg                         Informational                      [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc3642#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc3642">RFC 3642</a>           Common Elements of GSER Encodings        October 2003</span>
+
+
+   An OBJECT IDENTIFIER value is encoded using either the dotted decimal
+   representation or an object descriptor name, i.e., &lt;descr&gt;.  The
+   &lt;descr&gt; rule is described in <a href="https://tools.ietf.org/html/rfc2252">RFC 2252</a> [<a href="https://tools.ietf.org/html/rfc3642#ref-4" title="&quot;Lightweight Directory Access Protocol (v3): Attribute Syntax Definitions&quot;">4</a>].  An object descriptor name
+   is potentially ambiguous and should be used with care.
+
+   The &lt;OCTET-STRING&gt; rule describes the GSER encoding of values of the
+   OCTET STRING type.
+
+      OCTET-STRING = hstring
+
+   The octets are encoded in order from the first octet to the last
+   octet.  Each octet is encoded as a pair of hexadecimal digits where
+   the first digit corresponds to the four most significant bits of the
+   octet.  If the hexadecimal string does not have an even number of
+   digits, the four least significant bits in the last octet are assumed
+   to be zero.
+
+   The &lt;REAL&gt; rule describes the GSER encoding of values of the REAL
+   type.
+
+      REAL = &quot;0&quot;                    ; zero
+             / PLUS-INFINITY        ; positive infinity
+             / MINUS-INFINITY       ; negative infinity
+             / realnumber           ; positive base 10 REAL value
+             / ( &quot;-&quot; realnumber )   ; negative base 10 REAL value
+             / real-sequence-value  ; non-zero base 2 or 10 REAL value
+
+      PLUS-INFINITY  = %x50.4C.55.53.2D.49.4E.46.49.4E.49.54.59
+                          ; &quot;PLUS-INFINITY&quot;
+
+      MINUS-INFINITY = %x4D.49.4E.55.53.2D.49.4E.46.49.4E.49.54.59
+                          ; &quot;MINUS-INFINITY&quot;
+
+      realnumber = mantissa exponent
+      mantissa   = (positive-number [ &quot;.&quot; *decimal-digit ])
+                   / ( &quot;0.&quot; *(&quot;0&quot;) positive-number )
+      exponent   = &quot;E&quot; ( &quot;0&quot; / ([ &quot;-&quot; ] positive-number))
+
+      real-sequence-value = &quot;{&quot; sp id-mantissa msp INTEGER &quot;,&quot;
+                                sp id-base msp ( &quot;2&quot; / &quot;10&quot; ) &quot;,&quot;
+                                sp id-exponent msp INTEGER sp &quot;}&quot;
+      id-mantissa         = %x6D.61.6E.74.69.73.73.61 ; &quot;mantissa&quot;
+      id-base             = %x62.61.73.65             ; &quot;base&quot;
+      id-exponent         = %x65.78.70.6F.6E.65.6E.74 ; &quot;exponent&quot;
+
+   A value of the REAL type MUST be encoded as &quot;0&quot; if it is zero.
+
+
+
+
+
+<span class="grey">Legg                         Informational                      [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc3642#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc3642">RFC 3642</a>           Common Elements of GSER Encodings        October 2003</span>
+
+
+   The &lt;RELATIVE-OID&gt; rule describes the GSER encoding of values of the
+   RELATIVE-OID type.
+
+      RELATIVE-OID = oid-component *( &quot;.&quot; oid-component )
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc3642#section-5">5</a>. ASN.1 Restricted String Types</h2></span>
+
+   This section describes the GSER encoding of values of the ASN.1
+   restricted character string types.  The characters of a value of a
+   restricted character string type are always encoded as a UTF-8
+   character string between double quotes.  For some of the ASN.1 string
+   types, this requires a translation to or from the UTF-8 encoding.
+   Some of the ASN.1 string types permit only a subset of the characters
+   representable in UTF-8.  Any double quote characters in the character
+   string, where allowed by the character set, are escaped by being
+   repeated.
+
+   The &lt;UTF8String&gt; rule describes the GSER encoding of values of the
+   UTF8String type.  The characters of this string type do not require
+   any translation before being encoded.
+
+      UTF8String        = StringValue
+      StringValue       = dquote *SafeUTF8Character dquote
+
+      dquote            = %x22 ; &quot; (double quote)
+
+      SafeUTF8Character = %x00-21 / %x23-7F /   ; ASCII minus dquote
+                          dquote dquote /       ; escaped double quote
+                          %xC0-DF %x80-BF /     ; 2 byte UTF-8 character
+                          %xE0-EF 2(%x80-BF) /  ; 3 byte UTF-8 character
+                          %xF0-F7 3(%x80-BF)    ; 4 byte UTF-8 character
+
+   The &lt;NumericString&gt;, &lt;PrintableString&gt;, &lt;VisibleString&gt;,
+   &lt;ISO646String&gt;, &lt;IA5String&gt;, &lt;GeneralizedTime&gt; and &lt;UTCTime&gt; rules
+   describe the GSER encoding of values of the correspondingly named
+   ASN.1 types.  The characters of these string types are compatible
+   with UTF-8 and do not require any translation before being encoded.
+   The GeneralizedTime and UTCTime types use the VisibleString character
+   set, but have a strictly defined format.
+
+      NumericString        = dquote *(decimal-digit / space) dquote
+      space                = %x20
+
+
+
+
+
+
+
+
+
+<span class="grey">Legg                         Informational                      [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc3642#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc3642">RFC 3642</a>           Common Elements of GSER Encodings        October 2003</span>
+
+
+      PrintableString      = dquote *PrintableCharacter dquote
+      PrintableCharacter   = decimal-digit / space
+                             / %x41-5A ; A to Z
+                             / %x61-7A ; a to z
+                             / %x27-29 ; ' ( )
+                             / %x2B-2F ; + , - . /
+                             / %x3A    ; :
+                             / %x3D    ; =
+                             / %x3F    ; ?
+
+      ISO646String         = VisibleString
+      VisibleString        = dquote *SafeVisibleCharacter dquote
+      SafeVisibleCharacter = %x20-21
+                             / %x23-7E ; printable ASCII minus dquote
+                             / dquote dquote   ; escaped double quote
+
+      IA5String            = dquote *SafeIA5Character dquote
+      SafeIA5Character     = %x00-21 / %x23-7F ; ASCII minus dquote
+                             / dquote dquote   ; escaped double quote
+
+      century = 2(%x30-39) ; &quot;00&quot; to &quot;99&quot;
+      year    = 2(%x30-39) ; &quot;00&quot; to &quot;99&quot;
+      month   =   ( %x30 %x31-39 ) ; &quot;01&quot; (January) to &quot;09&quot;
+                / ( %x31 %x30-32 ) ; &quot;10&quot; to &quot;12&quot;
+      day     =   ( %x30 %x31-39 )    ; &quot;01&quot; to &quot;09&quot;
+                / ( %x31-32 %x30-39 ) ; &quot;10&quot; to &quot;29&quot;
+                / ( %x32 %x30-31 )    ; &quot;30&quot; to &quot;31&quot;
+      hour    = ( %x30-31 %x30-39 ) / ( %x32 %x30-33 ) ; &quot;00&quot; to &quot;23&quot;
+      minute  = %x30-35 %x30-39                        ; &quot;00&quot; to &quot;59&quot;
+      second  =   ( %x30-35 %x30-39 )  ; &quot;00&quot; to &quot;59&quot;
+                / ( %x36 %x30 )        ; &quot;60&quot; (a leap second)
+
+      UTCTime         = dquote year month day hour minute [ second ]
+                           [ %x5A / u-differential ] dquote
+      u-differential  = ( &quot;-&quot; / &quot;+&quot; ) hour minute
+
+      GeneralizedTime = dquote century year month day hour
+                           [ minute [ second ] ] [ fraction ]
+                           [ %x5A / g-differential ] dquote
+      fraction        = ( &quot;.&quot; / &quot;,&quot; ) 1*(%x30-39)
+      g-differential  = ( &quot;-&quot; / &quot;+&quot; ) hour [ minute ]
+
+   The &lt;BMPString&gt; and &lt;UniversalString&gt; rules describe the GSER
+   encoding of values of the BMPString and UniversalString types
+   respectively.  BMPString (UCS-2) and UniversalString (UCS-4) values
+   are translated into UTF-8 [<a href="https://tools.ietf.org/html/rfc3642#ref-6" title="&quot;UTF-8, a transformation format of ISO 10646&quot;">6</a>] character strings before being encoded
+   according to &lt;StringValue&gt;.
+
+
+
+
+<span class="grey">Legg                         Informational                      [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc3642#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc3642">RFC 3642</a>           Common Elements of GSER Encodings        October 2003</span>
+
+
+      BMPString       = StringValue
+      UniversalString = StringValue
+
+   The &lt;TeletexString&gt;, &lt;T61String&gt;, &lt;VideotexString&gt;, &lt;GraphicString&gt;,
+   &lt;GeneralString&gt; and &lt;ObjectDescriptor&gt; rules describe the GSER
+   encoding of values of the correspondingly named ASN.1 types.  Values
+   of these string types are translated into UTF-8 character strings
+   before being encoded according to &lt;StringValue&gt;.  The
+   ObjectDescriptor type uses the GraphicString character set.
+
+      TeletexString    = StringValue
+      T61String        = StringValue
+      VideotexString   = StringValue
+      GraphicString    = StringValue
+      GeneralString    = StringValue
+      ObjectDescriptor = GraphicString
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc3642#section-6">6</a>. Directory ASN.1 Types</h2></span>
+
+   This section describes the GSER encoding of values of selected ASN.1
+   types defined for LDAP and X.500.  The ABNF rule names beginning with
+   uppercase letters describe the GSER encoding of values of the ASN.1
+   type with the same name.
+
+      AttributeType  = OBJECT-IDENTIFIER
+
+   The characters of a DirectoryString are translated into UTF-8
+   characters as required before being encoded between double quotes
+   with any embedded double quotes escaped by being repeated.
+
+      DirectoryString = StringValue /
+                        ( id-teletexString   &quot;:&quot; TeletexString ) /
+                        ( id-printableString &quot;:&quot; PrintableString ) /
+                        ( id-bmpString       &quot;:&quot; BMPString ) /
+                        ( id-universalString &quot;:&quot; UniversalString ) /
+                        ( id-uTF8String      &quot;:&quot; UTF8String )
+
+      id-teletexString   = %x74.65.6C.65.74.65.78.53.74.72.69.6E.67
+                              ; &quot;teletexString&quot;
+      id-printableString = %x70.72.69.6E.74.61.62.6C.65
+                              %x53.74.72.69.6E.67 ; &quot;printableString&quot;
+      id-bmpString       = %x62.6D.70.53.74.72.69.6E.67 ; &quot;bmpString&quot;
+      id-universalString = %x75.6E.69.76.65.72.73.61.6C
+                              %x53.74.72.69.6E.67 ; &quot;universalString&quot;
+      id-uTF8String      = %x75.54.46.38.53.74.72.69.6E.67
+                                 ; &quot;uTF8String&quot;
+
+
+
+
+
+<span class="grey">Legg                         Informational                      [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc3642#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc3642">RFC 3642</a>           Common Elements of GSER Encodings        October 2003</span>
+
+
+   The &lt;RDNSequence&gt; rule describes the GSER encoding of values of the
+   RDNSequence type, which is syntactically equivalent to the
+   DistinguishedName and LocalName types.  The &lt;RDNSequence&gt; rule
+   encodes a name as an LDAPDN character string between double quotes.
+   The character string is first derived according to the
+   &lt;distinguishedName&gt; rule in <a href="https://tools.ietf.org/html/rfc2253#section-3">Section&nbsp;3 of RFC 2253</a> [<a href="https://tools.ietf.org/html/rfc3642#ref-5" title="&quot;Lightweight Directory Access Protocol (v3): UTF-8 String Representation of Distinguished Names&quot;">5</a>], and then it is
+   encoded between double quotes with any embedded double quotes escaped
+   by being repeated.
+
+      DistinguishedName = RDNSequence
+      LocalName         = RDNSequence
+      RDNSequence       = dquote *SafeUTF8Character dquote
+
+   The &lt;RelativeDistinguishedName&gt; rule describes the GSER encoding of
+   values of the RelativeDistinguishedName type that are not part of an
+   RDNSequence value.  The &lt;RelativeDistinguishedName&gt; rule encodes an
+   RDN as a double quoted string containing the RDN as it would appear
+   in an LDAPDN character string.  The character string is first derived
+   according to the &lt;name-component&gt; rule in <a href="https://tools.ietf.org/html/rfc2253#section-3">Section&nbsp;3 of RFC 2253</a> [<a href="https://tools.ietf.org/html/rfc3642#ref-5" title="&quot;Lightweight Directory Access Protocol (v3): UTF-8 String Representation of Distinguished Names&quot;">5</a>],
+   and then any embedded double quote characters are escaped by being
+   repeated.  This resulting string is output between double quotes.
+
+      RelativeDistinguishedName = dquote *SafeUTF8Character dquote
+
+   The &lt;ORAddress&gt; rule encodes an X.400 address as an IA5 character
+   string between double quotes.  The character string is first derived
+   according to <a href="https://tools.ietf.org/html/rfc2156#section-4.1">Section&nbsp;4.1 of RFC 2156</a> [<a href="https://tools.ietf.org/html/rfc3642#ref-2" title="&quot;MIXER (Mime Internet X.400 Enhanced Relay): Mapping between X.400 and RFC 822/MIME&quot;">2</a>], and then any embedded
+   double quotes are escaped by being repeated.  This resulting string
+   is output between double quotes.
+
+      ORAddress = dquote *SafeIA5Character dquote
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc3642#section-7">7</a>. Security Considerations</h2></span>
+
+   This document contains an alternative description of parts of the
+   Generic String Encoding Rules, but does not replace or alter GSER in
+   any way.  For the full security implications of using GSER, see the
+   Security Considerations section for GSER [<a href="https://tools.ietf.org/html/rfc3642#ref-7" title="&quot;Generic String Encoding Rules (GSER) for ASN.1 Types&quot;">7</a>].
+
+<span class="h2"><h2><a class="selflink" name="section-8" href="https://tools.ietf.org/html/rfc3642#section-8">8</a>. References</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-8.1" href="https://tools.ietf.org/html/rfc3642#section-8.1">8.1</a>. Normative References</h3></span>
+
+   [<a name="ref-1" id="ref-1">1</a>]  Bradner, S., &quot;Key words for use in RFCs to Indicate Requirement
+        Levels&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>, March 1997.
+
+   [<a name="ref-2" id="ref-2">2</a>]  Kille, S., &quot;MIXER (Mime Internet X.400 Enhanced Relay): Mapping
+        between X.400 and <a href="https://tools.ietf.org/html/rfc822">RFC 822</a>/MIME&quot;, <a href="https://tools.ietf.org/html/rfc2156">RFC 2156</a>, January 1998.
+
+
+
+<span class="grey">Legg                         Informational                     [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc3642#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc3642">RFC 3642</a>           Common Elements of GSER Encodings        October 2003</span>
+
+
+   [<a name="ref-3" id="ref-3">3</a>]  Crocker, D. and P. Overell, &quot;Augmented BNF for Syntax
+        Specifications: ABNF&quot;, <a href="https://tools.ietf.org/html/rfc2234">RFC 2234</a>, November 1997.
+
+   [<a name="ref-4" id="ref-4">4</a>]  Wahl, M., Coulbeck, A., Howes, T. and S. Kille, &quot;Lightweight
+        Directory Access Protocol (v3): Attribute Syntax Definitions&quot;,
+        <a href="https://tools.ietf.org/html/rfc2252">RFC 2252</a>, December 1997.
+
+   [<a name="ref-5" id="ref-5">5</a>]  Wahl, M., Kille, S. and T. Howes, &quot;Lightweight Directory Access
+        Protocol (v3): UTF-8 String Representation of Distinguished
+        Names&quot;, <a href="https://tools.ietf.org/html/rfc2253">RFC 2253</a>, December 1997.
+
+   [<a name="ref-6" id="ref-6">6</a>]  Yergeau, F., &quot;UTF-8, a transformation format of ISO 10646&quot;, <a href="https://tools.ietf.org/html/rfc2279">RFC</a>
+        <a href="https://tools.ietf.org/html/rfc2279">2279</a>, January 1998.
+
+   [<a name="ref-7" id="ref-7">7</a>]  Legg, S., &quot;Generic String Encoding Rules (GSER) for ASN.1
+        Types&quot;, <a href="https://tools.ietf.org/html/rfc3641">RFC 3641</a>, October 2003.
+
+   [<a name="ref-8" id="ref-8">8</a>]  ITU-T Recommendation X.680 (07/02) | ISO/IEC 8824-1:2002
+        Information technology - Abstract Syntax Notation One (ASN.1):
+        Specification of basic notation
+
+<span class="h3"><h3><a class="selflink" name="section-8.2" href="https://tools.ietf.org/html/rfc3642#section-8.2">8.2</a>. Informative References</h3></span>
+
+   [<a name="ref-9" id="ref-9">9</a>]  Hovey, R. and S. Bradner, &quot;The Organizations Involved in the
+        IETF Standards Process&quot;, <a href="https://tools.ietf.org/html/bcp11">BCP 11</a>, <a href="https://tools.ietf.org/html/rfc2028">RFC 2028</a>, October 1996.
+
+   [<a name="ref-10" id="ref-10">10</a>] Hodges, J. and R. Morgan, &quot;Lightweight Directory Access Protocol
+        (v3): Technical Specification&quot;, <a href="https://tools.ietf.org/html/rfc3377">RFC 3377</a>, September 2002.
+
+   [<a name="ref-11" id="ref-11">11</a>] ITU-T Recommendation X.500 (1993) | ISO/IEC 9594-1:1994,
+        Information Technology - Open Systems Interconnection - The
+        Directory: Overview of concepts, models and services
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Legg                         Informational                     [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc3642#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc3642">RFC 3642</a>           Common Elements of GSER Encodings        October 2003</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-9" href="https://tools.ietf.org/html/rfc3642#section-9">9</a>. Intellectual Property Notice</h2></span>
+
+   The IETF takes no position regarding the validity or scope of any
+   intellectual property or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; neither does it represent that it
+   has made any effort to identify any such rights.  Information on the
+   IETF's procedures with respect to rights in standards-track and
+   standards-related documentation can be found in <a href="https://tools.ietf.org/html/bcp11">BCP-11</a>.  Copies of
+   claims of rights made available for publication and any assurances of
+   licenses to be made available, or the result of an attempt made to
+   obtain a general license or permission for the use of such
+   proprietary rights by implementors or users of this specification can
+   be obtained from the IETF Secretariat.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights which may cover technology that may be required to practice
+   this standard.  Please address the information to the IETF Executive
+   Director.
+
+<span class="h2"><h2><a class="selflink" name="section-10" href="https://tools.ietf.org/html/rfc3642#section-10">10</a>. Author's Address</h2></span>
+
+   Steven Legg
+   Adacel Technologies Ltd.
+   250 Bay Street
+   Brighton, Victoria 3186
+   AUSTRALIA
+
+   Phone: +61 3 8530 7710
+   Fax:   +61 3 8530 7888
+   EMail: steven.legg@adacel.com.au
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Legg                         Informational                     [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-13" id="page-13" href="https://tools.ietf.org/html/rfc3642#page-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc3642">RFC 3642</a>           Common Elements of GSER Encodings        October 2003</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-11" href="https://tools.ietf.org/html/rfc3642#section-11">11</a>. Full Copyright Statement</h2></span>
+
+   Copyright (C) The Internet Society (2003).  All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works.  However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assignees.
+
+   This document and the information contained herein is provided on an
+   &quot;AS IS&quot; basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Acknowledgement
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Legg                         Informational                     [Page 13]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

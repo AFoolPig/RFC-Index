@@ -1,0 +1,2791 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Relation.Replaces" content="draft-liu-rtgwg-yang-vrrp" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:8347" /> 
+  <meta name="DC.Date.Issued" content="March, 2018" /> 
+  <meta name="DC.Creator" content="Lindem, Acee" /> 
+  <meta name="DC.Creator" content="Liu, Xufeng" /> 
+  <meta name="DC.Creator" content="Parikh, Ravi" /> 
+  <meta name="DC.Creator" content="Kyparlis, Athanasios" /> 
+  <meta name="DC.Creator" content="Zhang, Mingui" /> 
+  <meta name="DC.Description.Abstract" content="This document describes a data model for the Virtual Router Redundancy
+Protocol (VRRP). Both versions 2 and 3 of VRRP are covered." /> 
+  <meta name="DC.Title" content="A YANG Data Model for the Virtual Router Redundancy Protocol (VRRP)" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 8347 - A YANG Data Model for the Virtual Router Redundancy Protocol (VRRP)</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgblue" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc8347.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc8347" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-ietf-rtgwg-yang-vrrp" title="draft-ietf-rtgwg-yang-vrrp">draft-ietf-rtgw...</a>] [<a href="https://datatracker.ietf.org/doc/rfc8347" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc8347" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc8347" title="Side-by-side diff">Diff2</a>] </span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> PROPOSED STANDARD</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <pre>Internet Engineering Task Force (IETF)                       X. Liu, Ed.
+Request for Comments: 8347                                   A. Kyparlis
+Category: Standards Track                                          Jabil
+ISSN: 2070-1721                                                R. Parikh
+                                                                  VMware
+                                                               A. Lindem
+                                                           Cisco Systems
+                                                                M. Zhang
+                                                     Huawei Technologies
+                                                              March 2018
+
+
+  <span class="h1"><h1>A YANG Data Model for the Virtual Router Redundancy Protocol (VRRP)</h1></span>
+
+Abstract
+
+   This document describes a data model for the Virtual Router
+   Redundancy Protocol (VRRP).  Both versions 2 and 3 of VRRP are
+   covered.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in <a href="https://tools.ietf.org/html/rfc7841#section-2">Section&nbsp;2 of RFC 7841</a>.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   <a href="https://www.rfc-editor.org/info/rfc8347">https://www.rfc-editor.org/info/rfc8347</a>.
+
+Copyright Notice
+
+   Copyright (c) 2018 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                    [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc8347#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc8347#section-1">1</a>. Introduction ....................................................<a href="https://tools.ietf.org/html/rfc8347#page-2">2</a>
+      <a href="https://tools.ietf.org/html/rfc8347#section-1.1">1.1</a>. Terminology ................................................<a href="https://tools.ietf.org/html/rfc8347#page-2">2</a>
+      <a href="https://tools.ietf.org/html/rfc8347#section-1.2">1.2</a>. Tree Diagrams ..............................................<a href="https://tools.ietf.org/html/rfc8347#page-3">3</a>
+      <a href="https://tools.ietf.org/html/rfc8347#section-1.3">1.3</a>. Prefixes in Data Node Names ................................<a href="https://tools.ietf.org/html/rfc8347#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc8347#section-2">2</a>. Design of the Data Model ........................................<a href="https://tools.ietf.org/html/rfc8347#page-3">3</a>
+      <a href="https://tools.ietf.org/html/rfc8347#section-2.1">2.1</a>. Scope of the Model .........................................<a href="https://tools.ietf.org/html/rfc8347#page-3">3</a>
+      <a href="https://tools.ietf.org/html/rfc8347#section-2.2">2.2</a>. Relationships with the Interface Model and IP Model ........<a href="https://tools.ietf.org/html/rfc8347#page-4">4</a>
+      <a href="https://tools.ietf.org/html/rfc8347#section-2.3">2.3</a>. Protocol Configuration .....................................<a href="https://tools.ietf.org/html/rfc8347#page-5">5</a>
+      <a href="https://tools.ietf.org/html/rfc8347#section-2.4">2.4</a>. Protocol States ............................................<a href="https://tools.ietf.org/html/rfc8347#page-6">6</a>
+      <a href="https://tools.ietf.org/html/rfc8347#section-2.5">2.5</a>. Notifications ..............................................<a href="https://tools.ietf.org/html/rfc8347#page-9">9</a>
+   <a href="https://tools.ietf.org/html/rfc8347#section-3">3</a>. Tree Structure .................................................<a href="https://tools.ietf.org/html/rfc8347#page-10">10</a>
+   <a href="https://tools.ietf.org/html/rfc8347#section-4">4</a>. YANG Module ....................................................<a href="https://tools.ietf.org/html/rfc8347#page-13">13</a>
+   <a href="https://tools.ietf.org/html/rfc8347#section-5">5</a>. IANA Considerations ............................................<a href="https://tools.ietf.org/html/rfc8347#page-35">35</a>
+   <a href="https://tools.ietf.org/html/rfc8347#section-6">6</a>. Security Considerations ........................................<a href="https://tools.ietf.org/html/rfc8347#page-36">36</a>
+   <a href="https://tools.ietf.org/html/rfc8347#section-7">7</a>. References .....................................................<a href="https://tools.ietf.org/html/rfc8347#page-37">37</a>
+      <a href="https://tools.ietf.org/html/rfc8347#section-7.1">7.1</a>. Normative References ......................................<a href="https://tools.ietf.org/html/rfc8347#page-37">37</a>
+      <a href="https://tools.ietf.org/html/rfc8347#section-7.2">7.2</a>. Informative References ....................................<a href="https://tools.ietf.org/html/rfc8347#page-38">38</a>
+   <a href="https://tools.ietf.org/html/rfc8347#appendix-A">Appendix A</a>. Data Tree Example .....................................<a href="https://tools.ietf.org/html/rfc8347#page-40">40</a>
+   Authors' Addresses ................................................<a href="https://tools.ietf.org/html/rfc8347#page-45">45</a>
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc8347#section-1">1</a>. Introduction</h2></span>
+
+   This document introduces a YANG data model [<a href="https://tools.ietf.org/html/rfc6020" title="&quot;YANG - A Data Modeling Language for the Network Configuration Protocol (NETCONF)&quot;">RFC6020</a>] [<a href="https://tools.ietf.org/html/rfc7950" title="&quot;The YANG 1.1 Data Modeling Language&quot;">RFC7950</a>] for
+   the Virtual Router Redundancy Protocol (VRRP) [<a href="https://tools.ietf.org/html/rfc3768" title="&quot;Virtual Router Redundancy Protocol (VRRP)&quot;">RFC3768</a>] [<a href="https://tools.ietf.org/html/rfc5798" title="&quot;Virtual Router Redundancy Protocol (VRRP) Version 3 for IPv4 and IPv6&quot;">RFC5798</a>].
+   VRRP provides higher resiliency by specifying an election protocol
+   that dynamically assigns responsibility for a virtual router to one
+   of the VRRP routers on a LAN.
+
+   The YANG module specified in this document supports both versions 2
+   and 3 of VRRP.  VRRP version 2 (defined in [<a href="https://tools.ietf.org/html/rfc3768" title="&quot;Virtual Router Redundancy Protocol (VRRP)&quot;">RFC3768</a>]) supports IPv4.
+   VRRP version 3 (defined in [<a href="https://tools.ietf.org/html/rfc5798" title="&quot;Virtual Router Redundancy Protocol (VRRP) Version 3 for IPv4 and IPv6&quot;">RFC5798</a>]) supports both IPv4 and IPv6.
+
+<span class="h3"><h3><a class="selflink" name="section-1.1" href="https://tools.ietf.org/html/rfc8347#section-1.1">1.1</a>. Terminology</h3></span>
+
+   The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;NOT RECOMMENDED&quot;, &quot;MAY&quot;, and
+   &quot;OPTIONAL&quot; in this document are to be interpreted as described in
+   <a href="https://tools.ietf.org/html/bcp14">BCP 14</a> [<a href="https://tools.ietf.org/html/rfc2119" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">RFC2119</a>] [<a href="https://tools.ietf.org/html/rfc8174" title="&quot;Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words&quot;">RFC8174</a>] when, and only when, they appear in all
+   capitals, as shown here.
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                    [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc8347#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+   The following terms are defined in [<a href="https://tools.ietf.org/html/rfc7950" title="&quot;The YANG 1.1 Data Modeling Language&quot;">RFC7950</a>] and are not redefined
+   here:
+
+   o  augment
+
+   o  data model
+
+   o  data node
+
+<span class="h3"><h3><a class="selflink" name="section-1.2" href="https://tools.ietf.org/html/rfc8347#section-1.2">1.2</a>. Tree Diagrams</h3></span>
+
+   A simplified graphical representation of the data model is used in
+   this document.  The meaning of the symbols in these diagrams is
+   defined in [<a href="https://tools.ietf.org/html/rfc8340" title="&quot;YANG Tree Diagrams&quot;">RFC8340</a>].
+
+<span class="h3"><h3><a class="selflink" name="section-1.3" href="https://tools.ietf.org/html/rfc8347#section-1.3">1.3</a>. Prefixes in Data Node Names</h3></span>
+
+   In this document, names of data nodes, actions, and other data model
+   objects are often used without a prefix, as long as it is clear from
+   the context in which YANG module each name is defined.  Otherwise,
+   names are prefixed using the standard prefix associated with the
+   corresponding YANG module, as shown in Table 1.
+
+                 +--------+-----------------+-----------+
+                 | Prefix | YANG module     | Reference |
+                 +--------+-----------------+-----------+
+                 | yang   | ietf-yang-types | [<a href="https://tools.ietf.org/html/rfc6991" title="&quot;Common YANG Data Types&quot;">RFC6991</a>] |
+                 | inet   | ietf-inet-types | [<a href="https://tools.ietf.org/html/rfc6991" title="&quot;Common YANG Data Types&quot;">RFC6991</a>] |
+                 | if     | ietf-interfaces | [<a href="https://tools.ietf.org/html/rfc8343" title="&quot;A YANG Data Model for Interface Management&quot;">RFC8343</a>] |
+                 | ip     | ietf-ip         | [<a href="https://tools.ietf.org/html/rfc8344" title="&quot;A YANG Data Model for IP Management&quot;">RFC8344</a>] |
+                 +--------+-----------------+-----------+
+
+             Table 1: Prefixes and Corresponding YANG Modules
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc8347#section-2">2</a>. Design of the Data Model</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-2.1" href="https://tools.ietf.org/html/rfc8347#section-2.1">2.1</a>. Scope of the Model</h3></span>
+
+   The model covers VRRP version 2 [<a href="https://tools.ietf.org/html/rfc3768" title="&quot;Virtual Router Redundancy Protocol (VRRP)&quot;">RFC3768</a>] and VRRP version 3
+   [<a href="https://tools.ietf.org/html/rfc5798" title="&quot;Virtual Router Redundancy Protocol (VRRP) Version 3 for IPv4 and IPv6&quot;">RFC5798</a>].  The model is designed to be implemented on a device where
+   VRRP version 2 or 3 is implemented.  With the help of a proper
+   management protocol, the defined model can be used to:
+
+   o  Configure VRRP version 2 or 3.
+
+   o  Manage the protocol operational behavior.
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                    [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc8347#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+   o  Retrieve the protocol operational status.
+
+   o  Receive the protocol notifications.
+
+<span class="h3"><h3><a class="selflink" name="section-2.2" href="https://tools.ietf.org/html/rfc8347#section-2.2">2.2</a>. Relationships with the Interface Model and IP Model</h3></span>
+
+   This model augments the interface data model &quot;ietf-interfaces&quot;
+   [<a href="https://tools.ietf.org/html/rfc8343" title="&quot;A YANG Data Model for Interface Management&quot;">RFC8343</a>] and the IP management model &quot;ietf-ip&quot; [<a href="https://tools.ietf.org/html/rfc8344" title="&quot;A YANG Data Model for IP Management&quot;">RFC8344</a>].  The
+   augmentation relationships are shown as follows:
+
+   module: ietf-interfaces
+      +--rw interfaces
+         +--rw interface* [name]
+               ...
+            +--rw ip:ipv4!
+            |  +--rw ip:address* [ip]
+                     ...
+            |  +--rw vrrp:vrrp
+            |     +--rw vrrp:vrrp-instance* [vrid]
+            |        +--rw vrrp:vrid                            uint8
+            |        +--rw vrrp:virtual-ipv4-addresses
+                           ...
+            +--rw ip:ipv6!
+               +--rw ip:address* [ip]
+                     ...
+               +--rw vrrp:vrrp
+                  +--rw vrrp:vrrp-instance* [vrid]
+                     +--rw vrrp:vrid                            uint8
+                     +--rw vrrp:virtual-ipv6-addresses
+                           ...
+
+   In the above figure, a tree node without a prefix is from the model
+   &quot;ietf-interfaces&quot;.  A tree node with prefix &quot;ip:&quot; is from the model
+   &quot;ietf-ip&quot;.  A tree node with prefix &quot;vrrp:&quot; is from the VRRP model
+   specified in this document.
+
+   The &quot;vrrp&quot; container contains a list of vrrp-instance nodes, which
+   are instantiated under an interface for a specified address family
+   (IPv4 or IPv6).
+
+   Each vrrp-instance node represents a VRRP router state machine, as
+   described in <a href="https://tools.ietf.org/html/rfc5798#section-6.4">Section&nbsp;6.4 of [RFC5798]</a>, providing the configuration
+   and state information for the election process of a virtual router.
+   The IP addresses on the augmented interface are the real addresses
+   through which the VRRP router operates.  The IPv4 or IPv6 address or
+   addresses associated with a virtual router (described in <a href="https://tools.ietf.org/html/rfc5798#section-1">Section&nbsp;1 of
+   [RFC5798]</a>) are modeled as a list of IPv4 or IPv6 addresses under the
+   vrrp-instance.
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                    [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc8347#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-2.3" href="https://tools.ietf.org/html/rfc8347#section-2.3">2.3</a>. Protocol Configuration</h3></span>
+
+   The model structure for the protocol configuration is as shown below:
+
+     augment /if:interfaces/if:interface/ip:ipv4:
+       +--rw vrrp
+          +--rw vrrp-instance* [vrid]
+             +--rw vrid                            uint8
+             |     ...
+             +--rw track
+             |  +--rw interfaces
+             |  |  +--rw interface* [interface]
+             |  |     +--rw interface             if:interface-ref
+             |  |           ...
+             |  +--rw networks
+             |     +--rw network* [prefix]
+             |        +--rw prefix                inet:ipv4-prefix
+             |              ...
+             +--rw virtual-ipv4-addresses
+                +--rw virtual-ipv4-address* [ipv4-address]
+                   +--rw ipv4-address    inet:ipv4-address
+
+     augment /if:interfaces/if:interface/ip:ipv6:
+       +--rw vrrp
+          +--rw vrrp-instance* [vrid]
+             +--rw vrid                            uint8
+             |     ...
+             +--rw track
+             |  +--rw interfaces
+             |  |  +--rw interface* [interface]
+             |  |     +--rw interface             if:interface-ref
+             |  |           ...
+             |  +--rw networks
+             |     +--rw network* [prefix]
+             |        +--rw prefix                inet:ipv6-prefix
+             |              ...
+             +--rw virtual-ipv6-addresses
+                +--rw virtual-ipv6-address* [ipv6-address]
+                   +--rw ipv6-address    inet:ipv6-address
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                    [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc8347#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+   The model allows the following protocol entities to be configured:
+
+   o  VRRP instance (version 2 or 3), representing a VRRP router.
+
+   o  Virtual IPv4 or IPv6 address associated with a virtual router.
+
+   o  Tracking interface, to detect interface connectivity failures.
+
+   o  Tracking network, to detect network connectivity failures.
+
+<span class="h3"><h3><a class="selflink" name="section-2.4" href="https://tools.ietf.org/html/rfc8347#section-2.4">2.4</a>. Protocol States</h3></span>
+
+   The model structure for the protocol states is as shown below:
+
+   module: ietf-vrrp
+       +--ro vrrp
+          |     // global operational states
+          +--ro virtual-routers?   uint32
+          +--ro interfaces?        uint32
+          +--ro statistics                 // global statistics
+             +--ro discontinuity-datetime?   yang:date-and-time
+             +--ro checksum-errors?          yang:counter64
+             +--ro version-errors?           yang:counter64
+             +--ro vrid-errors?              yang:counter64
+             +--ro ip-ttl-errors?            yang:counter64
+
+     augment /if:interfaces/if:interface/ip:ipv4:
+       +--rw vrrp
+          +--rw vrrp-instance* [vrid]
+             +--rw vrid                            uint8
+             |     ...
+             +--rw track
+             |  +--rw interfaces
+             |  |  +--rw interface* [interface]
+             |  |     +--rw interface             if:interface-ref
+             |  |           ...
+             |  +--rw networks
+             |     +--rw network* [prefix]
+             |        +--rw prefix                inet:ipv4-prefix
+             |              ...
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                    [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc8347#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+             +--rw virtual-ipv4-addresses
+             |  +--rw virtual-ipv4-address* [ipv4-address]
+             |     +--rw ipv4-address    inet:ipv4-address
+             |
+             |     // per-instance operational states
+             +--ro state?                         identityref
+             +--ro is-owner?                      boolean
+             +--ro last-adv-source?               inet:ip-address
+             +--ro up-datetime?                   yang:date-and-time
+             +--ro master-down-interval?          uint32
+             +--ro skew-time?                     uint32
+             +--ro last-event?                    identityref
+             +--ro new-master-reason?             new-master-reason-type
+             +--ro statistics                // per-instance statistics
+                +--ro discontinuity-datetime?    yang:date-and-time
+                +--ro master-transitions?        yang:counter32
+                +--ro advertisement-rcvd?        yang:counter64
+                +--ro advertisement-sent?        yang:counter64
+                +--ro interval-errors?           yang:counter64
+                |       {validate-interval-errors}?
+                +--ro priority-zero-pkts-rcvd?   yang:counter64
+                +--ro priority-zero-pkts-sent?   yang:counter64
+                +--ro invalid-type-pkts-rcvd?    yang:counter64
+                +--ro address-list-errors?       yang:counter64
+                |       {validate-address-list-errors}?
+                +--ro packet-length-errors?      yang:counter64
+
+     augment /if:interfaces/if:interface/ip:ipv6:
+       +--rw vrrp
+          +--rw vrrp-instance* [vrid]
+             +--rw vrid                            uint8
+             +     ...
+             +--rw track
+             |  +--rw interfaces
+             |  |  +--rw interface* [interface]
+             |  |     +--rw interface             if:interface-ref
+             |  |           ...
+             |  +--rw networks
+             |     +--rw network* [prefix]
+             |        +--rw prefix                inet:ipv6-prefix
+             |              ...
+             +--rw virtual-ipv6-addresses
+             |  +--rw virtual-ipv6-address* [ipv6-address]
+             |     +--rw ipv6-address    inet:ipv6-address
+             |
+
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                    [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc8347#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+             |     // per-instance operational states
+             +--ro state?                         identityref
+             +--ro is-owner?                      boolean
+             +--ro last-adv-source?               inet:ip-address
+             +--ro up-datetime?                   yang:date-and-time
+             +--ro master-down-interval?          uint32
+             +--ro skew-time?                     uint32
+             +--ro last-event?                    identityref
+             +--ro new-master-reason?             new-master-reason-type
+             +--ro statistics                // per-instance statistics
+                +--ro discontinuity-datetime?    yang:date-and-time
+                +--ro master-transitions?        yang:counter32
+                +--ro advertisement-rcvd?        yang:counter64
+                +--ro advertisement-sent?        yang:counter64
+                +--ro interval-errors?           yang:counter64
+                |       {validate-interval-errors}?
+                +--ro priority-zero-pkts-rcvd?   yang:counter64
+                +--ro priority-zero-pkts-sent?   yang:counter64
+                +--ro invalid-type-pkts-rcvd?    yang:counter64
+                +--ro address-list-errors?       yang:counter64
+                |       {validate-address-list-errors}?
+                +--ro packet-length-errors?      yang:counter64
+
+   This model conforms to the Network Management Datastore Architecture
+   (NMDA) [<a href="https://tools.ietf.org/html/rfc8342" title="&quot;Network Management Datastore Architecture (NMDA)&quot;">RFC8342</a>].  The operational state data is combined with the
+   associated configuration data in the same hierarchy
+   [<a href="https://tools.ietf.org/html/rfc8347#ref-YANG-Guidelines" title="&quot;Guidelines for Authors and Reviewers of YANG Data Model Documents&quot;">YANG-Guidelines</a>].  When protocol states are retrieved from the NMDA
+   operational state datastore, the returned states cover all
+   &quot;config true&quot; (rw) and &quot;config false&quot; (ro) nodes defined in the
+   schema.
+
+   The model allows the retrieval of protocol states at the following
+   levels:
+
+   o  VRRP instance (version 2 or 3), representing a VRRP router.
+
+   o  Virtual IPv4 or IPv6 address associated with a virtual router.
+
+   o  Tracking interface, to detect interface connectivity failures.
+
+   o  Tracking network, to detect network connectivity failures.
+
+   o  Global states and statistics summarizing all instances.
+
+
+
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                    [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc8347#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-2.5" href="https://tools.ietf.org/html/rfc8347#section-2.5">2.5</a>. Notifications</h3></span>
+
+   This model defines the following VRRP-specific notifications:
+
+   notifications:
+      +---n vrrp-new-master-event
+      |  +--ro master-ip-address    inet:ip-address
+      |  +--ro new-master-reason    new-master-reason-type
+      +---n vrrp-protocol-error-event
+      |  +--ro protocol-error-reason    identityref
+      +---n vrrp-virtual-router-error-event
+         +--ro interface                      if:interface-ref
+         +--ro (ip-version)
+         |  +--:(ipv4)
+         |  |  +--ro ipv4
+         |  |     +--ro vrid    leafref
+         |  +--:(ipv6)
+         |     +--ro ipv6
+         |        +--ro vrid    leafref
+         +--ro virtual-router-error-reason    identityref
+
+   Each notification type is used to indicate a type of VRRP state
+   change or error occurrence:
+
+   vrrp-new-master-event
+      VRRP new master event, indicating that a new master has been
+      elected.
+
+   vrrp-protocol-error-event
+      VRRP protocol error event for a message that fails to reach a VRRP
+      instance to be processed.
+
+   vrrp-virtual-router-error-event
+      VRRP virtual router error event for a message processed on a VRRP
+      instance.
+
+   In addition to the notifications specified above, the mechanisms
+   defined in [<a href="https://tools.ietf.org/html/rfc8347#ref-Subscribed-Notifications" title="&quot;Custom Subscription to Event Streams&quot;">Subscribed-Notifications</a>] and [<a href="https://tools.ietf.org/html/rfc8347#ref-YANG-Push" title="&quot;YANG Datastore Subscription&quot;">YANG-Push</a>] can be used for
+   other general notifications.  These mechanisms currently allow the
+   user to:
+
+   o  Subscribe notifications on a per-client basis.
+
+   o  Specify subtree filters or XML Path Language (XPath) filters so
+      that only contents of interest will be sent.
+
+   o  Specify either periodic or on-demand notifications.
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                    [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc8347#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc8347#section-3">3</a>. Tree Structure</h2></span>
+
+   The VRRP YANG data model defined in this document has the following
+   tree structure:
+
+   module: ietf-vrrp
+       +--ro vrrp
+          +--ro virtual-routers?   uint32
+          +--ro interfaces?        uint32
+          +--ro statistics
+             +--ro discontinuity-datetime?   yang:date-and-time
+             +--ro checksum-errors?          yang:counter64
+             +--ro version-errors?           yang:counter64
+             +--ro vrid-errors?              yang:counter64
+             +--ro ip-ttl-errors?            yang:counter64
+     augment /if:interfaces/if:interface/ip:ipv4:
+       +--rw vrrp
+          +--rw vrrp-instance* [vrid]
+             +--rw vrid                            uint8
+             +--rw version                         identityref
+             +--rw log-state-change?               boolean
+             +--rw preempt
+             |  +--rw enabled?     boolean
+             |  +--rw hold-time?   uint16
+             +--rw priority?                       uint8
+             +--rw accept-mode?                    boolean
+             +--rw (advertise-interval-choice)?
+             |  +--:(v2)
+             |  |  +--rw advertise-interval-sec?         uint8
+             |  +--:(v3)
+             |     +--rw advertise-interval-centi-sec?   uint16
+             +--rw track
+             |  +--rw interfaces
+             |  |  +--rw interface* [interface]
+             |  |     +--rw interface             if:interface-ref
+             |  |     +--rw priority-decrement?   uint8
+             |  +--rw networks
+             |     +--rw network* [prefix]
+             |        +--rw prefix                inet:ipv4-prefix
+             |        +--rw priority-decrement?   uint8
+             +--rw virtual-ipv4-addresses
+             |  +--rw virtual-ipv4-address* [ipv4-address]
+             |     +--rw ipv4-address    inet:ipv4-address
+             +--ro state?                          identityref
+             +--ro is-owner?                       boolean
+             +--ro last-adv-source?                inet:ip-address
+             +--ro up-datetime?                    yang:date-and-time
+             +--ro master-down-interval?           uint32
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc8347#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+             +--ro skew-time?                      uint32
+             +--ro last-event?                     identityref
+             +--ro new-master-reason?
+    new-master-reason-type
+             +--ro statistics
+                +--ro discontinuity-datetime?    yang:date-and-time
+                +--ro master-transitions?        yang:counter32
+                +--ro advertisement-rcvd?        yang:counter64
+                +--ro advertisement-sent?        yang:counter64
+                +--ro interval-errors?           yang:counter64
+                |       {validate-interval-errors}?
+                +--ro priority-zero-pkts-rcvd?   yang:counter64
+                +--ro priority-zero-pkts-sent?   yang:counter64
+                +--ro invalid-type-pkts-rcvd?    yang:counter64
+                +--ro address-list-errors?       yang:counter64
+                |       {validate-address-list-errors}?
+                +--ro packet-length-errors?      yang:counter64
+     augment /if:interfaces/if:interface/ip:ipv6:
+       +--rw vrrp
+          +--rw vrrp-instance* [vrid]
+             +--rw vrid                            uint8
+             +--rw version                         identityref
+             +--rw log-state-change?               boolean
+             +--rw preempt
+             |  +--rw enabled?     boolean
+             |  +--rw hold-time?   uint16
+             +--rw priority?                       uint8
+             +--rw accept-mode?                    boolean
+             +--rw advertise-interval-centi-sec?   uint16
+             +--rw track
+             |  +--rw interfaces
+             |  |  +--rw interface* [interface]
+             |  |     +--rw interface             if:interface-ref
+             |  |     +--rw priority-decrement?   uint8
+             |  +--rw networks
+             |     +--rw network* [prefix]
+             |        +--rw prefix                inet:ipv6-prefix
+             |        +--rw priority-decrement?   uint8
+             +--rw virtual-ipv6-addresses
+             |  +--rw virtual-ipv6-address* [ipv6-address]
+             |     +--rw ipv6-address    inet:ipv6-address
+             +--ro state?                          identityref
+             +--ro is-owner?                       boolean
+             +--ro last-adv-source?                inet:ip-address
+             +--ro up-datetime?                    yang:date-and-time
+             +--ro master-down-interval?           uint32
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc8347#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+             +--ro skew-time?                      uint32
+             +--ro last-event?                     identityref
+             +--ro new-master-reason?
+    new-master-reason-type
+             +--ro statistics
+                +--ro discontinuity-datetime?    yang:date-and-time
+                +--ro master-transitions?        yang:counter32
+                +--ro advertisement-rcvd?        yang:counter64
+                +--ro advertisement-sent?        yang:counter64
+                +--ro interval-errors?           yang:counter64
+                |       {validate-interval-errors}?
+                +--ro priority-zero-pkts-rcvd?   yang:counter64
+                +--ro priority-zero-pkts-sent?   yang:counter64
+                +--ro invalid-type-pkts-rcvd?    yang:counter64
+                +--ro address-list-errors?       yang:counter64
+                |       {validate-address-list-errors}?
+                +--ro packet-length-errors?      yang:counter64
+
+     notifications:
+       +---n vrrp-new-master-event
+       |  +--ro master-ip-address    inet:ip-address
+       |  +--ro new-master-reason    new-master-reason-type
+       +---n vrrp-protocol-error-event
+       |  +--ro protocol-error-reason    identityref
+       +---n vrrp-virtual-router-error-event
+          +--ro interface                      if:interface-ref
+          +--ro (ip-version)
+          |  +--:(ipv4)
+          |  |  +--ro ipv4
+          |  |     +--ro vrid    leafref
+          |  +--:(ipv6)
+          |     +--ro ipv6
+          |        +--ro vrid    leafref
+          +--ro virtual-router-error-reason    identityref
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-13" id="page-13" href="https://tools.ietf.org/html/rfc8347#page-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc8347#section-4">4</a>. YANG Module</h2></span>
+
+   This module references [<a href="https://tools.ietf.org/html/rfc2787" title="&quot;Definitions of Managed Objects for the Virtual Router Redundancy Protocol&quot;">RFC2787</a>], [<a href="https://tools.ietf.org/html/rfc3768" title="&quot;Virtual Router Redundancy Protocol (VRRP)&quot;">RFC3768</a>], [<a href="https://tools.ietf.org/html/rfc5798" title="&quot;Virtual Router Redundancy Protocol (VRRP) Version 3 for IPv4 and IPv6&quot;">RFC5798</a>], and
+   [<a href="https://tools.ietf.org/html/rfc6527" title="&quot;Definitions of Managed Objects for Virtual Router Redundancy Protocol Version 3 (VRRPv3)&quot;">RFC6527</a>].
+
+   &lt;CODE BEGINS&gt; file &quot;ietf-vrrp@2018-03-13.yang&quot;
+
+   module ietf-vrrp {
+     yang-version 1.1;
+     namespace &quot;urn:ietf:params:xml:ns:yang:ietf-vrrp&quot;;
+     prefix &quot;vrrp&quot;;
+
+     import ietf-inet-types {
+       prefix &quot;inet&quot;;
+     }
+
+     import ietf-yang-types {
+       prefix &quot;yang&quot;;
+     }
+
+     import ietf-interfaces {
+       prefix &quot;if&quot;;
+     }
+
+     import ietf-ip {
+       prefix &quot;ip&quot;;
+     }
+
+     organization
+       &quot;IETF Routing Area Working Group (RTGWG)&quot;;
+     contact
+       &quot;WG Web:   &lt;<a href="https://datatracker.ietf.org/wg/rtgwg/">https://datatracker.ietf.org/wg/rtgwg/</a>&gt;
+        WG List:  &lt;mailto:rtgwg@ietf.org&gt;
+
+        Editor:   Xufeng Liu
+                  &lt;mailto:xufeng.liu.ietf@gmail.com&gt;
+
+        Editor:   Athanasios Kyparlis
+                  &lt;mailto:Athanasios_Kyparlis@jabil.com&gt;
+        Editor:   Ravi Parikh
+                  &lt;mailto:parikhr@vmware.com&gt;
+
+        Editor:   Acee Lindem
+                  &lt;mailto:acee@cisco.com&gt;
+
+        Editor:   Mingui Zhang
+                  &lt;mailto:zhangmingui@huawei.com&gt;&quot;;
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 13]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-14" id="page-14" href="https://tools.ietf.org/html/rfc8347#page-14" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+     description
+       &quot;This YANG module defines a model for managing Virtual Router
+        Redundancy Protocol (VRRP) versions 2 and 3.
+
+        Copyright (c) 2018 IETF Trust and the persons identified as
+        authors of the code.  All rights reserved.
+
+        Redistribution and use in source and binary forms, with or
+        without modification, is permitted pursuant to, and subject to
+        the license terms contained in, the Simplified BSD License set
+        forth in <a href="https://tools.ietf.org/html/rfc8347#section-4">Section 4</a>.c of the IETF Trust's Legal Provisions
+        Relating to IETF Documents
+        (<a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a>).
+
+        This version of this YANG module is part of <a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>; see the
+        RFC itself for full legal notices.&quot;;
+
+     revision 2018-03-13 {
+       description
+         &quot;Initial revision.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>: A YANG Data Model for the Virtual Router Redundancy
+                    Protocol (VRRP)
+          <a href="https://tools.ietf.org/html/rfc2787">RFC 2787</a>: Definitions of Managed Objects for the Virtual
+                    Router Redundancy Protocol
+          <a href="https://tools.ietf.org/html/rfc3768">RFC 3768</a>: Virtual Router Redundancy Protocol (VRRP)
+          <a href="https://tools.ietf.org/html/rfc5798">RFC 5798</a>: Virtual Router Redundancy Protocol (VRRP)
+                    Version 3 for IPv4 and IPv6
+          <a href="https://tools.ietf.org/html/rfc6527">RFC 6527</a>: Definitions of Managed Objects for the Virtual
+                    Router Redundancy Protocol Version 3 (VRRPv3)&quot;;
+     }
+
+     /*
+      * Features
+      */
+
+     feature validate-interval-errors {
+       description
+         &quot;This feature indicates that the system validates that the
+          advertisement interval from advertisement packets received
+          is the same as the interval configured for the local
+          VRRP router.&quot;;
+     }
+
+     feature validate-address-list-errors {
+       description
+         &quot;This feature indicates that the system validates that
+          the address list from received packets matches the
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 14]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-15" id="page-15" href="https://tools.ietf.org/html/rfc8347#page-15" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+          locally configured list for the VRRP router.&quot;;
+     }
+
+     /*
+      * Typedefs
+      */
+
+     typedef new-master-reason-type {
+       type enumeration {
+         enum not-master {
+           description
+             &quot;The virtual router has never transitioned to master
+              state.&quot;;
+         }
+         enum priority {
+           description
+             &quot;Priority was higher.&quot;;
+         }
+         enum preempted {
+           description
+             &quot;The master was preempted.&quot;;
+         }
+         enum no-response {
+           description
+             &quot;Previous master did not respond.&quot;;
+         }
+       }
+       description
+         &quot;Indicates why the virtual router has transitioned to
+          master state.&quot;;
+     } // new-master-reason-type
+
+     /*
+      * Identities
+      */
+
+     /* vrrp-event-type identity and its derivatives. */
+     identity vrrp-event-type {
+       description
+         &quot;Indicates the type of a VRRP protocol event.&quot;;
+     }
+     identity vrrp-event-none {
+       base vrrp-event-type;
+       description
+         &quot;Indicates a non-meaningful event.&quot;;
+     }
+     identity vrrp-event-startup {
+       base vrrp-event-type;
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 15]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-16" id="page-16" href="https://tools.ietf.org/html/rfc8347#page-16" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+       description
+         &quot;Indicates that a VRRP router has initiated the protocol.&quot;;
+     }
+     identity vrrp-event-shutdown {
+       base vrrp-event-type;
+       description
+         &quot;Indicates that a VRRP router has closed down the protocol.&quot;;
+     }
+     identity vrrp-event-higher-priority-backup {
+       base vrrp-event-type;
+       description
+         &quot;Indicates that a backup router has a higher priority than
+          the current master.&quot;;
+     }
+     identity vrrp-event-master-timeout {
+       base vrrp-event-type;
+       description
+         &quot;Indicates that the current master has not sent an
+          advertisement within the limit of master-down-interval.&quot;;
+     }
+     identity vrrp-event-interface-up {
+       base vrrp-event-type;
+       description
+         &quot;Indicates that the VRRP-enabled interface has become
+          'operational up'.&quot;;
+     }
+     identity vrrp-event-interface-down {
+       base vrrp-event-type;
+       description
+         &quot;Indicates that the VRRP-enabled interface has become
+          'operational down'.&quot;;
+     }
+     identity vrrp-event-no-primary-ip-address {
+       base vrrp-event-type;
+       description
+         &quot;Indicates that the primary IP address on the VRRP-enabled
+          interface has become unavailable.&quot;;
+     }
+     identity vrrp-event-primary-ip-address {
+       base vrrp-event-type;
+       description
+         &quot;Indicates that the primary IP address on the VRRP-enabled
+          interface has become available.&quot;;
+     }
+     identity vrrp-event-no-virtual-ip-addresses {
+       base vrrp-event-type;
+       description
+         &quot;Indicates that there are no virtual IP addresses on the
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 16]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-17" id="page-17" href="https://tools.ietf.org/html/rfc8347#page-17" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+          virtual router.&quot;;
+     }
+     identity vrrp-event-virtual-ip-addresses {
+       base vrrp-event-type;
+       description
+         &quot;Indicates that there are virtual IP addresses on the
+          virtual router.&quot;;
+     }
+     identity vrrp-event-preempt-hold-timeout {
+       base vrrp-event-type;
+       description
+         &quot;Indicates that the configured preemption hold time has
+          passed.&quot;;
+     }
+     identity vrrp-event-lower-priority-master {
+       base vrrp-event-type;
+       description
+         &quot;Indicates that there is a lower-priority VRRP master.&quot;;
+     }
+     identity vrrp-event-owner-preempt {
+       base vrrp-event-type;
+       description
+         &quot;Indicates that the owner has preempted another router to
+          become the master.&quot;;
+     }
+
+     /* vrrp-error-global identity and its derivatives. */
+     identity vrrp-error-global {
+       description
+         &quot;Indicates the type of a VRRP error that occurred
+          for a packet before it reaches a VRRP router.&quot;;
+     }
+     identity checksum-error {
+       base vrrp-error-global;
+       description
+         &quot;A packet has been received with an invalid VRRP checksum
+          value.&quot;;
+     }
+     identity ip-ttl-error {
+       base vrrp-error-global;
+       description
+         &quot;A packet has been received with IP TTL (Time-To-Live)
+          not equal to 255.&quot;;
+     }
+     identity version-error {
+       base vrrp-error-global;
+       description
+         &quot;A packet has been received with an unknown or unsupported
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 17]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-18" id="page-18" href="https://tools.ietf.org/html/rfc8347#page-18" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+          version number.&quot;;
+     }
+     identity vrid-error {
+       base vrrp-error-global;
+       description
+         &quot;A packet has been received with a Virtual Router Identifier
+          (VRID) that is not valid for any virtual router on this
+          router.&quot;;
+     }
+
+     /* vrrp-error-virtual-router identity and its derivatives. */
+     identity vrrp-error-virtual-router {
+       description
+         &quot;Indicates the type of a VRRP error that occurred
+          after a packet reaches a VRRP router.&quot;;
+     }
+     identity address-list-error {
+       base vrrp-error-virtual-router;
+       description
+         &quot;A packet has been received with an address list that
+          does not match the locally configured address list for
+          the virtual router.&quot;;
+     }
+     identity interval-error {
+       base vrrp-error-virtual-router;
+       description
+         &quot;A packet has been received with an advertisement interval
+          different than the interval configured for the local
+          virtual router.&quot;;
+     }
+     identity packet-length-error {
+       base vrrp-error-virtual-router;
+       description
+         &quot;A packet has been received with a packet length less
+          than the length of the VRRP header.&quot;;
+     }
+
+     /* vrrp-state-type identity and its derivatives. */
+     identity vrrp-state-type {
+       description
+         &quot;Indicates the state of a virtual router.&quot;;
+     }
+     identity initialize {
+       base vrrp-state-type;
+       description
+         &quot;Indicates that the virtual router is waiting
+          for a startup event.&quot;;
+     }
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 18]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-19" id="page-19" href="https://tools.ietf.org/html/rfc8347#page-19" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+     identity backup {
+       base vrrp-state-type;
+       description
+         &quot;Indicates that the virtual router is monitoring the
+          availability of the master router.&quot;;
+     }
+     identity master {
+       base vrrp-state-type;
+       description
+         &quot;Indicates that the virtual router is forwarding
+          packets for IP addresses that are associated with
+          this virtual router.&quot;;
+     }
+
+     /* vrrp-version identity and its derivatives. */
+     identity vrrp-version {
+       description
+         &quot;The version of VRRP.&quot;;
+     }
+     identity vrrp-v2 {
+       base vrrp-version;
+       description
+         &quot;Indicates version 2 of VRRP.&quot;;
+     }
+     identity vrrp-v3 {
+       base vrrp-version;
+       description
+         &quot;Indicates version 3 of VRRP.&quot;;
+     }
+
+     /*
+      * Groupings
+      */
+
+     grouping vrrp-common-attributes {
+       description
+         &quot;Group of VRRP attributes common to versions 2 and 3.&quot;;
+
+       leaf vrid {
+         type uint8 {
+           range &quot;1..255&quot;;
+         }
+         description
+           &quot;Virtual Router ID (i.e., VRID).&quot;;
+       }
+
+       leaf version {
+         type identityref {
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 19]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-20" id="page-20" href="https://tools.ietf.org/html/rfc8347#page-20" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+           base vrrp:vrrp-version;
+         }
+         mandatory true;
+         description
+           &quot;Version 2 or 3 of VRRP.&quot;;
+       }
+
+       leaf log-state-change {
+         type boolean;
+         default &quot;false&quot;;
+         description
+           &quot;Generates VRRP state change messages each time the
+            VRRP instance changes state (from 'up' to 'down'
+            or 'down' to 'up').&quot;;
+       }
+
+       container preempt {
+         description
+           &quot;Enables a higher-priority VRRP backup router to preempt a
+            lower-priority VRRP master.&quot;;
+         leaf enabled {
+           type boolean;
+           default &quot;true&quot;;
+           description
+             &quot;'true' if preemption is enabled.&quot;;
+         }
+         leaf hold-time {
+           type uint16;
+           units seconds;
+           default 0;
+           description
+             &quot;Hold time, in seconds, for which a higher-priority VRRP
+              backup router must wait before preempting a lower-priority
+              VRRP master.&quot;;
+         }
+       }
+
+       leaf priority {
+         type uint8 {
+           range &quot;1..254&quot;;
+         }
+         default 100;
+         description
+           &quot;Configures the VRRP election priority for the backup
+            virtual router.&quot;;
+       }
+
+       leaf accept-mode {
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 20]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-21" id="page-21" href="https://tools.ietf.org/html/rfc8347#page-21" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+         when &quot;derived-from-or-self(current()/../version, 'vrrp-v3')&quot; {
+           description
+             &quot;Applicable only to version 3.&quot;;
+         }
+         type boolean;
+         default &quot;false&quot;;
+         description
+           &quot;Controls whether a virtual router in master state will
+            accept packets addressed to the address owner's IPvX address
+            as its own if it is not the IPvX address owner.  The default
+            is 'false'.  Deployments that rely on, for example, pinging
+            the address owner's IPvX address may wish to configure
+            accept-mode to 'true'.
+
+            Note: IPv6 Neighbor Solicitations and Neighbor
+            Advertisements MUST NOT be dropped when accept-mode
+            is 'false'.&quot;;
+       }
+     } // vrrp-common-attributes
+
+     grouping vrrp-ipv4-attributes {
+       description
+         &quot;Group of VRRP attributes for IPv4.&quot;;
+
+       uses vrrp-common-attributes;
+
+       choice advertise-interval-choice {
+         description
+           &quot;The options for the advertisement interval at which VRRPv2
+            or VRRPv3 advertisements are sent from the specified
+            interface.&quot;;
+
+         case v2 {
+           when &quot;derived-from-or-self(version, 'vrrp-v2')&quot; {
+             description
+               &quot;Applicable only to version 2.&quot;;
+           }
+           leaf advertise-interval-sec {
+             type uint8 {
+               range &quot;1..254&quot;;
+             }
+             units seconds;
+             default 1;
+             description
+               &quot;Configures the interval that VRRPv2 advertisements
+                are sent from the specified interface.&quot;;
+           }
+         }
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 21]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-22" id="page-22" href="https://tools.ietf.org/html/rfc8347#page-22" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+         case v3 {
+           when &quot;derived-from-or-self(version, 'vrrp-v3')&quot; {
+             description
+               &quot;Applicable only to version 3.&quot;;
+           }
+           leaf advertise-interval-centi-sec {
+             type uint16 {
+               range &quot;1..4095&quot;;
+             }
+             units centiseconds;
+             default 100;
+             description
+               &quot;Configures the interval that VRRPv3 advertisements
+                are sent from the specified interface.&quot;;
+           }
+         }
+       } // advertise-interval-choice
+
+       container track {
+         description
+           &quot;Enables the specified VRRP instance to track interfaces
+            or networks.&quot;;
+         container interfaces {
+           description
+             &quot;Enables the specified VRRPv2 or VRRPv3 instance to track
+              interfaces.  Interface tracking prevents traffic loss by
+              detecting the availability of interfaces.  The operational
+              states of other interfaces are associated with the
+              priority of a VRRP router.  When a tracked interface
+              becomes unavailable (or 'operational down'), the priority
+              of the VRRP router decrements.  When an unavailable
+              interface becomes available again, the priority of the
+              VRRP router is incremented by the same amount.&quot;;
+
+           list interface {
+             key &quot;interface&quot;;
+             description
+               &quot;Interface to track.&quot;;
+             leaf interface {
+               type if:interface-ref;
+               must &quot;/if:interfaces/if:interface[if:name=current()]/&quot;
+                  + &quot;ip:ipv4&quot; {
+                 description
+                   &quot;Interface is IPv4.&quot;;
+               }
+               description
+                 &quot;Interface to track.&quot;;
+             }
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 22]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-23" id="page-23" href="https://tools.ietf.org/html/rfc8347#page-23" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+             leaf priority-decrement {
+               type uint8 {
+                 range &quot;1..254&quot;;
+               }
+               default 10;
+               description
+                 &quot;Specifies how much to decrement the priority of the
+                  VRRP instance if the interface goes down.&quot;;
+             }
+           } // interface
+         } // interfaces
+
+         container networks {
+           description
+             &quot;Enables the VRRPv2 or VRRPv3 router instance to track the
+              specified networks through their IPv4 network prefixes.
+              Network tracking prevents traffic loss by detecting
+              network connectivity failure.  The states of
+              connectivity to some networks are associated with the
+              priority of a VRRP router.  When connectivity to a
+              tracked network represented by its prefix is lost, the
+              priority of the VRRP router decrements.  When an
+              unavailable network is again reachable, the priority of
+              the VRRP router is incremented by the same amount.&quot;;
+           list network {
+             key &quot;prefix&quot;;
+             description
+               &quot;Enables the specified VRRPv2 or VRRPv3 instance to
+                track an IPv4 network by specifying the prefix of the
+                IPv4 network.&quot;;
+
+             leaf prefix {
+               type inet:ipv4-prefix;
+               description
+                 &quot;The IPv4 prefix of the network to track.&quot;;
+             }
+
+             leaf priority-decrement {
+               type uint8 {
+                 range &quot;1..254&quot;;
+               }
+               default 10;
+               description
+                 &quot;Specifies how much to decrement the priority of the
+                  VRRP router if there is a failure in the IPv4
+                  network.&quot;;
+             }
+           } // network
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 23]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-24" id="page-24" href="https://tools.ietf.org/html/rfc8347#page-24" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+         } // networks
+       } // track
+
+       container virtual-ipv4-addresses {
+         description
+           &quot;Configures the virtual IPv4 address for the
+            VRRP interface.&quot;;
+
+         list virtual-ipv4-address {
+           key &quot;ipv4-address&quot;;
+           max-elements 16;
+           description
+             &quot;Virtual IPv4 addresses for a single VRRP instance.  For a
+              VRRP owner router, the virtual address must match one
+              of the IPv4 addresses configured on the interface
+              corresponding to the virtual router.&quot;;
+
+           leaf ipv4-address {
+             type inet:ipv4-address;
+             description
+               &quot;An IPv4 address associated with a virtual router.&quot;;
+             reference
+               &quot;<a href="https://tools.ietf.org/html/rfc5798">RFC 5798</a>: Virtual Router Redundancy Protocol (VRRP)
+                          Version 3 for IPv4 and IPv6.  <a href="https://tools.ietf.org/html/rfc8347#section-1.2">Section 1.2</a>&quot;;
+           }
+         } // virtual-ipv4-address
+       } // virtual-ipv4-addresses
+     } // vrrp-ipv4-attributes
+
+     grouping vrrp-ipv6-attributes {
+       description
+         &quot;Group of VRRP attributes for IPv6.&quot;;
+
+       uses vrrp-common-attributes;
+
+       leaf advertise-interval-centi-sec {
+         type uint16 {
+           range &quot;1..4095&quot;;
+         }
+         units centiseconds;
+         default 100;
+         description
+           &quot;Configures the interval that VRRPv3 advertisements
+            are sent from the specified interface.&quot;;
+       }
+
+       container track {
+         description
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 24]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-25" id="page-25" href="https://tools.ietf.org/html/rfc8347#page-25" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+           &quot;Enables the specified VRRP instance to track interfaces
+            or networks.&quot;;
+         container interfaces {
+           description
+             &quot;Enables the specified VRRPv2 or VRRPv3 instance to track
+              interfaces.  Interface tracking prevents traffic loss by
+              detecting the availability of interfaces.  The operational
+              states of other interfaces are associated with the
+              priority of a VRRP router.  When a tracked interface
+              becomes unavailable (or 'operational down'), the priority
+              of the VRRP router decrements.  When an unavailable
+              interface becomes available again, the priority of the
+              VRRP router is incremented by the same amount.&quot;;
+           list interface {
+             key &quot;interface&quot;;
+             description
+               &quot;Interface to track.&quot;;
+
+             leaf interface {
+               type if:interface-ref;
+               must &quot;/if:interfaces/if:interface[if:name=current()]/&quot;
+                  + &quot;ip:ipv6&quot; {
+                 description
+                   &quot;Interface is IPv6.&quot;;
+               }
+               description
+                 &quot;Interface to track.&quot;;
+             }
+
+             leaf priority-decrement {
+               type uint8 {
+                 range &quot;1..254&quot;;
+               }
+               default 10;
+               description
+                 &quot;Specifies how much to decrement the priority of the
+                  VRRP instance if the interface goes down.&quot;;
+             }
+           } // interface
+         } // interfaces
+
+         container networks {
+           description
+             &quot;Enables the VRRPv2 or VRRPv3 router instance to track the
+              specified networks through their IPv6 network prefixes.
+              Network tracking prevents traffic loss by detecting
+              network connectivity failure.  The states of
+              connectivity to some networks are associated with the
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 25]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-26" id="page-26" href="https://tools.ietf.org/html/rfc8347#page-26" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+              priority of a VRRP router.  When connectivity to a
+              tracked network represented by its prefix is lost, the
+              priority of the VRRP router decrements.  When an
+              unavailable network is again reachable, the priority of
+              the VRRP router is incremented by the same amount.&quot;;
+           list network {
+             key &quot;prefix&quot;;
+             description
+               &quot;Enables the specified VRRPv2 or VRRPv3 instance to
+                track an IPv6 network by specifying the prefix of the
+                IPv6 network.&quot;;
+
+             leaf prefix {
+               type inet:ipv6-prefix;
+               description
+                 &quot;The IPv6 prefix of the network to track.&quot;;
+             }
+
+             leaf priority-decrement {
+               type uint8 {
+                 range &quot;1..254&quot;;
+               }
+               default 10;
+               description
+                 &quot;Specifies how much to decrement the priority of the
+                  VRRP router if there is a failure in the IPv6
+                  network.&quot;;
+             }
+           } // network
+         } // networks
+       } // track
+
+       container virtual-ipv6-addresses {
+         description
+           &quot;Configures the virtual IPv6 address for the
+            VRRP interface.&quot;;
+         list virtual-ipv6-address {
+           key &quot;ipv6-address&quot;;
+           max-elements 2;
+           description
+             &quot;Two IPv6 addresses are allowed.  The first address must
+              be a link-local address.  The second address can be a
+              link-local or global address.&quot;;
+
+           leaf ipv6-address {
+             type inet:ipv6-address;
+             description
+               &quot;An IPv6 address associated with a virtual router.&quot;;
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 26]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-27" id="page-27" href="https://tools.ietf.org/html/rfc8347#page-27" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+             reference
+               &quot;<a href="https://tools.ietf.org/html/rfc5798">RFC 5798</a>: Virtual Router Redundancy Protocol (VRRP)
+                          Version 3 for IPv4 and IPv6.  <a href="https://tools.ietf.org/html/rfc8347#section-1.3">Section 1.3</a>&quot;;
+           }
+         } // virtual-ipv6-address
+       } // virtual-ipv6-addresses
+     } // vrrp-ipv6-attributes
+
+     grouping vrrp-state-attributes {
+       description
+         &quot;Group of VRRP state attributes.&quot;;
+
+       leaf state {
+         type identityref {
+           base vrrp:vrrp-state-type;
+         }
+         config false;
+         description
+           &quot;Operational state.&quot;;
+       }
+
+       leaf is-owner {
+         type boolean;
+         config false;
+         description
+           &quot;Set to 'true' if this virtual router is the owner.&quot;;
+       }
+
+       leaf last-adv-source {
+         type inet:ip-address;
+         config false;
+         description
+           &quot;Last advertised IPv4/IPv6 source address.&quot;;
+       }
+
+       leaf up-datetime {
+         type yang:date-and-time;
+         config false;
+         description
+           &quot;The date and time when this virtual router
+            transitioned out of 'init' state.&quot;;
+       }
+
+       leaf master-down-interval {
+         type uint32;
+         units centiseconds;
+         config false;
+         description
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 27]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-28" id="page-28" href="https://tools.ietf.org/html/rfc8347#page-28" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+           &quot;Time interval for the backup virtual router to declare
+            'master down'.&quot;;
+       }
+
+       leaf skew-time {
+         type uint32;
+         units microseconds;
+         config false;
+         description
+           &quot;Calculated based on the priority and advertisement
+            interval configuration command parameters.  See <a href="https://tools.ietf.org/html/rfc3768">RFC 3768</a>.&quot;;
+       }
+
+       leaf last-event {
+         type identityref {
+           base vrrp:vrrp-event-type;
+         }
+         config false;
+         description
+           &quot;Last reported event.&quot;;
+       }
+
+       leaf new-master-reason {
+         type new-master-reason-type;
+         config false;
+         description
+           &quot;Indicates why the virtual router has transitioned to
+            master state.&quot;;
+       }
+
+       container statistics {
+         config false;
+         description
+           &quot;VRRP statistics.&quot;;
+
+         leaf discontinuity-datetime {
+           type yang:date-and-time;
+           description
+             &quot;The time on the most recent occasion at which any one or
+              more of the VRRP statistics counters suffered a
+              discontinuity.  If no such discontinuities have occurred
+              since the last re-initialization of the local management
+              subsystem, then this node contains the time that the
+              local management subsystem re-initialized itself.&quot;;
+         }
+
+         leaf master-transitions {
+           type yang:counter32;
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 28]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-29" id="page-29" href="https://tools.ietf.org/html/rfc8347#page-29" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+           description
+             &quot;The total number of times that this virtual router's
+              state has transitioned to 'master'.&quot;;
+         }
+
+         leaf advertisement-rcvd {
+           type yang:counter64;
+           description
+             &quot;The total number of VRRP advertisements received by
+              this virtual router.&quot;;
+         }
+
+         leaf advertisement-sent {
+           type yang:counter64;
+           description
+             &quot;The total number of VRRP advertisements sent by
+              this virtual router.&quot;;
+         }
+
+         leaf interval-errors {
+           if-feature validate-interval-errors;
+           type yang:counter64;
+           description
+             &quot;The total number of VRRP advertisement packets received
+              with an advertisement interval different than the
+              interval configured for the local virtual router.&quot;;
+         }
+
+         leaf priority-zero-pkts-rcvd {
+           type yang:counter64;
+           description
+             &quot;The total number of VRRP packets received by the
+              virtual router with a priority of 0.&quot;;
+         }
+
+         leaf priority-zero-pkts-sent {
+           type yang:counter64;
+           description
+             &quot;The total number of VRRP packets sent by the
+              virtual router with a priority of 0.&quot;;
+         }
+
+         leaf invalid-type-pkts-rcvd {
+           type yang:counter64;
+           description
+             &quot;The number of VRRP packets received by the virtual
+              router with an invalid value in the 'type' field.&quot;;
+         }
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 29]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-30" id="page-30" href="https://tools.ietf.org/html/rfc8347#page-30" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+         leaf address-list-errors {
+           if-feature validate-address-list-errors;
+           type yang:counter64;
+           description
+             &quot;The total number of packets received with an
+              address list that does not match the locally
+              configured address list for the virtual router.&quot;;
+         }
+
+         leaf packet-length-errors {
+           type yang:counter64;
+           description
+             &quot;The total number of packets received with a packet
+              length less than the length of the VRRP header.&quot;;
+         }
+       } // statistics
+     } // vrrp-state-attributes
+
+     grouping vrrp-global-state-attributes {
+       description
+         &quot;Group of VRRP global state attributes.&quot;;
+
+       leaf virtual-routers {
+         type uint32;
+         description
+           &quot;Number of configured virtual routers.&quot;;
+       }
+
+       leaf interfaces {
+         type uint32;
+         description
+           &quot;Number of interfaces with VRRP configured.&quot;;
+       }
+
+       container statistics {
+         description
+           &quot;VRRP global statistics.&quot;;
+
+         leaf discontinuity-datetime {
+           type yang:date-and-time;
+           description
+             &quot;The time on the most recent occasion at which any
+              one or more of checksum-errors, version-errors,
+              vrid-errors, or ip-ttl-errors suffered a
+              discontinuity.
+
+              If no such discontinuities have occurred since the last
+              re-initialization of the local management subsystem,
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 30]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-31" id="page-31" href="https://tools.ietf.org/html/rfc8347#page-31" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+              then this node contains the time that the local management
+              subsystem re-initialized itself.&quot;;
+         }
+
+         leaf checksum-errors {
+           type yang:counter64;
+           description
+             &quot;The total number of VRRP packets received with an invalid
+              VRRP checksum value.&quot;;
+           reference
+             &quot;<a href="https://tools.ietf.org/html/rfc5798">RFC 5798</a>: Virtual Router Redundancy Protocol (VRRP)
+                        Version 3 for IPv4 and IPv6.  <a href="https://tools.ietf.org/html/rfc8347#section-5.2.8">Section 5.2.8</a>&quot;;
+         }
+
+         leaf version-errors {
+           type yang:counter64;
+           description
+             &quot;The total number of VRRP packets received with an unknown
+              or unsupported version number.&quot;;
+           reference
+             &quot;<a href="https://tools.ietf.org/html/rfc5798">RFC 5798</a>: Virtual Router Redundancy Protocol (VRRP)
+                        Version 3 for IPv4 and IPv6.  <a href="https://tools.ietf.org/html/rfc8347#section-5.2.1">Section 5.2.1</a>&quot;;
+         }
+
+         leaf vrid-errors {
+           type yang:counter64;
+           description
+             &quot;The total number of VRRP packets received with a VRID that
+              is not valid for any virtual router on this router.&quot;;
+           reference
+             &quot;<a href="https://tools.ietf.org/html/rfc5798">RFC 5798</a>: Virtual Router Redundancy Protocol (VRRP)
+                        Version 3 for IPv4 and IPv6.  <a href="https://tools.ietf.org/html/rfc8347#section-5.2.3">Section 5.2.3</a>&quot;;
+         }
+
+         leaf ip-ttl-errors {
+           type yang:counter64;
+           description
+             &quot;The total number of VRRP packets received by the
+              virtual router with IP TTL (IPv4) or Hop Limit (IPv6)
+              not equal to 255.&quot;;
+           reference
+             &quot;<a href="https://tools.ietf.org/html/rfc5798">RFC 5798</a>: Virtual Router Redundancy Protocol (VRRP)
+                        Version 3 for IPv4 and IPv6.
+                        Sections <a href="https://tools.ietf.org/html/rfc8347#section-5.1.1.3">5.1.1.3</a> and <a href="https://tools.ietf.org/html/rfc8347#section-5.1.2.3">5.1.2.3</a>&quot;;
+         }
+       } // statistics
+     } // vrrp-global-state-attributes
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 31]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-32" id="page-32" href="https://tools.ietf.org/html/rfc8347#page-32" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+     /*
+      * Configuration data and operational state data nodes
+      */
+
+     augment &quot;/if:interfaces/if:interface/ip:ipv4&quot; {
+       description
+         &quot;Augments IPv4 interface.&quot;;
+
+       container vrrp {
+         description
+           &quot;Configures VRRP version 2 or 3 for IPv4.&quot;;
+
+         list vrrp-instance {
+           key &quot;vrid&quot;;
+           description
+             &quot;Defines a virtual router, identified by a VRID, within the
+              IPv4 address space.&quot;;
+
+           uses vrrp-ipv4-attributes;
+           uses vrrp-state-attributes;
+         }
+       }
+     } // augments ipv4
+
+     augment &quot;/if:interfaces/if:interface/ip:ipv6&quot; {
+       description
+         &quot;Augments IPv6 interface.&quot;;
+
+       container vrrp {
+         description
+           &quot;Configures VRRP version 3 for IPv6.&quot;;
+
+         list vrrp-instance {
+           must &quot;derived-from-or-self(version, 'vrrp-v3')&quot; {
+             description
+               &quot;IPv6 is only supported by version 3.&quot;;
+           }
+           key &quot;vrid&quot;;
+           description
+             &quot;Defines a virtual router, identified by a VRID, within the
+              IPv6 address space.&quot;;
+
+           uses vrrp-ipv6-attributes;
+           uses vrrp-state-attributes;
+         }
+       }
+     } // augments ipv6
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 32]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-33" id="page-33" href="https://tools.ietf.org/html/rfc8347#page-33" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+     container vrrp {
+       config false;
+       description
+         &quot;VRRP data at the global level.&quot;;
+
+       uses vrrp-global-state-attributes;
+     }
+
+     /*
+      * Notifications
+      */
+
+     notification vrrp-new-master-event {
+       description
+         &quot;Notification event for the election of a new VRRP master.&quot;;
+       leaf master-ip-address {
+         type inet:ip-address;
+         mandatory true;
+         description
+           &quot;IPv4 or IPv6 address of the new master.&quot;;
+       }
+       leaf new-master-reason {
+         type new-master-reason-type;
+         mandatory true;
+         description
+           &quot;Indicates why the virtual router has transitioned to
+            master state.&quot;;
+       }
+     }
+
+     notification vrrp-protocol-error-event {
+       description
+         &quot;Notification event for a VRRP protocol error.&quot;;
+       leaf protocol-error-reason {
+         type identityref {
+           base vrrp:vrrp-error-global;
+         }
+         mandatory true;
+         description
+           &quot;Indicates the reason for the protocol error.&quot;;
+       }
+     }
+
+     notification vrrp-virtual-router-error-event {
+       description
+         &quot;Notification event for an error that happened on a
+          virtual router.&quot;;
+       leaf interface {
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 33]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-34" id="page-34" href="https://tools.ietf.org/html/rfc8347#page-34" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+         type if:interface-ref;
+         mandatory true;
+         description
+           &quot;Indicates the interface on which the event has occurred.&quot;;
+       }
+
+       choice ip-version {
+         mandatory true;
+         description
+           &quot;The error may have happened on either an IPv4 virtual
+            router or an IPv6 virtual router.  The information
+            related to a specific IP version is provided by one of
+            the following cases.&quot;;
+         case ipv4 {
+           description
+             &quot;IPv4.&quot;;
+           container ipv4 {
+             description
+               &quot;Error information for IPv4.&quot;;
+             leaf vrid {
+               type leafref {
+                 path &quot;/if:interfaces/if:interface&quot;
+                   + &quot;[if:name = current()/../../vrrp:interface]/&quot;
+                   + &quot;ip:ipv4/vrrp:vrrp/vrrp:vrrp-instance/vrrp:vrid&quot;;
+               }
+               mandatory true;
+               description
+                 &quot;Indicates the virtual router on which the event has
+                  occurred.&quot;;
+             }
+           }
+         }
+         case ipv6 {
+           description
+             &quot;IPv6.&quot;;
+           container ipv6 {
+             description
+               &quot;Error information for IPv6.&quot;;
+             leaf vrid {
+               type leafref {
+                 path &quot;/if:interfaces/if:interface&quot;
+                   + &quot;[if:name = current()/../../vrrp:interface]/&quot;
+                   + &quot;ip:ipv6/vrrp:vrrp/vrrp:vrrp-instance/vrrp:vrid&quot;;
+               }
+               mandatory true;
+               description
+                 &quot;Indicates the virtual router on which the event has
+                  occurred.&quot;;
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 34]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-35" id="page-35" href="https://tools.ietf.org/html/rfc8347#page-35" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+             }
+           }
+         }
+       }
+
+       leaf virtual-router-error-reason {
+         type identityref {
+           base vrrp:vrrp-error-virtual-router;
+         }
+         mandatory true;
+         description
+           &quot;Indicates the reason for the virtual router error.&quot;;
+       }
+     }
+   }
+
+   &lt;CODE ENDS&gt;
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc8347#section-5">5</a>. IANA Considerations</h2></span>
+
+   This document registers the following namespace URI in the &quot;IETF XML
+   Registry&quot; [<a href="https://tools.ietf.org/html/rfc3688" title="&quot;The IETF XML Registry&quot;">RFC3688</a>]:
+
+   --------------------------------------------------------------------
+   URI: urn:ietf:params:xml:ns:yang:ietf-vrrp
+   Registrant Contact: The IESG.
+   XML: N/A; the requested URI is an XML namespace.
+   --------------------------------------------------------------------
+
+   This document registers the following YANG module in the &quot;YANG Module
+   Names&quot; registry [<a href="https://tools.ietf.org/html/rfc7950" title="&quot;The YANG 1.1 Data Modeling Language&quot;">RFC7950</a>]:
+
+   --------------------------------------------------------------------
+   name:         ietf-vrrp
+   namespace:    urn:ietf:params:xml:ns:yang:ietf-vrrp
+   prefix:       vrrp
+   reference:    <a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>
+   --------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 35]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-36" id="page-36" href="https://tools.ietf.org/html/rfc8347#page-36" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc8347#section-6">6</a>. Security Considerations</h2></span>
+
+   The YANG module specified in this document defines a schema for data
+   that is designed to be accessed via network management protocols such
+   as NETCONF [<a href="https://tools.ietf.org/html/rfc6241" title="&quot;Network Configuration Protocol (NETCONF)&quot;">RFC6241</a>] or RESTCONF [<a href="https://tools.ietf.org/html/rfc8040" title="&quot;RESTCONF Protocol&quot;">RFC8040</a>].  The lowest NETCONF layer
+   is the secure transport layer, and the mandatory-to-implement secure
+   transport is Secure Shell (SSH) [<a href="https://tools.ietf.org/html/rfc6242" title="&quot;Using the NETCONF Protocol over Secure Shell (SSH)&quot;">RFC6242</a>].  The lowest RESTCONF layer
+   is HTTPS, and the mandatory-to-implement secure transport is TLS
+   [<a href="https://tools.ietf.org/html/rfc5246" title="&quot;The Transport Layer Security (TLS) Protocol Version 1.2&quot;">RFC5246</a>].
+
+   The NETCONF access control model [<a href="https://tools.ietf.org/html/rfc8341" title="&quot;Network Configuration Access Control Model&quot;">RFC8341</a>] provides the means to
+   restrict access for particular NETCONF or RESTCONF users to a
+   preconfigured subset of all available NETCONF or RESTCONF protocol
+   operations and content.
+
+   There are a number of data nodes defined in this YANG module that are
+   writable/creatable/deletable (i.e., config true, which is the
+   default).  These data nodes may be considered sensitive or vulnerable
+   in some network environments.  Write operations (e.g., edit-config)
+   to these data nodes without proper protection can have a negative
+   effect on network operations.  These are the subtrees and data nodes
+   and their sensitivity/vulnerability:
+
+   /if:interfaces/if:interface/ip:ipv4/vrrp:vrrp/vrrp:vrrp-instance
+
+   /if:interfaces/if:interface/ip:ipv6/vrrp:vrrp/vrrp:vrrp-instance
+
+   Unauthorized access to any data node of these subtrees can adversely
+   affect the routing subsystem of both the local device and the
+   network.  This may lead to network malfunctions, delivery of packets
+   to inappropriate destinations, and other problems.
+
+   Some of the readable data nodes in this YANG module may be considered
+   sensitive or vulnerable in some network environments.  It is thus
+   important to control read access (e.g., via get, get-config, or
+   notification) to these data nodes.  These are the subtrees and data
+   nodes and their sensitivity/vulnerability:
+
+   /ietf-vrrp:vrrp
+
+   /if:interfaces/if:interface/ip:ipv4/vrrp:vrrp/vrrp:vrrp-instance
+
+   /if:interfaces/if:interface/ip:ipv6/vrrp:vrrp/vrrp:vrrp-instance
+
+   Unauthorized access to any data node of these subtrees can disclose
+   the operational state information of VRRP on this device.
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 36]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-37" id="page-37" href="https://tools.ietf.org/html/rfc8347#page-37" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc8347#section-7">7</a>. References</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-7.1" href="https://tools.ietf.org/html/rfc8347#section-7.1">7.1</a>. Normative References</h3></span>
+
+   [<a name="ref-RFC2119" id="ref-RFC2119">RFC2119</a>]  Bradner, S., &quot;Key words for use in RFCs to Indicate
+              Requirement Levels&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>,
+              DOI 10.17487/RFC2119, March 1997,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;.
+
+   [<a name="ref-RFC2787" id="ref-RFC2787">RFC2787</a>]  Jewell, B. and D. Chuang, &quot;Definitions of Managed Objects
+              for the Virtual Router Redundancy Protocol&quot;, <a href="https://tools.ietf.org/html/rfc2787">RFC 2787</a>,
+              DOI 10.17487/RFC2787, March 2000,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc2787">https://www.rfc-editor.org/info/rfc2787</a>&gt;.
+
+   [<a name="ref-RFC3688" id="ref-RFC3688">RFC3688</a>]  Mealling, M., &quot;The IETF XML Registry&quot;, <a href="https://tools.ietf.org/html/bcp81">BCP 81</a>, <a href="https://tools.ietf.org/html/rfc3688">RFC 3688</a>,
+              DOI 10.17487/RFC3688, January 2004,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc3688">https://www.rfc-editor.org/info/rfc3688</a>&gt;.
+
+   [<a name="ref-RFC5246" id="ref-RFC5246">RFC5246</a>]  Dierks, T. and E. Rescorla, &quot;The Transport Layer Security
+              (TLS) Protocol Version 1.2&quot;, <a href="https://tools.ietf.org/html/rfc5246">RFC 5246</a>,
+              DOI 10.17487/RFC5246, August 2008,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc5246">https://www.rfc-editor.org/info/rfc5246</a>&gt;.
+
+   [<a name="ref-RFC5798" id="ref-RFC5798">RFC5798</a>]  Nadas, S., Ed., &quot;Virtual Router Redundancy Protocol (VRRP)
+              Version 3 for IPv4 and IPv6&quot;, <a href="https://tools.ietf.org/html/rfc5798">RFC 5798</a>,
+              DOI 10.17487/RFC5798, March 2010,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc5798">https://www.rfc-editor.org/info/rfc5798</a>&gt;.
+
+   [<a name="ref-RFC6020" id="ref-RFC6020">RFC6020</a>]  Bjorklund, M., Ed., &quot;YANG - A Data Modeling Language for
+              the Network Configuration Protocol (NETCONF)&quot;, <a href="https://tools.ietf.org/html/rfc6020">RFC 6020</a>,
+              DOI 10.17487/RFC6020, October 2010,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc6020">https://www.rfc-editor.org/info/rfc6020</a>&gt;.
+
+   [<a name="ref-RFC6241" id="ref-RFC6241">RFC6241</a>]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
+              and A. Bierman, Ed., &quot;Network Configuration Protocol
+              (NETCONF)&quot;, <a href="https://tools.ietf.org/html/rfc6241">RFC 6241</a>, DOI 10.17487/RFC6241, June 2011,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc6241">https://www.rfc-editor.org/info/rfc6241</a>&gt;.
+
+   [<a name="ref-RFC6242" id="ref-RFC6242">RFC6242</a>]  Wasserman, M., &quot;Using the NETCONF Protocol over Secure
+              Shell (SSH)&quot;, <a href="https://tools.ietf.org/html/rfc6242">RFC 6242</a>, DOI 10.17487/RFC6242, June 2011,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc6242">https://www.rfc-editor.org/info/rfc6242</a>&gt;.
+
+   [<a name="ref-RFC6527" id="ref-RFC6527">RFC6527</a>]  Tata, K., &quot;Definitions of Managed Objects for Virtual
+              Router Redundancy Protocol Version 3 (VRRPv3)&quot;, <a href="https://tools.ietf.org/html/rfc6527">RFC 6527</a>,
+              DOI 10.17487/RFC6527, March 2012,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc6527">https://www.rfc-editor.org/info/rfc6527</a>&gt;.
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 37]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-38" id="page-38" href="https://tools.ietf.org/html/rfc8347#page-38" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+   [<a name="ref-RFC6991" id="ref-RFC6991">RFC6991</a>]  Schoenwaelder, J., Ed., &quot;Common YANG Data Types&quot;,
+              <a href="https://tools.ietf.org/html/rfc6991">RFC 6991</a>, DOI 10.17487/RFC6991, July 2013,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc6991">https://www.rfc-editor.org/info/rfc6991</a>&gt;.
+
+   [<a name="ref-RFC7950" id="ref-RFC7950">RFC7950</a>]  Bjorklund, M., Ed., &quot;The YANG 1.1 Data Modeling Language&quot;,
+              <a href="https://tools.ietf.org/html/rfc7950">RFC 7950</a>, DOI 10.17487/RFC7950, August 2016,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc7950">https://www.rfc-editor.org/info/rfc7950</a>&gt;.
+
+   [<a name="ref-RFC8040" id="ref-RFC8040">RFC8040</a>]  Bierman, A., Bjorklund, M., and K. Watsen, &quot;RESTCONF
+              Protocol&quot;, <a href="https://tools.ietf.org/html/rfc8040">RFC 8040</a>, DOI 10.17487/RFC8040, January 2017,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc8040">https://www.rfc-editor.org/info/rfc8040</a>&gt;.
+
+   [<a name="ref-RFC8174" id="ref-RFC8174">RFC8174</a>]  Leiba, B., &quot;Ambiguity of Uppercase vs Lowercase in
+              <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a> Key Words&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc8174">RFC 8174</a>,
+              DOI 10.17487/RFC8174, May 2017,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;.
+
+   [<a name="ref-RFC8341" id="ref-RFC8341">RFC8341</a>]  Bierman, A. and M. Bjorklund, &quot;Network Configuration
+              Access Control Model&quot;, STD 91, <a href="https://tools.ietf.org/html/rfc8341">RFC 8341</a>,
+              DOI 10.17487/RFC8341, March 2018,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc8341">https://www.rfc-editor.org/info/rfc8341</a>&gt;.
+
+   [<a name="ref-RFC8342" id="ref-RFC8342">RFC8342</a>]  Bjorklund, M., Schoenwaelder, J., Shafer, P., Watsen, K.,
+              and R. Wilton, &quot;Network Management Datastore Architecture
+              (NMDA)&quot;, <a href="https://tools.ietf.org/html/rfc8342">RFC 8342</a>, DOI 10.17487/RFC8342, March 2018,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc8342">https://www.rfc-editor.org/info/rfc8342</a>&gt;.
+
+   [<a name="ref-RFC8343" id="ref-RFC8343">RFC8343</a>]  Bjorklund, M., &quot;A YANG Data Model for Interface
+              Management&quot;, <a href="https://tools.ietf.org/html/rfc8343">RFC 8343</a>, DOI 10.17487/RFC8343, March 2018,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc8343">https://www.rfc-editor.org/info/rfc8343</a>&gt;.
+
+   [<a name="ref-RFC8344" id="ref-RFC8344">RFC8344</a>]  Bjorklund, M., &quot;A YANG Data Model for IP Management&quot;,
+              <a href="https://tools.ietf.org/html/rfc8344">RFC 8344</a>, DOI 10.17487/RFC8344, March 2018,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc8344">https://www.rfc-editor.org/info/rfc8344</a>&gt;.
+
+<span class="h3"><h3><a class="selflink" name="section-7.2" href="https://tools.ietf.org/html/rfc8347#section-7.2">7.2</a>. Informative References</h3></span>
+
+   [<a name="ref-RFC3768" id="ref-RFC3768">RFC3768</a>]  Hinden, R., Ed., &quot;Virtual Router Redundancy Protocol
+              (VRRP)&quot;, <a href="https://tools.ietf.org/html/rfc3768">RFC 3768</a>, DOI 10.17487/RFC3768, April 2004,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc3768">https://www.rfc-editor.org/info/rfc3768</a>&gt;.
+
+   [<a name="ref-RFC7224" id="ref-RFC7224">RFC7224</a>]  Bjorklund, M., &quot;IANA Interface Type YANG Module&quot;,
+              <a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>, DOI 10.17487/RFC7224, May 2014,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc7224">https://www.rfc-editor.org/info/rfc7224</a>&gt;.
+
+   [<a name="ref-RFC7951" id="ref-RFC7951">RFC7951</a>]  Lhotka, L., &quot;JSON Encoding of Data Modeled with YANG&quot;,
+              <a href="https://tools.ietf.org/html/rfc7951">RFC 7951</a>, DOI 10.17487/RFC7951, August 2016,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc7951">https://www.rfc-editor.org/info/rfc7951</a>&gt;.
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 38]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-39" id="page-39" href="https://tools.ietf.org/html/rfc8347#page-39" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+   [<a name="ref-RFC8340" id="ref-RFC8340">RFC8340</a>]  Bjorklund, M. and L. Berger, Ed., &quot;YANG Tree Diagrams&quot;,
+              <a href="https://tools.ietf.org/html/bcp215">BCP 215</a>, <a href="https://tools.ietf.org/html/rfc8340">RFC 8340</a>, DOI 10.17487/RFC8340, March 2018,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc8340">https://www.rfc-editor.org/info/rfc8340</a>&gt;.
+
+   [<a name="ref-Subscribed-Notifications" id="ref-Subscribed-Notifications">Subscribed-Notifications</a>]
+              Voit, E., Clemm, A., Gonzalez Prieto, A., Nilsen-Nygaard,
+              E., and A. Tripathy, &quot;Custom Subscription to Event
+              Streams&quot;, Work in Progress, <a href="https://tools.ietf.org/html/draft-ietf-netconf-subscribed-notifications-10">draft-ietf-netconf-subscribed-</a>
+              <a href="https://tools.ietf.org/html/draft-ietf-netconf-subscribed-notifications-10">notifications-10</a>, February 2018.
+
+   [<a name="ref-YANG-Push" id="ref-YANG-Push">YANG-Push</a>]
+              Clemm, A., Voit, E., Gonzalez Prieto, A., Tripathy, A.,
+              Nilsen-Nygaard, E., Bierman, A., and B. Lengyel, &quot;YANG
+              Datastore Subscription&quot;, Work in Progress,
+              <a href="https://tools.ietf.org/html/draft-ietf-netconf-yang-push-15">draft-ietf-netconf-yang-push-15</a>, February 2018.
+
+   [<a name="ref-YANG-Guidelines" id="ref-YANG-Guidelines">YANG-Guidelines</a>]
+              Bierman, A., &quot;Guidelines for Authors and Reviewers of YANG
+              Data Model Documents&quot;, Work in Progress,
+              <a href="https://tools.ietf.org/html/draft-ietf-netmod-rfc6087bis-20">draft-ietf-netmod-rfc6087bis-20</a>, March 2018.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 39]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-40" id="page-40" href="https://tools.ietf.org/html/rfc8347#page-40" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+<span class="h2"><h2><a class="selflink" name="appendix-A" href="https://tools.ietf.org/html/rfc8347#appendix-A">Appendix A</a>. Data Tree Example</h2></span>
+
+   This section contains an example of an instance data tree in JSON
+   encoding [<a href="https://tools.ietf.org/html/rfc7951" title="&quot;JSON Encoding of Data Modeled with YANG&quot;">RFC7951</a>], containing both configuration and state data.
+   (This example includes &quot;iana-if-type&quot;, which is defined in
+   [<a href="https://tools.ietf.org/html/rfc7224" title="&quot;IANA Interface Type YANG Module&quot;">RFC7224</a>].)
+
+                 Virtual router IP address: fe80::1
+              +-----------------+        +-----------------+
+              |                 |        |                 |
+              |    Router 1     |        |    Router 2     |
+              |                 |        |                 |
+              +--------+--------+        +--------+--------+
+                       |eth1                      |eth1
+                       |fe80::11                  |fe80::12
+                -------+--------------------------+-------
+                       |                          |
+                       |fe80::51                  |fe80::52
+              +--------+--------+        +--------+--------+
+              |     Host 1      |        |     Host 2      |
+              | Default gateway:|        | Default gateway:|
+              |     fe80::1     |        |     fe80::1     |
+              +-----------------+        +-----------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 40]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-41" id="page-41" href="https://tools.ietf.org/html/rfc8347#page-41" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+   The configuration instance data for Router 1 in the above figure
+   could be as follows:
+
+   {
+     &quot;ietf-interfaces:interfaces&quot;: {
+       &quot;interface&quot;: [
+         {
+           &quot;name&quot;: &quot;eth1&quot;,
+           &quot;description&quot;: &quot;An interface with VRRP enabled.&quot;,
+           &quot;type&quot;: &quot;iana-if-type:ethernetCsmacd&quot;,
+           &quot;ietf-ip:ipv6&quot;: {
+             &quot;address&quot;: [
+               {
+                 &quot;ip&quot;: &quot;2001:db8:0:1::1&quot;,
+                 &quot;prefix-length&quot;: 64
+               },
+               {
+                 &quot;ip&quot;: &quot;fe80::11&quot;,
+                 &quot;prefix-length&quot;: 64
+               }
+             ],
+             &quot;forwarding&quot;: true,
+             &quot;ietf-vrrp:vrrp&quot;: {
+               &quot;vrrp-instance&quot;: [
+                 {
+                   &quot;vrid&quot;: 1,
+                   &quot;version&quot;: &quot;vrrp-v3&quot;,
+                   &quot;priority&quot;: 200,
+                   &quot;advertise-interval-centi-sec&quot;: 50,
+                   &quot;virtual-ipv6-addresses&quot;: {
+                     &quot;virtual-ipv6-address&quot;: [
+                       &quot;ipv6-address&quot;: &quot;fe80::1&quot;
+                     ]
+                   }
+                 }
+               ]
+             }
+           }
+         }
+       ]
+     }
+   }
+
+
+
+
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 41]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-42" id="page-42" href="https://tools.ietf.org/html/rfc8347#page-42" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+   The corresponding operational state data for Router 1 could be as
+   follows:
+
+   {
+     &quot;ietf-interfaces:interfaces&quot;: {
+       &quot;interface&quot;: [
+         {
+           &quot;name&quot;: &quot;eth1&quot;,
+           &quot;description&quot;: &quot;An interface with VRRP enabled.&quot;,
+           &quot;type&quot;: &quot;iana-if-type:ethernetCsmacd&quot;,
+           &quot;phys-address&quot;: &quot;00:00:5e:00:53:01&quot;,
+           &quot;oper-status&quot;: &quot;up&quot;,
+           &quot;statistics&quot;: {
+             &quot;discontinuity-time&quot;: &quot;2016-10-24T17:11:27+02:00&quot;
+           },
+           &quot;ietf-ip:ipv6&quot;: {
+             &quot;forwarding&quot;: true,
+             &quot;mtu&quot;: 1500,
+             &quot;address&quot;: [
+               {
+                 &quot;ip&quot;: &quot;2001:db8:0:1::1&quot;,
+                 &quot;prefix-length&quot;: 64,
+                 &quot;origin&quot;: &quot;static&quot;,
+                 &quot;status&quot;: &quot;preferred&quot;
+               },
+               {
+                 &quot;ip&quot;: &quot;fe80::11&quot;,
+                 &quot;prefix-length&quot;: 64,
+                 &quot;origin&quot;: &quot;static&quot;,
+                 &quot;status&quot;: &quot;preferred&quot;
+               }
+             ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 42]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-43" id="page-43" href="https://tools.ietf.org/html/rfc8347#page-43" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+             &quot;ietf-vrrp:vrrp&quot;: {
+               &quot;vrrp-instance&quot;: [
+                 {
+                   &quot;vrid&quot;: 1,
+                   &quot;version&quot;: &quot;vrrp-v3&quot;,
+                   &quot;log-state-change&quot;: false,
+                   &quot;preempt&quot;: {
+                     &quot;enabled&quot;: true,
+                     &quot;hold-time&quot;: 0
+                   }
+                   &quot;priority&quot;: 200,
+                   &quot;accept-mode&quot;: false,
+                   &quot;advertise-interval-centi-sec&quot;: 50,
+                   &quot;virtual-ipv6-addresses&quot;: {
+                     &quot;virtual-ipv6-address&quot;: [
+                       &quot;ipv6-address&quot;: &quot;fe80::1&quot;
+                     ]
+                   },
+                   &quot;state&quot;: &quot;master&quot;,
+                   &quot;is-owner&quot;: false,
+                   &quot;last-adv-source&quot;: &quot;fe80::11&quot;,
+                   &quot;up-datetime&quot;: &quot;2016-10-24T17:11:27+02:00&quot;,
+                   &quot;master-down-interval&quot;: 161,
+                   &quot;skew-time&quot;: 11,
+                   &quot;last-event&quot;: &quot;vrrp-event-interface-up&quot;,
+                   &quot;new-master-reason&quot;: &quot;priority&quot;,
+                   &quot;statistics&quot;: {
+                     &quot;discontinuity-datetime&quot;:
+                       &quot;2016-10-24T17:11:27+02:00&quot;,
+                     &quot;master-transitions&quot;: 2,
+                     &quot;advertisement-rcvd&quot;: 20,
+                     &quot;advertisement-sent&quot;: 12,
+                     &quot;interval-errors&quot;: 0,
+                     &quot;priority-zero-pkts-rcvd&quot;: 0,
+                     &quot;priority-zero-pkts-sent&quot;: 0,
+                     &quot;invalid-type-pkts-rcvd&quot;: 0,
+                     &quot;address-list-errors&quot;: 0,
+                     &quot;packet-length-errors&quot;: 1
+                   }
+                 }
+               ]
+             }
+           }
+         }
+       ]
+     }
+   }
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 43]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-44" id="page-44" href="https://tools.ietf.org/html/rfc8347#page-44" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+   {
+     &quot;ietf-vrrp:vrrp&quot;: {
+       &quot;virtual-routers&quot;: 3,
+       &quot;interfaces&quot;: 2,
+       &quot;statistics&quot;: {
+         &quot;discontinuity-datetime&quot;: &quot;2016-10-24T17:11:27+02:00&quot;,
+         &quot;checksum-errors&quot;: 2,
+         &quot;version-errors&quot;: 0,
+         &quot;vrid-errors&quot;: 0,
+         &quot;ip-ttl-errors&quot;: 1
+       }
+     }
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Liu, et al.                  Standards Track                   [Page 44]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-45" id="page-45" href="https://tools.ietf.org/html/rfc8347#page-45" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc8347">RFC 8347</a>                        YANG VRRP                     March 2018</span>
+
+
+Authors' Addresses
+
+   Xufeng Liu (editor)
+   Jabil
+   8281 Greensboro Drive, Suite 200
+   McLean, VA  22102
+   United States of America
+
+   Email: xufeng.liu.ietf@gmail.com
+
+
+   Athanasios Kyparlis
+   Jabil
+   8281 Greensboro Drive, Suite 200
+   McLean, VA  22102
+   United States of America
+
+   Email: Athanasios_Kyparlis@jabil.com
+
+
+   Ravi Parikh
+   VMware
+   3425 Hillview Avenue
+   Palo Alto, CA  94304
+   United States of America
+
+   Email: parikhr@vmware.com
+
+
+   Acee Lindem
+   Cisco Systems
+   301 Midenhall Way
+   Cary, NC  27513
+   United States of America
+
+   Email: acee@cisco.com
+
+
+   Mingui Zhang
+   Huawei Technologies
+   No. 156 Beiqing Rd. Haidian District
+   Beijing  100095
+   China
+
+   Email: zhangmingui@huawei.com
+
+
+
+
+
+
+Liu, et al.                  Standards Track                   [Page 45]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

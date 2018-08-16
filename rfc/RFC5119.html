@@ -1,0 +1,701 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:5119" /> 
+  <meta name="DC.Description.Abstract" content="This document describes a Uniform Resource Name (URN) namespace for
+the Society of Motion Picture and Television Engineers (SMPTE) for
+naming persistent resources that SMPTE produces or manages. A
+subnamespace for Universal Labels is specifically described. This memo
+provides information for the Internet community." /> 
+  <meta name="DC.Creator" content="Thomas Edwards &lt;tedwards@pbs.org&gt;" /> 
+  <meta name="DC.Date.Issued" content="February, 2008" /> 
+  <meta name="DC.Title" content="A Uniform Resource Name (URN) Namespace for the Society of Motion Picture and Television Engineers (SMPTE)" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 5119 - A Uniform Resource Name (URN) Namespace for the Society of Motion Picture and Television Engineers (SMPTE)</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgorange" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc5119.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc5119" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-edwards-urn-smpte" title="draft-edwards-urn-smpte">draft-edwards-u...</a>] [<a href="https://datatracker.ietf.org/doc/rfc5119" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc5119" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc5119" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5119">Errata</a>]</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> INFORMATIONAL</span>
+   <br /> 
+   <span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span>
+   <br /> 
+   <pre>Network Working Group                                         T. Edwards
+Request for Comments: 5119                                           FOX
+Category: Informational                                    February 2008
+
+
+              <span class="h1"><h1>A Uniform Resource Name (URN) Namespace for</h1></span>
+     <span class="h1"><h1>the Society of Motion Picture and Television Engineers (SMPTE)</h1></span>
+
+Status of This Memo
+
+   This memo provides information for the Internet community.  It does
+   not specify an Internet standard of any kind.  Distribution of this
+   memo is unlimited.
+
+Abstract
+
+   This document describes a Uniform Resource Name (URN) namespace for
+   the Society of Motion Picture and Television Engineers (SMPTE) for
+   naming persistent resources that SMPTE produces or manages.  A
+   subnamespace for Universal Labels is specifically described.
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc5119#section-1">1</a>.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5119#page-2">2</a>
+   <a href="https://tools.ietf.org/html/rfc5119#section-2">2</a>.  URN Namespace Definition Template  . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5119#page-2">2</a>
+   <a href="https://tools.ietf.org/html/rfc5119#section-3">3</a>.  Examples . . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5119#page-6">6</a>
+   <a href="https://tools.ietf.org/html/rfc5119#section-4">4</a>.  Security Considerations  . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5119#page-6">6</a>
+   <a href="https://tools.ietf.org/html/rfc5119#section-5">5</a>.  Namespace Considerations and Community Considerations  . . . .  <a href="https://tools.ietf.org/html/rfc5119#page-6">6</a>
+   <a href="https://tools.ietf.org/html/rfc5119#section-6">6</a>.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5119#page-7">7</a>
+   <a href="https://tools.ietf.org/html/rfc5119#section-7">7</a>.  SMPTE Registration Authority (Informative) . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5119#page-7">7</a>
+   <a href="https://tools.ietf.org/html/rfc5119#section-8">8</a>.  References . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5119#page-7">7</a>
+     <a href="https://tools.ietf.org/html/rfc5119#section-8.1">8.1</a>.  Normative References . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5119#page-7">7</a>
+     <a href="https://tools.ietf.org/html/rfc5119#section-8.2">8.2</a>.  Informative References . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc5119#page-7">7</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Edwards                      Informational                      [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc5119#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5119">RFC 5119</a>                  SMPTE URN Definition             February 2008</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc5119#section-1">1</a>. Introduction</h2></span>
+
+   SMPTE (the Society of Motion Picture and Television Engineers) is an
+   internationally-recognized standards-developing organization.
+   Headquartered and incorporated in the United States of America, SMPTE
+   has members in over 80 countries on six continents.  SMPTE's
+   Engineering Documents, including Standards, Recommended Practices,
+   and Engineering Guidelines, are prepared by SMPTE's Technology
+   Committees.  Participation in these Committees is open to all with a
+   bona fide interest in a committee's work.  SMPTE cooperates closely
+   with other standards-developing organizations, including ISO, the
+   IEC, and the ITU.  Also, the SMPTE Registration Authority maintains a
+   registry of Universal Labels (ULs) used in identifying the type and
+   encoding of data within data streams associated with audio-visual
+   material.
+
+   SMPTE would like to assign unique, permanent, and location-
+   independent names using URNs for resources that SMPTE produces or
+   manages.
+
+   This namespace specification is for a formal namespace.
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc5119#section-2">2</a>. URN Namespace Definition Template</h2></span>
+
+   The following template is provided in accordance with [<a href="https://tools.ietf.org/html/rfc3406" title="&quot;Uniform Resource Names (URN) Namespace Definition Mechanisms&quot;">RFC3406</a>].
+
+      Namespace ID:
+
+         smpte
+
+      Registration Information:
+
+         Version: 2
+
+         Date: 2007-07-08
+
+      Declared registrant of the namespace:
+
+         Registering Organization: Society of Motion Picture and
+                                   Television Engineers
+
+            Address: 3 Barker Avenue - 5th Floor
+                     White Plains, NY 10601 USA
+
+         Designated Contact Person: Director of Engineering
+
+            Phone: +1 (914) 761-1100
+            Email: standards@smpte.org
+
+
+
+<span class="grey">Edwards                      Informational                      [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc5119#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5119">RFC 5119</a>                  SMPTE URN Definition             February 2008</span>
+
+
+      Declaration of structure:
+
+         The Namespace Specific String (NSS) of all URNs that use the
+         &quot;smpte&quot; NID shall be conformant to the URN syntax requirements
+         defined in [<a href="https://tools.ietf.org/html/rfc2141" title="&quot;URN Syntax&quot;">RFC2141</a>].
+
+         URNs for the &quot;urn:smpte&quot; namespace shall follow the structure
+         defined in [<a href="https://tools.ietf.org/html/rfc5119#ref-SMPTE2029" title="&quot;Uniform Resource Names for SMPTE Resources&quot;">SMPTE2029</a>].
+
+         SMPTE (or it successor) may add additional subnamespaces
+         in the future.  Any system that deals with URNs for the
+         &quot;urn:smpte&quot; namespace should be written with the awareness
+         that this could occur at any time.
+
+         For informative purposes, the identifier structure described
+         using ABNF (according to [<a href="https://tools.ietf.org/html/rfc4234" title="&quot;Augmented BNF for Syntax Specifications: ABNF&quot;">RFC4234</a>]) is as follows:
+
+            ;start ABNF notation
+
+            URN = &quot;urn:&quot; NID NSS
+
+            NID = &quot;smpte:&quot;
+
+            NSS = UL-NSS / other-NSS
+
+            UL-NSS = &quot;ul:&quot; UL
+
+            UL = QUADBYTE *(DOT QUADBYTE)
+
+            DOT = %x2E ; period
+
+            QUADBYTE = 4BYTE
+
+            BYTE = 2HEXDIG
+
+            other-NSS = 1*(DIGIT / ALPHA / &quot;-&quot;/&quot;:&quot;)
+
+            ; other-NSS that conforms with [<a href="https://tools.ietf.org/html/rfc2141" title="&quot;URN Syntax&quot;">RFC2141</a>] for future
+            expansion
+
+            ;end ABNF notation
+
+      Relevant ancillary documentation:
+
+         The structure for URNs in the &quot;urn:smpte&quot; namespace are defined
+         in [<a href="https://tools.ietf.org/html/rfc5119#ref-SMPTE2029" title="&quot;Uniform Resource Names for SMPTE Resources&quot;">SMPTE2029</a>].
+
+
+
+
+
+<span class="grey">Edwards                      Informational                      [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc5119#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5119">RFC 5119</a>                  SMPTE URN Definition             February 2008</span>
+
+
+         The values of ULs in the &quot;urn:smpte:ul&quot; subnamespace shall be
+         constrained as defined in [<a href="https://tools.ietf.org/html/rfc5119#ref-SMPTE298M" title="&quot;Universal Labels for Unique Identification of Digital Data&quot;">SMPTE298M</a>].  Details regarding the
+         use of ULs as keys in key-length-value (KLV) coding, including
+         how to determine in which SMPTE registry a SMPTE-administered
+         UL may be found, are described in [<a href="https://tools.ietf.org/html/rfc5119#ref-SMPTE336M" title="&quot;Data Encoding Protocol using Key-Length-Value&quot;">SMPTE336M</a>].
+
+      Identifier uniqueness considerations:
+
+         [<a name="ref-SMPTE2029" id="ref-SMPTE2029">SMPTE2029</a>] states that &quot;All URNs in the SMPTE namespace shall
+         conform to IETF <a href="https://tools.ietf.org/html/rfc3406">RFC 3406</a>.  In particular, URNs in the SMPTE
+         namespace shall not be re-assigned, and URNs shall continue to
+         be valid, even if the owners or registrants of the SMPTE
+         resources identified by the URNs are no longer members or
+         customers of SMPTE.  There need not be resolution of such URNs,
+         but they shall not resolve to false or stale information.&quot;
+
+         Additionally, the rules for assignment of SMPTE-administered
+         ULs requires that each UL be unique to the UL space and that it
+         cannot be reassigned or reused.
+
+         It should be noted that [<a href="https://tools.ietf.org/html/rfc5119#ref-SMPTE298M" title="&quot;Universal Labels for Unique Identification of Digital Data&quot;">SMPTE298M</a>] states that &quot;A universal
+         label shall be an 'object identifier' as specified by ISO/IEC
+         8824-1,&quot; ([<a href="https://tools.ietf.org/html/rfc5119#ref-ISO8824-1" title="&quot;Information Processing - Open System Interconnection - Specification of Abstract Syntax Notation One (ASN.1)&quot;">ISO8824-1</a>]) although the SMPTE Universal Label
+         representation is a specialized one that carries additional
+         semantics over the OID representation of a URN OID ([<a href="https://tools.ietf.org/html/rfc3061" title="&quot;A URN Namespace of Object Identifiers&quot;">RFC3061</a>]).
+
+         SMPTE will work to ensure that all current and future
+         &quot;urn:smpte&quot; subnamespaces contain unique identifiers.
+
+      Identifier persistence considerations:
+
+         SMPTE-administered ULs may occasionally be deleted through
+         SMPTE procedures.  Regardless, even after a UL has been
+         deleted, it will not be reused.  Revisions to ULs will result
+         in the creation of a new UL and the deletion of the old one.
+
+         The persistence of URNs in future &quot;urn:smpte&quot; subnamespaces
+         will be defined by SMPTE Standards.
+
+      Process of identifier assignment:
+
+         Assignment of URNs in the SMPTE NID is limited to SMPTE and
+         those authorities that are specifically designated by SMPTE.
+         SMPTE may designate portions of its namespace for assignment by
+         other parties.
+
+
+
+
+
+
+<span class="grey">Edwards                      Informational                      [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc5119#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5119">RFC 5119</a>                  SMPTE URN Definition             February 2008</span>
+
+
+         Due process is followed by committees in the development of
+         SMPTE documents.  Some types of Universal Label registrations
+         and other registrations may require a fee to be paid to SMPTE.
+
+         All classes of SMPTE-administered ULs require for registration
+         the name and address of the applicant.  Some classes of labels
+         also require the submission of supporting technical
+         documentation for the label and may require a due process
+         evaluation through the SMPTE Engineering Committee process.
+
+      Process for identifier resolution:
+
+         SMPTE-administered ULs are resolved through publications of the
+         SMPTE Registration Authority.  Currently, publication of
+         SMPTE-administered ULs are made through a Metadata Dictionary
+         as specified in [<a href="https://tools.ietf.org/html/rfc5119#ref-RP210" title="&quot;Metadata Dictionary Registry of Metadata Element Descriptions&quot;">RP210</a>] and through the SMPTE Labels Registry
+         as specified in [<a href="https://tools.ietf.org/html/rfc5119#ref-RP224" title="&quot;Registry of SMPTE Universal Labels&quot;">RP224</a>], both of which are currently available
+         online at <a href="http://www.smpte-ra.org/mdd/">http://www.smpte-ra.org/mdd/</a>.
+
+         SMPTE expects to develop and maintain &quot;URN catalogs&quot; that map
+         all future assigned URNs in the &quot;urn:smpte&quot; namespace to
+         Uniform Resource Locators (URLs) to enable Web-based resolution
+         of named resources.
+
+      Rules for Lexical Equivalence:
+
+         Lexical equivalence of URNs in the &quot;urn:smpte:ul&quot; subnamespace
+         is defined by case-insensitive string match.
+
+         Lexical equivalence of URNs in additional subnamespaces of
+         &quot;urn:smpte:&quot; will be specified by SMPTE in the defining
+         document; in the absence of such specification, lexical
+         equivalence of URNs in the &quot;urn:smpte:&quot; namespace outside of
+         the &quot;urn:smpte:ul&quot; subnamespace is defined by exact string
+         match, according to [<a href="https://tools.ietf.org/html/rfc2141" title="&quot;URN Syntax&quot;">RFC2141</a>].
+
+      Conformance with URN Syntax:
+
+         No special considerations beyond the syntax herein described.
+
+      Validation mechanism:
+
+         None.
+
+      Scope:
+
+         Global.
+
+
+
+
+<span class="grey">Edwards                      Informational                      [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc5119#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5119">RFC 5119</a>                  SMPTE URN Definition             February 2008</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc5119#section-3">3</a>. Examples</h2></span>
+
+   Currently, only a &quot;urn:smpte:ul&quot; subnamespace is defined.  This is
+   the subnamespace for SMPTE Universal Labels [<a href="https://tools.ietf.org/html/rfc5119#ref-SMPTE298M" title="&quot;Universal Labels for Unique Identification of Digital Data&quot;">SMPTE298M</a>].  SMPTE may
+   add additional subnamespaces in the future.
+
+   The following examples are not guaranteed to be real and are provided
+   for illustrative purposes only.
+
+      urn:smpte:ul:060E2B34.04010103.04010202.01011100
+
+      urn:smpte:newnss:future-urn-2105
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc5119#section-4">4</a>. Security Considerations</h2></span>
+
+   The SMPTE URN Namespace ID shares the security considerations
+   outlined in [<a href="https://tools.ietf.org/html/rfc3406" title="&quot;Uniform Resource Names (URN) Namespace Definition Mechanisms&quot;">RFC3406</a>], but has no other known security
+   considerations.
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc5119#section-5">5</a>. Namespace Considerations and Community Considerations</h2></span>
+
+   SMPTE is an internationally-recognized standards-developing
+   organization.  As part of this effort, SMPTE also registers items
+   such as Universal Labels through the SMPTE Registration Authority.
+   The SMPTE namespace provides a uniform, unique, and effective way to
+   communicate resource names for these items, which can be used by the
+   motion imaging industry community.  This namespace is also intended
+   to be a useful mechanism to provide both human and automated access
+   to these resources through online systems.
+
+   The individual URNs in the namespace shall be assigned through the
+   process of development of documents by SMPTE, through definition by
+   SMPTE standards, or through the registration of Universal Labels or
+   other items by the SMPTE Registration Authority.
+
+   <a href="https://tools.ietf.org/html/rfc3406">RFC 3406</a> states that a URN registration RFC must include a 'Namespace
+   Considerations' section, which outlines the perceived need for a new
+   namespace.  There are four areas where existing URN namespaces fall
+   short of the requirements for a SMPTE URN namespace.
+
+      URN assignment procedures: URNs for resources defined by SMPTE
+      standards must be assigned exclusively by SMPTE or its delegates
+      to ensure the integrity of the standards process.  No other
+      existing URN namespace has URNs assigned and managed by SMPTE.
+
+      URN resolution: URNs assigned by SMPTE standards must be resolved
+      by SMPTE mechanisms such as the SMPTE Registration Authority to
+
+
+
+
+<span class="grey">Edwards                      Informational                      [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc5119#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5119">RFC 5119</a>                  SMPTE URN Definition             February 2008</span>
+
+
+      ensure the integrity of the standards process.  This resolution
+      may require the reference of databases only maintained by SMPTE.
+
+      Types of resources to be identified: Many resources defined by
+      SMPTE standards (such as Universal Labels) have no adequate
+      existing URN representation.
+
+      Types of services to be supported: SMPTE expects to establish Web
+      services for the automated resolution of resources defined by
+      SMPTE standards utilizing the SMPTE URN namespace.
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc5119#section-6">6</a>. IANA Considerations</h2></span>
+
+   This document defines a URN NID registration that has been entered
+   into the IANA registry of URN NIDs.  IANA has registered the NID
+   &quot;smpte&quot;.
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc5119#section-7">7</a>. SMPTE Registration Authority (Informative)</h2></span>
+
+   The URL of the SMPTE Registration Authority is
+   <a href="http://www.smpte-ra.org">http://www.smpte-ra.org</a>.
+
+<span class="h2"><h2><a class="selflink" name="section-8" href="https://tools.ietf.org/html/rfc5119#section-8">8</a>. References</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-8.1" href="https://tools.ietf.org/html/rfc5119#section-8.1">8.1</a>. Normative References</h3></span>
+
+   [<a name="ref-RFC2141" id="ref-RFC2141">RFC2141</a>]   Moats, R., &quot;URN Syntax&quot;, <a href="https://tools.ietf.org/html/rfc2141">RFC 2141</a>, May 1997.
+
+   [<a name="ref-RFC3406" id="ref-RFC3406">RFC3406</a>]   Daigle, L., van Gulik, D., Iannella, R., and P.
+               Faltstrom, &quot;Uniform Resource Names (URN) Namespace
+               Definition Mechanisms&quot;, <a href="https://tools.ietf.org/html/bcp66">BCP 66</a>, <a href="https://tools.ietf.org/html/rfc3406">RFC 3406</a>, October 2002.
+
+   [<a name="ref-SMPTE2029" id="ref-SMPTE2029">SMPTE2029</a>] Society of Motion Picture and Television Engineers,
+               &quot;Uniform Resource Names for SMPTE Resources&quot;, SMPTE
+               2029-2007, &lt;<a href="http://www.smpte.org">http://www.smpte.org</a>&gt;.
+
+<span class="h3"><h3><a class="selflink" name="section-8.2" href="https://tools.ietf.org/html/rfc5119#section-8.2">8.2</a>. Informative References</h3></span>
+
+   [<a name="ref-ISO8824-1" id="ref-ISO8824-1">ISO8824-1</a>] International Organization for Standardization,
+               &quot;Information Processing - Open System Interconnection -
+               Specification of Abstract Syntax Notation One (ASN.1)&quot;,
+               ISO Standard 8824-1:1995, 1995.
+
+   [<a name="ref-RFC3061" id="ref-RFC3061">RFC3061</a>]   Mealling, M., &quot;A URN Namespace of Object Identifiers&quot;,
+               <a href="https://tools.ietf.org/html/rfc3061">RFC 3061</a>, February 2001.
+
+   [<a name="ref-RFC4234" id="ref-RFC4234">RFC4234</a>]   Crocker, D., Ed., and P. Overell, &quot;Augmented BNF for
+               Syntax Specifications: ABNF&quot;, <a href="https://tools.ietf.org/html/rfc4234">RFC 4234</a>, October 2005.
+
+
+
+<span class="grey">Edwards                      Informational                      [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc5119#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5119">RFC 5119</a>                  SMPTE URN Definition             February 2008</span>
+
+
+   [<a name="ref-RP210" id="ref-RP210">RP210</a>]     Society of Motion Picture and Television Engineers,
+               &quot;Metadata Dictionary Registry of Metadata Element
+               Descriptions&quot;, SMPTE RP210, &lt;<a href="http://www.smpte.org">http://www.smpte.org</a>&gt;.
+
+   [<a name="ref-RP224" id="ref-RP224">RP224</a>]     Society of Motion Picture and Television Engineers,
+               &quot;Registry of SMPTE Universal Labels&quot;, SMPTE RP224,
+               &lt;<a href="http://www.smpte.org">http://www.smpte.org</a>&gt;.
+
+   [<a name="ref-SMPTE298M" id="ref-SMPTE298M">SMPTE298M</a>] Society of Motion Picture and Television Engineers,
+               &quot;Universal Labels for Unique Identification of Digital
+               Data&quot;, ANSI / SMPTE 298M-1997, &lt;<a href="http://www.smpte.org">http://www.smpte.org</a>&gt;.
+
+   [<a name="ref-SMPTE336M" id="ref-SMPTE336M">SMPTE336M</a>] Society of Motion Picture and Television Engineers, &quot;Data
+               Encoding Protocol using Key-Length-Value&quot;, SMPTE 336M-
+               2001, &lt;<a href="http://www.smpte.org">http://www.smpte.org</a>&gt;.
+
+Author's Address
+
+   Thomas G. Edwards
+   FOX
+   10201 West Pico Boulevard
+   Los Angeles, CA  90035
+   US
+
+   Phone: +1 310 369 7093
+   Email: thomas.edwards@fox.com
+   URI:   <a href="http://www.fox.com">http://www.fox.com</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Edwards                      Informational                      [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc5119#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc5119">RFC 5119</a>                  SMPTE URN Definition             February 2008</span>
+
+
+Full Copyright Statement
+
+   Copyright (C) The IETF Trust (2008).
+
+   This document is subject to the rights, licenses and restrictions
+   contained in <a href="https://tools.ietf.org/html/bcp78">BCP 78</a>, and except as set forth therein, the authors
+   retain all their rights.
+
+   This document and the information contained herein are provided on an
+   &quot;AS IS&quot; basis and THE CONTRIBUTOR, THE ORGANIZATION HE/SHE REPRESENTS
+   OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY, THE IETF TRUST AND
+   THE INTERNET ENGINEERING TASK FORCE DISCLAIM ALL WARRANTIES, EXPRESS
+   OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF
+   THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
+   WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Intellectual Property
+
+   The IETF takes no position regarding the validity or scope of any
+   Intellectual Property Rights or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; nor does it represent that it has
+   made any independent effort to identify any such rights.  Information
+   on the procedures with respect to rights in RFC documents can be
+   found in <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and <a href="https://tools.ietf.org/html/bcp79">BCP 79</a>.
+
+   Copies of IPR disclosures made to the IETF Secretariat and any
+   assurances of licenses to be made available, or the result of an
+   attempt made to obtain a general license or permission for the use of
+   such proprietary rights by implementers or users of this
+   specification can be obtained from the IETF on-line IPR repository at
+   <a href="http://www.ietf.org/ipr">http://www.ietf.org/ipr</a>.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights that may cover technology that may be required to implement
+   this standard.  Please address the information to the IETF at
+   ietf-ipr@ietf.org.
+
+
+
+
+
+
+
+
+
+
+
+
+Edwards                      Informational                      [Page 9]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

@@ -1,0 +1,1746 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:2940" /> 
+  <meta name="DC.Description.Abstract" content="This memo defines a portion of the Management Information Base (MIB)
+for use with network management protocols in TCP/IP based internets.
+In particular it defines objects for managing a client of the Common
+Open Policy Service (COPS) protocol. [STANDARDS-TRACK]" /> 
+  <meta name="DC.Creator" content="Seligson, John" /> 
+  <meta name="DC.Creator" content="Partain, David" /> 
+  <meta name="DC.Creator" content="Smith, Andrew" /> 
+  <meta name="DC.Date.Issued" content="October, 2000" /> 
+  <meta name="DC.Title" content="Definitions of Managed Objects for Common Open Policy Service (COPS) Protocol Clients" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 2940 - Definitions of Managed Objects for Common Open Policy Service (COPS) Protocol Clients</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgblue" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc2940.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc2940" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-ietf-rap-cops-client-mib" title="draft-ietf-rap-cops-client-mib">draft-ietf-rap-...</a>] [<a href="https://datatracker.ietf.org/doc/rfc2940" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc2940" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc2940" title="Side-by-side diff">Diff2</a>] </span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> PROPOSED STANDARD</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <pre>Network Working Group                                            A. Smith
+Request for Comments: 2940                                     Consultant
+Category: Standards Track                                      D. Partain
+                                                                 Ericsson
+                                                              J. Seligson
+                                                          Nortel Networks
+                                                             October 2000
+
+
+  <span class="h1"><h1>Definitions of Managed Objects for Common Open Policy Service (COPS)</h1></span>
+                            <span class="h1"><h1>Protocol Clients</h1></span>
+
+Status of this Memo
+
+   This document specifies an Internet standards track protocol for the
+   Internet community, and requests discussion and suggestions for
+   improvements.  Please refer to the current edition of the &quot;Internet
+   Official Protocol Standards&quot; (STD 1) for the standardization state
+   and status of this protocol.  Distribution of this memo is unlimited.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2000).  All Rights Reserved.
+
+Abstract
+
+   This memo defines a portion of the Management Information Base (MIB)
+   for use with network management protocols in TCP/IP based internets.
+   In particular it defines objects for managing a client of the Common
+   Open Policy Service (COPS) protocol.
+
+   This memo includes a MIB module in a manner that is compliant to the
+   SMIv2 [<a href="https://tools.ietf.org/html/rfc2940#ref-V2SMI" title="&quot;Structure of Management Information Version 2 (SMIv2)&quot;">V2SMI</a>].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Smith                       Standards Track                     [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc2940#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc2940#section-1">1</a>. The SNMP Management Framework</h2></span>
+
+   The SNMP Management Framework presently consists of five major
+   components:
+
+      o  An overall architecture, described in an Architecture for
+         Describing SNMP Management Frameworks [<a href="https://tools.ietf.org/html/rfc2940#ref-ARCH" title="&quot;An Architecture for Describing SNMP Management Frameworks&quot;">ARCH</a>].
+
+      o  Mechanisms for describing and naming objects and events for the
+         purpose of management.  The first version of this Structure of
+         Management Information (SMI) is called SMIv1 and described in
+         STD 16, <a href="https://tools.ietf.org/html/rfc1155">RFC 1155</a> [<a href="https://tools.ietf.org/html/rfc2940#ref-V1SMI" title="&quot;Structure and Identification of Management Information for TCP/IP- based Internets&quot;">V1SMI</a>], STD 16, <a href="https://tools.ietf.org/html/rfc1212">RFC 1212</a> [<a href="https://tools.ietf.org/html/rfc2940#ref-V1CONCISE" title="&quot;Concise MIB Definitions&quot;">V1CONCISE</a>] and <a href="https://tools.ietf.org/html/rfc1215">RFC</a>
+         <a href="https://tools.ietf.org/html/rfc1215">1215</a> [<a href="https://tools.ietf.org/html/rfc2940#ref-V1TRAPS" title="&quot;A Convention for Defining Traps for use with the SNMP&quot;">V1TRAPS</a>].  The second version, called SMIv2, is described
+         in STD 58, <a href="https://tools.ietf.org/html/rfc2578">RFC 2578</a> [<a href="https://tools.ietf.org/html/rfc2940#ref-V2SMI" title="&quot;Structure of Management Information Version 2 (SMIv2)&quot;">V2SMI</a>], STD 58, <a href="https://tools.ietf.org/html/rfc2579">RFC 2579</a> [<a href="https://tools.ietf.org/html/rfc2940#ref-V2TC" title="&quot;Textual Conventions for SMIv2&quot;">V2TC</a>] and STD
+         58, <a href="https://tools.ietf.org/html/rfc2580">RFC 2580</a> [<a href="https://tools.ietf.org/html/rfc2940#ref-V2CONFORM" title="&quot;Conformance Statements for SMIv2&quot;">V2CONFORM</a>].
+
+      o  Message protocols for transferring management information.  The
+         first version of the SNMP message protocol is called SNMPv1 and
+         described in STD 15, <a href="https://tools.ietf.org/html/rfc1157">RFC 1157</a> [<a href="https://tools.ietf.org/html/rfc2940#ref-V1PROTO" title="&quot;Simple Network Management Protocol&quot;">V1PROTO</a>].  A second version of
+         the SNMP message protocol, which is not an Internet standards
+         track protocol, is called SNMPv2c and described in <a href="https://tools.ietf.org/html/rfc1901">RFC 1901</a>
+         [<a href="https://tools.ietf.org/html/rfc2940#ref-V2COMMUNITY" title="&quot;Introduction to Community-based SNMPv2&quot;">V2COMMUNITY</a>] and <a href="https://tools.ietf.org/html/rfc1906">RFC 1906</a> [<a href="https://tools.ietf.org/html/rfc2940#ref-V2TRANS" title="&quot;Transport Mappings for Version 2 of the Simple Network Management Protocol (SNMPv2)&quot;">V2TRANS</a>].  The third version of the
+         message protocol is called SNMPv3 and described in <a href="https://tools.ietf.org/html/rfc1906">RFC1906</a>
+         [<a href="https://tools.ietf.org/html/rfc2940#ref-V2TRANS" title="&quot;Transport Mappings for Version 2 of the Simple Network Management Protocol (SNMPv2)&quot;">V2TRANS</a>], Message Processing and Dispatching [<a href="https://tools.ietf.org/html/rfc2940#ref-V3MPC" title="&quot;Message Processing and Dispatching for the Simple Network Management Protocol (SNMP)&quot;">V3MPC</a>] and
+         User-based Security Model [<a href="https://tools.ietf.org/html/rfc2940#ref-V3USM" title="&quot;The User-Based Security Model (USM) for Version 3 of the Simple Network Management Protocol (SNMPv3)&quot;">V3USM</a>].
+
+      o  Protocol operations for accessing management information.  The
+         first set of protocol operations and associated PDU formats is
+         described in STD 15, <a href="https://tools.ietf.org/html/rfc1157">RFC 1157</a> [<a href="https://tools.ietf.org/html/rfc2940#ref-V1PROTO" title="&quot;Simple Network Management Protocol&quot;">V1PROTO</a>].  A second set of
+         protocol operations and associated PDU formats is described in
+         <a href="https://tools.ietf.org/html/rfc1905">RFC 1905</a> [<a href="https://tools.ietf.org/html/rfc2940#ref-V2PROTO" title="&quot;Protocol Operations for Version 2 of the Simple Network Management Protocol (SNMPv2)&quot;">V2PROTO</a>].
+
+      o  A set of fundamental applications described in SNMPv3
+         Applications [<a href="https://tools.ietf.org/html/rfc2940#ref-V3APPS" title="&quot;SNMP Applications&quot;">V3APPS</a>] and the view-based access control
+         mechanism described in View-based Access Control Model
+         [<a href="https://tools.ietf.org/html/rfc2940#ref-V3VACM" title="&quot;View-based Access Control Model for the Simple Network Management Protocol (SNMP)&quot;">V3VACM</a>].
+
+   A more detailed introduction to the current SNMP Management Framework
+   can be found in <a href="https://tools.ietf.org/html/rfc2570">RFC 2570</a> [<a href="https://tools.ietf.org/html/rfc2940#ref-V3INTRO" title="&quot;Introduction to Version 3 of the Internet-standard Network Management Framework&quot;">V3INTRO</a>].
+
+   Managed objects are accessed via a virtual information store, termed
+   the Management Information Base or MIB.  Objects in the MIB are
+   defined using the mechanisms defined in the SMI.
+
+   This memo specifies a MIB module that is compliant to the SMIv2.  A
+   MIB conforming to the SMIv1 can be produced through the appropriate
+   translations.  The resulting translated MIB must be semantically
+   equivalent, except where objects or events are omitted because no
+
+
+
+<span class="grey">Smith                       Standards Track                     [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc2940#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+   translation is possible (use of Counter64).  Some machine readable
+   information in SMIv2 will be converted into textual descriptions in
+   SMIv1 during the translation process.  However, this loss of machine
+   readable information is not considered to change the semantics of the
+   MIB.
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc2940#section-2">2</a>. Overview</h2></span>
+
+   The COPS protocol [<a href="https://tools.ietf.org/html/rfc2940#ref-COPS" title="&quot;The COPS (Common Open Policy Service) Protocol&quot;">COPS</a>] is a client-server protocol intended for the
+   communication of policy requests and decisions between a Policy
+   Enforcement Point (PEP) and a Policy Decision Point (PDP).  The PEP
+   acts as a COPS client in this scenario.  The model for policy out-
+   sourcing, of which the COPS protocol provides one part, is described
+   in [<a href="https://tools.ietf.org/html/rfc2940#ref-FRAMEWORK" title="&quot;A Framework for Policy-based Admission Control&quot;">FRAMEWORK</a>].
+
+<span class="h3"><h3><a class="selflink" name="section-2.1" href="https://tools.ietf.org/html/rfc2940#section-2.1">2.1</a>. Scope</h3></span>
+
+   This MIB is intended to provide management of the important features
+   of a COPS protocol client module. It does not provide management for
+   a COPS server - this is outside the scope of the current memo.  It
+   provides for monitoring of status and protocol statistics, as well as
+   for configuration of the client, in particular for telling it where
+   to locate its servers.  Other mechanisms for achieving this function
+   without SNMP configuration might include use of the Service Location
+   Protocol [<a href="https://tools.ietf.org/html/rfc2940#ref-SRVLOC" title="&quot;Service Location Protocol, Version 2&quot;">SRVLOC</a>] although this is outside the scope of this memo and
+   are not specified by the COPS protocol itself.
+
+   This MIB also does not provide management of specific COPS client-
+   types e.g., for use with the RSVP protocol [<a href="https://tools.ietf.org/html/rfc2940#ref-RSVP" title="&quot;Resource ReSerVation Protocol (RSVP) Version 1 - Functional Specification&quot;">RSVP</a>][COPSRSVP].
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc2940#section-3">3</a>. Structure of COPS Client MIB</h2></span>
+
+   Objects in this MIB are arranged into groups.  Each group is
+   organized as a set of related objects. The overall structure is
+   described below.
+
+<span class="h3"><h3><a class="selflink" name="section-3.1" href="https://tools.ietf.org/html/rfc2940#section-3.1">3.1</a>. copsClientCapabilitiesGroup</h3></span>
+
+   This group contains objects that represent COPS protocol capabilities
+   implemented by this COPS client.
+
+<span class="h3"><h3><a class="selflink" name="section-3.2" href="https://tools.ietf.org/html/rfc2940#section-3.2">3.2</a>. copsClientStatusGroup</h3></span>
+
+   This group contains objects that indicate the current status of
+   connection(s) to COPS servers, including per-server protocol
+   statistics.  It maintains last-known statistics for all of the
+   servers with which the client has ever been connected since agent
+   restart.
+
+
+
+<span class="grey">Smith                       Standards Track                     [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc2940#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-3.3" href="https://tools.ietf.org/html/rfc2940#section-3.3">3.3</a>. copsConfigGroup</h3></span>
+
+   This group contains objects that allow for configuration of COPS
+   server addresses and the order to which connections should be
+   attempted.  It contains a table of per-server objects as well as
+   scalars for configuration of the retry algorithm to be used by a
+   client to obtain a connection to an appropriate server.
+
+<span class="h3"><h3><a class="selflink" name="section-3.4" href="https://tools.ietf.org/html/rfc2940#section-3.4">3.4</a>. Textual Conventions</h3></span>
+
+   The datatypes CopsClientState, CopsServerEntryType, CopsErrorCode,
+   CopsTcpPort and CopsAuthType are used as textual conventions in this
+   document.  These textual conventions have NO effect on either the
+   syntax nor the semantics of any managed object.  Objects defined
+   using these conventions are always encoded by means of the rules that
+   define their primitive type.  Hence, no changes to the SMI or the
+   SNMP are necessary to accommodate these textual conventions which are
+   adopted merely for the convenience of readers.
+
+<span class="h3"><h3><a class="selflink" name="section-3.5" href="https://tools.ietf.org/html/rfc2940#section-3.5">3.5</a>. Relationship to Other MIBs</h3></span>
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.1" href="https://tools.ietf.org/html/rfc2940#section-3.5.1">3.5.1</a>. Relationship to the 'system' group</h4></span>
+
+   This MIB contains definitions for a single COPS protocol client
+   represented by a single SNMP agent and instance of the MIB-2 system
+   group [<a href="https://tools.ietf.org/html/rfc2940#ref-MIB2" title="&quot;Management Information Base for Network Management of TCP/IP-based internets&quot;">MIB2</a>].  It does not address the case of multiple co-located
+   COPS protocol clients.
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc2940#section-4">4</a>. Definitions for COPS Client MIB</h2></span>
+
+COPS-CLIENT-MIB DEFINITIONS ::= BEGIN
+
+-- -------------------------------------------------------------
+-- -------------------------------------------------------------
+
+IMPORTS
+    MODULE-IDENTITY, OBJECT-TYPE, Counter32, Integer32,
+    Unsigned32, mib-2
+        FROM SNMPv2-SMI
+    TimeStamp, TimeInterval, RowStatus, TEXTUAL-CONVENTION
+        FROM SNMPv2-TC
+    MODULE-COMPLIANCE, OBJECT-GROUP
+        FROM SNMPv2-CONF
+    InetAddressType, InetAddress
+        FROM INET-ADDRESS-MIB;
+
+
+--    REFERENCE
+
+
+
+<span class="grey">Smith                       Standards Track                     [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc2940#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+--        &quot;The COPS (Common Open Policy Service) Protocol <a href="https://tools.ietf.org/html/rfc2748">RFC 2748</a>
+
+copsClientMIB MODULE-IDENTITY
+    LAST-UPDATED &quot;200009280000Z&quot;
+    ORGANIZATION &quot;IETF RSVP Admission Policy Working Group&quot;
+    CONTACT-INFO
+        &quot;       Andrew Smith (WG co-chair)
+         Phone: +1 408 579 2821
+         Email: ah_smith@pacbell.net
+
+                Mark Stevens (WG co-chair)
+         Phone: +1 978 287 9102
+         Email: markstevens@lucent.com
+
+         Editor: Andrew Smith
+         Phone: +1 408 579 2821
+         Email: ah_smith@pacbell.net
+
+         Editor: David Partain
+         Phone: +46 13 28 41 44
+         Email: David.Partain@ericsson.com
+
+         Editor: John Seligson
+         Phone: +1 408 495 2992
+         Email: jseligso@nortelnetworks.com&quot;
+
+    DESCRIPTION
+        &quot;The COPS Client MIB module&quot;
+
+    REVISION    &quot;200009280000Z&quot;
+    DESCRIPTION &quot;This version published as <a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>&quot;
+
+    ::= { mib-2 89 }
+
+copsClientMIBObjects OBJECT IDENTIFIER ::= { copsClientMIB 1 }
+
+-- -------------------------------------------------------------
+-- Textual Conventions
+-- -------------------------------------------------------------
+
+CopsClientState ::= TEXTUAL-CONVENTION
+    STATUS      current
+    DESCRIPTION
+        &quot;A value indicating the state of a COPS client.&quot;
+    SYNTAX      INTEGER {
+            copsClientInvalid(1),      -- default state.
+            copsClientTcpconnected(2), -- TCP connection up but COPS
+                                       -- not yet open.
+
+
+
+<span class="grey">Smith                       Standards Track                     [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc2940#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+            copsClientAuthenticating(3), -- TCP connection up but still
+                                         -- authenticating.
+            copsClientSecAccepted(4),  -- connection authenticated.
+            copsClientAccepted(5),     -- COPS server accepted client.
+            copsClientTimingout(6)     -- Keepalive timer has expired,
+                                       -- client is in process of
+                                       -- tearing down connection.
+    }
+
+CopsServerEntryType ::= TEXTUAL-CONVENTION
+    STATUS      current
+    DESCRIPTION
+        &quot;A value indicating how a COPS server entry came into existence.&quot;
+    SYNTAX      INTEGER {
+            copsServerStatic(1),        -- configured by manager
+            copsServerRedirect(2)       -- notified by COPS server
+    }
+
+CopsErrorCode ::= TEXTUAL-CONVENTION
+    STATUS      current
+    DESCRIPTION
+        &quot;A value describing a COPS protocol error. Codes are identical
+         to those used by the COPS protocol itself.&quot;
+    SYNTAX      INTEGER {
+            errorOther(0),             -- none of the below
+            errorBadHandle(1),
+            errorInvalidHandleReference(2),
+            errorBadMessageFormat(3),
+            errorUnableToProcess(4),
+            errorMandatoryClientSiMissing(5),
+            errorUnsupportedClientType(6),
+            errorMandatoryCopsObjectMissing(7),
+            errorClientFailure(8),
+            errorCommunicationFailure(9),
+            errorUnspecified(10),        -- client-type specific subcode
+            errorShuttingDown(11),
+            errorRedirectToPreferredServer(12),
+            errorUnknownCopsObject(13),
+            errorAuthenticationFailure(14),
+            errorAuthenticationMissing(15)
+    }
+--  REFERENCE
+--      &quot;<a href="https://tools.ietf.org/html/rfc2748#section-2.2.8">RFC 2748 section&nbsp;2.2.8</a>&quot;
+
+CopsTcpPort ::= TEXTUAL-CONVENTION
+    STATUS      current
+    DESCRIPTION
+        &quot;A value indicating a TCP protocol port number.&quot;
+
+
+
+<span class="grey">Smith                       Standards Track                     [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc2940#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+    SYNTAX      INTEGER (0..65535)
+
+CopsAuthType ::= TEXTUAL-CONVENTION
+    STATUS      current
+    DESCRIPTION
+        &quot;A value indicating a type of security authentication mechanism.&quot;
+    SYNTAX      INTEGER {
+        authNone(0),
+        authOther(1),
+        authIpSecAh(2),
+        authIpSecEsp(3),
+        authTls(4),
+        authCopsIntegrity(5)
+    }
+
+-- -------------------------------------------------------------
+
+copsClientCapabilitiesGroup OBJECT IDENTIFIER
+                            ::= { copsClientMIBObjects 1 }
+
+-- -------------------------------------------------------------
+--
+-- Capabilities of the COPS client to connect to a COPS server:
+--
+copsClientCapabilities OBJECT-TYPE
+    SYNTAX      BITS {
+        copsClientVersion1(0),     -- supports version1 of COPS protocol
+        copsClientAuthIpSecAh(1) , -- supports IP-SEC Authentication
+        copsClientAuthIpSecEsp(2), -- supports IP-SEC Encryption
+        copsClientAuthTls(3),      -- supports Transport-Layer Security
+        copsClientAuthInteg(4)     -- supports COPS Integrity
+    }
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A list of the optional capabilities that this COPS client
+        supports.&quot;
+    ::= { copsClientCapabilitiesGroup 1 }
+
+-- -------------------------------------------------------------
+
+copsClientStatusGroup OBJECT IDENTIFIER ::= { copsClientMIBObjects 2 }
+
+-- -------------------------------------------------------------
+--
+-- Current status of COPS server connections, all read-only.
+--
+
+
+
+
+<span class="grey">Smith                       Standards Track                     [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc2940#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+copsClientServerCurrentTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF CopsClientServerCurrentEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        &quot;A table of information regarding COPS servers as seen from the
+        point of view of a COPS client. This table contains entries
+        for both statically-configured and dynamically-learned servers
+        (from a PDP Redirect operation). One entry exists in this table
+        for each COPS Client-Type served by the COPS server. In addition,
+        an entry will exist with copsClientServerClientType 0 (zero)
+        representing information about the underlying connection itself:
+        this is consistent with the COPS specification which reserves
+        this value for this purpose.&quot;
+
+    ::= { copsClientStatusGroup 1 }
+
+copsClientServerCurrentEntry OBJECT-TYPE
+    SYNTAX      CopsClientServerCurrentEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        &quot;A set of information regarding a single COPS server serving
+        a single COPS Client-Type from the point of view of a COPS
+        client.&quot;
+    INDEX { copsClientServerAddressType, copsClientServerAddress,
+            copsClientServerClientType }
+    ::= { copsClientServerCurrentTable 1 }
+
+CopsClientServerCurrentEntry ::=
+    SEQUENCE {
+        copsClientServerAddressType         InetAddressType,
+        copsClientServerAddress             InetAddress,
+        copsClientServerClientType          INTEGER,
+        copsClientServerTcpPort             CopsTcpPort,
+        copsClientServerType                CopsServerEntryType,
+        copsClientServerAuthType            CopsAuthType,
+        copsClientServerLastConnAttempt     TimeStamp,
+        copsClientState                     CopsClientState,
+        copsClientServerKeepaliveTime       TimeInterval,
+        copsClientServerAccountingTime      TimeInterval,
+        copsClientInPkts                    Counter32,
+        copsClientOutPkts                   Counter32,
+        copsClientInErrs                    Counter32,
+        copsClientLastError                 CopsErrorCode,
+        copsClientTcpConnectAttempts        Counter32,
+        copsClientTcpConnectFailures        Counter32,
+        copsClientOpenAttempts              Counter32,
+
+
+
+<span class="grey">Smith                       Standards Track                     [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc2940#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+        copsClientOpenFailures              Counter32,
+        copsClientErrUnsupportClienttype    Counter32,
+        copsClientErrUnsupportedVersion     Counter32,
+        copsClientErrLengthMismatch         Counter32,
+        copsClientErrUnknownOpcode          Counter32,
+        copsClientErrUnknownCnum            Counter32,
+        copsClientErrBadCtype               Counter32,
+        copsClientErrBadSends               Counter32,
+        copsClientErrWrongObjects           Counter32,
+        copsClientErrWrongOpcode            Counter32,
+        copsClientKaTimedoutClients         Counter32,
+        copsClientErrAuthFailures           Counter32,
+        copsClientErrAuthMissing            Counter32
+    }
+
+copsClientServerAddressType OBJECT-TYPE
+    SYNTAX      InetAddressType
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        &quot;The type of address in copsClientServerAddress.&quot;
+    ::= { copsClientServerCurrentEntry 1 }
+
+copsClientServerAddress OBJECT-TYPE
+    SYNTAX      InetAddress
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        &quot;The IPv4, IPv6 or DNS address of a COPS Server. Note that,
+        since this is an index to the table, the DNS name must be
+        short enough to fit into the maximum length of indices allowed
+        by the management protocol in use.&quot;
+    REFERENCE
+        &quot;<a href="https://tools.ietf.org/html/rfc2748#section-2.3">RFC 2748 section&nbsp;2.3</a>&quot;
+    ::= { copsClientServerCurrentEntry 2 }
+
+copsClientServerClientType OBJECT-TYPE
+    SYNTAX      INTEGER (0..65535)
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        &quot;The COPS protocol Client-Type for which this entry
+        applies. Multiple Client-Types can be served by a single
+        COPS server. The value 0 (zero) indicates that this
+        entry contains information about the underlying connection
+        itself.&quot;
+    REFERENCE
+        &quot;<a href="https://tools.ietf.org/html/rfc2748#section-6">RFC 2748 section&nbsp;6</a>, IANA&quot;
+
+
+
+<span class="grey">Smith                       Standards Track                     [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc2940#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+    ::= { copsClientServerCurrentEntry 3 }
+
+copsClientServerTcpPort OBJECT-TYPE
+    SYNTAX      CopsTcpPort
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;The TCP port number on the COPS server to which the
+        client should connect/is connected.&quot;
+    ::= { copsClientServerCurrentEntry 4 }
+
+copsClientServerType OBJECT-TYPE
+    SYNTAX      CopsServerEntryType
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;Indicator of the source of this COPS server information.
+        COPS servers may be configured by network management
+        into copsClientServerConfigTable and appear in this entry
+        with type copsServerStatic(1). Alternatively, the may be
+        notified from another COPS server by means of the COPS
+        PDP-Redirect mechanism and appear as copsServerRedirect(2).&quot;
+    ::= { copsClientServerCurrentEntry 5 }
+
+copsClientServerAuthType OBJECT-TYPE
+    SYNTAX      CopsAuthType
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;Indicator of the current security mode in use between
+        client and this COPS server.&quot;
+    ::= { copsClientServerCurrentEntry 6 }
+
+copsClientServerLastConnAttempt OBJECT-TYPE
+    SYNTAX      TimeStamp
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;Timestamp of the last time that this client attempted to
+        connect to this COPS server.&quot;
+    ::= { copsClientServerCurrentEntry 7 }
+
+copsClientState  OBJECT-TYPE
+    SYNTAX      CopsClientState
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;The state of the connection and COPS protocol with respect
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc2940#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+        to this COPS server.&quot;
+    ::= { copsClientServerCurrentEntry 8 }
+
+copsClientServerKeepaliveTime OBJECT-TYPE
+    SYNTAX      TimeInterval
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;The value of the COPS protocol Keepalive timeout, in
+        centiseconds, currently in use by this client, as
+        specified by this COPS server in the Client-Accept operation.
+        A value of zero indicates no keepalive activity is expected.&quot;
+    REFERENCE
+        &quot;<a href="https://tools.ietf.org/html/rfc2748#section-3.7">RFC 2748 section&nbsp;3.7</a>, 4.4&quot;
+    ::= { copsClientServerCurrentEntry 9 }
+
+copsClientServerAccountingTime   OBJECT-TYPE
+    SYNTAX      TimeInterval
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;The value of the COPS protocol Accounting timeout, in
+        centiseconds, currently in use by this client, as specified
+        by the COPS server in the Client-Accept operation. A value
+        of zero indicates no accounting activity is to be performed.&quot;
+    REFERENCE
+        &quot;<a href="https://tools.ietf.org/html/rfc2748#section-3.7">RFC 2748 section&nbsp;3.7</a>&quot;
+    ::= { copsClientServerCurrentEntry 10 }
+
+copsClientInPkts OBJECT-TYPE
+    SYNTAX      Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of COPS messages that this client
+        has received from this COPS server marked for this Client-Type.
+        This value is cumulative since agent restart and is not zeroed
+        on new connections.&quot;
+    ::= { copsClientServerCurrentEntry 11 }
+
+copsClientOutPkts OBJECT-TYPE
+    SYNTAX      Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of COPS messages that this client
+        has sent to this COPS server marked for this Client-Type. This
+        value is cumulative since agent restart and is not zeroed on new
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc2940#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+        connections.&quot;
+    ::= { copsClientServerCurrentEntry 12 }
+
+copsClientInErrs OBJECT-TYPE
+    SYNTAX      Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of COPS messages that this client
+        has received from this COPS server marked for this Client-Type
+        that contained errors in syntax. This value is cumulative since
+        agent restart and is not zeroed on new connections.&quot;
+    ::= { copsClientServerCurrentEntry 13 }
+
+copsClientLastError OBJECT-TYPE
+    SYNTAX      CopsErrorCode
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;The code contained in the last COPS protocol Error Object
+        received by this client from this COPS server marked for this
+        Client-Type. This value is not zeroed on COPS Client-Open
+        operations.&quot;
+    REFERENCE
+        &quot;<a href="https://tools.ietf.org/html/rfc2748#section-2.2.8">RFC 2748 section&nbsp;2.2.8</a>&quot;
+    ::= { copsClientServerCurrentEntry 14 }
+
+copsClientTcpConnectAttempts OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the number of times that this COPS client has tried
+        (successfully or otherwise) to open an TCP connection to a COPS
+        server. This value is cumulative  since agent restart and is not
+        zeroed on new connections. This value is not incremented for
+        entries representing a non-zero Client-Type.&quot;
+    ::= { copsClientServerCurrentEntry 15 }
+
+copsClientTcpConnectFailures OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the number of times that this COPS client has failed
+        to open an TCP connection to a COPS server. This value is
+        cumulative since agent restart and is not zeroed on new
+        connections. This value is not incremented for
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-13" id="page-13" href="https://tools.ietf.org/html/rfc2940#page-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+        entries representing a non-zero Client-Type.&quot;
+    ::= { copsClientServerCurrentEntry 16 }
+
+copsClientOpenAttempts OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the number of times that this COPS client has tried
+        to perform a COPS Client-Open to a COPS server for this
+        Client-Type. This value is cumulative since agent restart and is
+        not zeroed on new connections.&quot;
+    ::= { copsClientServerCurrentEntry 17 }
+
+copsClientOpenFailures OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the number of times that this COPS client has failed
+        to perform a COPS Client-Open to a COPS server for this
+        Client-Type. This value is cumulative since agent restart and is
+        not zeroed on new connections.&quot;
+    ::= { copsClientServerCurrentEntry 18 }
+
+copsClientErrUnsupportClienttype OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of COPS messages that this client
+        has received from COPS servers that referred to Client-Types
+        that are unsupported by this client. This value is cumulative
+        since agent restart and is not zeroed on new connections. This
+        value is not incremented for entries representing a non-zero
+        Client-Type.&quot;
+    ::= { copsClientServerCurrentEntry 19 }
+
+copsClientErrUnsupportedVersion OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of COPS messages that this client
+        has received from COPS servers marked for this Client-Type that
+        had a COPS protocol Version number that is unsupported by this
+        client. This value is cumulative since agent restart and is not
+        zeroed on new connections.&quot;
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 13]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-14" id="page-14" href="https://tools.ietf.org/html/rfc2940#page-14" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+    ::= { copsClientServerCurrentEntry 20 }
+
+copsClientErrLengthMismatch OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of COPS messages that this client
+        has received from COPS servers marked for this Client-Type that
+        had a COPS protocol Message Length that did not match the actual
+        received message. This value is cumulative since agent restart
+        and is not zeroed on new connections.&quot;
+    ::= { copsClientServerCurrentEntry 21 }
+
+copsClientErrUnknownOpcode OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of COPS messages that this client
+        has received from COPS servers marked for this Client-Type that
+        had a COPS protocol Op Code that was unrecognised by this
+        client. This value is cumulative since agent restart and is not
+        zeroed on new connections.&quot;
+    ::= { copsClientServerCurrentEntry 22 }
+
+copsClientErrUnknownCnum OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of COPS messages that this client
+        has received from COPS servers marked for this Client-Type that
+        contained a COPS protocol object C-Num that was unrecognised by
+        this client. This value is cumulative since agent restart and is
+        not zeroed on new connections.&quot;
+    ::= { copsClientServerCurrentEntry 23 }
+
+copsClientErrBadCtype OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of COPS messages that this client
+        has received from COPS servers marked for this Client-Type that
+        contained a COPS protocol object C-Type that was not defined for
+        the C-Nums known by this client. This value is cumulative since
+        agent restart and is not zeroed on new connections.&quot;
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 14]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-15" id="page-15" href="https://tools.ietf.org/html/rfc2940#page-15" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+    ::= { copsClientServerCurrentEntry 24 }
+
+copsClientErrBadSends OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of COPS messages that this client
+        attempted to send to COPS servers marked for this Client-Type
+        that resulted in a transmit error. This value is cumulative
+        since agent restart and is not zeroed on new connections.&quot;
+    ::= { copsClientServerCurrentEntry 25 }
+
+copsClientErrWrongObjects OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of COPS messages that this client
+        has received from COPS servers marked for this Client-Type that
+        did not contain a permitted set of COPS protocol objects. This
+        value is cumulative since agent restart and is not zeroed on new
+        connections.&quot;
+    ::= { copsClientServerCurrentEntry 26 }
+
+copsClientErrWrongOpcode OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of COPS messages that this client
+        has received from COPS servers marked for this Client-Type that
+        had a COPS protocol Op Code that should not have been sent to a
+        COPS client e.g. Open-Requests. This value is cumulative since
+        agent restart and is not zeroed on new connections.&quot;
+    ::= { copsClientServerCurrentEntry 27 }
+
+copsClientKaTimedoutClients OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of times that this client has
+        been shut down for this Client-Type by COPS servers that had
+        detected a COPS protocol Keepalive timeout. This value is
+        cumulative since agent restart and is not zeroed on new
+        connections.&quot;
+    ::= { copsClientServerCurrentEntry 28 }
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 15]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-16" id="page-16" href="https://tools.ietf.org/html/rfc2940#page-16" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+copsClientErrAuthFailures OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of times that this client has
+        received a COPS message marked for this Client-Type which
+        could not be authenticated using the authentication mechanism
+        used by this client.&quot;
+    ::= { copsClientServerCurrentEntry 29 }
+
+copsClientErrAuthMissing OBJECT-TYPE
+    SYNTAX     Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        &quot;A count of the total number of times that this client has
+        received a COPS message marked for this Client-Type which did not
+        contain authentication information.&quot;
+    ::= { copsClientServerCurrentEntry 30 }
+
+
+-- -------------------------------------------------------------
+
+copsClientConfigGroup OBJECT IDENTIFIER ::= { copsClientMIBObjects 3 }
+
+-- -------------------------------------------------------------
+
+copsClientServerConfigTable OBJECT-TYPE
+     SYNTAX      SEQUENCE OF CopsClientServerConfigEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        &quot;Table of possible COPS servers to try to connect to in order
+        of copsClientServerConfigPriority. There may be multiple
+        entries in this table for the same server and client-type which
+        specify different security mechanisms: these mechanisms will
+        be attempted by the client in the priority order given. Note
+        that a server learned by means of PDPRedirect always takes
+        priority over any of these configured entries.&quot;
+    ::= { copsClientConfigGroup 1 }
+
+copsClientServerConfigEntry OBJECT-TYPE
+    SYNTAX      CopsClientServerConfigEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        &quot;A set of configuration information regarding a single
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 16]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-17" id="page-17" href="https://tools.ietf.org/html/rfc2940#page-17" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+        COPS server from the point of view of a COPS client.&quot;
+    INDEX { copsClientServerConfigAddrType,
+            copsClientServerConfigAddress,
+            copsClientServerConfigClientType,
+            copsClientServerConfigAuthType }
+    ::= { copsClientServerConfigTable 1 }
+
+CopsClientServerConfigEntry ::=
+    SEQUENCE {
+        copsClientServerConfigAddrType      InetAddressType,
+        copsClientServerConfigAddress       InetAddress,
+        copsClientServerConfigClientType    INTEGER,
+        copsClientServerConfigAuthType      CopsAuthType,
+        copsClientServerConfigTcpPort       CopsTcpPort,
+        copsClientServerConfigPriority      Integer32,
+        copsClientServerConfigRowStatus     RowStatus
+    }
+
+copsClientServerConfigAddrType OBJECT-TYPE
+    SYNTAX      InetAddressType
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        &quot;The type of address in copsClientServerConfigAddress.&quot;
+    ::= { copsClientServerConfigEntry 1 }
+
+copsClientServerConfigAddress OBJECT-TYPE
+    SYNTAX      InetAddress
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        &quot;The IPv4, IPv6 or DNS address of a COPS Server. Note that,
+        since this is an index to the table, the DNS name must be
+        short enough to fit into the maximum length of indices allowed
+        by the management protocol in use.&quot;
+    REFERENCE
+        &quot;<a href="https://tools.ietf.org/html/rfc2748#section-2.3">RFC 2748 section&nbsp;2.3</a>&quot;
+    ::= { copsClientServerConfigEntry 2 }
+
+copsClientServerConfigClientType OBJECT-TYPE
+    SYNTAX      INTEGER (0..65535)
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        &quot;The COPS protocol Client-Type for which this entry
+        applies and for which this COPS server is capable
+        of serving. Multiple Client-Types can be served by a
+        single COPS server.&quot;
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 17]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-18" id="page-18" href="https://tools.ietf.org/html/rfc2940#page-18" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+    REFERENCE
+        &quot;<a href="https://tools.ietf.org/html/rfc2748#section-6">RFC 2748 section&nbsp;6</a>, IANA&quot;
+    ::= { copsClientServerConfigEntry 3 }
+
+copsClientServerConfigAuthType OBJECT-TYPE
+    SYNTAX      CopsAuthType
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        &quot;The type of authentication mechanism for this COPS client
+        to request when negotiating security at the start of a
+        connection to a COPS server.&quot;
+    REFERENCE
+        &quot;<a href="https://tools.ietf.org/html/rfc2748#section-4">RFC 2748 section&nbsp;4</a>.&quot;
+    ::= { copsClientServerConfigEntry 4 }
+
+
+copsClientServerConfigTcpPort OBJECT-TYPE
+    SYNTAX      CopsTcpPort
+    MAX-ACCESS  read-create
+    STATUS      current
+    DESCRIPTION
+        &quot;The TCP port number on the COPS server to which the
+        client should connect.&quot;
+    ::= { copsClientServerConfigEntry 5 }
+
+copsClientServerConfigPriority OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-create
+    STATUS      current
+    DESCRIPTION
+        &quot;The priority of this entry relative to other entries.
+        COPS client will attempt to contact COPS servers for the
+        appropriate Client-Type. Higher numbers are tried first. The
+        order to be used amongst server entries with the same priority
+        is undefined. COPS servers that are notified to the client using
+        the COPS protocol PDP-Redirect mechanism are always used in
+        preference to any entries in this table.&quot;
+    ::= { copsClientServerConfigEntry 6 }
+
+copsClientServerConfigRowStatus OBJECT-TYPE
+    SYNTAX      RowStatus
+    MAX-ACCESS  read-create
+    STATUS      current
+    DESCRIPTION
+        &quot;State of this entry in the table.&quot;
+    ::= { copsClientServerConfigEntry 7 }
+
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 18]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-19" id="page-19" href="https://tools.ietf.org/html/rfc2940#page-19" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+copsClientServerConfigRetryAlgrm OBJECT-TYPE
+    SYNTAX      INTEGER {
+                    other(1),
+                    sequential(2),
+                    roundRobin(3)
+                }
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+        &quot;The algorithm by which the client should retry when it
+         fails to connect to a COPS server.&quot;
+    DEFVAL { sequential }
+    ::= { copsClientConfigGroup 2 }
+
+copsClientServerConfigRetryCount OBJECT-TYPE
+    SYNTAX      Unsigned32
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+        &quot;A retry count for use by the retry algorithm.  Each retry
+         algorithm needs to specify how it uses this value.
+
+         For the 'sequential(2)' algorithm, this value is the
+         number of times the client should retry to connect
+         to one COPS server before moving on to another.
+         For the 'roundRobin(3)' algorithm, this value is not used.&quot;
+    DEFVAL { 1 }
+    ::= { copsClientConfigGroup 3 }
+
+copsClientServerConfigRetryIntvl OBJECT-TYPE
+    SYNTAX      TimeInterval
+    UNITS       &quot;centi-seconds&quot;
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+        &quot;A retry interval for use by the retry algorithm.  Each retry
+         algorithm needs to specify how it uses this value.
+
+         For the 'sequential(2)' algorithm, this value is the time to
+         wait between retries of a connection to the same COPS server.
+
+         For the 'roundRobin(3)' algorithm, the client always attempts
+         to connect to each Server in turn, until one succeeds or they
+         all fail; if they all fail, then the client waits for the value
+         of this interval before restarting the algorithm.&quot;
+    DEFVAL { 1000 }
+    ::= { copsClientConfigGroup 4 }
+
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 19]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-20" id="page-20" href="https://tools.ietf.org/html/rfc2940#page-20" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+-- -------------------------------------------------------------
+-- Conformance Information
+-- -------------------------------------------------------------
+
+copsClientConformance OBJECT IDENTIFIER ::= { copsClientMIB 2 }
+
+copsClientGroups OBJECT IDENTIFIER ::= { copsClientConformance 1 }
+copsClientCompliances OBJECT IDENTIFIER ::= { copsClientConformance 2 }
+
+-- -------------------------------------------------------------
+-- units of conformance
+-- -------------------------------------------------------------
+
+copsDeviceStatusGroup OBJECT-GROUP
+    OBJECTS {
+        copsClientCapabilities,
+        copsClientServerTcpPort, copsClientServerType,
+        copsClientServerAuthType, copsClientServerLastConnAttempt,
+        copsClientState, copsClientServerKeepaliveTime,
+        copsClientServerAccountingTime, copsClientInPkts,
+        copsClientOutPkts, copsClientInErrs, copsClientLastError,
+        copsClientTcpConnectAttempts, copsClientTcpConnectFailures,
+        copsClientOpenAttempts, copsClientOpenFailures,
+        copsClientErrUnsupportClienttype,
+        copsClientErrUnsupportedVersion, copsClientErrLengthMismatch,
+        copsClientErrUnknownOpcode, copsClientErrUnknownCnum,
+        copsClientErrBadCtype, copsClientErrBadSends,
+        copsClientErrWrongObjects, copsClientErrWrongOpcode,
+        copsClientKaTimedoutClients, copsClientErrAuthFailures,
+        copsClientErrAuthMissing
+    }
+    STATUS      current
+    DESCRIPTION
+        &quot;A collection of objects for monitoring the status of
+        connections to COPS servers and statistics for a COPS client.&quot;
+    ::= { copsClientGroups 1 }
+
+copsDeviceConfigGroup OBJECT-GROUP
+    OBJECTS {
+        copsClientServerConfigTcpPort, copsClientServerConfigPriority,
+        copsClientServerConfigRowStatus,
+        copsClientServerConfigRetryAlgrm,
+        copsClientServerConfigRetryCount,
+        copsClientServerConfigRetryIntvl
+    }
+    STATUS      current
+    DESCRIPTION
+        &quot;A collection of objects for configuring COPS server
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 20]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-21" id="page-21" href="https://tools.ietf.org/html/rfc2940#page-21" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+        information.&quot;
+    ::= { copsClientGroups 2 }
+
+-- -------------------------------------------------------------
+-- compliance statements
+-- -------------------------------------------------------------
+
+copsClientCompliance MODULE-COMPLIANCE
+    STATUS  current
+    DESCRIPTION
+        &quot;The compliance statement for device support of
+        management of the COPS client.&quot;
+
+    MODULE
+        MANDATORY-GROUPS {
+            copsDeviceStatusGroup, copsDeviceConfigGroup
+        }
+
+        OBJECT      copsClientServerConfigTcpPort
+        MIN-ACCESS  read-only
+        DESCRIPTION
+            &quot;Write access is required only if the device supports the
+            configuration of COPS server information.&quot;
+
+        OBJECT      copsClientServerConfigPriority
+        MIN-ACCESS  read-only
+        DESCRIPTION
+            &quot;Write access is required only if the device supports the
+            configuration of COPS server information.&quot;
+
+        OBJECT      copsClientServerConfigRowStatus
+        MIN-ACCESS  read-only
+        DESCRIPTION
+            &quot;Write access is required only if the device supports the
+            configuration of COPS server information.&quot;
+
+        OBJECT      copsClientServerConfigRetryAlgrm
+        MIN-ACCESS  read-only
+        DESCRIPTION
+            &quot;Write access is required only if the device supports the
+            configuration of COPS server information.&quot;
+
+        OBJECT      copsClientServerConfigRetryCount
+        MIN-ACCESS  read-only
+        DESCRIPTION
+            &quot;Write access is required only if the device supports the
+            configuration of COPS server information.&quot;
+
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 21]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-22" id="page-22" href="https://tools.ietf.org/html/rfc2940#page-22" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+        OBJECT      copsClientServerConfigRetryIntvl
+        MIN-ACCESS  read-only
+        DESCRIPTION
+            &quot;Write access is required only if the device supports the
+            configuration of COPS server information.&quot;
+
+       ::= { copsClientCompliances 1 }
+
+END
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc2940#section-5">5</a>. Acknowledgments</h2></span>
+
+   This document describes instrumentation for the client side of the
+   COPS protocol which was defined by the RSVP Admission Policy (rap)
+   Working Group, now known as the Resource Allocation Protocol (rap)
+   Working Group.
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc2940#section-6">6</a>. Security Considerations</h2></span>
+
+   There are a number of management objects defined in this MIB that
+   have a MAX-ACCESS clause of read-create.  Such objects may be
+   considered sensitive or vulnerable in some network environments.  The
+   support for SET operations in a non-secure environment without proper
+   protection can have a negative effect on network operations.
+
+   SNMPv1 by itself is not a secure environment.  Even if the network
+   itself is secure (for example by using IPSec), even then, there is no
+   control as to who on the secure network is allowed to access and
+   GET/SET (read/change/create/delete) the objects in this MIB.
+
+   It is recommended that the implementers consider the security
+   features as provided by the SNMPv3 framework.  Specifically, the use
+   of the User-based Security Model [USM] and the View-based Access
+   Control Model [VACM] is recommended.
+
+   It is then a customer/user responsibility to ensure that the SNMP
+   entity giving access to an instance of this MIB, is properly
+   configured to give access to the objects only to those principals
+   (users) that have legitimate rights to indeed GET or SET
+   (change/create/delete) them.
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 22]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-23" id="page-23" href="https://tools.ietf.org/html/rfc2940#page-23" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc2940#section-7">7</a>. References</h2></span>
+
+   [<a name="ref-ARCH" id="ref-ARCH">ARCH</a>]        Harrington, D., Presuhn, R. and B. Wijnen, &quot;An
+                 Architecture for Describing SNMP Management
+                 Frameworks&quot;, <a href="https://tools.ietf.org/html/rfc2571">RFC 2571</a>, April 1999.
+
+   [<a name="ref-V1PROTO" id="ref-V1PROTO">V1PROTO</a>]     Case, J., Fedor, M., Schoffstall, M. and J. Davin,
+                 &quot;Simple Network Management Protocol&quot;, STD 15, <a href="https://tools.ietf.org/html/rfc1157">RFC 1157</a>,
+                 May 1990.
+
+   [<a name="ref-V1SMI" id="ref-V1SMI">V1SMI</a>]       Rose, M. and K. McCloghrie, &quot;Structure and
+                 Identification of Management Information for TCP/IP-
+                 based Internets&quot;, STD 16, <a href="https://tools.ietf.org/html/rfc1155">RFC 1155</a>, May 1990.
+
+   [<a name="ref-V1CONCISE" id="ref-V1CONCISE">V1CONCISE</a>]   Rose, M. and K. McCloghrie, &quot;Concise MIB Definitions&quot;,
+                 STD 16, <a href="https://tools.ietf.org/html/rfc1212">RFC 1212</a>, March 1991.
+
+   [<a name="ref-V1TRAPS" id="ref-V1TRAPS">V1TRAPS</a>]     Rose, M., &quot;A Convention for Defining Traps for use with
+                 the SNMP&quot;, <a href="https://tools.ietf.org/html/rfc1215">RFC 1215</a>, March 1991.
+
+   [<a name="ref-V2SMI" id="ref-V2SMI">V2SMI</a>]       McCloghrie, K., Perkins, D., Schoenwaelder, J., Case,
+                 J., Rose, M. and S. Waldbusser, &quot;Structure of
+                 Management Information Version 2 (SMIv2)&quot;, STD 58, <a href="https://tools.ietf.org/html/rfc2578">RFC</a>
+                 <a href="https://tools.ietf.org/html/rfc2578">2578</a>, April 1999.
+
+   [<a name="ref-V2TC" id="ref-V2TC">V2TC</a>]        McCloghrie, K., Perkins, D., Schoenwaelder, J., Case,
+                 J., Rose, M. and S. Waldbusser, &quot;Textual Conventions
+                 for SMIv2&quot;, STD 58, <a href="https://tools.ietf.org/html/rfc2579">RFC 2579</a>, April 1999.
+
+   [<a name="ref-V2CONFORM" id="ref-V2CONFORM">V2CONFORM</a>]   McCloghrie, K., Perkins, D., Schoenwaelder, J., Case,
+                 J., Rose, M. and S. Waldbusser, &quot;Conformance Statements
+                 for SMIv2&quot;, STD 58, <a href="https://tools.ietf.org/html/rfc2580">RFC 2580</a>, April 1999.
+
+   [<a name="ref-V2COMMUNITY" id="ref-V2COMMUNITY">V2COMMUNITY</a>] Case, J., McCloghrie, K., Rose, M. and S. Waldbusser,
+                 &quot;Introduction to Community-based SNMPv2&quot;, <a href="https://tools.ietf.org/html/rfc1901">RFC 1901</a>,
+                 January 1996.
+
+   [<a name="ref-V2TRANS" id="ref-V2TRANS">V2TRANS</a>]     Case, J., McCloghrie, K., Rose, M. and S. Waldbusser,
+                 &quot;Transport Mappings for Version 2 of the Simple Network
+                 Management Protocol (SNMPv2)&quot;, <a href="https://tools.ietf.org/html/rfc1906">RFC 1906</a>, January 1996.
+
+   [<a name="ref-V2PROTO" id="ref-V2PROTO">V2PROTO</a>]     Case, J., McCloghrie, K., Rose, M. and S. Waldbusser,
+                 &quot;Protocol Operations for Version 2 of the Simple
+                 Network Management Protocol (SNMPv2)&quot;, <a href="https://tools.ietf.org/html/rfc1905">RFC 1905</a>,
+                 January 1996.
+
+
+
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 23]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-24" id="page-24" href="https://tools.ietf.org/html/rfc2940#page-24" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+   [<a name="ref-V3INTRO" id="ref-V3INTRO">V3INTRO</a>]     Case, J., Mundy, R., Partain, D. and B. Stewart,
+                 &quot;Introduction to Version 3 of the Internet-standard
+                 Network Management Framework&quot;, <a href="https://tools.ietf.org/html/rfc2570">RFC 2570</a>, April 1999.
+
+   [<a name="ref-V3MPC" id="ref-V3MPC">V3MPC</a>]       Case, J., Harrington D., Presuhn R. and B. Wijnen,
+                 &quot;Message Processing and Dispatching for the Simple
+                 Network Management Protocol (SNMP)&quot;, <a href="https://tools.ietf.org/html/rfc2572">RFC 2572</a>, April
+                 1999.
+
+   [<a name="ref-V3USM" id="ref-V3USM">V3USM</a>]       Blumenthal, U. and B. Wijnen, &quot;The User-Based Security
+                 Model (USM) for Version 3 of the Simple Network
+                 Management Protocol (SNMPv3)&quot;, <a href="https://tools.ietf.org/html/rfc2574">RFC 2574</a>, April 1999.
+
+   [<a name="ref-V3APPS" id="ref-V3APPS">V3APPS</a>]      Levi, D., Meyer, P. and B. Stewart, &quot;SNMP
+                 Applications&quot;, <a href="https://tools.ietf.org/html/rfc2573">RFC 2573</a>, April 1999.
+
+   [<a name="ref-V3VACM" id="ref-V3VACM">V3VACM</a>]      Wijnen, B., Presuhn, R. and K. McCloghrie, &quot;View-based
+                 Access Control Model for the Simple Network Management
+                 Protocol (SNMP)&quot;, <a href="https://tools.ietf.org/html/rfc2575">RFC 2575</a>, April 1999.
+
+   [<a name="ref-MIB2" id="ref-MIB2">MIB2</a>]        McCloghrie K. and M. Rose, &quot;Management Information Base
+                 for Network Management of TCP/IP-based internets&quot;, STD
+                 17, <a href="https://tools.ietf.org/html/rfc1213">RFC 1213</a>, March 1991.
+
+   [<a name="ref-FRAMEWORK" id="ref-FRAMEWORK">FRAMEWORK</a>]   Yavatkar, R., Pendarakis, D. and Guerin, R., &quot;A
+                 Framework for Policy-based Admission Control&quot;, <a href="https://tools.ietf.org/html/rfc2753">RFC</a>
+                 <a href="https://tools.ietf.org/html/rfc2753">2753</a>, January 2000.
+
+   [<a name="ref-COPS" id="ref-COPS">COPS</a>]        Boyle, J., Cohen, R., Durham, D., Herzog, S., Rajan, R.
+                 and A. Sastry, &quot;The COPS (Common Open Policy Service)
+                 Protocol&quot;, <a href="https://tools.ietf.org/html/rfc2748">RFC 2748</a>, January 2000.
+
+   [<a name="ref-RSVP" id="ref-RSVP">RSVP</a>]        Braden, R. ed., Zhang, L., Berson, S., Herzog, S. and
+                 S.  Jamin, &quot;Resource ReSerVation Protocol (RSVP)
+                 Version 1 - Functional Specification&quot;, <a href="https://tools.ietf.org/html/rfc2205">RFC 2205</a>,
+                 September 1997.
+
+   [<a name="ref-COPSRSVP" id="ref-COPSRSVP">COPSRSVP</a>]    Boyle, J., Cohen, R., Durham, D., Herzog, S., Rajan, R.
+                 and A. Sastry, &quot;COPS Usage for RSVP&quot;, <a href="https://tools.ietf.org/html/rfc2749">RFC 2749</a>, January
+                 2000.
+
+   [<a name="ref-SRVLOC" id="ref-SRVLOC">SRVLOC</a>]      Guttman, E., Perkins, C., Veizades, J. and M. Day,
+                 &quot;Service Location Protocol, Version 2&quot;, <a href="https://tools.ietf.org/html/rfc2608">RFC 2608</a>, June
+                 1999.
+
+   [<a name="ref-ADDRESSMIB" id="ref-ADDRESSMIB">ADDRESSMIB</a>]  Daniele, M., Haberman, B., Routhier, S. and J.
+                 Schoenwaelder, &quot;Textual Conventions for Internet
+                 Network Addresses&quot;, <a href="https://tools.ietf.org/html/rfc2851">RFC 2851</a>, June 2000.
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 24]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-25" id="page-25" href="https://tools.ietf.org/html/rfc2940#page-25" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+   [<a name="ref-PROCESS" id="ref-PROCESS">PROCESS</a>]     Bradner, S., &quot;The Internet Standards Process --
+                 Revision 3&quot;, <a href="https://tools.ietf.org/html/bcp9">BCP 9</a>, <a href="https://tools.ietf.org/html/rfc2026">RFC 2026</a>, October 1996.
+
+<span class="h2"><h2><a class="selflink" name="section-8" href="https://tools.ietf.org/html/rfc2940#section-8">8</a>. Authors' Addresses</h2></span>
+
+   Andrew Smith
+
+   Fax:  +1 415 345 1827
+   Email: ah_smith@pacbell.net
+
+
+   David Partain
+   Ericsson Radio Systems
+   Research and Innovation
+   P.O. Box 1248
+   SE-581 12 Linkoping
+   Sweden
+
+   Phone: +46 13 28 41 44
+   EMail: David.Partain@ericsson.com
+
+
+   John Seligson
+   Nortel Networks, Inc.
+   4401 Great America Parkway
+   Santa Clara, CA 95054
+   USA
+
+   Phone: +1 408 495 2992
+   EMail: jseligso@nortelnetworks.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 25]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-26" id="page-26" href="https://tools.ietf.org/html/rfc2940#page-26" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-9" href="https://tools.ietf.org/html/rfc2940#section-9">9</a>. Notices</h2></span>
+
+   The IETF takes no position regarding the validity or scope of any
+   intellectual property or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; neither does it represent that it
+   has made any effort to identify any such rights.  Information on the
+   IETF's procedures with respect to rights in standards-track and
+   standards-related documentation can be found in <a href="https://tools.ietf.org/html/bcp11">BCP-11</a>.  Copies of
+   claims of rights made available for publication and any assurances of
+   licenses to be made available, or the result of an attempt made to
+   obtain a general license or permission for the use of such
+   proprietary rights by implementors or users of this specification can
+   be obtained from the IETF Secretariat.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights which may cover technology that may be required to practice
+   this standard.  Please address the information to the IETF Executive
+   Director.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Smith                       Standards Track                    [Page 26]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-27" id="page-27" href="https://tools.ietf.org/html/rfc2940#page-27" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2940">RFC 2940</a>                    COPS Client MIB                 October 2000</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-10" href="https://tools.ietf.org/html/rfc2940#section-10">10</a>. Full Copyright Statement</h2></span>
+
+   Copyright (C) The Internet Society (2000).  All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works.  However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assigns.
+
+   This document and the information contained herein is provided on an
+   &quot;AS IS&quot; basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Acknowledgement
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Smith                       Standards Track                    [Page 27]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

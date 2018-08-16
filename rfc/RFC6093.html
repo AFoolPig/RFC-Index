@@ -1,0 +1,880 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Relation.Replaces" content="draft-gont-tcpm-urgent-data" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:6093" /> 
+  <meta name="DC.Date.Issued" content="January, 2011" /> 
+  <meta name="DC.Creator" content="Yourtchenko, Andrew" /> 
+  <meta name="DC.Creator" content="Gont, Fernando" /> 
+  <meta name="DC.Description.Abstract" content="This document analyzes how current TCP implementations process TCP
+urgent indications, and how the behavior of some widely-deployed
+middle-boxes affect how urgent indications are processed by end
+systems. This document updates the relevant specifications such that
+they accommodate current practice in processing TCP urgent
+indications, provides advice to applications that make use of the
+urgent mechanism, and raises awareness about the reliability of TCP
+urgent indications in the current Internet." /> 
+  <meta name="DC.Title" content="On the Implementation of the TCP Urgent Mechanism" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 6093 - On the Implementation of the TCP Urgent Mechanism</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgblue" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc6093.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc6093" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-ietf-tcpm-urgent-data" title="draft-ietf-tcpm-urgent-data">draft-ietf-tcpm...</a>] [<a href="https://datatracker.ietf.org/doc/rfc6093" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc6093" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc6093" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=6093">Errata</a>]</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> PROPOSED STANDARD</span>
+   <br /> 
+   <span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span>
+   <br /> 
+   <pre>Internet Engineering Task Force (IETF)                           F. Gont
+Request for Comments: 6093                                       UTN/FRH
+Updates: <a href="https://tools.ietf.org/html/rfc793">793</a>, <a href="https://tools.ietf.org/html/rfc1011">1011</a>, <a href="https://tools.ietf.org/html/rfc1122">1122</a>                                  A. Yourtchenko
+Category: Standards Track                                          Cisco
+ISSN: 2070-1721                                             January 2011
+
+
+           <span class="h1"><h1>On the Implementation of the TCP Urgent Mechanism</h1></span>
+
+Abstract
+
+   This document analyzes how current TCP implementations process TCP
+   urgent indications and how the behavior of some widely deployed
+   middleboxes affects how end systems process urgent indications.  This
+   document updates the relevant specifications such that they
+   accommodate current practice in processing TCP urgent indications,
+   raises awareness about the reliability of TCP urgent indications in
+   the Internet, and recommends against the use of urgent indications
+   (but provides advice to applications that do).
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in <a href="https://tools.ietf.org/html/rfc5741#section-2">Section&nbsp;2 of RFC 5741</a>.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   <a href="http://www.rfc-editor.org/info/rfc6093">http://www.rfc-editor.org/info/rfc6093</a>.
+
+Copyright Notice
+
+   Copyright (c) 2011 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+<span class="grey">Gont &amp; Yourtchenko           Standards Track                    [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc6093#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6093">RFC 6093</a>               On the TCP Urgent Mechanism          January 2011</span>
+
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc6093#section-1">1</a>. Introduction ....................................................<a href="https://tools.ietf.org/html/rfc6093#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc6093#section-2">2</a>. Specification of the TCP Urgent Mechanism .......................<a href="https://tools.ietf.org/html/rfc6093#page-3">3</a>
+      <a href="https://tools.ietf.org/html/rfc6093#section-2.1">2.1</a>. Semantics of Urgent Indications ............................<a href="https://tools.ietf.org/html/rfc6093#page-3">3</a>
+      <a href="https://tools.ietf.org/html/rfc6093#section-2.2">2.2</a>. Semantics of the Urgent Pointer ............................<a href="https://tools.ietf.org/html/rfc6093#page-4">4</a>
+      <a href="https://tools.ietf.org/html/rfc6093#section-2.3">2.3</a>. Allowed Length of &quot;Urgent Data&quot; ............................<a href="https://tools.ietf.org/html/rfc6093#page-4">4</a>
+   <a href="https://tools.ietf.org/html/rfc6093#section-3">3</a>. Current Implementation Practice of the TCP Urgent Mechanism .....<a href="https://tools.ietf.org/html/rfc6093#page-5">5</a>
+      <a href="https://tools.ietf.org/html/rfc6093#section-3.1">3.1</a>. Semantics of Urgent Indications ............................<a href="https://tools.ietf.org/html/rfc6093#page-5">5</a>
+      <a href="https://tools.ietf.org/html/rfc6093#section-3.2">3.2</a>. Semantics of the Urgent Pointer ............................<a href="https://tools.ietf.org/html/rfc6093#page-5">5</a>
+      <a href="https://tools.ietf.org/html/rfc6093#section-3.3">3.3</a>. Allowed Length of &quot;Urgent Data&quot; ............................<a href="https://tools.ietf.org/html/rfc6093#page-6">6</a>
+      <a href="https://tools.ietf.org/html/rfc6093#section-3.4">3.4</a>. Interaction of Middleboxes with TCP Urgent Indications .....<a href="https://tools.ietf.org/html/rfc6093#page-6">6</a>
+   <a href="https://tools.ietf.org/html/rfc6093#section-4">4</a>. Updating <a href="https://tools.ietf.org/html/rfc793">RFC 793</a>, <a href="https://tools.ietf.org/html/rfc1011">RFC 1011</a>, and <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a> ........................<a href="https://tools.ietf.org/html/rfc6093#page-6">6</a>
+   <a href="https://tools.ietf.org/html/rfc6093#section-5">5</a>. Advice to New Applications Employing TCP ........................<a href="https://tools.ietf.org/html/rfc6093#page-7">7</a>
+   <a href="https://tools.ietf.org/html/rfc6093#section-6">6</a>. Advice to Applications That Make Use of the Urgent Mechanism ....<a href="https://tools.ietf.org/html/rfc6093#page-7">7</a>
+   <a href="https://tools.ietf.org/html/rfc6093#section-7">7</a>. Security Considerations .........................................<a href="https://tools.ietf.org/html/rfc6093#page-7">7</a>
+   <a href="https://tools.ietf.org/html/rfc6093#section-8">8</a>. Acknowledgements ................................................<a href="https://tools.ietf.org/html/rfc6093#page-8">8</a>
+   <a href="https://tools.ietf.org/html/rfc6093#section-9">9</a>. References ......................................................<a href="https://tools.ietf.org/html/rfc6093#page-8">8</a>
+      <a href="https://tools.ietf.org/html/rfc6093#section-9.1">9.1</a>. Normative References .......................................<a href="https://tools.ietf.org/html/rfc6093#page-8">8</a>
+      <a href="https://tools.ietf.org/html/rfc6093#section-9.2">9.2</a>. Informative References .....................................<a href="https://tools.ietf.org/html/rfc6093#page-8">8</a>
+   <a href="https://tools.ietf.org/html/rfc6093#appendix-A">Appendix A</a>.  Survey of the Processing of TCP Urgent
+                Indications by Some Popular TCP Implementations ......<a href="https://tools.ietf.org/html/rfc6093#page-10">10</a>
+      <a href="https://tools.ietf.org/html/rfc6093#appendix-A.1">A.1</a>. FreeBSD ...................................................<a href="https://tools.ietf.org/html/rfc6093#page-10">10</a>
+      <a href="https://tools.ietf.org/html/rfc6093#appendix-A.2">A.2</a>. Linux .....................................................<a href="https://tools.ietf.org/html/rfc6093#page-10">10</a>
+      <a href="https://tools.ietf.org/html/rfc6093#appendix-A.3">A.3</a>. NetBSD ....................................................<a href="https://tools.ietf.org/html/rfc6093#page-10">10</a>
+      <a href="https://tools.ietf.org/html/rfc6093#appendix-A.4">A.4</a>. OpenBSD ...................................................<a href="https://tools.ietf.org/html/rfc6093#page-11">11</a>
+      <a href="https://tools.ietf.org/html/rfc6093#appendix-A.5">A.5</a>. Cisco IOS software ........................................<a href="https://tools.ietf.org/html/rfc6093#page-11">11</a>
+      <a href="https://tools.ietf.org/html/rfc6093#appendix-A.6">A.6</a>. Microsoft Windows 2000, Service Pack 4 ....................<a href="https://tools.ietf.org/html/rfc6093#page-11">11</a>
+      <a href="https://tools.ietf.org/html/rfc6093#appendix-A.7">A.7</a>. Microsoft Windows 2008 ....................................<a href="https://tools.ietf.org/html/rfc6093#page-11">11</a>
+      <a href="https://tools.ietf.org/html/rfc6093#appendix-A.8">A.8</a>. Microsoft Windows 95 ......................................<a href="https://tools.ietf.org/html/rfc6093#page-11">11</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Gont &amp; Yourtchenko           Standards Track                    [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc6093#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6093">RFC 6093</a>               On the TCP Urgent Mechanism          January 2011</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc6093#section-1">1</a>. Introduction</h2></span>
+
+   This document analyzes how some current TCP implementations process
+   TCP urgent indications, and how the behavior of some widely deployed
+   middleboxes affects the processing of urgent indications by hosts.
+   This document updates <a href="https://tools.ietf.org/html/rfc793">RFC 793</a> [<a href="https://tools.ietf.org/html/rfc0793" title="&quot;Transmission Control Protocol&quot;">RFC0793</a>], <a href="https://tools.ietf.org/html/rfc1011">RFC 1011</a> [<a href="https://tools.ietf.org/html/rfc1011" title="&quot;Official Internet protocols&quot;">RFC1011</a>], and <a href="https://tools.ietf.org/html/rfc1122">RFC</a>
+   <a href="https://tools.ietf.org/html/rfc1122">1122</a> [<a href="https://tools.ietf.org/html/rfc1122" title="&quot;Requirements for Internet Hosts - Communication Layers&quot;">RFC1122</a>] such that they accommodate current practice in
+   processing TCP urgent indications.  It also provides advice to
+   applications using the urgent mechanism and raises awareness about
+   the reliability of TCP urgent indications in the current Internet.
+
+   Given the above issues and potential interoperability issues with
+   respect to the currently common default mode operation, it is
+   strongly recommended that applications do not employ urgent
+   indications.  Nevertheless, urgent indications are still retained as
+   a mandatory part of the TCP protocol to support the few legacy
+   applications that employ them.  However, it is expected that even
+   these applications will have difficulties in environments with
+   middleboxes.
+
+   <a href="https://tools.ietf.org/html/rfc6093#section-2">Section 2</a> describes what the current IETF specifications state with
+   respect to TCP urgent indications.  <a href="https://tools.ietf.org/html/rfc6093#section-3">Section 3</a> describes how current
+   TCP implementations actually process TCP urgent indications.  <a href="https://tools.ietf.org/html/rfc6093#section-4">Section</a>
+   <a href="https://tools.ietf.org/html/rfc6093#section-4">4</a> updates <a href="https://tools.ietf.org/html/rfc793">RFC 793</a> [<a href="https://tools.ietf.org/html/rfc0793" title="&quot;Transmission Control Protocol&quot;">RFC0793</a>], <a href="https://tools.ietf.org/html/rfc1011">RFC 1011</a> [<a href="https://tools.ietf.org/html/rfc1011" title="&quot;Official Internet protocols&quot;">RFC1011</a>], and <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a>
+   [<a href="https://tools.ietf.org/html/rfc1122" title="&quot;Requirements for Internet Hosts - Communication Layers&quot;">RFC1122</a>], such that they accommodate current practice in processing
+   TCP urgent indications.  <a href="https://tools.ietf.org/html/rfc6093#section-5">Section 5</a> provides advice to new
+   applications employing TCP, with respect to the TCP urgent mechanism.
+   <a href="https://tools.ietf.org/html/rfc6093#section-6">Section 6</a> provides advice to existing applications that use or rely
+   on the TCP urgent mechanism.
+
+   The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
+   document are to be interpreted as described in <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a> [<a href="https://tools.ietf.org/html/rfc2119" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">RFC2119</a>].
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc6093#section-2">2</a>. Specification of the TCP Urgent Mechanism</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-2.1" href="https://tools.ietf.org/html/rfc6093#section-2.1">2.1</a>. Semantics of Urgent Indications</h3></span>
+
+   TCP implements an &quot;urgent mechanism&quot; that allows the sending user to
+   stimulate the receiving user to accept some &quot;urgent data&quot; and that
+   permits the receiving TCP to indicate to the receiving user when all
+   the currently known &quot;urgent data&quot; have been read.
+
+   The TCP urgent mechanism permits a point in the data stream to be
+   designated as the end of urgent information.  Whenever this point is
+   in advance of the receive sequence number (RCV.NXT) at the receiving
+   TCP, that TCP must tell the user to go into &quot;urgent mode&quot;; when the
+   receive sequence number catches up to the urgent pointer, the TCP
+
+
+
+<span class="grey">Gont &amp; Yourtchenko           Standards Track                    [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc6093#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6093">RFC 6093</a>               On the TCP Urgent Mechanism          January 2011</span>
+
+
+   must tell user to go into &quot;normal mode&quot; [<a href="https://tools.ietf.org/html/rfc0793" title="&quot;Transmission Control Protocol&quot;">RFC0793</a>].  This means, for
+   example, that data that was received as &quot;normal data&quot; might become
+   &quot;urgent data&quot; if an urgent indication is received in some successive
+   TCP segment before that data is consumed by the TCP user.
+
+   The URG control flag indicates that the &quot;Urgent Pointer&quot; field is
+   meaningful and must be added to the segment sequence number to yield
+   the urgent pointer.  The absence of this flag indicates that there is
+   no &quot;urgent data&quot; outstanding [<a href="https://tools.ietf.org/html/rfc0793" title="&quot;Transmission Control Protocol&quot;">RFC0793</a>].
+
+   The TCP urgent mechanism is NOT a mechanism for sending &quot;out-of-band&quot;
+   data: the so-called &quot;urgent data&quot; should be delivered &quot;in-line&quot; to
+   the TCP user.
+
+<span class="h3"><h3><a class="selflink" name="section-2.2" href="https://tools.ietf.org/html/rfc6093#section-2.2">2.2</a>. Semantics of the Urgent Pointer</h3></span>
+
+   There is some ambiguity in <a href="https://tools.ietf.org/html/rfc793">RFC 793</a> [<a href="https://tools.ietf.org/html/rfc0793" title="&quot;Transmission Control Protocol&quot;">RFC0793</a>] with respect to the
+   semantics of the Urgent Pointer.  <a href="https://tools.ietf.org/html/rfc6093#section-3.1">Section 3.1</a> (page 17) of <a href="https://tools.ietf.org/html/rfc793">RFC 793</a>
+   [<a href="https://tools.ietf.org/html/rfc0793" title="&quot;Transmission Control Protocol&quot;">RFC0793</a>] states that the Urgent Pointer &quot;communicates the current
+   value of the urgent pointer as a positive offset from the sequence
+   number in this segment.  The urgent pointer points to the sequence
+   number of the octet following the urgent data.  This field is only be
+   interpreted in segments with the URG control bit set&quot; (sic).
+   However, <a href="https://tools.ietf.org/html/rfc6093#section-3.9">Section 3.9</a> (page 56) of <a href="https://tools.ietf.org/html/rfc793">RFC 793</a> [<a href="https://tools.ietf.org/html/rfc0793" title="&quot;Transmission Control Protocol&quot;">RFC0793</a>] states, when
+   describing the processing of the SEND call in the ESTABLISHED and
+   CLOSE-WAIT states, that &quot;If the urgent flag is set, then SND.UP &lt;-
+   SND.NXT-1 and set the urgent pointer in the outgoing segments&quot;.
+
+   <a href="https://tools.ietf.org/html/rfc1011">RFC 1011</a> [<a href="https://tools.ietf.org/html/rfc1011" title="&quot;Official Internet protocols&quot;">RFC1011</a>] clarified this ambiguity in <a href="https://tools.ietf.org/html/rfc793">RFC 793</a> stating that
+   &quot;Page 17 is wrong.  The urgent pointer points to the last octet of
+   urgent data (not to the first octet of non-urgent data)&quot;.  <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a>
+   [<a href="https://tools.ietf.org/html/rfc1122" title="&quot;Requirements for Internet Hosts - Communication Layers&quot;">RFC1122</a>] formally updated <a href="https://tools.ietf.org/html/rfc793">RFC 793</a> by stating, in <a href="https://tools.ietf.org/html/rfc6093#section-4.2.2.4">Section 4.2.2.4</a>
+   (page 84), that &quot;the urgent pointer points to the sequence number of
+   the LAST octet (not LAST+1) in a sequence of urgent data&quot;.
+
+<span class="h3"><h3><a class="selflink" name="section-2.3" href="https://tools.ietf.org/html/rfc6093#section-2.3">2.3</a>. Allowed Length of &quot;Urgent Data&quot;</h3></span>
+
+   <a href="https://tools.ietf.org/html/rfc793">RFC 793</a> [<a href="https://tools.ietf.org/html/rfc0793" title="&quot;Transmission Control Protocol&quot;">RFC0793</a>] allows TCP peers to send &quot;urgent data&quot; of any
+   length, as the TCP urgent mechanism simply provides a pointer to an
+   interesting point in the data stream.  In this respect, <a href="https://tools.ietf.org/html/rfc6093#section-4.2.2.4">Section</a>
+   <a href="https://tools.ietf.org/html/rfc6093#section-4.2.2.4">4.2.2.4</a> (page 84) of <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a> [<a href="https://tools.ietf.org/html/rfc1122" title="&quot;Requirements for Internet Hosts - Communication Layers&quot;">RFC1122</a>] explicitly states that &quot;A TCP
+   MUST support a sequence of urgent data of any length&quot;.
+
+
+
+
+
+
+
+
+
+<span class="grey">Gont &amp; Yourtchenko           Standards Track                    [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc6093#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6093">RFC 6093</a>               On the TCP Urgent Mechanism          January 2011</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc6093#section-3">3</a>. Current Implementation Practice of the TCP Urgent Mechanism</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-3.1" href="https://tools.ietf.org/html/rfc6093#section-3.1">3.1</a>. Semantics of Urgent Indications</h3></span>
+
+   As discussed in <a href="https://tools.ietf.org/html/rfc6093#section-2">Section 2</a>, the TCP urgent mechanism simply permits a
+   point in the data stream to be designated as the end of urgent
+   information but does NOT provide a mechanism for sending &quot;out-of-
+   band&quot; data.
+
+   Unfortunately, virtually all TCP implementations process TCP urgent
+   indications differently.  By default, the last byte of &quot;urgent data&quot;
+   is delivered &quot;out of band&quot; to the application.  That is, it is not
+   delivered as part of the normal data stream [<a href="https://tools.ietf.org/html/rfc6093#ref-UNPv1" title="&quot;UNIX Network Programming, Volume 1. Networking APIs: Sockets and XTI&quot;">UNPv1</a>].  For example,
+   the &quot;out-of-band&quot; byte is read by an application when a recv(2)
+   system call with the MSG_OOB flag set is issued.
+
+   Most implementations provide a socket option (SO_OOBINLINE) that
+   allows an application to override the (broken) default processing of
+   urgent indications, so that &quot;urgent data&quot; is delivered &quot;in line&quot; to
+   the application, thus providing the semantics intended by the IETF
+   specifications.
+
+<span class="h3"><h3><a class="selflink" name="section-3.2" href="https://tools.ietf.org/html/rfc6093#section-3.2">3.2</a>. Semantics of the Urgent Pointer</h3></span>
+
+   All the popular implementations that the authors of this document
+   have been able to test interpret the semantics of the TCP Urgent
+   Pointer as specified in <a href="https://tools.ietf.org/html/rfc793#section-3.1">Section&nbsp;3.1 of RFC 793</a>.  This means that even
+   when <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a> formally updated <a href="https://tools.ietf.org/html/rfc793">RFC 793</a> to clarify the ambiguity in
+   the semantics of the Urgent Pointer, this clarification was never
+   reflected in actual implementations (i.e., virtually all
+   implementations default to the semantics of the urgent pointer
+   specified in <a href="https://tools.ietf.org/html/rfc793#section-3.1">Section&nbsp;3.1 of RFC 793</a>).
+
+   Some operating systems provide a system-wide toggle to override this
+   behavior and interpret the semantics of the Urgent Pointer as
+   clarified in <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a>.  However, this system-wide toggle has been
+   found to be inconsistent.  For example, Linux provides the sysctl
+   &quot;tcp_stdurg&quot; (i.e., net.ipv4.tcp_stdurg) that, when set, supposedly
+   changes the system behavior to interpret the semantics of the TCP
+   Urgent Pointer as specified in <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a>. However, this sysctl changes
+   the semantics of the Urgent Pointer only for incoming segments (i.e.,
+   not for outgoing segments).  This means that if this sysctl is set,
+   an application might be unable to interoperate with itself if both
+   the TCP sender and the TCP receiver are running on the same host.
+
+
+
+
+
+
+
+<span class="grey">Gont &amp; Yourtchenko           Standards Track                    [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc6093#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6093">RFC 6093</a>               On the TCP Urgent Mechanism          January 2011</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-3.3" href="https://tools.ietf.org/html/rfc6093#section-3.3">3.3</a>. Allowed Length of &quot;Urgent Data&quot;</h3></span>
+
+   While <a href="https://tools.ietf.org/html/rfc6093#section-4.2.2.4">Section 4.2.2.4</a> (page 84) of <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a> explicitly states that &quot;A
+   TCP MUST support a sequence of urgent data of any length&quot;, in
+   practice, all those implementations that interpret TCP urgent
+   indications as a mechanism for sending &quot;out-of-band&quot; data keep a
+   buffer of a single byte for storing the &quot;last byte of urgent data&quot;.
+   Thus, if successive indications of &quot;urgent data&quot; are received before
+   the application reads the pending &quot;out-of-band&quot; byte, that pending
+   byte will be discarded (i.e., overwritten by the new byte of &quot;urgent
+   data&quot;).
+
+   In order to avoid &quot;urgent data&quot; from being discarded, some
+   implementations queue each of the received &quot;urgent bytes&quot;, so that
+   even if another urgent indication is received before the pending
+   &quot;urgent data&quot; are consumed by the application, those bytes do not
+   need to be discarded.  Some of these implementations have been known
+   to fail to enforce any limits on the amount of &quot;urgent data&quot; that
+   they queue; thus, they become vulnerable to trivial resource
+   exhaustion attacks [<a href="https://tools.ietf.org/html/rfc6093#ref-CPNI-TCP" title="&quot;Security Assessment of the Transmission Control Protocol (TCP)&quot;">CPNI-TCP</a>].
+
+   It should be reinforced that the aforementioned implementations are
+   broken.  The TCP urgent mechanism is not a mechanism for delivering
+   &quot;out-of-band&quot; data.
+
+<span class="h3"><h3><a class="selflink" name="section-3.4" href="https://tools.ietf.org/html/rfc6093#section-3.4">3.4</a>. Interaction of Middleboxes with TCP Urgent Indications</h3></span>
+
+   As a result of the publication of Network Intrusion Detection System
+   (NIDS) evasion techniques based on TCP urgent indications [<a href="https://tools.ietf.org/html/rfc6093#ref-phrack" title="&quot;NIDS Evasion Method named &quot;">phrack</a>],
+   some middleboxes clear the urgent indications by clearing the URG
+   flag and setting the Urgent Pointer to zero.  This causes the &quot;urgent
+   data&quot; to become &quot;in line&quot; (that is, accessible by the read(2) call or
+   the recv(2) call without the MSG_OOB flag) in the case of those TCP
+   implementations that interpret the TCP urgent mechanism as a facility
+   for delivering &quot;out-of-band&quot; data (as described in <a href="https://tools.ietf.org/html/rfc6093#section-3.1">Section 3.1</a>).  An
+   example of such a middlebox is the Cisco PIX firewall [<a href="https://tools.ietf.org/html/rfc6093#ref-Cisco-PIX" title="&quot;http://www.cisco.com/en/US/docs/security/ asa/asa70/command/reference/tz.html#wp1288756&quot;">Cisco-PIX</a>].
+   This should discourage applications from depending on urgent
+   indications for their correct operation, as urgent indications may
+   not be reliable in the current Internet.
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc6093#section-4">4</a>. Updating <a href="https://tools.ietf.org/html/rfc793">RFC 793</a>, <a href="https://tools.ietf.org/html/rfc1011">RFC 1011</a>, and <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a></h2></span>
+
+   Considering that as long as both the TCP sender and the TCP receiver
+   implement the same semantics for the Urgent Pointer there is no
+   functional difference in having the Urgent Pointer point to &quot;the
+   sequence number of the octet following the urgent data&quot; vs.  &quot;the
+   last octet of urgent data&quot;, and that all known implementations
+   interpret the semantics of the Urgent Pointer as pointing to &quot;the
+
+
+
+<span class="grey">Gont &amp; Yourtchenko           Standards Track                    [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc6093#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6093">RFC 6093</a>               On the TCP Urgent Mechanism          January 2011</span>
+
+
+   sequence number of the octet following the urgent data&quot;, we hereby
+   update <a href="https://tools.ietf.org/html/rfc793">RFC 793</a> [<a href="https://tools.ietf.org/html/rfc0793" title="&quot;Transmission Control Protocol&quot;">RFC0793</a>], <a href="https://tools.ietf.org/html/rfc1011">RFC 1011</a> [<a href="https://tools.ietf.org/html/rfc1011" title="&quot;Official Internet protocols&quot;">RFC1011</a>], and <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a> [<a href="https://tools.ietf.org/html/rfc1122" title="&quot;Requirements for Internet Hosts - Communication Layers&quot;">RFC1122</a>]
+   such that &quot;the urgent pointer points to the sequence number of the
+   octet following the urgent data&quot; (in segments with the URG control
+   bit set), thus accommodating virtually all existing TCP
+   implementations.
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc6093#section-5">5</a>. Advice to New Applications Employing TCP</h2></span>
+
+   As a result of the issues discussed in <a href="https://tools.ietf.org/html/rfc6093#section-3.2">Section 3.2</a> and <a href="https://tools.ietf.org/html/rfc6093#section-3.4">Section 3.4</a>,
+   new applications SHOULD NOT employ the TCP urgent mechanism.
+   However, TCP implementations MUST still include support for the
+   urgent mechanism such that existing applications can still use it.
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc6093#section-6">6</a>. Advice to Applications That Make Use of the Urgent Mechanism</h2></span>
+
+   Even though applications SHOULD NOT employ the urgent mechanism,
+   applications that still decide to employ it MUST set the SO_OOBINLINE
+   socket option, such that &quot;urgent data&quot; is delivered in line, as
+   intended by the IETF specifications.
+
+   Additionally, applications that still decide to use the urgent
+   mechanism need to be designed for correct operation even when the URG
+   flag is cleared by middleboxes.
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc6093#section-7">7</a>. Security Considerations</h2></span>
+
+   Multiple factors can affect the data flow that is actually delivered
+   to an application when the TCP urgent mechanism is employed: for
+   example, the two possible interpretations of the semantics of the
+   Urgent Pointer in current implementations (e.g., depending on the
+   value of the tcp_stdurg sysctl), the possible implementation of the
+   urgent mechanism as an &quot;out-of-band&quot; (OOB) facility (versus &quot;in-band&quot;
+   as intended by the IETF specifications), or middleboxes (such as
+   packet scrubbers) or the end-systems themselves that could cause the
+   &quot;urgent data&quot; to be processed &quot;in line&quot;.  This might make it
+   difficult for a Network Intrusion Detection System (NIDS) to track
+   the application-layer data transferred to the destination system and
+   thus lead to false negatives or false positives in the NIDS
+   [<a href="https://tools.ietf.org/html/rfc6093#ref-CPNI-TCP" title="&quot;Security Assessment of the Transmission Control Protocol (TCP)&quot;">CPNI-TCP</a>] [<a href="https://tools.ietf.org/html/rfc6093#ref-phrack" title="&quot;NIDS Evasion Method named &quot;">phrack</a>].
+
+   Probably the best way to avoid the security implications of TCP
+   &quot;urgent data&quot; is to avoid having applications use the TCP urgent
+   mechanism altogether.  Packet scrubbers could probably be configured
+   to clear the URG bit and set the Urgent Pointer to zero.  This would
+   basically cause the &quot;urgent data&quot; to be put &quot;in line&quot;.  However, this
+
+
+
+
+
+<span class="grey">Gont &amp; Yourtchenko           Standards Track                    [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc6093#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6093">RFC 6093</a>               On the TCP Urgent Mechanism          January 2011</span>
+
+
+   might cause interoperability problems or undesired behavior in those
+   applications that rely on the TCP urgent mechanism, such as Telnet
+   [<a href="https://tools.ietf.org/html/rfc0854" title="&quot;Telnet Protocol Specification&quot;">RFC0854</a>] and FTP [<a href="https://tools.ietf.org/html/rfc0959" title="&quot;File Transfer Protocol&quot;">RFC0959</a>].
+
+<span class="h2"><h2><a class="selflink" name="section-8" href="https://tools.ietf.org/html/rfc6093#section-8">8</a>. Acknowledgements</h2></span>
+
+   The authors of this document would like to thank (in alphabetical
+   order) Jari Arkko, Ron Bonica, David Borman, Dave Cridland, Ralph
+   Droms, Wesley Eddy, John Heffner, Alfred Hoenes, Alexey Melnikov,
+   Keith Moore, Carlos Pignataro, Tim Polk, Anantha Ramaiah, Joe Touch,
+   Michael Welzl, Dan Wing, and Alexander Zimmermann for providing
+   valuable feedback on earlier versions of this document.
+
+   Fernando would like to thank David Borman and Joe Touch for a
+   fruitful discussion about the TCP urgent mechanism at IETF 73
+   (Minneapolis).
+
+   Fernando Gont's attendance to IETF meetings was supported by ISOC's
+   &quot;Fellowship to the IETF&quot; program.
+
+   Finally, Fernando Gont wishes to express deep and heartfelt gratitude
+   to Jorge Oscar Gont and Nelida Garcia for their precious motivation
+   and guidance.
+
+<span class="h2"><h2><a class="selflink" name="section-9" href="https://tools.ietf.org/html/rfc6093#section-9">9</a>. References</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-9.1" href="https://tools.ietf.org/html/rfc6093#section-9.1">9.1</a>. Normative References</h3></span>
+
+   [<a name="ref-RFC0793" id="ref-RFC0793">RFC0793</a>]     Postel, J., &quot;Transmission Control Protocol&quot;, STD 7, <a href="https://tools.ietf.org/html/rfc793">RFC</a>
+                 <a href="https://tools.ietf.org/html/rfc793">793</a>, September 1981.
+
+   [<a name="ref-RFC1011" id="ref-RFC1011">RFC1011</a>]     Reynolds, J. and J. Postel, &quot;Official Internet
+                 protocols&quot;, <a href="https://tools.ietf.org/html/rfc1011">RFC 1011</a>, May 1987.
+
+   [<a name="ref-RFC1122" id="ref-RFC1122">RFC1122</a>]     Braden, R., Ed., &quot;Requirements for Internet Hosts -
+                 Communication Layers&quot;, STD 3, <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a>, October 1989.
+
+   [<a name="ref-RFC2119" id="ref-RFC2119">RFC2119</a>]     Bradner, S., &quot;Key words for use in RFCs to Indicate
+                 Requirement Levels&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>, March 1997.
+
+<span class="h3"><h3><a class="selflink" name="section-9.2" href="https://tools.ietf.org/html/rfc6093#section-9.2">9.2</a>. Informative References</h3></span>
+
+   [<a name="ref-CPNI-TCP" id="ref-CPNI-TCP">CPNI-TCP</a>]    Gont, F., &quot;Security Assessment of the Transmission
+                 Control Protocol (TCP)&quot;, &quot;<a href="http://www.cpni.gov.uk/Docs/tn-03-09-security-assessment-TCP.pdf">http://www.cpni.gov.uk/</a>
+                 <a href="http://www.cpni.gov.uk/Docs/tn-03-09-security-assessment-TCP.pdf">Docs/tn-03-09-security-assessment-TCP.pdf</a>&quot;, 2009.
+
+   [<a name="ref-Cisco-PIX" id="ref-Cisco-PIX">Cisco-PIX</a>]   Cisco PIX, &quot;<a href="http://www.cisco.com/en/US/docs/security/asa/asa70/command/reference/tz.html#wp1288756">http://www.cisco.com/en/US/docs/security/</a>
+                 <a href="http://www.cisco.com/en/US/docs/security/asa/asa70/command/reference/tz.html#wp1288756">asa/asa70/command/reference/tz.html#wp1288756</a>&quot;.
+
+
+
+<span class="grey">Gont &amp; Yourtchenko           Standards Track                    [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc6093#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6093">RFC 6093</a>               On the TCP Urgent Mechanism          January 2011</span>
+
+
+   [<a name="ref-FreeBSD" id="ref-FreeBSD">FreeBSD</a>]     The FreeBSD project, &quot;<a href="http://www.freebsd.org">http://www.freebsd.org</a>&quot;.
+
+   [<a name="ref-Linux" id="ref-Linux">Linux</a>]       The Linux Project, &quot;<a href="http://www.kernel.org">http://www.kernel.org</a>&quot;.
+
+   [<a name="ref-NetBSD" id="ref-NetBSD">NetBSD</a>]      The NetBSD project, &quot;<a href="http://www.netbsd.org">http://www.netbsd.org</a>&quot;.
+
+   [<a name="ref-OpenBSD" id="ref-OpenBSD">OpenBSD</a>]     The OpenBSD project, &quot;<a href="http://www.openbsd.org">http://www.openbsd.org</a>&quot;.
+
+   [<a name="ref-RFC0854" id="ref-RFC0854">RFC0854</a>]     Postel, J. and J. Reynolds, &quot;Telnet Protocol
+                 Specification&quot;, STD 8, <a href="https://tools.ietf.org/html/rfc854">RFC 854</a>, May 1983.
+
+   [<a name="ref-RFC0959" id="ref-RFC0959">RFC0959</a>]     Postel, J. and J. Reynolds, &quot;File Transfer Protocol&quot;,
+                 STD 9, <a href="https://tools.ietf.org/html/rfc959">RFC 959</a>, October 1985.
+
+   [<a name="ref-UNPv1" id="ref-UNPv1">UNPv1</a>]       Stevens, W., &quot;UNIX Network Programming, Volume 1.
+                 Networking APIs: Sockets and XTI&quot;, Prentice Hall PTR,
+                 1997.
+
+   [<a name="ref-Windows2000" id="ref-Windows2000">Windows2000</a>] Microsoft Windows 2000, &quot;<a href="http://technet.microsoft.com/">http://technet.microsoft.com/</a>
+                 en-us/library/bb726981(printer).aspx&quot;.
+
+   [<a name="ref-Windows95" id="ref-Windows95">Windows95</a>]   Microsoft Windows 95, &quot;<a href="ftp://ftp.demon.co.uk/pub/mirrors/win95netfaq/faq-c.html">ftp://ftp.demon.co.uk/pub/</a>
+                 <a href="ftp://ftp.demon.co.uk/pub/mirrors/win95netfaq/faq-c.html">mirrors/win95netfaq/faq-c.html</a>&quot;.
+
+   [<a name="ref-phrack" id="ref-phrack">phrack</a>]      Ko, Y., Ko, S., and M. Ko, &quot;NIDS Evasion Method named
+                 &quot;SeolMa&quot;&quot;, Phrack Magazine, Volume 0x0b, Issue 0x39,
+                 Phile #0x03 of 0x12 <a href="http://www.phrack.org/issues">http://www.phrack.org/</a>
+                 <a href="http://www.phrack.org/issues">issues</a>.html?issue=57&amp;id=3#article, 2001.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Gont &amp; Yourtchenko           Standards Track                    [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc6093#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6093">RFC 6093</a>               On the TCP Urgent Mechanism          January 2011</span>
+
+
+<span class="h2"><h2><a class="selflink" name="appendix-A" href="https://tools.ietf.org/html/rfc6093#appendix-A">Appendix A</a>. Survey of the Processing of TCP Urgent Indications by Some</h2></span>
+             Popular TCP Implementations
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.1" href="https://tools.ietf.org/html/rfc6093#appendix-A.1">A.1</a>. FreeBSD</h3></span>
+
+   FreeBSD 8.0 [<a href="https://tools.ietf.org/html/rfc6093#ref-FreeBSD" title="&quot;http://www.freebsd.org&quot;">FreeBSD</a>] interprets the semantics of the urgent pointer
+   as specified in <a href="https://tools.ietf.org/html/rfc6093#section-4">Section 4</a> of this document.  It does not provide any
+   sysctl to override this behavior.
+
+   FreeBSD provides the SO_OOBINLINE socket option that, when set,
+   causes TCP &quot;urgent data&quot; to remain &quot;in line&quot;.  That is, it will be
+   accessible by the read(2) call or the recv(2) call without the
+   MSG_OOB flag.
+
+   FreeBSD supports only one byte of &quot;urgent data&quot;.  That is, only the
+   byte preceding the Urgent Pointer is considered &quot;urgent data&quot;.
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.2" href="https://tools.ietf.org/html/rfc6093#appendix-A.2">A.2</a>. Linux</h3></span>
+
+   Linux 2.6.15-53-386 [<a href="https://tools.ietf.org/html/rfc6093#ref-Linux" title="&quot;http://www.kernel.org&quot;">Linux</a>] interprets the semantics of the urgent
+   pointer as specified in <a href="https://tools.ietf.org/html/rfc6093#section-4">Section 4</a> of this document.  It provides the
+   net.ipv4.tcp_stdurg sysctl to override this behavior to interpret the
+   Urgent Pointer as specified in <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a> [<a href="https://tools.ietf.org/html/rfc1122" title="&quot;Requirements for Internet Hosts - Communication Layers&quot;">RFC1122</a>].  However, this
+   sysctl only affects the processing of incoming segments (the Urgent
+   Pointer in outgoing segments will still be set as specified in
+   <a href="https://tools.ietf.org/html/rfc6093#section-4">Section 4</a> of this document).
+
+   Linux provides the SO_OOBINLINE socket option that, when set, causes
+   TCP &quot;urgent data&quot; to remain &quot;in line&quot;.  That is, it will be
+   accessible by the read(2) call or the recv(2) call without the
+   MSG_OOB flag.
+
+   Linux supports only one byte of &quot;urgent data&quot;.  That is, only the
+   byte preceding the Urgent Pointer is considered &quot;urgent data&quot;.
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.3" href="https://tools.ietf.org/html/rfc6093#appendix-A.3">A.3</a>. NetBSD</h3></span>
+
+   NetBSD 5.0.1 [<a href="https://tools.ietf.org/html/rfc6093#ref-NetBSD" title="&quot;http://www.netbsd.org&quot;">NetBSD</a>] interprets the semantics of the urgent pointer
+   as specified in <a href="https://tools.ietf.org/html/rfc6093#section-4">Section 4</a> of this document.  It does not provide any
+   sysctl to override this behavior.
+
+   NetBSD provides the SO_OOBINLINE socket option that, when set, causes
+   TCP &quot;urgent data&quot; to remain &quot;in line&quot;.  That is, it will be
+   accessible by the read(2) call or the recv(2) call without the
+   MSG_OOB flag.
+
+   NetBSD supports only one byte of &quot;urgent data&quot;.  That is, only the
+   byte preceding the Urgent Pointer is considered &quot;urgent data&quot;.
+
+
+
+<span class="grey">Gont &amp; Yourtchenko           Standards Track                   [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc6093#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6093">RFC 6093</a>               On the TCP Urgent Mechanism          January 2011</span>
+
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.4" href="https://tools.ietf.org/html/rfc6093#appendix-A.4">A.4</a>. OpenBSD</h3></span>
+
+   OpenBSD 4.2 [<a href="https://tools.ietf.org/html/rfc6093#ref-OpenBSD" title="&quot;http://www.openbsd.org&quot;">OpenBSD</a>] interprets the semantics of the urgent pointer
+   as specified in <a href="https://tools.ietf.org/html/rfc6093#section-4">Section 4</a> of this document.  It does not provide any
+   sysctl to override this behavior.
+
+   OpenBSD provides the SO_OOBINLINE socket option that, when set,
+   causes TCP &quot;urgent data&quot; to remain &quot;in line&quot;.  That is, it will be
+   accessible by the read(2) or recv(2) calls without the MSG_OOB flag.
+
+   OpenBSD supports only one byte of &quot;urgent data&quot;.  That is, only the
+   byte preceding the Urgent Pointer is considered &quot;urgent data&quot;.
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.5" href="https://tools.ietf.org/html/rfc6093#appendix-A.5">A.5</a>. Cisco IOS software</h3></span>
+
+   Cisco IOS Software Releases 12.2(18)SXF7, 12.4(15)T7 interpret the
+   semantics of the urgent pointer as specified in <a href="https://tools.ietf.org/html/rfc6093#section-4">Section 4</a> of this
+   document.
+
+   The behavior is consistent with having the SO_OOBINLINE socket option
+   turned on, i.e., the data is processed &quot;in line&quot;.
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.6" href="https://tools.ietf.org/html/rfc6093#appendix-A.6">A.6</a>. Microsoft Windows 2000, Service Pack 4</h3></span>
+
+   Microsoft Windows 2000 [<a href="https://tools.ietf.org/html/rfc6093#ref-Windows2000" title="&quot;http://technet.microsoft.com/ en-us/library/bb726981(printer).aspx&quot;">Windows2000</a>] interprets the semantics of the
+   urgent pointer as specified in <a href="https://tools.ietf.org/html/rfc6093#section-4">Section 4</a> of this document.  It
+   provides the TcpUseRFC1122UrgentPointer system-wide variable to
+   override this behavior, interpreting the Urgent Pointer as specified
+   in <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a> [<a href="https://tools.ietf.org/html/rfc1122" title="&quot;Requirements for Internet Hosts - Communication Layers&quot;">RFC1122</a>].
+
+   Tests performed with a sample server application compiled using the
+   cygwin environment has shown that the default behavior is to return
+   the &quot;urgent data&quot; &quot;in line&quot;.
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.7" href="https://tools.ietf.org/html/rfc6093#appendix-A.7">A.7</a>. Microsoft Windows 2008</h3></span>
+
+   Microsoft Windows 2008 interprets the semantics of the urgent pointer
+   as specified in <a href="https://tools.ietf.org/html/rfc6093#section-4">Section 4</a> of this document.
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.8" href="https://tools.ietf.org/html/rfc6093#appendix-A.8">A.8</a>. Microsoft Windows 95</h3></span>
+
+   Microsoft Windows 95 interprets the semantics of the urgent pointer
+   as specified in <a href="https://tools.ietf.org/html/rfc6093#section-4">Section 4</a> of this document.  It provides the
+   BSDUrgent system-wide variable to override this behavior,
+   interpreting the Urgent Pointer as specified in <a href="https://tools.ietf.org/html/rfc1122">RFC 1122</a> [<a href="https://tools.ietf.org/html/rfc1122" title="&quot;Requirements for Internet Hosts - Communication Layers&quot;">RFC1122</a>].
+   Windows 95 supports only one byte of &quot;urgent data&quot;.  That is, only
+   the byte preceding the Urgent Pointer is considered &quot;urgent data&quot;
+   [<a href="https://tools.ietf.org/html/rfc6093#ref-Windows95" title="&quot;ftp://ftp.demon.co.uk/pub/ mirrors/win95netfaq/faq-c.html&quot;">Windows95</a>].
+
+
+
+<span class="grey">Gont &amp; Yourtchenko           Standards Track                   [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc6093#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6093">RFC 6093</a>               On the TCP Urgent Mechanism          January 2011</span>
+
+
+Authors' Addresses
+
+   Fernando Gont
+   Universidad Tecnologica Nacional / Facultad Regional Haedo
+   Evaristo Carriego 2644
+   Haedo, Provincia de Buenos Aires  1706
+   Argentina
+
+   Phone: +54 11 4650 8472
+   EMail: fernando@gont.com.ar
+   URI:   <a href="http://www.gont.com.ar">http://www.gont.com.ar</a>
+
+
+   Andrew Yourtchenko
+   Cisco
+   De Kleetlaan, 7
+   Diegem  B-1831
+   Belgium
+
+   Phone: +32 2 704 5494
+   EMail: ayourtch@cisco.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Gont &amp; Yourtchenko           Standards Track                   [Page 12]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

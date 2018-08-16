@@ -1,0 +1,1981 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Relation.Replaces" content="draft-kewisch-et-al-icalendar-in-json" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:7265" /> 
+  <meta name="DC.Date.Issued" content="May, 2014" /> 
+  <meta name="DC.Creator" content="Kewisch, Philipp" /> 
+  <meta name="DC.Creator" content="Daboo, Cyrus" /> 
+  <meta name="DC.Creator" content="Douglass, Mike" /> 
+  <meta name="DC.Description.Abstract" content="This specification defines &quot;jCal&quot;, a JSON format for iCalendar data.
+The iCalendar data format is a text format for capturing and
+exchanging information normally stored within a calendaring and
+scheduling application, for example, tasks and events. JSON is a
+lightweight, text-based, language-independent data interchange format
+commonly used in Internet applications." /> 
+  <meta name="DC.Title" content="jCal: The JSON Format for iCalendar" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 7265 - jCal: The JSON Format for iCalendar</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgblue" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc7265.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc7265" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-ietf-jcardcal-jcal" title="draft-ietf-jcardcal-jcal">draft-ietf-jcar...</a>] [<a href="https://datatracker.ietf.org/doc/rfc7265" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc7265" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc7265" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=7265">Errata</a>]</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo">Updated by: <a href="https://tools.ietf.org/html/rfc7529">7529</a> PROPOSED STANDARD</span>
+   <br /> 
+   <span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span>
+   <br /> 
+   <pre>Internet Engineering Task Force (IETF)                        P. Kewisch
+Request for Comments: 7265                                       Mozilla
+Category: Standards Track                                       C. Daboo
+ISSN: 2070-1721                                              Apple, Inc.
+                                                             M. Douglass
+                                                                     RPI
+                                                                May 2014
+
+
+                  <span class="h1"><h1>jCal: The JSON Format for iCalendar</h1></span>
+
+Abstract
+
+   This specification defines &quot;jCal&quot;, a JSON format for iCalendar data.
+   The iCalendar data format is a text format for capturing and
+   exchanging information normally stored within a calendaring and
+   scheduling application, for example, tasks and events.  JSON is a
+   lightweight, text-based, language-independent data interchange format
+   commonly used in Internet applications.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in <a href="https://tools.ietf.org/html/rfc5741#section-2">Section&nbsp;2 of RFC 5741</a>.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   <a href="http://www.rfc-editor.org/info/rfc7265">http://www.rfc-editor.org/info/rfc7265</a>.
+
+Copyright Notice
+
+   Copyright (c) 2014 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                    [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc7265#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc7265#section-1">1</a>.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7265#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc7265#section-2">2</a>.  Conventions Used in This Document . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7265#page-4">4</a>
+   <a href="https://tools.ietf.org/html/rfc7265#section-3">3</a>.  Converting from iCalendar to jCal . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7265#page-4">4</a>
+     <a href="https://tools.ietf.org/html/rfc7265#section-3.1">3.1</a>.  Pre-processing  . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7265#page-4">4</a>
+     <a href="https://tools.ietf.org/html/rfc7265#section-3.2">3.2</a>.  iCalendar Stream and Objects (<a href="https://tools.ietf.org/html/rfc5545#section-3.4">RFC 5545, Section&nbsp;3.4</a>)  . .   <a href="https://tools.ietf.org/html/rfc7265#page-5">5</a>
+     <a href="https://tools.ietf.org/html/rfc7265#section-3.3">3.3</a>.  Components (<a href="https://tools.ietf.org/html/rfc5545#section-3.6">RFC 5545, Section&nbsp;3.6</a>)  . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7265#page-6">6</a>
+     <a href="https://tools.ietf.org/html/rfc7265#section-3.4">3.4</a>.  Properties (<a href="https://tools.ietf.org/html/rfc5545">RFC 5545</a>, Sections <a href="https://tools.ietf.org/html/rfc7265#section-3.7">3.7</a> and <a href="https://tools.ietf.org/html/rfc7265#section-3.8">3.8</a>) . . . . . . .   <a href="https://tools.ietf.org/html/rfc7265#page-6">6</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.4.1">3.4.1</a>.  Special Cases for Properties  . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7265#page-8">8</a>
+         <a href="https://tools.ietf.org/html/rfc7265#section-3.4.1.1">3.4.1.1</a>.  GEO Property (<a href="https://tools.ietf.org/html/rfc5545#section-3.8.1.6">RFC 5545, Section&nbsp;3.8.1.6</a>)  . . . .   <a href="https://tools.ietf.org/html/rfc7265#page-8">8</a>
+         3.4.1.2.  REQUEST-STATUS Property (<a href="https://tools.ietf.org/html/rfc5545#section-3.8.8.3">RFC 5545, Section&nbsp;</a>
+                   <a href="https://tools.ietf.org/html/rfc7265#section-3.8.8.3">3.8.8.3</a>)  . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7265#page-8">8</a>
+     <a href="https://tools.ietf.org/html/rfc7265#section-3.5">3.5</a>.  Parameters (<a href="https://tools.ietf.org/html/rfc5545#section-3.2">RFC 5545, Section&nbsp;3.2</a>)  . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7265#page-9">9</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.5.1">3.5.1</a>.  VALUE Parameter . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-10">10</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.5.2">3.5.2</a>.  Multi-value Parameters  . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-11">11</a>
+     <a href="https://tools.ietf.org/html/rfc7265#section-3.6">3.6</a>.  Values (<a href="https://tools.ietf.org/html/rfc5545#section-3.3">RFC 5545, Section&nbsp;3.3</a>)  . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-11">11</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.1">3.6.1</a>.  Binary (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.1">RFC 5545, Section&nbsp;3.3.1</a>)  . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-12">12</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.2">3.6.2</a>.  Boolean  (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.2">RFC 5545, Section&nbsp;3.3.2</a>)  . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-12">12</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.3">3.6.3</a>.  Calendar User Address (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.3">RFC 5545, Section&nbsp;3.3.3</a>) . . .  <a href="https://tools.ietf.org/html/rfc7265#page-12">12</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.4">3.6.4</a>.  Date (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.4">RFC 5545, Section&nbsp;3.3.4</a>)  . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-12">12</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.5">3.6.5</a>.  Date-Time (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.5">RFC 5545, Section&nbsp;3.3.5</a>) . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-13">13</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.6">3.6.6</a>.  Duration (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.6">RFC 5545, Section&nbsp;3.3.6</a>)  . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-13">13</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.7">3.6.7</a>.  Float (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.7">RFC 5545, Section&nbsp;3.3.7</a>) . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-14">14</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.8">3.6.8</a>.  Integer (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.8">RFC 5545, Section&nbsp;3.3.8</a>) . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-14">14</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.9">3.6.9</a>.  Period of Time (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.9">RFC 5545, Section&nbsp;3.3.9</a>)  . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-14">14</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.10">3.6.10</a>. Recurrence Rule (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.10">RFC 5545, Section&nbsp;3.3.10</a>)  . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-15">15</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.11">3.6.11</a>. Text (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.11">RFC 5545, Section&nbsp;3.3.11</a>) . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-16">16</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.12">3.6.12</a>. Time (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.12">RFC 5545, Section&nbsp;3.3.12</a>) . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-16">16</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.13">3.6.13</a>. URI (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.13">RFC 5545, Section&nbsp;3.3.13</a>)  . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-17">17</a>
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.6.14">3.6.14</a>. UTC Offset (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.14">RFC 5545, Section&nbsp;3.3.14</a>) . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-17">17</a>
+     <a href="https://tools.ietf.org/html/rfc7265#section-3.7">3.7</a>.  Extensions  . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-17">17</a>
+   <a href="https://tools.ietf.org/html/rfc7265#section-4">4</a>.  Converting from jCal into iCalendar . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-17">17</a>
+   <a href="https://tools.ietf.org/html/rfc7265#section-5">5</a>.  Handling Unrecognized Properties or Parameters  . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-18">18</a>
+     <a href="https://tools.ietf.org/html/rfc7265#section-5.1">5.1</a>.  Converting iCalendar into jCal  . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-18">18</a>
+     <a href="https://tools.ietf.org/html/rfc7265#section-5.2">5.2</a>.  Converting jCal into iCalendar  . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-19">19</a>
+     <a href="https://tools.ietf.org/html/rfc7265#section-5.3">5.3</a>.  Examples  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-19">19</a>
+   <a href="https://tools.ietf.org/html/rfc7265#section-6">6</a>.  Security Considerations . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-20">20</a>
+   <a href="https://tools.ietf.org/html/rfc7265#section-7">7</a>.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-21">21</a>
+     <a href="https://tools.ietf.org/html/rfc7265#section-7.1">7.1</a>.  UNKNOWN iCalendar Value Data Type . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-22">22</a>
+   <a href="https://tools.ietf.org/html/rfc7265#section-8">8</a>.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-23">23</a>
+   <a href="https://tools.ietf.org/html/rfc7265#section-9">9</a>.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-23">23</a>
+     <a href="https://tools.ietf.org/html/rfc7265#section-9.1">9.1</a>.  Normative References  . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-23">23</a>
+     <a href="https://tools.ietf.org/html/rfc7265#section-9.2">9.2</a>.  Informative References  . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-24">24</a>
+
+
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                    [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc7265#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+   <a href="https://tools.ietf.org/html/rfc7265#appendix-A">Appendix A</a>.  ABNF Schema  . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-25">25</a>
+   <a href="https://tools.ietf.org/html/rfc7265#appendix-B">Appendix B</a>.  Examples . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-27">27</a>
+     <a href="https://tools.ietf.org/html/rfc7265#appendix-B.1">B.1</a>.  Example 1 . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-27">27</a>
+       <a href="https://tools.ietf.org/html/rfc7265#appendix-B.1.1">B.1.1</a>.  iCalendar Data  . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-27">27</a>
+       <a href="https://tools.ietf.org/html/rfc7265#appendix-B.1.2">B.1.2</a>.  jCal Data . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-27">27</a>
+     <a href="https://tools.ietf.org/html/rfc7265#appendix-B.2">B.2</a>.  Example 2 . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-28">28</a>
+       <a href="https://tools.ietf.org/html/rfc7265#appendix-B.2.1">B.2.1</a>.  iCalendar Data  . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-28">28</a>
+       <a href="https://tools.ietf.org/html/rfc7265#appendix-B.2.2">B.2.2</a>.  jCal Data . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7265#page-29">29</a>
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc7265#section-1">1</a>. Introduction</h2></span>
+
+   The iCalendar data format [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>] is a widely deployed interchange
+   format for calendaring and scheduling data.  While many applications
+   and services consume and generate calendar data, iCalendar is a
+   specialized format that requires its own parser/generator.  In
+   contrast, JSON-based formats as defined in [<a href="https://tools.ietf.org/html/rfc7159" title="&quot;The JavaScript Object Notation (JSON) Data Interchange Format&quot;">RFC7159</a>] are the native
+   format for JavaScript widgets and libraries, and it is appropriate to
+   have a standard form of calendar data that is easier to work with
+   than iCalendar.
+
+   The purpose of this specification is to define &quot;jCal&quot;, a JSON format
+   for iCalendar data. jCal is defined as a straightforward mapping into
+   JSON from iCalendar, so that iCalendar data can be converted to JSON,
+   and then back to iCalendar, without losing any semantic meaning in
+   the data.  Anyone creating jCal calendar data according to this
+   specification will know that their data can be converted to a valid
+   iCalendar representation as well.
+
+   The key design considerations are essentially the same as those for
+   [<a href="https://tools.ietf.org/html/rfc6321" title="&quot;xCal: The XML Format for iCalendar&quot;">RFC6321</a>], that is:
+
+      Round-tripping (converting an iCalendar instance to jCal and back)
+      will give the same semantic result as the starting point.  For
+      example, all components, properties, and property parameters are
+      guaranteed to be preserved.
+
+      Ordering of elements and case of property and parameter names will
+      not necessarily be preserved.
+
+      The iCalendar data semantics are to be preserved, allowing a
+      simple consumer to easily browse the data in jCal.  A full
+      understanding of iCalendar is still required in order to modify
+      and/or fully comprehend the calendar data.
+
+      Extensions to the underlying iCalendar specification must not lead
+      to requiring an update to jCal.
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                    [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc7265#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc7265#section-2">2</a>. Conventions Used in This Document</h2></span>
+
+   The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
+   document are to be interpreted as described in [<a href="https://tools.ietf.org/html/rfc2119" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">RFC2119</a>].  The
+   underlying format used for jCal is JSON.  Consequently, the terms
+   &quot;object&quot; and &quot;array&quot; as well as the four primitive types (strings,
+   numbers, booleans, and null) are to be interpreted as described in
+   <a href="https://tools.ietf.org/html/rfc7159#section-1">Section&nbsp;1 of [RFC7159]</a>.
+
+   Some examples in this document contain &quot;partial&quot; JSON documents used
+   for illustrative purposes.  In these examples, three periods &quot;...&quot;
+   are used to indicate a portion of the document that has been removed
+   for compactness.
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc7265#section-3">3</a>. Converting from iCalendar to jCal</h2></span>
+
+   This section describes how iCalendar data is converted to jCal using
+   a simple mapping between the iCalendar data model and JSON elements.
+   Aside from the formal description in this section, an informative
+   ABNF is specified in <a href="https://tools.ietf.org/html/rfc5545#appendix-A">Appendix&nbsp;A.
+
+   In [RFC5545]</a>, an iCalendar object comprises a set of &quot;components&quot;,
+   &quot;properties&quot;, &quot;parameters&quot;, and &quot;values&quot;.  The top level of iCalendar
+   data typically contains a stream of iCalendar objects, each of which
+   can be considered a &quot;component&quot;.  A &quot;component&quot; can contain other
+   &quot;components&quot; or &quot;properties&quot;.  A &quot;property&quot; has a &quot;value&quot; and a set
+   of zero or more &quot;parameters&quot;.  Each of these entities have a
+   representation in jCal, defined in the following sections.  The
+   representation of an iCalendar object in JSON will be named &quot;jCal
+   object&quot; throughout this document.
+
+<span class="h3"><h3><a class="selflink" name="section-3.1" href="https://tools.ietf.org/html/rfc7265#section-3.1">3.1</a>. Pre-processing</h3></span>
+
+   iCalendar uses a line-folding mechanism to limit lines of data to a
+   maximum line length (typically 75 octets) to ensure the maximum
+   likelihood of preserving data integrity as it is transported via
+   various means (e.g., email) -- see <a href="https://tools.ietf.org/html/rfc5545#section-3.1">Section&nbsp;3.1 of [RFC5545]</a>.
+
+   iCalendar data uses an &quot;escape&quot; character sequence for text values
+   and property parameter values.  See Sections <a href="https://tools.ietf.org/html/rfc7265#section-3.1">3.1</a> and <a href="https://tools.ietf.org/html/rfc7265#section-3.3">3.3</a> of [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>]
+   as well as [<a href="https://tools.ietf.org/html/rfc6868" title="&quot;Parameter Value Encoding in iCalendar and vCard&quot;">RFC6868</a>].
+
+   There is a subtle difference in the number representations between
+   JSON and iCalendar.  While in iCalendar, a number may have leading
+   zeros, as well as a leading plus sign; this is not the case in JSON.
+   Numbers should be represented in whatever way needed for the
+   underlying format.
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                    [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc7265#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+   When converting from iCalendar to jCal: First, iCalendar lines MUST
+   be unfolded.  Afterwards, any iCalendar escaping MUST be unescaped.
+   Finally, JSON escaping, as described in <a href="https://tools.ietf.org/html/rfc7159#section-7">Section&nbsp;7 of [RFC7159]</a>, MUST
+   be applied.  The reverse order applies when converting from jCal to
+   iCalendar, which is further described in <a href="https://tools.ietf.org/html/rfc7265#section-4">Section 4</a>.
+
+   iCalendar uses a base64 encoding for binary data.  However, it does
+   not restrict the encoding from being applied to non-binary value
+   types.  So, the following rules are applied when processing a
+   property with the &quot;ENCODING&quot; property parameter set to &quot;BASE64&quot;:
+
+   o  If the property value type is &quot;BINARY&quot;, the base64 encoding MUST
+      be preserved.
+
+   o  If the value type is not &quot;BINARY&quot;, the &quot;ENCODING&quot; property
+      parameter MUST be removed, and the value MUST be base64 decoded.
+
+   When base64 encoding is used, it MUST conform to <a href="https://tools.ietf.org/html/rfc4648#section-4">Section&nbsp;4 of
+   [RFC4648]</a>, which is the base64 method used in [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>].
+
+   One key difference in the formatting of values used in iCalendar and
+   jCal is that in jCal, the specification uses date/time values aligned
+   with the extended format of [<a href="https://tools.ietf.org/html/rfc7265#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>], which is more commonly
+   used in Internet applications that make use of the JSON format.  The
+   sections of this document describing the various date and time
+   formats contain more information on the use of the complete
+   representation, reduced accuracy, or truncated representation.
+
+<span class="h3"><h3><a class="selflink" name="section-3.2" href="https://tools.ietf.org/html/rfc7265#section-3.2">3.2</a>. iCalendar Stream and Objects (<a href="https://tools.ietf.org/html/rfc5545#section-3.4">RFC 5545, Section&nbsp;3.4</a>)</h3></span>
+
+   At the top level of the iCalendar object model is an &quot;iCalendar
+   stream&quot;.  This stream encompasses multiple &quot;iCalendar objects&quot;.  As
+   the typical use case is transporting a single iCalendar object, there
+   is no defined equivalent to an &quot;iCalendar stream&quot; in jCal.  To
+   transport multiple jCal objects in a stream, a simple JSON array can
+   be used.
+
+   Example:
+
+   [&quot;vcalendar&quot;,
+     [ /* Add jCal properties in place of this comment */ ],
+     [ /* Add jCal components in place of this comment */ ]
+   ]
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                    [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc7265#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-3.3" href="https://tools.ietf.org/html/rfc7265#section-3.3">3.3</a>. Components (<a href="https://tools.ietf.org/html/rfc5545#section-3.6">RFC 5545, Section&nbsp;3.6</a>)</h3></span>
+
+   Each iCalendar component, delimited by &quot;BEGIN&quot; and &quot;END&quot;, will be
+   converted to a fixed-length array with three fields that have a
+   specific structure:
+
+   1.  A string with the name of the iCalendar component, but in
+       lowercase.
+
+   2.  An array of jCal properties as described in <a href="https://tools.ietf.org/html/rfc7265#section-3.4">Section 3.4</a>.
+
+   3.  An array of jCal components, representing the sub-components of
+       the component in question.
+
+   This mapping applies to the top level iCalendar objects, as well as
+   individual sub-components in the same way.  The iCalendar to jCal
+   component mapping is valid for both current iCalendar components and
+   any new iCalendar components added in the future.  Conversion is to
+   be done in the same way.
+
+   While the grouping of properties and sub-components does not retain
+   the original order specified in the iCalendar data, the semantics of
+   a component are preserved.
+
+   Example:
+
+   [&quot;vevent&quot;,
+     [ /* Add jCal properties in place of this comment */ ],
+     [ /* Add jCal components in place of this comment */ ]
+   ]
+
+<span class="h3"><h3><a class="selflink" name="section-3.4" href="https://tools.ietf.org/html/rfc7265#section-3.4">3.4</a>. Properties (<a href="https://tools.ietf.org/html/rfc5545">RFC 5545</a>, Sections <a href="https://tools.ietf.org/html/rfc7265#section-3.7">3.7</a> and <a href="https://tools.ietf.org/html/rfc7265#section-3.8">3.8</a>)</h3></span>
+
+   iCalendar properties, whether they apply to the &quot;VCALENDAR&quot; object or
+   to a component, are handled in a consistent way in the jCal format.
+
+   In jCal, each individual iCalendar property MUST be represented by an
+   array with three fixed elements, followed by one or more additional
+   elements, depending on if the property is a multi-valued property as
+   described in <a href="https://tools.ietf.org/html/rfc5545#section-3.1.2">Section&nbsp;3.1.2 of [RFC5545]</a>.
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                    [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc7265#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+   The array consists of the following fixed elements:
+
+   1.  The name of the property, as a lowercase string.  The iCalendar
+       format specifies that property names are case insensitive and
+       recommends that they be rendered in uppercase.  In jCal, they
+       MUST be in lowercase.
+
+   2.  An object containing the parameters as described in <a href="https://tools.ietf.org/html/rfc7265#section-3.5">Section 3.5</a>.
+       If the property has no parameters, an empty object is used to
+       represent that.
+
+   3.  The type identifier string of the value, in lowercase.  Due to
+       special casing of certain properties as described in
+       <a href="https://tools.ietf.org/html/rfc7265#section-3.4.1">Section 3.4.1</a>, it is important that parsers check both the type
+       identifier and the value data type and do not rely on assumptions
+       based on the property name.
+
+   The remaining elements of the array are used for one or more values
+   of the property.  For single-valued properties, the array has exactly
+   four elements; for multi-valued properties, as described in
+   <a href="https://tools.ietf.org/html/rfc5545#section-3.1.2">Section&nbsp;3.1.2 of [RFC5545]</a>, each value is another element, and there
+   can be any number of additional elements.
+
+   In the following example, the &quot;categories&quot; property is multi-valued
+   and has two values, while the summary property is single-valued:
+
+   Example:
+
+   [&quot;vevent&quot;,
+     [
+       [&quot;summary&quot;, {}, &quot;text&quot;, &quot;Meeting with Fred&quot;],
+       [&quot;categories&quot;, {}, &quot;text&quot;, &quot;Meetings&quot;, &quot;Work&quot;]
+       ...
+     ],
+     [ /* sub-components */ ]
+   ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                    [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc7265#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+<span class="h4"><h4><a class="selflink" name="section-3.4.1" href="https://tools.ietf.org/html/rfc7265#section-3.4.1">3.4.1</a>. Special Cases for Properties</h4></span>
+
+   This section describes some properties that have special handling
+   when converting to jCal.
+
+<span class="h5"><h5><a class="selflink" name="section-3.4.1.1" href="https://tools.ietf.org/html/rfc7265#section-3.4.1.1">3.4.1.1</a>. GEO Property (<a href="https://tools.ietf.org/html/rfc5545#section-3.8.1.6">RFC 5545, Section&nbsp;3.8.1.6</a>)</h5></span>
+
+   In iCalendar, the &quot;GEO&quot; property value is defined as a semicolon-
+   separated list of two &quot;FLOAT&quot; values, the first representing latitude
+   and the second longitude.
+
+   In jCal, the value for the &quot;geo&quot; property value is represented as an
+   array of two values.  The first value of the property represents the
+   latitude; the second value represents the longitude.
+
+   When converting from jCal to iCalendar, be careful to use a semicolon
+   as the separator between the two values as required by [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>].
+
+   When converting from jCal to iCalendar, the two values MUST be
+   converted using a semicolon as the separator character.
+
+   Example
+
+   [&quot;vevent&quot;,
+     [
+       [&quot;geo&quot;, {}, &quot;float&quot;, [ 37.386013, -122.082932 ] ]
+       ...
+     ],
+     ...
+   ]
+
+<span class="h5"><h5><a class="selflink" name="section-3.4.1.2" href="https://tools.ietf.org/html/rfc7265#section-3.4.1.2">3.4.1.2</a>. REQUEST-STATUS Property (<a href="https://tools.ietf.org/html/rfc5545#section-3.8.8.3">RFC 5545, Section&nbsp;3.8.8.3</a>)</h5></span>
+
+   In iCalendar, the &quot;REQUEST-STATUS&quot; property value is defined as a
+   semicolon-separated list of two or three &quot;TEXT&quot; values.  The first
+   represents a code, the second a description, and the third any
+   additional data.
+
+   In jCal, the value for the &quot;request-status&quot; property value is
+   represented as an array with two or three values.  The first array
+   element corresponds to the code, the second element corresponds to
+   the description, and the third element corresponds to the additional
+   data.  Each value is represented using a string value.  If there is
+   no additional data in the iCalendar value, the last element of the
+   array SHOULD NOT be present.
+
+   When converting from jCal to iCalendar, the two or three values MUST
+   be converted using a semicolon as the separator character.
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                    [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc7265#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+   iCalendar Example:
+
+   BEGIN:VEVENT
+   ...
+   REQUEST-STATUS:2.0;Success
+   REQUEST-STATUS:3.7;Invalid calendar user;ATTENDEE:
+    mailto:jsmith@example.com
+   ...
+   END:VEVENT
+
+   jCal Example:
+
+   [&quot;vevent&quot;:
+     [
+       [&quot;request-status&quot;, {}, &quot;text&quot;, [&quot;2.0&quot;, &quot;Success&quot;] ],
+       [&quot;request-status&quot;, {}, &quot;text&quot;,
+          [
+           &quot;3.7&quot;,
+           &quot;Invalid calendar user&quot;,
+           &quot;ATTENDEE:mailto:jsmith@example.org&quot;
+          ]
+       ],
+       ...
+     ],
+     ...
+   ]
+
+<span class="h3"><h3><a class="selflink" name="section-3.5" href="https://tools.ietf.org/html/rfc7265#section-3.5">3.5</a>. Parameters (<a href="https://tools.ietf.org/html/rfc5545#section-3.2">RFC 5545, Section&nbsp;3.2</a>)</h3></span>
+
+   Property parameters are represented as a JSON object where each key-
+   value pair represents the iCalendar parameter name and its value.
+   The name of the parameter MUST be in lowercase; the original case of
+   the parameter value MUST be preserved.  For example, the &quot;PARTSTAT&quot;
+   property parameter is represented in jCal by the &quot;partstat&quot; key.  Any
+   new iCalendar parameters added in the future will be converted in the
+   same way.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                    [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc7265#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+   Example:
+
+   [&quot;vevent&quot;:
+     [
+       [&quot;attendee&quot;,
+        {
+          &quot;partstat&quot;: &quot;ACCEPTED&quot;,
+          &quot;rsvp&quot;: &quot;TRUE&quot;,
+          &quot;role&quot;: &quot;REQ-PARTICIPANT&quot;
+        },
+        &quot;cal-address&quot;,
+        &quot;mailto:jsmith@example.org&quot;
+       ],
+       [&quot;summary&quot;, {}, &quot;text&quot;, &quot;Meeting&quot;],
+       ...
+     ],
+     ...
+   ]
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.1" href="https://tools.ietf.org/html/rfc7265#section-3.5.1">3.5.1</a>. VALUE Parameter</h4></span>
+
+   iCalendar defines a &quot;VALUE&quot; property parameter (<a href="https://tools.ietf.org/html/rfc5545#section-3.2.20">Section&nbsp;3.2.20 of
+   [RFC5545]</a>).  This property parameter MUST NOT be added to the
+   parameters object.  Instead, the value type is signaled through the
+   type identifier in the third element of the array describing the
+   property.  When converting a property from iCalendar to jCal, the
+   value type is determined as follows:
+
+   1.  If the property has a &quot;VALUE&quot; parameter, that parameter's value
+       is used as the value type.
+
+   2.  If the property has no &quot;VALUE&quot; parameter but has a default value
+       type, the default value type is used.
+
+   3.  If the property has no &quot;VALUE&quot; parameter and has no default value
+       type, &quot;unknown&quot; is used.
+
+   Converting from jCal into iCalendar is done as follows:
+
+   1.  If the property's value type is &quot;unknown&quot;, no &quot;VALUE&quot; parameter
+       is included.
+
+   2.  If the property's value type is the default type for that
+       property, no &quot;VALUE&quot; parameter is included.
+
+   3.  Otherwise, a &quot;VALUE&quot; parameter is included, and the value type is
+       used as the parameter value.
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc7265#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+   See <a href="https://tools.ietf.org/html/rfc7265#section-5">Section 5</a> for information on handling unknown value types.
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.2" href="https://tools.ietf.org/html/rfc7265#section-3.5.2">3.5.2</a>. Multi-value Parameters</h4></span>
+
+   In [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>], some parameters allow using a COMMA-separated list of
+   values.  To ease processing in jCal, the value of such parameters
+   MUST be represented in an array containing the separated values.  The
+   array elements MUST be string values.  Single-value parameters can be
+   represented using either a single string value or an array with one
+   string element.  A jCal parser MUST be able to understand both value
+   data types.  Examples of such parameters are the iCalendar
+   &quot;DELEGATED-FROM&quot; and &quot;DELEGATED-TO&quot; parameters; more such parameters
+   may be added in extensions.
+
+   The iCalendar specification requires encapsulation between DQUOTE
+   characters if a parameter value contains a colon, a semicolon, or a
+   comma.  These extra DQUOTE characters do not belong to the actual
+   parameter value, and hence are not included when the parameter is
+   converted to jCal.
+
+   Example 1:
+
+   [&quot;attendee&quot;,
+    {
+      &quot;delegated-to&quot;: [&quot;mailto:jdoe@example.org&quot;,
+                       &quot;mailto:jqpublic@example.org&quot;]
+    },
+    &quot;cal-address&quot;,
+    &quot;mailto:jsmith@example.org&quot;
+   ]
+
+   Example 2:
+
+   [&quot;attendee&quot;,
+    {
+      &quot;delegated-to&quot;: &quot;mailto:jdoe@example.org&quot;
+    },
+    &quot;cal-address&quot;,
+    &quot;mailto:jsmith@example.org&quot;
+   ]
+
+<span class="h3"><h3><a class="selflink" name="section-3.6" href="https://tools.ietf.org/html/rfc7265#section-3.6">3.6</a>. Values (<a href="https://tools.ietf.org/html/rfc5545#section-3.3">RFC 5545, Section&nbsp;3.3</a>)</h3></span>
+
+   The following subsections specify how iCalendar property value data
+   types, which are defined in the subsections of <a href="https://tools.ietf.org/html/rfc5545#section-3.3">[RFC5545],
+   Section&nbsp;3.3</a>, are represented in jCal.
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc7265#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.1" href="https://tools.ietf.org/html/rfc7265#section-3.6.1">3.6.1</a>. Binary (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.1">RFC 5545, Section&nbsp;3.3.1</a>)</h4></span>
+
+   Description:  iCalendar &quot;BINARY&quot; property values are represented by a
+      property with the type identifier &quot;binary&quot;.  The value element is
+      a JSON string, encoded with base64 encoding as specified in
+      <a href="https://tools.ietf.org/html/rfc4648#section-4">Section&nbsp;4 of [RFC4648]</a>.
+
+   Example:
+
+   [&quot;attach&quot;, {}, &quot;binary&quot;, &quot;SGVsbG8gV29ybGQh&quot;]
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.2" href="https://tools.ietf.org/html/rfc7265#section-3.6.2">3.6.2</a>. Boolean (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.2">RFC 5545, Section&nbsp;3.3.2</a>)</h4></span>
+
+   Description:  iCalendar &quot;BOOLEAN&quot; property values are represented by
+      a property with the type identifier &quot;boolean&quot;.  The value is a
+      JSON boolean value.
+
+   Example:
+
+   [&quot;x-non-smoking&quot;, {}, &quot;boolean&quot;, true]
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.3" href="https://tools.ietf.org/html/rfc7265#section-3.6.3">3.6.3</a>. Calendar User Address (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.3">RFC 5545, Section&nbsp;3.3.3</a>)</h4></span>
+
+   Description:  iCalendar &quot;CAL-ADDRESS&quot; property values are represented
+      by a property with the type identifier &quot;cal-address&quot;.  The value
+      is a JSON string with the URI as described in [<a href="https://tools.ietf.org/html/rfc3986" title="&quot;Uniform Resource Identifier (URI): Generic Syntax&quot;">RFC3986</a>].
+
+   Example:
+
+   [&quot;attendee&quot;, {}, &quot;cal-address&quot;, &quot;mailto:kewisch@example.com&quot;]
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.4" href="https://tools.ietf.org/html/rfc7265#section-3.6.4">3.6.4</a>. Date (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.4">RFC 5545, Section&nbsp;3.3.4</a>)</h4></span>
+
+   Description:  iCalendar &quot;DATE&quot; property values are represented by a
+      property with the type identifier &quot;date&quot;.  The value elements are
+      JSON strings with the same date value specified by [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>], but
+      represented using the extended format of the complete
+      representation specified in [<a href="https://tools.ietf.org/html/rfc7265#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>], Section 4.1.2.2.
+      Other variations, for example, representation with reduced
+      accuracy, MUST NOT be used.
+
+   ABNF Schema:
+
+   ; year, month, and day rules are
+   ; defined in [<a href="https://tools.ietf.org/html/rfc7265#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>], Section 2.2.
+   date = year &quot;-&quot; month &quot;-&quot; day ;YYYY-MM-DD
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-13" id="page-13" href="https://tools.ietf.org/html/rfc7265#page-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+   Example:
+
+   [&quot;dtstart&quot;, {}, &quot;date&quot;, &quot;2011-05-17&quot;]
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.5" href="https://tools.ietf.org/html/rfc7265#section-3.6.5">3.6.5</a>. Date-Time (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.5">RFC 5545, Section&nbsp;3.3.5</a>)</h4></span>
+
+   Description:  iCalendar &quot;DATE-TIME&quot; property values are represented
+      by a property with the type identifier &quot;date-time&quot;.  The value
+      elements are JSON strings with the same date value specified by
+      [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>], but represented using the extended format of the
+      complete representation specified in [<a href="https://tools.ietf.org/html/rfc7265#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>],
+      Section 4.3.2.  Other variations, for example, representation with
+      reduced accuracy, MUST NOT be used.  The same restrictions apply
+      with respect to leap seconds and time zone offsets as specified in
+      <a href="https://tools.ietf.org/html/rfc5545#section-3.3.5">[RFC5545], Section&nbsp;3.3.5</a>.
+
+   ABNF Schema:
+
+   ; year, month, day, hour, minute, and second rules are
+   ; defined in [<a href="https://tools.ietf.org/html/rfc7265#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>], Section 2.2.
+   ; The zone identifier is described in [<a href="https://tools.ietf.org/html/rfc7265#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>], Section 4.3.2.
+   date-complete = year &quot;-&quot; month &quot;-&quot; day ;YYYY-MM-DD
+   time-complete =  hour &quot;:&quot; minute &quot;:&quot; second [zone] ; HH:MM:SS
+   datetime = date-complete &quot;T&quot; time-complete
+
+   Examples:
+
+   [&quot;dtstart&quot;, {}, &quot;date-time&quot;, &quot;2012-10-17T12:00:00&quot;],
+   [&quot;dtstamp&quot;, {}, &quot;date-time&quot;, &quot;2012-10-17T12:00:00Z&quot;],
+   [&quot;dtend&quot;,
+    { &quot;tzid&quot;: &quot;Europe/Berlin&quot; },
+    &quot;date-time&quot;,
+    &quot;2011-10-17T13:00:00&quot;
+   ]
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.6" href="https://tools.ietf.org/html/rfc7265#section-3.6.6">3.6.6</a>. Duration (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.6">RFC 5545, Section&nbsp;3.3.6</a>)</h4></span>
+
+   Description:  iCalendar &quot;DURATION&quot; property values are represented by
+      a property with the type identifier &quot;duration&quot;.  The value
+      elements are JSON strings with the same duration value specified
+      by [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>].
+
+   Example:
+
+   [&quot;duration&quot;, {}, &quot;duration&quot;, &quot;P1D&quot;]
+
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 13]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-14" id="page-14" href="https://tools.ietf.org/html/rfc7265#page-14" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.7" href="https://tools.ietf.org/html/rfc7265#section-3.6.7">3.6.7</a>. Float (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.7">RFC 5545, Section&nbsp;3.3.7</a>)</h4></span>
+
+   Description:  iCalendar &quot;FLOAT&quot; property values are represented by a
+      property with the type identifier &quot;float&quot;.  The value elements are
+      JSON primitive number values.
+
+   Example:
+
+   [&quot;x-grade&quot;, {}, &quot;float&quot;, 1.3]
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.8" href="https://tools.ietf.org/html/rfc7265#section-3.6.8">3.6.8</a>. Integer (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.8">RFC 5545, Section&nbsp;3.3.8</a>)</h4></span>
+
+   Description:  vCard &quot;INTEGER&quot; property values are represented by a
+      property with the type identifier &quot;integer&quot;.  The value elements
+      are JSON primitive number values that MUST resolve to an integer
+      value in the range specified in <a href="https://tools.ietf.org/html/rfc5545#section-3.3.8">[RFC5545], Section&nbsp;3.3.8</a>.  Thus, a
+      fractional and/or exponential part are only allowed under limited
+      circumstances.
+
+   Examples:
+
+   [&quot;percent-complete&quot;, {}, &quot;integer&quot;, 42]
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.9" href="https://tools.ietf.org/html/rfc7265#section-3.6.9">3.6.9</a>. Period of Time (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.9">RFC 5545, Section&nbsp;3.3.9</a>)</h4></span>
+
+   Description:  iCalendar &quot;PERIOD&quot; property values are represented by a
+      jCal property with the type identifier &quot;period&quot;.  The value
+      element is an array of JSON strings, with the first element
+      representing the start of the period and the second element
+      representing the end of the period.  As in [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>], the start of
+      the period is always formatted as a date-time value, and the end
+      of the period MUST be either a date-time or duration value.  Any
+      date, date-time, or duration values contained in the period value
+      MUST be formatted in accordance to the rules for date, date-time,
+      or duration values specified in this document.
+
+   Example:
+
+   [&quot;freebusy&quot;,
+    { &quot;fbtype&quot;: &quot;FREE&quot; },
+    &quot;period&quot;,
+    [&quot;1997-03-08T16:00:00Z&quot;, &quot;P1D&quot;]
+   ]
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 14]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-15" id="page-15" href="https://tools.ietf.org/html/rfc7265#page-15" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.10" href="https://tools.ietf.org/html/rfc7265#section-3.6.10">3.6.10</a>. Recurrence Rule (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.10">RFC 5545, Section&nbsp;3.3.10</a>)</h4></span>
+
+   Description:  iCalendar &quot;RECUR&quot; property values are represented by a
+      property with the type identifier &quot;recur&quot;.  The value elements are
+      objects describing the structured data as specified by [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>].
+      Each rule part is described by the combination of key and value.
+      The key specifies the name of the rule part and MUST be converted
+      to lowercase.  The value of the rule part MUST be mapped by the
+      following rules:
+
+      *  The value of the &quot;freq&quot; and &quot;wkst&quot; rule parts MUST be a string
+         as specified in [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>], with case preserved.
+
+      *  The value of the &quot;until&quot; rule part MUST be a date or date-time
+         value formatted in accordance to the rules for date or date-
+         time specified in this document.
+
+      *  The &quot;count&quot; and &quot;interval&quot; rule parts MUST be specified as a
+         single JSON number value.
+
+      *  The following rule parts can have one or more numeric values:
+         &quot;bysecond&quot;, &quot;byminute&quot;, &quot;byhour&quot;, &quot;bymonthday&quot;, &quot;byyearday&quot;,
+         &quot;byweekno&quot;, &quot;bymonth&quot;, and &quot;bysetpos&quot;.  If a rule part contains
+         multiple values, an array of numbers MUST be used for that rule
+         part.  Single-valued rule parts can be represented by either
+         using a single number value, omitting the array completely, or
+         using an array with one number element.  A jCal parser MUST be
+         able to understand both data types.
+
+      *  Similarly, the &quot;byday&quot; rule part can have one or more string
+         values.  If it contains multiple values, an array of strings
+         MUST be used.  As before, a single-valued rule part can be
+         represented using either a single string value or an array with
+         one string element, both of which a jCal parser MUST be able to
+         understand.
+
+   Example 1:
+
+   [&quot;rrule&quot;,
+    {},
+    &quot;recur&quot;,
+    {
+      &quot;freq&quot;: &quot;YEARLY&quot;,
+      &quot;count&quot;: 5,
+      &quot;byday&quot;: [ &quot;-1SU&quot;, &quot;2MO&quot; ],
+      &quot;bymonth&quot;: 10
+    }
+   ]
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 15]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-16" id="page-16" href="https://tools.ietf.org/html/rfc7265#page-16" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+   Example 2:
+
+   [&quot;rrule&quot;,
+    {},
+    &quot;recur&quot;,
+    {
+      &quot;freq&quot;: &quot;MONTHLY&quot;,
+      &quot;interval&quot;: 2,
+      &quot;bymonthday&quot;: [ 1, 15, -1 ],
+      &quot;until&quot;: &quot;2013-10-01&quot;
+    }
+   ]
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.11" href="https://tools.ietf.org/html/rfc7265#section-3.6.11">3.6.11</a>. Text (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.11">RFC 5545, Section&nbsp;3.3.11</a>)</h4></span>
+
+   Description:  iCalendar &quot;TEXT&quot; property values are represented by a
+      property with the type identifier &quot;text&quot;.  The value elements are
+      JSON strings.
+
+   Example:
+
+   [&quot;comment&quot;, {}, &quot;text&quot;, &quot;hello, world&quot;]
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.12" href="https://tools.ietf.org/html/rfc7265#section-3.6.12">3.6.12</a>. Time (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.12">RFC 5545, Section&nbsp;3.3.12</a>)</h4></span>
+
+   Description:  iCalendar &quot;TIME&quot; property values are represented by a
+      property with the type identifier &quot;time&quot;.  The value elements are
+      JSON strings with the same time value specified by [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>], but
+      represented using the extended format of the complete
+      representation specified in [<a href="https://tools.ietf.org/html/rfc7265#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>], Section 4.2.2.2.
+      Other variations, for example, representation with reduced
+      accuracy, MUST NOT be used.  The same restrictions apply with
+      respect to leap seconds, time fractions, and time zone offsets as
+      specified in <a href="https://tools.ietf.org/html/rfc5545#section-3.3.12">[RFC5545], Section&nbsp;3.3.12</a>.
+
+   ABNF Schema:
+
+   ; hour, minute, and second rules are
+   ; defined in [<a href="https://tools.ietf.org/html/rfc7265#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>], Section 2.2.
+   ; The zone identifier is described in [<a href="https://tools.ietf.org/html/rfc7265#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>], Section 4.3.2.
+   time-complete =  hour &quot;:&quot; minute &quot;:&quot; second [zone] ; HH:MM:SS
+
+   Example:
+
+   [&quot;x-time-local&quot;, {}, &quot;time&quot;, &quot;12:30:00&quot;],
+   [&quot;x-time-utc&quot;, {}, &quot;time&quot;, &quot;12:30:00Z&quot;],
+   [&quot;x-time-offset&quot;, { &quot;tzid&quot;: &quot;Europe/Berlin&quot; }, &quot;time&quot;, &quot;12:30:00&quot;]
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 16]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-17" id="page-17" href="https://tools.ietf.org/html/rfc7265#page-17" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.13" href="https://tools.ietf.org/html/rfc7265#section-3.6.13">3.6.13</a>. URI (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.13">RFC 5545, Section&nbsp;3.3.13</a>)</h4></span>
+
+   Description:  iCalendar &quot;URI&quot; property values are represented by a
+      property with the type identifier &quot;uri&quot;.  The value elements are
+      JSON strings representing the URI.
+
+   Example:
+
+   [&quot;tzurl&quot;, {}, &quot;uri&quot;, &quot;http://example.org/tz/Europe-Berlin.ics&quot;]
+
+<span class="h4"><h4><a class="selflink" name="section-3.6.14" href="https://tools.ietf.org/html/rfc7265#section-3.6.14">3.6.14</a>. UTC Offset (<a href="https://tools.ietf.org/html/rfc5545#section-3.3.14">RFC 5545, Section&nbsp;3.3.14</a>)</h4></span>
+
+   Description:  iCalendar &quot;UTC-OFFSET&quot; property values are represented
+      by a property with the type identifier &quot;utc-offset&quot;.  The value
+      elements are JSON strings with the same UTC offset value specified
+      by [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>], with the exception that the hour and minute
+      components are separated by a &quot;:&quot; character, for consistency with
+      the [<a href="https://tools.ietf.org/html/rfc7265#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>] time zone offset, extended format.
+
+   Example:
+
+   [&quot;tzoffsetfrom&quot;, {}, &quot;utc-offset&quot;, &quot;-05:00&quot;],
+   [&quot;tzoffsetto&quot;, {}, &quot;utc-offset&quot;, &quot;+12:45&quot;]
+
+<span class="h3"><h3><a class="selflink" name="section-3.7" href="https://tools.ietf.org/html/rfc7265#section-3.7">3.7</a>. Extensions</h3></span>
+
+   iCalendar extension properties and property parameters (those with an
+   &quot;X-&quot; prefix in their name) are handled in the same way as other
+   properties and property parameters: the property is represented by an
+   array, and the property parameter is represented by an object.  The
+   property or parameter name uses the same name as for the iCalendar
+   extension, but in lowercase.  For example, the &quot;X-FOO&quot; property in
+   iCalendar turns into the &quot;x-foo&quot; jCal property.  See <a href="https://tools.ietf.org/html/rfc7265#section-5">Section 5</a> for
+   how to deal with default values for unrecognized extension properties
+   or property parameters.
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc7265#section-4">4</a>. Converting from jCal into iCalendar</h2></span>
+
+   Converting jCal to iCalendar reverses the process described in
+   <a href="https://tools.ietf.org/html/rfc7265#section-3">Section 3</a>.  This section describes a few additional requirements for
+   conversion.
+
+   When converting component, property, and property parameter names,
+   the names SHOULD be converted to uppercase.  Although iCalendar names
+   are case insensitive, common practice is to keep them all uppercase
+   following the actual definitions in [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>].
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 17]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-18" id="page-18" href="https://tools.ietf.org/html/rfc7265#page-18" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+   During conversion, JSON escaping MUST be unescaped.  Afterwards,
+   iCalendar escaping, as defined by [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>] and [<a href="https://tools.ietf.org/html/rfc6868" title="&quot;Parameter Value Encoding in iCalendar and vCard&quot;">RFC6868</a>], MUST be
+   applied.  Finally, long lines SHOULD be folded as described in
+   <a href="https://tools.ietf.org/html/rfc5545#section-3.1">[RFC5545], Section&nbsp;3.1</a>.
+
+   Non-binary value types MUST NOT be base64 encoded.
+
+   When converting to iCalendar, the VALUE parameter MUST be added to
+   properties whose default value type is unknown, but do not have a
+   jCal type identifier &quot;unknown&quot;.  The VALUE parameter MAY be omitted
+   for properties using the default value type.  The VALUE parameter
+   MUST be omitted for properties that have the jCal type identifier
+   &quot;unknown&quot;.
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc7265#section-5">5</a>. Handling Unrecognized Properties or Parameters</h2></span>
+
+   In iCalendar, properties can have one or more value types as
+   specified by their definition, with one of those values being defined
+   as the default.  When a property uses its default value type, the
+   &quot;VALUE&quot; property parameter does not need to be specified on the
+   property.  For example, the default value type for &quot;DTSTART&quot; is
+   &quot;DATE-TIME&quot;, so &quot;VALUE=DATE-TIME&quot; need not be set as a property
+   parameter.  However, &quot;DTSTART&quot; also allows a &quot;DATE&quot; value to be
+   specified, and if that is used, &quot;VALUE=DATE&quot; has to be set as a
+   property parameter.
+
+   When new properties are defined or &quot;X-&quot; properties used, an iCalendar
+   to jCal converter might not recognize them, and not know what the
+   appropriate default value types are, yet they need to be able to
+   preserve the values.  A similar issue arises for unrecognized
+   property parameters.
+
+   In jCal, a new &quot;unknown&quot; property value type is introduced.  Its
+   purpose is to allow preserving unknown property values when round-
+   tripping between jCal and iCalendar.  To avoid collisions, this
+   specification reserves the UNKNOWN property value type in iCalendar.
+   It MUST NOT be used in any iCalendar as specified by [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>], nor
+   any extensions to it.  Thus, the type is registered to the iCalendar
+   Value Data Types registry in <a href="https://tools.ietf.org/html/rfc7265#section-7.1">Section 7.1</a>.
+
+<span class="h3"><h3><a class="selflink" name="section-5.1" href="https://tools.ietf.org/html/rfc7265#section-5.1">5.1</a>. Converting iCalendar into jCal</h3></span>
+
+   Any property that does not include a &quot;VALUE&quot; property parameter and
+   whose default value type is not known, MUST be converted to a
+   primitive JSON string.  The content of that string is the unprocessed
+   value text.  Also, value type MUST be set to &quot;unknown&quot;.
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 18]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-19" id="page-19" href="https://tools.ietf.org/html/rfc7265#page-19" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+   To correctly implement this format, it is critical that the type
+   &quot;unknown&quot; be used if the default type is not known.  If this
+   requirement is ignored and, for example, &quot;text&quot; is used, additional
+   escaping may occur, which breaks round-tripping values.
+
+   Any unrecognized property parameter MUST be converted to a string
+   value, with its content set to the property parameter value text, and
+   treated as if it were a &quot;TEXT&quot; value.
+
+<span class="h3"><h3><a class="selflink" name="section-5.2" href="https://tools.ietf.org/html/rfc7265#section-5.2">5.2</a>. Converting jCal into iCalendar</h3></span>
+
+   In jCal, the value type is always explicitly specified.  It is
+   converted to iCalendar using the iCalendar VALUE parameter, except in
+   the following two cases:
+
+   o  If the value type specified in jCal matches the default value type
+      in iCalendar, the VALUE parameter MAY be omitted.
+
+   o  If the value type specified in jCal is set to &quot;unknown&quot;, the VALUE
+      parameter MUST NOT be specified.  The value MUST be taken over in
+      iCalendar without processing.
+
+<span class="h3"><h3><a class="selflink" name="section-5.3" href="https://tools.ietf.org/html/rfc7265#section-5.3">5.3</a>. Examples</h3></span>
+
+   The following is an example of an unrecognized iCalendar property
+   (that uses a &quot;DATE-TIME&quot; value as its default), and the equivalent
+   jCal representation of that property.
+
+   iCalendar:
+
+   X-COMPLAINT-DEADLINE:20110512T120000Z
+
+   jCal:
+
+   [&quot;x-complaint-deadline&quot;, {}, &quot;unknown&quot;, &quot;20110512T120000Z&quot;]
+
+   The following is an example of how to cope with jCal data where the
+   parser was unable to identify the type.  Note how the &quot;unknown&quot; value
+   type is not added to the iCalendar data and escaping, aside from
+   standard JSON string escaping, is not processed.
+
+   jCal:
+
+   [&quot;x-coffee-data&quot;, {}, &quot;unknown&quot;, &quot;Stenophylla;Guinea\\,Africa&quot;]
+
+   iCalendar:
+
+   X-COFFEE-DATA:Stenophylla;Guinea\,Africa
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 19]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-20" id="page-20" href="https://tools.ietf.org/html/rfc7265#page-20" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+   The following is an example of a jCal property (where the
+   corresponding iCalendar property uses an &quot;INTEGER&quot; value as its
+   default) and the equivalent iCalendar representation of that
+   property.
+
+   jCal:
+
+   [&quot;percent-complete&quot;, {}, &quot;integer&quot;, 95]
+
+   iCalendar:
+
+   PERCENT-COMPLETE:95
+
+   The following is an example of an unrecognized iCalendar property
+   parameter (that uses a &quot;FLOAT&quot; value as its default) specified on a
+   recognized iCalendar property and the equivalent jCal representation
+   of that property and property parameter.
+
+   iCalendar:
+
+   DTSTART;X-SLACK=30.3;VALUE=DATE:20110512
+
+   jCal:
+
+   [&quot;dtstart&quot;, { &quot;x-slack&quot;: &quot;30.3&quot; }, &quot;date&quot;, &quot;2011-05-12&quot;]
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc7265#section-6">6</a>. Security Considerations</h2></span>
+
+   This specification defines how iCalendar data can be &quot;translated&quot;
+   between two different data formats -- the original text format and
+   JSON -- with a one-to-one mapping to ensure all the semantic data in
+   one format (properties, parameters, and values) are preserved in the
+   other.  It does not change the semantic meaning of the underlying
+   data itself, or impose or remove any security considerations that
+   apply to the underlying data.
+
+   The use of JSON as a format does have its own inherent security risks
+   as discussed in <a href="https://tools.ietf.org/html/rfc7159#section-12">Section&nbsp;12 of [RFC7159]</a>.  Even though JSON is
+   considered a safe subset of JavaScript, it should be kept in mind
+   that a flaw in the parser processing JSON could still impose a
+   threat, which doesn't arise with conventional iCalendar data.
+
+   With this in mind, a parser for JSON data should be used for jCal
+   that is aware of the security implications.  For example, the use of
+   JavaScript's eval() function is considered an unacceptable security
+   risk, as described in <a href="https://tools.ietf.org/html/rfc7159#section-12">Section&nbsp;12 of [RFC7159]</a>.  A native parser with
+   full awareness of the JSON format should be preferred.
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 20]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-21" id="page-21" href="https://tools.ietf.org/html/rfc7265#page-21" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+   In addition, it is expected that this new format will result in
+   iCalendar data being more widely disseminated (e.g., with use in web
+   applications rather than just dedicated calendaring applications).
+
+   In all cases, application developers have to conform to the semantics
+   of the iCalendar data as defined by [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>] and associated
+   extensions, and all of the security considerations described in
+   <a href="https://tools.ietf.org/html/rfc5545#section-7">Section&nbsp;7 of [RFC5545]</a>, or any associated extensions, are applicable.
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc7265#section-7">7</a>. IANA Considerations</h2></span>
+
+   This document defines a MIME media type for use with iCalendar in
+   JSON data.  This media type SHOULD be used for the transfer of
+   calendaring data in JSON.
+
+   Type name:  application
+
+   Subtype name:  calendar+json
+
+   Required parameters:  none
+
+   Optional parameters:  &quot;method&quot;, &quot;component&quot;, and &quot;optinfo&quot; as defined
+      for the text/calendar media type in <a href="https://tools.ietf.org/html/rfc5545#section-8.1">[RFC5545], Section&nbsp;8.1</a>.
+
+   Encoding considerations:  Same as encoding considerations of
+      application/json as specified in <a href="https://tools.ietf.org/html/rfc7159#section-11">[RFC7159], Section&nbsp;11</a>.
+
+   Security considerations:  See <a href="https://tools.ietf.org/html/rfc7265#section-6">Section 6</a>.
+
+   Interoperability considerations:  This media type provides an
+      alternative format for iCalendar data based on JSON.
+
+   Published specification:  This specification.
+
+   Applications that use this media type:  Applications that currently
+      make use of the text/calendar media type can use this as an
+      alternative.  Similarly, applications that use the application/
+      json media type to transfer calendaring data can use this to
+      further specify the content.
+
+   Fragment identifier considerations:  N/A
+
+   Additional information:
+
+      Deprecated alias names for this type:  N/A
+
+      Magic number(s):  N/A
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 21]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-22" id="page-22" href="https://tools.ietf.org/html/rfc7265#page-22" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+      File extension(s):  N/A
+
+      Macintosh file type code(s):  N/A
+
+   Person &amp; email address to contact for further information:
+      calsify@ietf.org
+
+   Intended usage:  COMMON
+
+   Restrictions on usage:  There are no restrictions on where this media
+      type can be used.
+
+   Author:  See the &quot;Authors' Addresses&quot; section of this document.
+
+   Change controller:  IETF
+
+<span class="h3"><h3><a class="selflink" name="section-7.1" href="https://tools.ietf.org/html/rfc7265#section-7.1">7.1</a>. UNKNOWN iCalendar Value Data Type</h3></span>
+
+   IANA has added the following entry to the iCalendar Data Types
+   registry:
+
+   Value name:  UNKNOWN
+
+   Purpose:  To allow preserving property values whose default value
+      type is not known during round-tripping between jCal and
+      iCalendar.
+
+   Format definition:  N/A
+
+   Description:  The UNKNOWN value data type is reserved for the
+      exclusive use of the jCal format.  Its use is described in
+      <a href="https://tools.ietf.org/html/rfc7265#section-5">Section 5</a> of this document.
+
+   Example:  As this registration serves as a reservation of the UNKNOWN
+      type so that it is not used in iCalendar, there is no applicable
+      iCalendar example.  Examples of its usage in jCal can be found in
+      this document.
+
+   IANA has made the &quot;Status&quot; column for this entry in the registry say,
+   &quot;Reserved - Do not use&quot; and has made the &quot;Reference&quot; column refer to
+   <a href="https://tools.ietf.org/html/rfc7265#section-5">Section 5</a> of this document.
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 22]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-23" id="page-23" href="https://tools.ietf.org/html/rfc7265#page-23" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-8" href="https://tools.ietf.org/html/rfc7265#section-8">8</a>. Acknowledgments</h2></span>
+
+   The authors would like to thank the following for their valuable
+   contributions: William Gill, Erwin Rehme, Dave Thewlis, Simon
+   Perreault, Michael Angstadt, Peter Saint-Andre, Bert Greevenbosch,
+   and Javier Godoy.  This specification originated from the work of the
+   XML-JSON technical committee of the Calendaring and Scheduling
+   Consortium.
+
+<span class="h2"><h2><a class="selflink" name="section-9" href="https://tools.ietf.org/html/rfc7265#section-9">9</a>. References</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-9.1" href="https://tools.ietf.org/html/rfc7265#section-9.1">9.1</a>. Normative References</h3></span>
+
+   [<a name="ref-ISO.8601.2004" id="ref-ISO.8601.2004">ISO.8601.2004</a>]
+              International Organization for Standardization, &quot;Data
+              elements and interchange formats -- Information
+              interchange -- Representation of dates and times&quot;, ISO
+              8601, December 2004,
+              &lt;<a href="http://www.iso.org/iso/catalogue_detail?csnumber=40874">http://www.iso.org/iso/catalogue_detail?csnumber=40874</a>&gt;.
+
+   [<a name="ref-RFC2119" id="ref-RFC2119">RFC2119</a>]  Bradner, S., &quot;Key words for use in RFCs to Indicate
+              Requirement Levels&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>, March 1997.
+
+   [<a name="ref-RFC3986" id="ref-RFC3986">RFC3986</a>]  Berners-Lee, T., Fielding, R., and L. Masinter, &quot;Uniform
+              Resource Identifier (URI): Generic Syntax&quot;, STD 66, <a href="https://tools.ietf.org/html/rfc3986">RFC</a>
+              <a href="https://tools.ietf.org/html/rfc3986">3986</a>, January 2005.
+
+   [<a name="ref-RFC4648" id="ref-RFC4648">RFC4648</a>]  Josefsson, S., &quot;The Base16, Base32, and Base64 Data
+              Encodings&quot;, <a href="https://tools.ietf.org/html/rfc4648">RFC 4648</a>, October 2006.
+
+   [<a name="ref-RFC5234" id="ref-RFC5234">RFC5234</a>]  Crocker, D. and P. Overell, &quot;Augmented BNF for Syntax
+              Specifications: ABNF&quot;, STD 68, <a href="https://tools.ietf.org/html/rfc5234">RFC 5234</a>, January 2008.
+
+   [<a name="ref-RFC5545" id="ref-RFC5545">RFC5545</a>]  Desruisseaux, B., &quot;Internet Calendaring and Scheduling
+              Core Object Specification (iCalendar)&quot;, <a href="https://tools.ietf.org/html/rfc5545">RFC 5545</a>,
+              September 2009.
+
+   [<a name="ref-RFC6321" id="ref-RFC6321">RFC6321</a>]  Daboo, C., Douglass, M., and S. Lees, &quot;xCal: The XML
+              Format for iCalendar&quot;, <a href="https://tools.ietf.org/html/rfc6321">RFC 6321</a>, August 2011.
+
+   [<a name="ref-RFC6868" id="ref-RFC6868">RFC6868</a>]  Daboo, C., &quot;Parameter Value Encoding in iCalendar and
+              vCard&quot;, <a href="https://tools.ietf.org/html/rfc6868">RFC 6868</a>, February 2013.
+
+   [<a name="ref-RFC7159" id="ref-RFC7159">RFC7159</a>]  Bray, T., &quot;The JavaScript Object Notation (JSON) Data
+              Interchange Format&quot;, <a href="https://tools.ietf.org/html/rfc7159">RFC 7159</a>, March 2014.
+
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 23]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-24" id="page-24" href="https://tools.ietf.org/html/rfc7265#page-24" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.2" href="https://tools.ietf.org/html/rfc7265#section-9.2">9.2</a>. Informative References</h3></span>
+
+   [<a name="ref-calconnect-artifacts" id="ref-calconnect-artifacts">calconnect-artifacts</a>]
+              The Calendaring and Scheduling Consortium, &quot;Code Artifacts
+              and Schemas&quot;, &lt;<a href="http://www.calconnect.org/artifacts.shtml">http://www.calconnect.org/artifacts.shtml</a>&gt;.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 24]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-25" id="page-25" href="https://tools.ietf.org/html/rfc7265#page-25" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+<span class="h2"><h2><a class="selflink" name="appendix-A" href="https://tools.ietf.org/html/rfc7265#appendix-A">Appendix A</a>. ABNF Schema</h2></span>
+
+   Below is an ABNF schema as per [<a href="https://tools.ietf.org/html/rfc5234" title="&quot;Augmented BNF for Syntax Specifications: ABNF&quot;">RFC5234</a>] for iCalendar in JSON.  ABNF
+   symbols not described here are taken from [<a href="https://tools.ietf.org/html/rfc7159" title="&quot;The JavaScript Object Notation (JSON) Data Interchange Format&quot;">RFC7159</a>].  The schema is
+   non-normative and given for reference only.
+
+   Additional semantic restrictions apply, especially regarding the
+   allowed properties and sub-components per component.  Details on
+   these restrictions can be found in this document and [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>].
+
+   Additional schemas may be available on the Internet at
+   [<a href="https://tools.ietf.org/html/rfc7265#ref-calconnect-artifacts" title="&quot;Code Artifacts and Schemas&quot;">calconnect-artifacts</a>].
+
+   ; A jCal object is a component with the component-name &quot;vcalendar&quot;.
+   ; Restrictions to which properties and sub-components may be
+   ; specified are to be taken from [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>].
+   jcalobject = component
+
+   ; A jCal component consists of the name string, properties array, and
+   ; component array
+   component = begin-array
+               DQUOTE component-name DQUOTE value-separator
+               properties-array value-separator
+               components-array
+               end-array
+
+   components-array = begin-array
+                      [ component *(value-separator component) ]
+                      end-array
+
+   ; A jCal property consists of the name string, parameters object,
+   ; type string, and one or more values as specified in this document.
+   property = begin-array
+              DQUOTE property-name DQUOTE value-separator
+              params-object value-separator
+              DQUOTE type-name DQUOTE
+              property-value *(value-separator property-value)
+              end-array
+   properties-array = begin-array
+                      [ property *(value-separator property) ]
+                      end-array
+
+   ; Property values depend on the type-name. Aside from the value types
+   ; mentioned here, extensions may make use of other JSON value types.
+   ; The non-terminal symbol structured-prop-value covers the special
+   ; cases for GEO and REQUEST-STATUS.
+   property-value = simple-prop-value / structured-prop-value
+   simple-prop-value = string / number / true / false
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 25]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-26" id="page-26" href="https://tools.ietf.org/html/rfc7265#page-26" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+   structured-prop-value =
+       begin-array
+       [ structured-element *(value-separator structured-element) ]
+       end-array
+   structured-element = simple-prop-value
+
+   ; The jCal params-object is a JSON object that follows the semantic
+   ; guidelines described in this document.
+   params-object = begin-object
+                   [ params-member *(value-separator params-member) ]
+                   end-object
+   params-member = DQUOTE param-name DQUOTE name-separator param-value
+   param-value = string / param-multi
+   param-multi = begin-array
+                 [ string *(value-separator string) ]
+                 end-array
+
+   ; The type MUST be a valid type as described by this document. New
+   ; value types can be added by extensions.
+   type-name = &quot;binary&quot; / &quot;boolean&quot; / &quot;cal-address&quot; / &quot;date&quot; /
+               &quot;date-time&quot; / &quot;duration&quot; / &quot;float&quot; / &quot;integer&quot; /
+               &quot;period&quot; / &quot;recur&quot; / &quot;text&quot; / &quot;time&quot; / &quot;uri&quot; /
+               &quot;utc-offset&quot; / x-type
+
+
+   ; Component, property, parameter, and type names MUST be lowercase.
+   ; Additional semantic restrictions apply as described by this
+   ; document and [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>].
+   component-name = lowercase-name
+   property-name = lowercase-name
+   param-name = lowercase-name
+   x-type = lowercase-name
+   lowercase-name = 1*(%x61-7A / DIGIT / &quot;-&quot;)
+
+   ; The following rules are defined in [<a href="https://tools.ietf.org/html/rfc7159" title="&quot;The JavaScript Object Notation (JSON) Data Interchange Format&quot;">RFC7159</a>], as mentioned above:
+   ;   begin-array / end-array
+   ;   begin-object / end-object
+   ;   name-separator / value-separator
+   ;   string / number / true / false
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 26]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-27" id="page-27" href="https://tools.ietf.org/html/rfc7265#page-27" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+<span class="h2"><h2><a class="selflink" name="appendix-B" href="https://tools.ietf.org/html/rfc7265#appendix-B">Appendix B</a>. Examples</h2></span>
+
+   This section contains two examples of iCalendar objects with their
+   jCal representation.
+
+<span class="h3"><h3><a class="selflink" name="appendix-B.1" href="https://tools.ietf.org/html/rfc7265#appendix-B.1">B.1</a>. Example 1</h3></span>
+
+<span class="h4"><h4><a class="selflink" name="appendix-B.1.1" href="https://tools.ietf.org/html/rfc7265#appendix-B.1.1">B.1.1</a>. iCalendar Data</h4></span>
+
+   BEGIN:VCALENDAR
+   CALSCALE:GREGORIAN
+   PRODID:-//Example Inc.//Example Calendar//EN
+   VERSION:2.0
+   BEGIN:VEVENT
+   DTSTAMP:20080205T191224Z
+   DTSTART:20081006
+   SUMMARY:Planning meeting
+   UID:4088E990AD89CB3DBB484909
+   END:VEVENT
+   END:VCALENDAR
+
+<span class="h4"><h4><a class="selflink" name="appendix-B.1.2" href="https://tools.ietf.org/html/rfc7265#appendix-B.1.2">B.1.2</a>. jCal Data</h4></span>
+
+   [&quot;vcalendar&quot;,
+     [
+       [&quot;calscale&quot;, {}, &quot;text&quot;, &quot;GREGORIAN&quot;],
+       [&quot;prodid&quot;, {}, &quot;text&quot;, &quot;-//Example Inc.//Example Calendar//EN&quot;],
+       [&quot;version&quot;, {}, &quot;text&quot;, &quot;2.0&quot;]
+     ],
+     [
+       [&quot;vevent&quot;,
+         [
+           [&quot;dtstamp&quot;, {}, &quot;date-time&quot;, &quot;2008-02-05T19:12:24Z&quot;],
+           [&quot;dtstart&quot;, {}, &quot;date&quot;, &quot;2008-10-06&quot;],
+           [&quot;summary&quot;, {}, &quot;text&quot;, &quot;Planning meeting&quot;],
+           [&quot;uid&quot;, {}, &quot;text&quot;, &quot;4088E990AD89CB3DBB484909&quot;]
+         ],
+         []
+       ]
+     ]
+   ]
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 27]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-28" id="page-28" href="https://tools.ietf.org/html/rfc7265#page-28" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+<span class="h3"><h3><a class="selflink" name="appendix-B.2" href="https://tools.ietf.org/html/rfc7265#appendix-B.2">B.2</a>. Example 2</h3></span>
+
+<span class="h4"><h4><a class="selflink" name="appendix-B.2.1" href="https://tools.ietf.org/html/rfc7265#appendix-B.2.1">B.2.1</a>. iCalendar Data</h4></span>
+
+   BEGIN:VCALENDAR
+   VERSION:2.0
+   PRODID:-//Example Corp.//Example Client//EN
+   BEGIN:VTIMEZONE
+   LAST-MODIFIED:20040110T032845Z
+   TZID:US/Eastern
+   BEGIN:DAYLIGHT
+   DTSTART:20000404T020000
+   RRULE:FREQ=YEARLY;BYDAY=1SU;BYMONTH=4
+   TZNAME:EDT
+   TZOFFSETFROM:-0500
+   TZOFFSETTO:-0400
+   END:DAYLIGHT
+   BEGIN:STANDARD
+   DTSTART:20001026T020000
+   RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=10
+   TZNAME:EST
+   TZOFFSETFROM:-0400
+   TZOFFSETTO:-0500
+   END:STANDARD
+   END:VTIMEZONE
+   BEGIN:VEVENT
+   DTSTAMP:20060206T001121Z
+   DTSTART;TZID=US/Eastern:20060102T120000
+   DURATION:PT1H
+   RRULE:FREQ=DAILY;COUNT=5
+   RDATE;TZID=US/Eastern;VALUE=PERIOD:20060102T150000/PT2H
+   SUMMARY:Event #2
+   DESCRIPTION:We are having a meeting all this week at 12 pm fo
+    r one hour\, with an additional meeting on the first day 2 h
+    ours long.\nPlease bring your own lunch for the 12 pm meetin
+    gs.
+   UID:00959BC664CA650E933C892C@example.com
+   END:VEVENT
+   BEGIN:VEVENT
+   DTSTAMP:20060206T001121Z
+   DTSTART;TZID=US/Eastern:20060104T140000
+   DURATION:PT1H
+   RECURRENCE-ID;TZID=US/Eastern:20060104T120000
+   SUMMARY:Event #2 bis
+   UID:00959BC664CA650E933C892C@example.com
+   END:VEVENT
+   END:VCALENDAR
+
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 28]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-29" id="page-29" href="https://tools.ietf.org/html/rfc7265#page-29" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+<span class="h4"><h4><a class="selflink" name="appendix-B.2.2" href="https://tools.ietf.org/html/rfc7265#appendix-B.2.2">B.2.2</a>. jCal Data</h4></span>
+
+   [&quot;vcalendar&quot;,
+     [
+       [&quot;prodid&quot;, {}, &quot;text&quot;, &quot;-//Example Corp.//Example Client//EN&quot;],
+       [&quot;version&quot;, {}, &quot;text&quot;, &quot;2.0&quot;]
+     ],
+     [
+       [&quot;vtimezone&quot;,
+         [
+           [&quot;last-modified&quot;, {}, &quot;date-time&quot;, &quot;2004-01-10T03:28:45Z&quot;],
+           [&quot;tzid&quot;, {}, &quot;text&quot;, &quot;US/Eastern&quot;]
+         ],
+         [
+           [&quot;daylight&quot;,
+             [
+               [&quot;dtstart&quot;, {}, &quot;date-time&quot;, &quot;2000-04-04T02:00:00&quot;],
+               [&quot;rrule&quot;,
+                 {},
+                 &quot;recur&quot;,
+                 {
+                   &quot;freq&quot;: &quot;YEARLY&quot;,
+                   &quot;byday&quot;: &quot;1SU&quot;,
+                   &quot;bymonth&quot;: 4
+                 }
+               ],
+               [&quot;tzname&quot;, {}, &quot;text&quot;, &quot;EDT&quot;],
+               [&quot;tzoffsetfrom&quot;, {}, &quot;utc-offset&quot;, &quot;-05:00&quot;],
+               [&quot;tzoffsetto&quot;, {}, &quot;utc-offset&quot;, &quot;-04:00&quot;]
+             ],
+             []
+           ],
+           [&quot;standard&quot;,
+             [
+               [&quot;dtstart&quot;, {}, &quot;date-time&quot;, &quot;2000-10-26T02:00:00&quot;],
+               [&quot;rrule&quot;,
+                 {},
+                 &quot;recur&quot;,
+                 {
+                   &quot;freq&quot;: &quot;YEARLY&quot;,
+                   &quot;byday&quot;: &quot;1SU&quot;,
+                   &quot;bymonth&quot;: 10
+                 }
+               ],
+               [&quot;tzname&quot;, {}, &quot;text&quot;, &quot;EST&quot;],
+               [&quot;tzoffsetfrom&quot;, {}, &quot;utc-offset&quot;, &quot;-04:00&quot;],
+               [&quot;tzoffsetto&quot;, {}, &quot;utc-offset&quot;, &quot;-05:00&quot;]
+             ],
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 29]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-30" id="page-30" href="https://tools.ietf.org/html/rfc7265#page-30" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+             []
+           ]
+         ]
+       ],
+       [&quot;vevent&quot;,
+         [
+           [&quot;dtstamp&quot;, {}, &quot;date-time&quot;, &quot;2006-02-06T00:11:21Z&quot;],
+           [&quot;dtstart&quot;,
+             { &quot;tzid&quot;: &quot;US/Eastern&quot; },
+             &quot;date-time&quot;,
+             &quot;2006-01-02T12:00:00&quot;
+           ],
+           [&quot;duration&quot;, {}, &quot;duration&quot;, &quot;PT1H&quot;],
+           [&quot;rrule&quot;, {}, &quot;recur&quot;, { &quot;freq&quot;: &quot;DAILY&quot;, &quot;count&quot;: 5 } ],
+           [&quot;rdate&quot;,
+             { &quot;tzid&quot;: &quot;US/Eastern&quot; },
+             &quot;period&quot;,
+             &quot;2006-01-02T15:00:00/PT2H&quot;
+           ],
+           [&quot;summary&quot;, {}, &quot;text&quot;, &quot;Event #2&quot;],
+           [&quot;description&quot;,
+            {},
+            &quot;text&quot;,
+            // Note that comments and string concatenation are not
+            // allowed per the JSON specification and is used here only
+            // to avoid long lines.
+            &quot;We are having a meeting all this week at 12 pm for one &quot; +
+            &quot;hour, with an additional meeting on the first day 2 &quot; +
+            &quot;hours long.\nPlease bring your own lunch for the 12 pm &quot; +
+            &quot;meetings.&quot;
+           ],
+           [&quot;uid&quot;, {}, &quot;text&quot;, &quot;00959BC664CA650E933C892C@example.com&quot;]
+         ],
+         []
+       ],
+       [&quot;vevent&quot;,
+         [
+           [&quot;dtstamp&quot;, {}, &quot;date-time&quot;, &quot;2006-02-06T00:11:21Z&quot;],
+           [&quot;dtstart&quot;,
+             { &quot;tzid&quot;: &quot;US/Eastern&quot; },
+             &quot;date-time&quot;,
+             &quot;2006-01-02T14:00:00&quot;
+           ],
+           [&quot;duration&quot;, {}, &quot;duration&quot;, &quot;PT1H&quot;],
+           [&quot;recurrence-id&quot;,
+             { &quot;tzid&quot;: &quot;US/Eastern&quot; },
+             &quot;date-time&quot;,
+             &quot;2006-01-04T12:00:00&quot;
+
+
+
+<span class="grey">Kewisch, et al.              Standards Track                   [Page 30]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-31" id="page-31" href="https://tools.ietf.org/html/rfc7265#page-31" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7265">RFC 7265</a>                          jCal                          May 2014</span>
+
+
+           ],
+           [&quot;summary&quot;, {}, &quot;text&quot;, &quot;Event #2&quot;],
+           [&quot;uid&quot;, {}, &quot;text&quot;, &quot;00959BC664CA650E933C892C@example.com&quot;]
+         ],
+         []
+       ]
+     ]
+   ]
+
+Authors' Addresses
+
+   Philipp Kewisch
+   Mozilla Corporation
+   650 Castro Street, Suite 300
+   Mountain View, CA  94041
+   USA
+
+   EMail: mozilla@kewis.ch
+   URI:   <a href="http://www.mozilla.org/">http://www.mozilla.org/</a>
+
+
+   Cyrus Daboo
+   Apple Inc.
+   1 Infinite Loop
+   Cupertino, CA  95014
+   USA
+
+   EMail: cyrus@daboo.name
+   URI:   <a href="http://www.apple.com/">http://www.apple.com/</a>
+
+
+   Mike Douglass
+   Rensselaer Polytechnic Institute
+   110 8th Street
+   Troy, NY  12180
+   USA
+
+   EMail: douglm@rpi.edu
+   URI:   <a href="http://www.rpi.edu/">http://www.rpi.edu/</a>
+
+
+
+
+
+
+
+
+
+
+
+
+Kewisch, et al.              Standards Track                   [Page 31]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

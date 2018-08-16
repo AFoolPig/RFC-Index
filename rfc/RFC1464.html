@@ -1,0 +1,410 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:1464" /> 
+  <meta name="DC.Description.Abstract" content="This paper describes a simple means to associate arbitrary string
+information (ASCII text) with attributes that have not been defined by
+the DNS. This memo defines an Experimental Protocol for the Internet
+community." /> 
+  <meta name="DC.Creator" content="R. Rosenbaum" /> 
+  <meta name="DC.Date.Issued" content="May, 1993" /> 
+  <meta name="DC.Title" content="Using the Domain Name System To Store Arbitrary String Attributes" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 1464 - Using the Domain Name System To Store Arbitrary String Attributes</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgyellow" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc1464.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc1464" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-rosenbaum-dns-storage" title="draft-rosenbaum-dns-storage">draft-rosenbaum...</a>] [<a href="https://datatracker.ietf.org/doc/rfc1464" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc1464" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc1464" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=1464">Errata</a>]</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> EXPERIMENTAL</span>
+   <br /> 
+   <span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span>
+   <br /> 
+   <pre>Network Working Group                                       R. Rosenbaum
+Request for Comments: 1464                 Digital Equipment Corporation
+                                                                May 1993
+
+
+                     <span class="h1"><h1>Using the Domain Name System</h1></span>
+                  <span class="h1"><h1>To Store Arbitrary String Attributes</h1></span>
+
+Status of this Memo
+
+   This memo defines an Experimental Protocol for the Internet
+   community.  Discussion and suggestions for improvement are requested.
+   Please refer to the current edition of the &quot;IAB Official Protocol
+   Standards&quot; for the standardization state and status of this protocol.
+   Distribution of this memo is unlimited.
+
+Abstract
+
+   While the Domain Name System (DNS) [<a href="https://tools.ietf.org/html/rfc1464#ref-2" title="&quot;Domain Names - Concepts and Facilities&quot;">2</a>,<a href="https://tools.ietf.org/html/rfc1464#ref-3" title="&quot;Domain Names - Implementation and Specification&quot;">3</a>] is generally used to store
+   predefined types of information (e.g., addresses of hosts), it is
+   possible to use it to store information that has not been previously
+   classified.
+
+   This paper describes a simple means to associate arbitrary string
+   information (ASCII text) with attributes that have not been defined
+   by the DNS.  It uses DNS TXT resource records to store the
+   information.  It requires no change to current DNS implementations.
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc1464#section-1">1</a>. Introduction</h2></span>
+
+   The Domain Name System is designed to store information that has both
+   a predefined type and structure.  Examples include IP addresses of
+   hosts and names of mail exchangers.  It would be useful to take
+   advantage of the widespread use and scaleability of the DNS to store
+   information that has not been previously defined.
+
+   This paper proposes the use of the DNS TXT resource record (defined
+   in STD 13, <a href="https://tools.ietf.org/html/rfc1035">RFC 1035</a>) to contain new types of information.  The
+   principal advantage of such an approach is that it requires no change
+   to most existing DNS servers.  It is not intended to replace the
+   process by which new resource records are defined and implemented.
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc1464#section-2">2</a>. Format of TXT record</h2></span>
+
+   To store new types of information, the TXT record uses a structured
+   format in its TXT-DATA field.  The format consists of the attribute
+   name followed by the value of the attribute.  The name and value are
+   separated by an equals sign (=).
+
+
+
+<span class="grey">Rosenbaum                                                       [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc1464#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc1464">RFC 1464</a>          Storing Arbitrary Attributes in DNS           May 1993</span>
+
+
+   For example, the following TXT records contain attributes specified
+   in this fashion:
+
+        host.widgets.com   IN   TXT   &quot;printer=lpr5&quot;
+        sam.widgets.com    IN   TXT   &quot;favorite drink=orange juice&quot;
+
+   The general syntax is:
+
+        &lt;owner&gt; &lt;class&gt; &lt;ttl&gt; TXT &quot;&lt;attribute name&gt;=&lt;attribute value&gt;&quot;
+
+   Attribute Names
+
+   Any printable ASCII character is permitted for the attribute name.
+   If an equals sign is embedded in the attribute name, it must be
+   quoted with a preceding grave accent (or backquote: &quot;`&quot;).  A
+   backquote must also be quoted with an additional &quot;`&quot;.
+
+   Attribute Name Matching Rules
+
+   The attribute name is considered case-insensitive.  For example, a
+   lookup of the attribute &quot;Favorite Drink&quot; would match a TXT record
+   containing &quot;favorite drink=Earl Grey tea&quot;.
+
+   During lookups, TXT records that do not contain an unquoted &quot;=&quot; are
+   ignored.  TXT records that seem to contain a null attribute name,
+   that is, the TXT-DATA starts with the character &quot;=&quot;, are also
+   ignored.
+
+   Leading and trailing whitespace (spaces and tabs) in the attribute
+   name are ignored unless they are quoted (with a &quot;`&quot;).  For example,
+   &quot;abc&quot; matches &quot; abc&lt;tab&gt;&quot; but does not match &quot;` abc&quot;.
+
+   Note that most DNS server implementations require a backslash (\) or
+   double quote (&quot;) in a text string to be quoted with a preceding
+   backslash.  Accent grave (&quot;`&quot;) was chosen as a quoting character in
+   this syntax to avoid confusion with &quot;\&quot; (and remove the need for
+   confusing strings that include sequences like &quot;\\\\&quot;).
+
+   Attribute Values
+
+   All printable ASCII characters are permitted in the attribute value.
+   No characters need to be quoted with a &quot;`&quot;.  In other words, the
+   first unquoted equals sign in the TXT record is the name/value
+   delimiter.  All subsequent characters are part of the value.
+
+   Once again, note that in most implementations the backslash character
+   is an active quoting character (and must, itself, be quoted).
+
+
+
+
+<span class="grey">Rosenbaum                                                       [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc1464#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc1464">RFC 1464</a>          Storing Arbitrary Attributes in DNS           May 1993</span>
+
+
+   All whitespace in the attribute value is returned to the requestor
+   (it is up to the application to decide if it is significant.)
+
+   Examples
+
+   &lt;sp&gt; indicates a space character.
+
+   Attribute    Attribute       Internal Form           External Form
+   Name         Value           (server to resolver)    (TXT record)
+
+   color        blue            color=blue              &quot;color=blue&quot;
+   equation     a=4             equation=a=4            &quot;equation=a=4&quot;
+   a=a          true            a`=a=true               &quot;a`=a=true&quot;
+   a\=a false           a\`=a=false             &quot;a\\`=a=false&quot;
+   =            \=              `==\=                   &quot;`==\\=&quot;
+
+   string       &quot;Cat&quot;           string=&quot;Cat&quot;            &quot;string=\&quot;Cat\&quot;&quot;
+   string2      `abc`           string2=``abc``         &quot;string2=``abc``&quot;
+   novalue                      novalue=                &quot;novalue=&quot;
+   a b          c d             a b=c d                 &quot;a b=c d&quot;
+   abc&lt;sp&gt;      123&lt;sp&gt;         abc` =123&lt;sp&gt;           &quot;abc` =123 &quot;
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc1464#section-3">3</a>. Application Usage</h2></span>
+
+   The attributes can be accessed by the standard resolver library, but
+   it is recommended that a library routine designed specially for this
+   attribute format be used.  Such a routine might provide an analogue
+   to gethostbyname:
+
+         getattributebyname(objectname,          name of object
+                            attributename,       name of attribute
+                            attributevalue,      pointer to buffer
+                            attributevaluelen)   length of buffer
+
+   This routine would remove all quoting characters before returning the
+   information to the caller.  A more complex routine could return
+   attributes with multiple values, or several different attributes.
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc1464#section-4">4</a>. Attribute Name Registration</h2></span>
+
+   To permit ease of interoperability and to reduce the chance of naming
+   conflicts, a registration process for well known attribute names
+   might be established.  This could be a periodically updated list of
+   names and/or adherence to other name registration mechanisms such as
+   published object identifiers.
+
+   This paper does not address attribute name registration.
+
+
+
+
+<span class="grey">Rosenbaum                                                       [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc1464#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc1464">RFC 1464</a>          Storing Arbitrary Attributes in DNS           May 1993</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc1464#section-5">5</a>. Restrictions</h2></span>
+
+   Some DNS server implementations place limits on the size or number of
+   TXT records associated with a particular owner.  Certain
+   implementations may not support TXT records at all.
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc1464#section-6">6</a>. REFERENCES and BIBLIOGRAPHY</h2></span>
+
+   [<a name="ref-1" id="ref-1">1</a>] Stahl, M., &quot;Domain Administrators Guide&quot;, <a href="https://tools.ietf.org/html/rfc1032">RFC 1032</a>, Network
+       Information Center, SRI International, November 1987.
+
+   [<a name="ref-2" id="ref-2">2</a>] Mockapetris, P., &quot;Domain Names - Concepts and Facilities&quot;, STD
+       13, <a href="https://tools.ietf.org/html/rfc1034">RFC 1034</a>, USC/Information Sciences Institute, November 1987.
+
+   [<a name="ref-3" id="ref-3">3</a>] Mockapetris, P., &quot;Domain Names - Implementation and
+       Specification&quot;, STD 13, <a href="https://tools.ietf.org/html/rfc1035">RFC 1035</a>, USC/Information Sciences
+       Institute, November 1987.
+
+   [<a name="ref-4" id="ref-4">4</a>] Mockapetris, P., &quot;DNS Encoding of Network Names and Other Types&quot;,
+       <a href="https://tools.ietf.org/html/rfc1101">RFC 1101</a>, USC/Information Sciences Institute, April 1989.
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc1464#section-7">7</a>. Security Considerations</h2></span>
+
+   Security issues are not discussed in this memo.
+
+<span class="h2"><h2><a class="selflink" name="section-8" href="https://tools.ietf.org/html/rfc1464#section-8">8</a>. Author's Address</h2></span>
+
+   Rich Rosenbaum
+   Digital Equipment Corporation
+   550 King Street, LKG2-2/Z7
+   Littleton, MA  01460-1289
+
+   Phone: 508-486-5922
+   Email: rosenbaum@lkg.dec.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Rosenbaum                                                       [Page 4]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

@@ -1,0 +1,2322 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:7224" /> 
+  <meta name="DC.Description.Abstract" content="This document defines the initial version of the iana-if-type YANG
+module." /> 
+  <meta name="DC.Creator" content="Martin Bjorklund &lt;mbj@tail-f.com&gt;" /> 
+  <meta name="DC.Date.Issued" content="May, 2014" /> 
+  <meta name="DC.Title" content="IANA Interface Type YANG Module" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 7224 - IANA Interface Type YANG Module</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgblue" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc7224.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc7224" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-ietf-netmod-iana-if-type" title="draft-ietf-netmod-iana-if-type">draft-ietf-netm...</a>] [<a href="https://datatracker.ietf.org/doc/rfc7224" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc7224" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc7224" title="Side-by-side diff">Diff2</a>] </span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> PROPOSED STANDARD</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <pre>Internet Engineering Task Force (IETF)                      M. Bjorklund
+Request for Comments: 7224                                Tail-f Systems
+Category: Standards Track                                       May 2014
+ISSN: 2070-1721
+
+
+                    <span class="h1"><h1>IANA Interface Type YANG Module</h1></span>
+
+Abstract
+
+   This document defines the initial version of the iana-if-type YANG
+   module.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in <a href="https://tools.ietf.org/html/rfc5741#section-2">Section&nbsp;2 of RFC 5741</a>.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   <a href="http://www.rfc-editor.org/info/rfc7224">http://www.rfc-editor.org/info/rfc7224</a>.
+
+Copyright Notice
+
+   Copyright (c) 2014 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                    [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc7224#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc7224#section-1">1</a>.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7224#page-2">2</a>
+   <a href="https://tools.ietf.org/html/rfc7224#section-2">2</a>.  IANA-Maintained Interface Type YANG Module  . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7224#page-2">2</a>
+   <a href="https://tools.ietf.org/html/rfc7224#section-3">3</a>.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7224#page-35">35</a>
+     <a href="https://tools.ietf.org/html/rfc7224#section-3.1">3.1</a>.  URI Registrations . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7224#page-36">36</a>
+     <a href="https://tools.ietf.org/html/rfc7224#section-3.2">3.2</a>.  YANG Module Registrations . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7224#page-36">36</a>
+   <a href="https://tools.ietf.org/html/rfc7224#section-4">4</a>.  Security Considerations . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7224#page-36">36</a>
+   <a href="https://tools.ietf.org/html/rfc7224#section-5">5</a>.  Normative References  . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7224#page-37">37</a>
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc7224#section-1">1</a>. Introduction</h2></span>
+
+   This document defines the initial version of the iana-if-type YANG
+   module for interface type definitions.
+
+   The iana-if-type module reflects IANA's existing &quot;ifType definitions&quot;
+   registry [<a href="https://tools.ietf.org/html/rfc7224#ref-IFTYPE-IANA-REGISTRY" title="&quot;ifType Definitions&quot;">IFTYPE-IANA-REGISTRY</a>].  The latest revision of the module
+   can be obtained from the IANA web site.
+
+   Whenever a new interface type is added to the &quot;ifType definitions&quot;
+   registry, the IANAifType-MIB and the iana-if-type YANG module are
+   updated by IANA.
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc7224#section-2">2</a>. IANA-Maintained Interface Type YANG Module</h2></span>
+
+   This YANG module imports the &quot;interface-type&quot; identity from
+   [<a href="https://tools.ietf.org/html/rfc7223" title="&quot;A YANG Data Model for Interface Management&quot;">RFC7223</a>].
+
+   &lt;CODE BEGINS&gt; file &quot;iana-if-type.yang&quot;
+
+   module iana-if-type {
+     namespace &quot;urn:ietf:params:xml:ns:yang:iana-if-type&quot;;
+     prefix ianaift;
+
+     import ietf-interfaces {
+       prefix if;
+     }
+
+     organization &quot;IANA&quot;;
+     contact
+       &quot;        Internet Assigned Numbers Authority
+
+        Postal: ICANN
+                4676 Admiralty Way, Suite 330
+                Marina del Rey, CA 90292
+
+        Tel:    +1 310 823 9358
+        &lt;mailto:iana@iana.org&gt;&quot;;
+
+
+
+<span class="grey">Bjorklund                    Standards Track                    [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc7224#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     description
+       &quot;This YANG module defines YANG identities for IANA-registered
+        interface types.
+
+        This YANG module is maintained by IANA and reflects the
+        'ifType definitions' registry.
+
+        The latest revision of this YANG module can be obtained from
+        the IANA web site.
+
+        Requests for new values should be made to IANA via
+        email (iana@iana.org).
+
+        Copyright (c) 2014 IETF Trust and the persons identified as
+        authors of the code.  All rights reserved.
+
+        Redistribution and use in source and binary forms, with or
+        without modification, is permitted pursuant to, and subject
+        to the license terms contained in, the Simplified BSD License
+        set forth in <a href="https://tools.ietf.org/html/rfc7224#section-4">Section 4</a>.c of the IETF Trust's Legal Provisions
+        Relating to IETF Documents
+        (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>).
+
+        The initial version of this YANG module is part of <a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>;
+        see the RFC itself for full legal notices.&quot;;
+       reference
+         &quot;IANA 'ifType definitions' registry.
+          &lt;<a href="http://www.iana.org/assignments/smi-numbers">http://www.iana.org/assignments/smi-numbers</a>&gt;&quot;;
+
+     revision 2014-05-08 {
+       description
+         &quot;Initial revision.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>: IANA Interface Type YANG Module&quot;;
+     }
+
+     identity iana-interface-type {
+       base if:interface-type;
+       description
+         &quot;This identity is used as a base for all interface types
+          defined in the 'ifType definitions' registry.&quot;;
+     }
+
+
+
+
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                    [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc7224#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity other {
+       base iana-interface-type;
+     }
+     identity regular1822 {
+       base iana-interface-type;
+     }
+     identity hdh1822 {
+       base iana-interface-type;
+     }
+     identity ddnX25 {
+       base iana-interface-type;
+     }
+     identity rfc877x25 {
+       base iana-interface-type;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc1382">RFC 1382</a> - SNMP MIB Extension for the X.25 Packet Layer&quot;;
+     }
+     identity ethernetCsmacd {
+       base iana-interface-type;
+       description
+         &quot;For all Ethernet-like interfaces, regardless of speed,
+          as per <a href="https://tools.ietf.org/html/rfc3635">RFC 3635</a>.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc3635">RFC 3635</a> - Definitions of Managed Objects for the
+                     Ethernet-like Interface Types&quot;;
+     }
+     identity iso88023Csmacd {
+       base iana-interface-type;
+       status deprecated;
+       description
+         &quot;Deprecated via <a href="https://tools.ietf.org/html/rfc3635">RFC 3635</a>.
+          Use ethernetCsmacd(6) instead.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc3635">RFC 3635</a> - Definitions of Managed Objects for the
+                     Ethernet-like Interface Types&quot;;
+     }
+     identity iso88024TokenBus {
+       base iana-interface-type;
+     }
+     identity iso88025TokenRing {
+       base iana-interface-type;
+     }
+     identity iso88026Man {
+       base iana-interface-type;
+     }
+     identity starLan {
+       base iana-interface-type;
+       status deprecated;
+
+
+
+<span class="grey">Bjorklund                    Standards Track                    [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc7224#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+       description
+         &quot;Deprecated via <a href="https://tools.ietf.org/html/rfc3635">RFC 3635</a>.
+          Use ethernetCsmacd(6) instead.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc3635">RFC 3635</a> - Definitions of Managed Objects for the
+                     Ethernet-like Interface Types&quot;;
+     }
+     identity proteon10Mbit {
+       base iana-interface-type;
+     }
+     identity proteon80Mbit {
+       base iana-interface-type;
+     }
+     identity hyperchannel {
+       base iana-interface-type;
+     }
+     identity fddi {
+       base iana-interface-type;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc1512">RFC 1512</a> - FDDI Management Information Base&quot;;
+     }
+     identity lapb {
+       base iana-interface-type;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc1381">RFC 1381</a> - SNMP MIB Extension for X.25 LAPB&quot;;
+     }
+     identity sdlc {
+       base iana-interface-type;
+     }
+     identity ds1 {
+       base iana-interface-type;
+       description
+         &quot;DS1-MIB.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc4805">RFC 4805</a> - Definitions of Managed Objects for the
+                     DS1, J1, E1, DS2, and E2 Interface Types&quot;;
+     }
+     identity e1 {
+       base iana-interface-type;
+       status obsolete;
+       description
+         &quot;Obsolete; see DS1-MIB.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc4805">RFC 4805</a> - Definitions of Managed Objects for the
+                     DS1, J1, E1, DS2, and E2 Interface Types&quot;;
+     }
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                    [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc7224#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity basicISDN {
+       base iana-interface-type;
+       description
+         &quot;No longer used.  See also <a href="https://tools.ietf.org/html/rfc2127">RFC 2127</a>.&quot;;
+     }
+     identity primaryISDN {
+       base iana-interface-type;
+       description
+         &quot;No longer used.  See also <a href="https://tools.ietf.org/html/rfc2127">RFC 2127</a>.&quot;;
+     }
+     identity propPointToPointSerial {
+       base iana-interface-type;
+       description
+         &quot;Proprietary serial.&quot;;
+     }
+     identity ppp {
+       base iana-interface-type;
+     }
+     identity softwareLoopback {
+       base iana-interface-type;
+     }
+     identity eon {
+       base iana-interface-type;
+       description
+         &quot;CLNP over IP.&quot;;
+     }
+     identity ethernet3Mbit {
+       base iana-interface-type;
+     }
+     identity nsip {
+       base iana-interface-type;
+       description
+         &quot;XNS over IP.&quot;;
+     }
+     identity slip {
+       base iana-interface-type;
+       description
+         &quot;Generic SLIP.&quot;;
+     }
+     identity ultra {
+       base iana-interface-type;
+       description
+         &quot;Ultra Technologies.&quot;;
+     }
+     identity ds3 {
+       base iana-interface-type;
+       description
+         &quot;DS3-MIB.&quot;;
+
+
+
+<span class="grey">Bjorklund                    Standards Track                    [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc7224#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc3896">RFC 3896</a> - Definitions of Managed Objects for the
+                     DS3/E3 Interface Type&quot;;
+     }
+     identity sip {
+       base iana-interface-type;
+       description
+         &quot;SMDS, coffee.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc1694">RFC 1694</a> - Definitions of Managed Objects for SMDS
+                     Interfaces using SMIv2&quot;;
+     }
+     identity frameRelay {
+       base iana-interface-type;
+       description
+         &quot;DTE only.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc2115">RFC 2115</a> - Management Information Base for Frame Relay
+                     DTEs Using SMIv2&quot;;
+     }
+     identity rs232 {
+       base iana-interface-type;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc1659">RFC 1659</a> - Definitions of Managed Objects for RS-232-like
+                     Hardware Devices using SMIv2&quot;;
+     }
+     identity para {
+       base iana-interface-type;
+       description
+         &quot;Parallel-port.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc1660">RFC 1660</a> - Definitions of Managed Objects for
+                     Parallel-printer-like Hardware Devices using
+                     SMIv2&quot;;
+     }
+     identity arcnet {
+       base iana-interface-type;
+       description
+         &quot;ARCnet.&quot;;
+     }
+     identity arcnetPlus {
+       base iana-interface-type;
+       description
+         &quot;ARCnet Plus.&quot;;
+     }
+
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                    [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc7224#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity atm {
+       base iana-interface-type;
+       description
+         &quot;ATM cells.&quot;;
+     }
+     identity miox25 {
+       base iana-interface-type;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc1461">RFC 1461</a> - SNMP MIB extension for Multiprotocol
+                     Interconnect over X.25&quot;;
+     }
+     identity sonet {
+       base iana-interface-type;
+       description
+         &quot;SONET or SDH.&quot;;
+     }
+     identity x25ple {
+       base iana-interface-type;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc2127">RFC 2127</a> - ISDN Management Information Base using SMIv2&quot;;
+     }
+     identity iso88022llc {
+       base iana-interface-type;
+     }
+     identity localTalk {
+       base iana-interface-type;
+     }
+     identity smdsDxi {
+       base iana-interface-type;
+     }
+     identity frameRelayService {
+       base iana-interface-type;
+       description
+         &quot;FRNETSERV-MIB.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc2954">RFC 2954</a> - Definitions of Managed Objects for Frame
+                     Relay Service&quot;;
+     }
+     identity v35 {
+       base iana-interface-type;
+     }
+     identity hssi {
+       base iana-interface-type;
+     }
+     identity hippi {
+       base iana-interface-type;
+     }
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                    [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc7224#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity modem {
+       base iana-interface-type;
+       description
+         &quot;Generic modem.&quot;;
+     }
+     identity aal5 {
+       base iana-interface-type;
+       description
+         &quot;AAL5 over ATM.&quot;;
+     }
+     identity sonetPath {
+       base iana-interface-type;
+     }
+     identity sonetVT {
+       base iana-interface-type;
+     }
+     identity smdsIcip {
+       base iana-interface-type;
+       description
+         &quot;SMDS InterCarrier Interface.&quot;;
+     }
+     identity propVirtual {
+       base iana-interface-type;
+       description
+         &quot;Proprietary virtual/internal.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc2863">RFC 2863</a> - The Interfaces Group MIB&quot;;
+     }
+     identity propMultiplexor {
+       base iana-interface-type;
+       description
+         &quot;Proprietary multiplexing.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc2863">RFC 2863</a> - The Interfaces Group MIB&quot;;
+     }
+     identity ieee80212 {
+       base iana-interface-type;
+       description
+         &quot;100BaseVG.&quot;;
+     }
+     identity fibreChannel {
+       base iana-interface-type;
+       description
+         &quot;Fibre Channel.&quot;;
+     }
+
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                    [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc7224#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity hippiInterface {
+       base iana-interface-type;
+       description
+         &quot;HIPPI interfaces.&quot;;
+     }
+     identity frameRelayInterconnect {
+       base iana-interface-type;
+       status obsolete;
+       description
+         &quot;Obsolete; use either
+          frameRelay(32) or frameRelayService(44).&quot;;
+     }
+     identity aflane8023 {
+       base iana-interface-type;
+       description
+         &quot;ATM Emulated LAN for 802.3.&quot;;
+     }
+     identity aflane8025 {
+       base iana-interface-type;
+       description
+         &quot;ATM Emulated LAN for 802.5.&quot;;
+     }
+     identity cctEmul {
+       base iana-interface-type;
+       description
+         &quot;ATM Emulated circuit.&quot;;
+     }
+     identity fastEther {
+       base iana-interface-type;
+       status deprecated;
+       description
+         &quot;Obsoleted via <a href="https://tools.ietf.org/html/rfc3635">RFC 3635</a>.
+          ethernetCsmacd(6) should be used instead.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc3635">RFC 3635</a> - Definitions of Managed Objects for the
+                     Ethernet-like Interface Types&quot;;
+     }
+     identity isdn {
+       base iana-interface-type;
+       description
+         &quot;ISDN and X.25.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc1356">RFC 1356</a> - Multiprotocol Interconnect on X.25 and ISDN
+                     in the Packet Mode&quot;;
+     }
+
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc7224#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity v11 {
+       base iana-interface-type;
+       description
+         &quot;CCITT V.11/X.21.&quot;;
+     }
+     identity v36 {
+       base iana-interface-type;
+       description
+         &quot;CCITT V.36.&quot;;
+     }
+     identity g703at64k {
+       base iana-interface-type;
+       description
+         &quot;CCITT G703 at 64Kbps.&quot;;
+     }
+     identity g703at2mb {
+       base iana-interface-type;
+       status obsolete;
+       description
+         &quot;Obsolete; see DS1-MIB.&quot;;
+     }
+     identity qllc {
+       base iana-interface-type;
+       description
+         &quot;SNA QLLC.&quot;;
+     }
+     identity fastEtherFX {
+       base iana-interface-type;
+       status deprecated;
+       description
+         &quot;Obsoleted via <a href="https://tools.ietf.org/html/rfc3635">RFC 3635</a>.
+          ethernetCsmacd(6) should be used instead.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc3635">RFC 3635</a> - Definitions of Managed Objects for the
+                     Ethernet-like Interface Types&quot;;
+     }
+     identity channel {
+       base iana-interface-type;
+       description
+         &quot;Channel.&quot;;
+     }
+     identity ieee80211 {
+       base iana-interface-type;
+       description
+         &quot;Radio spread spectrum.&quot;;
+     }
+     identity ibm370parChan {
+       base iana-interface-type;
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc7224#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+       description
+         &quot;IBM System 360/370 OEMI Channel.&quot;;
+     }
+     identity escon {
+       base iana-interface-type;
+       description
+         &quot;IBM Enterprise Systems Connection.&quot;;
+     }
+     identity dlsw {
+       base iana-interface-type;
+       description
+         &quot;Data Link Switching.&quot;;
+     }
+     identity isdns {
+       base iana-interface-type;
+       description
+         &quot;ISDN S/T interface.&quot;;
+     }
+     identity isdnu {
+       base iana-interface-type;
+       description
+         &quot;ISDN U interface.&quot;;
+     }
+     identity lapd {
+       base iana-interface-type;
+       description
+         &quot;Link Access Protocol D.&quot;;
+     }
+     identity ipSwitch {
+       base iana-interface-type;
+       description
+         &quot;IP Switching Objects.&quot;;
+     }
+     identity rsrb {
+       base iana-interface-type;
+       description
+         &quot;Remote Source Route Bridging.&quot;;
+     }
+     identity atmLogical {
+       base iana-interface-type;
+       description
+         &quot;ATM Logical Port.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc3606">RFC 3606</a> - Definitions of Supplemental Managed Objects
+                     for ATM Interface&quot;;
+     }
+     identity ds0 {
+       base iana-interface-type;
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-13" id="page-13" href="https://tools.ietf.org/html/rfc7224#page-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+       description
+         &quot;Digital Signal Level 0.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc2494">RFC 2494</a> - Definitions of Managed Objects for the DS0
+                     and DS0 Bundle Interface Type&quot;;
+     }
+     identity ds0Bundle {
+       base iana-interface-type;
+       description
+         &quot;Group of ds0s on the same ds1.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc2494">RFC 2494</a> - Definitions of Managed Objects for the DS0
+                     and DS0 Bundle Interface Type&quot;;
+     }
+     identity bsc {
+       base iana-interface-type;
+       description
+         &quot;Bisynchronous Protocol.&quot;;
+     }
+     identity async {
+       base iana-interface-type;
+       description
+         &quot;Asynchronous Protocol.&quot;;
+     }
+     identity cnr {
+       base iana-interface-type;
+       description
+         &quot;Combat Net Radio.&quot;;
+     }
+     identity iso88025Dtr {
+       base iana-interface-type;
+       description
+         &quot;ISO 802.5r DTR.&quot;;
+     }
+     identity eplrs {
+       base iana-interface-type;
+       description
+         &quot;Ext Pos Loc Report Sys.&quot;;
+     }
+     identity arap {
+       base iana-interface-type;
+       description
+         &quot;Appletalk Remote Access Protocol.&quot;;
+     }
+     identity propCnls {
+       base iana-interface-type;
+       description
+         &quot;Proprietary Connectionless Protocol.&quot;;
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 13]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-14" id="page-14" href="https://tools.ietf.org/html/rfc7224#page-14" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     }
+     identity hostPad {
+       base iana-interface-type;
+       description
+         &quot;CCITT-ITU X.29 PAD Protocol.&quot;;
+     }
+     identity termPad {
+       base iana-interface-type;
+       description
+         &quot;CCITT-ITU X.3 PAD Facility.&quot;;
+     }
+     identity frameRelayMPI {
+       base iana-interface-type;
+       description
+         &quot;Multiproto Interconnect over FR.&quot;;
+     }
+     identity x213 {
+       base iana-interface-type;
+       description
+         &quot;CCITT-ITU X213.&quot;;
+     }
+     identity adsl {
+       base iana-interface-type;
+       description
+         &quot;Asymmetric Digital Subscriber Loop.&quot;;
+     }
+     identity radsl {
+       base iana-interface-type;
+       description
+         &quot;Rate-Adapt. Digital Subscriber Loop.&quot;;
+     }
+     identity sdsl {
+       base iana-interface-type;
+       description
+         &quot;Symmetric Digital Subscriber Loop.&quot;;
+     }
+     identity vdsl {
+       base iana-interface-type;
+       description
+         &quot;Very H-Speed Digital Subscrib. Loop.&quot;;
+     }
+     identity iso88025CRFPInt {
+       base iana-interface-type;
+       description
+         &quot;ISO 802.5 CRFP.&quot;;
+     }
+     identity myrinet {
+       base iana-interface-type;
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 14]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-15" id="page-15" href="https://tools.ietf.org/html/rfc7224#page-15" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+       description
+         &quot;Myricom Myrinet.&quot;;
+     }
+     identity voiceEM {
+       base iana-interface-type;
+       description
+         &quot;Voice recEive and transMit.&quot;;
+     }
+     identity voiceFXO {
+       base iana-interface-type;
+       description
+         &quot;Voice Foreign Exchange Office.&quot;;
+     }
+     identity voiceFXS {
+       base iana-interface-type;
+       description
+         &quot;Voice Foreign Exchange Station.&quot;;
+     }
+     identity voiceEncap {
+       base iana-interface-type;
+       description
+         &quot;Voice encapsulation.&quot;;
+     }
+     identity voiceOverIp {
+       base iana-interface-type;
+       description
+         &quot;Voice over IP encapsulation.&quot;;
+     }
+     identity atmDxi {
+       base iana-interface-type;
+       description
+         &quot;ATM DXI.&quot;;
+     }
+     identity atmFuni {
+       base iana-interface-type;
+       description
+         &quot;ATM FUNI.&quot;;
+     }
+     identity atmIma {
+       base iana-interface-type;
+       description
+         &quot;ATM IMA.&quot;;
+     }
+     identity pppMultilinkBundle {
+       base iana-interface-type;
+       description
+         &quot;PPP Multilink Bundle.&quot;;
+     }
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 15]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-16" id="page-16" href="https://tools.ietf.org/html/rfc7224#page-16" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity ipOverCdlc {
+       base iana-interface-type;
+       description
+         &quot;IBM ipOverCdlc.&quot;;
+     }
+     identity ipOverClaw {
+       base iana-interface-type;
+       description
+         &quot;IBM Common Link Access to Workstn.&quot;;
+     }
+     identity stackToStack {
+       base iana-interface-type;
+       description
+         &quot;IBM stackToStack.&quot;;
+     }
+     identity virtualIpAddress {
+       base iana-interface-type;
+       description
+         &quot;IBM VIPA.&quot;;
+     }
+     identity mpc {
+       base iana-interface-type;
+       description
+         &quot;IBM multi-protocol channel support.&quot;;
+     }
+     identity ipOverAtm {
+       base iana-interface-type;
+       description
+         &quot;IBM ipOverAtm.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc2320">RFC 2320</a> - Definitions of Managed Objects for Classical IP
+                     and ARP Over ATM Using SMIv2 (IPOA-MIB)&quot;;
+     }
+     identity iso88025Fiber {
+       base iana-interface-type;
+       description
+         &quot;ISO 802.5j Fiber Token Ring.&quot;;
+     }
+     identity tdlc {
+       base iana-interface-type;
+       description
+         &quot;IBM twinaxial data link control.&quot;;
+     }
+     identity gigabitEthernet {
+       base iana-interface-type;
+       status deprecated;
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 16]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-17" id="page-17" href="https://tools.ietf.org/html/rfc7224#page-17" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+       description
+         &quot;Obsoleted via <a href="https://tools.ietf.org/html/rfc3635">RFC 3635</a>.
+          ethernetCsmacd(6) should be used instead.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc3635">RFC 3635</a> - Definitions of Managed Objects for the
+                     Ethernet-like Interface Types&quot;;
+     }
+     identity hdlc {
+       base iana-interface-type;
+       description
+         &quot;HDLC.&quot;;
+     }
+     identity lapf {
+       base iana-interface-type;
+       description
+         &quot;LAP F.&quot;;
+     }
+     identity v37 {
+       base iana-interface-type;
+       description
+         &quot;V.37.&quot;;
+     }
+     identity x25mlp {
+       base iana-interface-type;
+       description
+         &quot;Multi-Link Protocol.&quot;;
+     }
+     identity x25huntGroup {
+       base iana-interface-type;
+       description
+         &quot;X25 Hunt Group.&quot;;
+     }
+     identity transpHdlc {
+       base iana-interface-type;
+       description
+         &quot;Transp HDLC.&quot;;
+     }
+     identity interleave {
+       base iana-interface-type;
+       description
+         &quot;Interleave channel.&quot;;
+     }
+     identity fast {
+       base iana-interface-type;
+       description
+         &quot;Fast channel.&quot;;
+     }
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 17]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-18" id="page-18" href="https://tools.ietf.org/html/rfc7224#page-18" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity ip {
+       base iana-interface-type;
+       description
+         &quot;IP (for APPN HPR in IP networks).&quot;;
+     }
+     identity docsCableMaclayer {
+       base iana-interface-type;
+       description
+         &quot;CATV Mac Layer.&quot;;
+     }
+     identity docsCableDownstream {
+       base iana-interface-type;
+       description
+         &quot;CATV Downstream interface.&quot;;
+     }
+     identity docsCableUpstream {
+       base iana-interface-type;
+       description
+         &quot;CATV Upstream interface.&quot;;
+     }
+     identity a12MppSwitch {
+       base iana-interface-type;
+       description
+         &quot;Avalon Parallel Processor.&quot;;
+     }
+     identity tunnel {
+       base iana-interface-type;
+       description
+         &quot;Encapsulation interface.&quot;;
+     }
+     identity coffee {
+       base iana-interface-type;
+       description
+         &quot;Coffee pot.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc2325">RFC 2325</a> - Coffee MIB&quot;;
+     }
+     identity ces {
+       base iana-interface-type;
+       description
+         &quot;Circuit Emulation Service.&quot;;
+     }
+     identity atmSubInterface {
+       base iana-interface-type;
+       description
+         &quot;ATM Sub Interface.&quot;;
+     }
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 18]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-19" id="page-19" href="https://tools.ietf.org/html/rfc7224#page-19" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity l2vlan {
+       base iana-interface-type;
+       description
+         &quot;Layer 2 Virtual LAN using 802.1Q.&quot;;
+     }
+     identity l3ipvlan {
+       base iana-interface-type;
+       description
+         &quot;Layer 3 Virtual LAN using IP.&quot;;
+     }
+     identity l3ipxvlan {
+       base iana-interface-type;
+       description
+         &quot;Layer 3 Virtual LAN using IPX.&quot;;
+     }
+     identity digitalPowerline {
+       base iana-interface-type;
+       description
+         &quot;IP over Power Lines.&quot;;
+     }
+     identity mediaMailOverIp {
+       base iana-interface-type;
+       description
+         &quot;Multimedia Mail over IP.&quot;;
+     }
+     identity dtm {
+       base iana-interface-type;
+       description
+         &quot;Dynamic synchronous Transfer Mode.&quot;;
+     }
+     identity dcn {
+       base iana-interface-type;
+       description
+         &quot;Data Communications Network.&quot;;
+     }
+     identity ipForward {
+       base iana-interface-type;
+       description
+         &quot;IP Forwarding Interface.&quot;;
+     }
+     identity msdsl {
+       base iana-interface-type;
+       description
+         &quot;Multi-rate Symmetric DSL.&quot;;
+     }
+     identity ieee1394 {
+       base iana-interface-type;
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 19]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-20" id="page-20" href="https://tools.ietf.org/html/rfc7224#page-20" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+       description
+         &quot;IEEE1394 High Performance Serial Bus.&quot;;
+     }
+     identity if-gsn {
+       base iana-interface-type;
+       description
+         &quot;HIPPI-6400.&quot;;
+     }
+     identity dvbRccMacLayer {
+       base iana-interface-type;
+       description
+         &quot;DVB-RCC MAC Layer.&quot;;
+     }
+     identity dvbRccDownstream {
+       base iana-interface-type;
+       description
+         &quot;DVB-RCC Downstream Channel.&quot;;
+     }
+     identity dvbRccUpstream {
+       base iana-interface-type;
+       description
+         &quot;DVB-RCC Upstream Channel.&quot;;
+     }
+     identity atmVirtual {
+       base iana-interface-type;
+       description
+         &quot;ATM Virtual Interface.&quot;;
+     }
+     identity mplsTunnel {
+       base iana-interface-type;
+       description
+         &quot;MPLS Tunnel Virtual Interface.&quot;;
+     }
+     identity srp {
+       base iana-interface-type;
+       description
+         &quot;Spatial Reuse Protocol.&quot;;
+     }
+     identity voiceOverAtm {
+       base iana-interface-type;
+       description
+         &quot;Voice over ATM.&quot;;
+     }
+     identity voiceOverFrameRelay {
+       base iana-interface-type;
+       description
+         &quot;Voice Over Frame Relay.&quot;;
+     }
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 20]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-21" id="page-21" href="https://tools.ietf.org/html/rfc7224#page-21" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity idsl {
+       base iana-interface-type;
+       description
+         &quot;Digital Subscriber Loop over ISDN.&quot;;
+     }
+     identity compositeLink {
+       base iana-interface-type;
+       description
+         &quot;Avici Composite Link Interface.&quot;;
+     }
+     identity ss7SigLink {
+       base iana-interface-type;
+       description
+         &quot;SS7 Signaling Link.&quot;;
+     }
+     identity propWirelessP2P {
+       base iana-interface-type;
+       description
+         &quot;Prop. P2P wireless interface.&quot;;
+     }
+     identity frForward {
+       base iana-interface-type;
+       description
+         &quot;Frame Forward Interface.&quot;;
+     }
+     identity <a href="https://tools.ietf.org/html/rfc1483">rfc1483</a> {
+       base iana-interface-type;
+       description
+         &quot;Multiprotocol over ATM AAL5.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc1483">RFC 1483</a> - Multiprotocol Encapsulation over ATM
+                     Adaptation Layer 5&quot;;
+     }
+     identity usb {
+       base iana-interface-type;
+       description
+         &quot;USB Interface.&quot;;
+     }
+     identity ieee8023adLag {
+       base iana-interface-type;
+       description
+         &quot;IEEE 802.3ad Link Aggregate.&quot;;
+     }
+     identity bgppolicyaccounting {
+       base iana-interface-type;
+       description
+         &quot;BGP Policy Accounting.&quot;;
+     }
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 21]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-22" id="page-22" href="https://tools.ietf.org/html/rfc7224#page-22" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity frf16MfrBundle {
+       base iana-interface-type;
+       description
+         &quot;FRF.16 Multilink Frame Relay.&quot;;
+     }
+     identity h323Gatekeeper {
+       base iana-interface-type;
+       description
+         &quot;H323 Gatekeeper.&quot;;
+     }
+     identity h323Proxy {
+       base iana-interface-type;
+       description
+         &quot;H323 Voice and Video Proxy.&quot;;
+     }
+     identity mpls {
+       base iana-interface-type;
+       description
+         &quot;MPLS.&quot;;
+     }
+     identity mfSigLink {
+       base iana-interface-type;
+       description
+         &quot;Multi-frequency signaling link.&quot;;
+     }
+     identity hdsl2 {
+       base iana-interface-type;
+       description
+         &quot;High Bit-Rate DSL - 2nd generation.&quot;;
+     }
+     identity shdsl {
+       base iana-interface-type;
+       description
+         &quot;Multirate HDSL2.&quot;;
+     }
+     identity ds1FDL {
+       base iana-interface-type;
+       description
+         &quot;Facility Data Link (4Kbps) on a DS1.&quot;;
+     }
+     identity pos {
+       base iana-interface-type;
+       description
+         &quot;Packet over SONET/SDH Interface.&quot;;
+     }
+
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 22]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-23" id="page-23" href="https://tools.ietf.org/html/rfc7224#page-23" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity dvbAsiIn {
+       base iana-interface-type;
+       description
+         &quot;DVB-ASI Input.&quot;;
+     }
+     identity dvbAsiOut {
+       base iana-interface-type;
+       description
+         &quot;DVB-ASI Output.&quot;;
+     }
+     identity plc {
+       base iana-interface-type;
+       description
+         &quot;Power Line Communications.&quot;;
+     }
+     identity nfas {
+       base iana-interface-type;
+       description
+         &quot;Non-Facility Associated Signaling.&quot;;
+     }
+     identity tr008 {
+       base iana-interface-type;
+       description
+         &quot;TR008.&quot;;
+     }
+     identity gr303RDT {
+       base iana-interface-type;
+       description
+         &quot;Remote Digital Terminal.&quot;;
+     }
+     identity gr303IDT {
+       base iana-interface-type;
+       description
+         &quot;Integrated Digital Terminal.&quot;;
+     }
+     identity isup {
+       base iana-interface-type;
+       description
+         &quot;ISUP.&quot;;
+     }
+     identity propDocsWirelessMaclayer {
+       base iana-interface-type;
+       description
+         &quot;Cisco proprietary Maclayer.&quot;;
+     }
+
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 23]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-24" id="page-24" href="https://tools.ietf.org/html/rfc7224#page-24" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity propDocsWirelessDownstream {
+       base iana-interface-type;
+       description
+         &quot;Cisco proprietary Downstream.&quot;;
+     }
+     identity propDocsWirelessUpstream {
+       base iana-interface-type;
+       description
+         &quot;Cisco proprietary Upstream.&quot;;
+     }
+     identity hiperlan2 {
+       base iana-interface-type;
+       description
+         &quot;HIPERLAN Type 2 Radio Interface.&quot;;
+     }
+     identity propBWAp2Mp {
+       base iana-interface-type;
+       description
+         &quot;PropBroadbandWirelessAccesspt2Multipt (use of this value
+          for IEEE 802.16 WMAN interfaces as per IEEE Std 802.16f
+          is deprecated, and ieee80216WMAN(237) should be used
+          instead).&quot;;
+     }
+     identity sonetOverheadChannel {
+       base iana-interface-type;
+       description
+         &quot;SONET Overhead Channel.&quot;;
+     }
+     identity digitalWrapperOverheadChannel {
+       base iana-interface-type;
+       description
+         &quot;Digital Wrapper.&quot;;
+     }
+     identity aal2 {
+       base iana-interface-type;
+       description
+         &quot;ATM adaptation layer 2.&quot;;
+     }
+     identity radioMAC {
+       base iana-interface-type;
+       description
+         &quot;MAC layer over radio links.&quot;;
+     }
+     identity atmRadio {
+       base iana-interface-type;
+       description
+         &quot;ATM over radio links.&quot;;
+     }
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 24]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-25" id="page-25" href="https://tools.ietf.org/html/rfc7224#page-25" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity imt {
+       base iana-interface-type;
+       description
+         &quot;Inter-Machine Trunks.&quot;;
+     }
+     identity mvl {
+       base iana-interface-type;
+       description
+         &quot;Multiple Virtual Lines DSL.&quot;;
+     }
+     identity reachDSL {
+       base iana-interface-type;
+       description
+         &quot;Long Reach DSL.&quot;;
+     }
+     identity frDlciEndPt {
+       base iana-interface-type;
+       description
+         &quot;Frame Relay DLCI End Point.&quot;;
+     }
+     identity atmVciEndPt {
+       base iana-interface-type;
+       description
+         &quot;ATM VCI End Point.&quot;;
+     }
+     identity opticalChannel {
+       base iana-interface-type;
+       description
+         &quot;Optical Channel.&quot;;
+     }
+     identity opticalTransport {
+       base iana-interface-type;
+       description
+         &quot;Optical Transport.&quot;;
+     }
+     identity propAtm {
+       base iana-interface-type;
+       description
+         &quot;Proprietary ATM.&quot;;
+     }
+     identity voiceOverCable {
+       base iana-interface-type;
+       description
+         &quot;Voice Over Cable Interface.&quot;;
+     }
+
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 25]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-26" id="page-26" href="https://tools.ietf.org/html/rfc7224#page-26" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity infiniband {
+       base iana-interface-type;
+       description
+         &quot;Infiniband.&quot;;
+     }
+     identity teLink {
+       base iana-interface-type;
+       description
+         &quot;TE Link.&quot;;
+     }
+     identity q2931 {
+       base iana-interface-type;
+       description
+         &quot;Q.2931.&quot;;
+     }
+     identity virtualTg {
+       base iana-interface-type;
+       description
+         &quot;Virtual Trunk Group.&quot;;
+     }
+     identity sipTg {
+       base iana-interface-type;
+       description
+         &quot;SIP Trunk Group.&quot;;
+     }
+     identity sipSig {
+       base iana-interface-type;
+       description
+         &quot;SIP Signaling.&quot;;
+     }
+     identity docsCableUpstreamChannel {
+       base iana-interface-type;
+       description
+         &quot;CATV Upstream Channel.&quot;;
+     }
+     identity econet {
+       base iana-interface-type;
+       description
+         &quot;Acorn Econet.&quot;;
+     }
+     identity pon155 {
+       base iana-interface-type;
+       description
+         &quot;FSAN 155Mb Symetrical PON interface.&quot;;
+     }
+
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 26]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-27" id="page-27" href="https://tools.ietf.org/html/rfc7224#page-27" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity pon622 {
+       base iana-interface-type;
+       description
+         &quot;FSAN 622Mb Symetrical PON interface.&quot;;
+     }
+     identity bridge {
+       base iana-interface-type;
+       description
+         &quot;Transparent bridge interface.&quot;;
+     }
+     identity linegroup {
+       base iana-interface-type;
+       description
+         &quot;Interface common to multiple lines.&quot;;
+     }
+     identity voiceEMFGD {
+       base iana-interface-type;
+       description
+         &quot;Voice E&amp;M Feature Group D.&quot;;
+     }
+     identity voiceFGDEANA {
+       base iana-interface-type;
+       description
+         &quot;Voice FGD Exchange Access North American.&quot;;
+     }
+     identity voiceDID {
+       base iana-interface-type;
+       description
+         &quot;Voice Direct Inward Dialing.&quot;;
+     }
+     identity mpegTransport {
+       base iana-interface-type;
+       description
+         &quot;MPEG transport interface.&quot;;
+     }
+     identity sixToFour {
+       base iana-interface-type;
+       status deprecated;
+       description
+         &quot;6to4 interface (DEPRECATED).&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc4087">RFC 4087</a> - IP Tunnel MIB&quot;;
+     }
+     identity gtp {
+       base iana-interface-type;
+       description
+         &quot;GTP (GPRS Tunneling Protocol).&quot;;
+     }
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 27]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-28" id="page-28" href="https://tools.ietf.org/html/rfc7224#page-28" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity pdnEtherLoop1 {
+       base iana-interface-type;
+       description
+         &quot;Paradyne EtherLoop 1.&quot;;
+     }
+     identity pdnEtherLoop2 {
+       base iana-interface-type;
+       description
+         &quot;Paradyne EtherLoop 2.&quot;;
+     }
+     identity opticalChannelGroup {
+       base iana-interface-type;
+       description
+         &quot;Optical Channel Group.&quot;;
+     }
+     identity homepna {
+       base iana-interface-type;
+       description
+         &quot;HomePNA ITU-T G.989.&quot;;
+     }
+     identity gfp {
+       base iana-interface-type;
+       description
+         &quot;Generic Framing Procedure (GFP).&quot;;
+     }
+     identity ciscoISLvlan {
+       base iana-interface-type;
+       description
+         &quot;Layer 2 Virtual LAN using Cisco ISL.&quot;;
+     }
+     identity actelisMetaLOOP {
+       base iana-interface-type;
+       description
+         &quot;Acteleis proprietary MetaLOOP High Speed Link.&quot;;
+     }
+     identity fcipLink {
+       base iana-interface-type;
+       description
+         &quot;FCIP Link.&quot;;
+     }
+     identity rpr {
+       base iana-interface-type;
+       description
+         &quot;Resilient Packet Ring Interface Type.&quot;;
+     }
+
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 28]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-29" id="page-29" href="https://tools.ietf.org/html/rfc7224#page-29" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity qam {
+       base iana-interface-type;
+       description
+         &quot;RF Qam Interface.&quot;;
+     }
+     identity lmp {
+       base iana-interface-type;
+       description
+         &quot;Link Management Protocol.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc4327">RFC 4327</a> - Link Management Protocol (LMP) Management
+                     Information Base (MIB)&quot;;
+     }
+     identity cblVectaStar {
+       base iana-interface-type;
+       description
+         &quot;Cambridge Broadband Networks Limited VectaStar.&quot;;
+     }
+     identity docsCableMCmtsDownstream {
+       base iana-interface-type;
+       description
+         &quot;CATV Modular CMTS Downstream Interface.&quot;;
+     }
+     identity adsl2 {
+       base iana-interface-type;
+       status deprecated;
+       description
+         &quot;Asymmetric Digital Subscriber Loop Version 2
+          (DEPRECATED/OBSOLETED - please use adsl2plus(238)
+          instead).&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc4706">RFC 4706</a> - Definitions of Managed Objects for Asymmetric
+                     Digital Subscriber Line 2 (ADSL2)&quot;;
+     }
+     identity macSecControlledIF {
+       base iana-interface-type;
+       description
+         &quot;MACSecControlled.&quot;;
+     }
+     identity macSecUncontrolledIF {
+       base iana-interface-type;
+       description
+         &quot;MACSecUncontrolled.&quot;;
+     }
+     identity aviciOpticalEther {
+       base iana-interface-type;
+       description
+         &quot;Avici Optical Ethernet Aggregate.&quot;;
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 29]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-30" id="page-30" href="https://tools.ietf.org/html/rfc7224#page-30" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     }
+     identity atmbond {
+       base iana-interface-type;
+       description
+         &quot;atmbond.&quot;;
+     }
+     identity voiceFGDOS {
+       base iana-interface-type;
+       description
+         &quot;Voice FGD Operator Services.&quot;;
+     }
+     identity mocaVersion1 {
+       base iana-interface-type;
+       description
+         &quot;MultiMedia over Coax Alliance (MoCA) Interface
+          as documented in information provided privately to IANA.&quot;;
+     }
+     identity ieee80216WMAN {
+       base iana-interface-type;
+       description
+         &quot;IEEE 802.16 WMAN interface.&quot;;
+     }
+     identity adsl2plus {
+       base iana-interface-type;
+       description
+         &quot;Asymmetric Digital Subscriber Loop Version 2 -
+          Version 2 Plus and all variants.&quot;;
+     }
+     identity dvbRcsMacLayer {
+       base iana-interface-type;
+       description
+         &quot;DVB-RCS MAC Layer.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc5728">RFC 5728</a> - The SatLabs Group DVB-RCS MIB&quot;;
+     }
+     identity dvbTdm {
+       base iana-interface-type;
+       description
+         &quot;DVB Satellite TDM.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc5728">RFC 5728</a> - The SatLabs Group DVB-RCS MIB&quot;;
+     }
+     identity dvbRcsTdma {
+       base iana-interface-type;
+       description
+         &quot;DVB-RCS TDMA.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc5728">RFC 5728</a> - The SatLabs Group DVB-RCS MIB&quot;;
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 30]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-31" id="page-31" href="https://tools.ietf.org/html/rfc7224#page-31" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     }
+     identity x86Laps {
+       base iana-interface-type;
+       description
+         &quot;LAPS based on ITU-T X.86/Y.1323.&quot;;
+     }
+     identity wwanPP {
+       base iana-interface-type;
+       description
+         &quot;3GPP WWAN.&quot;;
+     }
+     identity wwanPP2 {
+       base iana-interface-type;
+       description
+         &quot;3GPP2 WWAN.&quot;;
+     }
+     identity voiceEBS {
+       base iana-interface-type;
+       description
+         &quot;Voice P-phone EBS physical interface.&quot;;
+     }
+     identity ifPwType {
+       base iana-interface-type;
+       description
+         &quot;Pseudowire interface type.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc5601">RFC 5601</a> - Pseudowire (PW) Management Information Base (MIB)&quot;;
+     }
+     identity ilan {
+       base iana-interface-type;
+       description
+         &quot;Internal LAN on a bridge per IEEE 802.1ap.&quot;;
+     }
+     identity pip {
+       base iana-interface-type;
+       description
+         &quot;Provider Instance Port on a bridge per IEEE 802.1ah PBB.&quot;;
+     }
+     identity aluELP {
+       base iana-interface-type;
+       description
+         &quot;Alcatel-Lucent Ethernet Link Protection.&quot;;
+     }
+     identity gpon {
+       base iana-interface-type;
+       description
+         &quot;Gigabit-capable passive optical networks (G-PON) as per
+          ITU-T G.948.&quot;;
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 31]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-32" id="page-32" href="https://tools.ietf.org/html/rfc7224#page-32" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     }
+     identity vdsl2 {
+       base iana-interface-type;
+       description
+         &quot;Very high speed digital subscriber line Version 2
+          (as per ITU-T Recommendation G.993.2).&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc5650">RFC 5650</a> - Definitions of Managed Objects for Very High
+                     Speed Digital Subscriber Line 2 (VDSL2)&quot;;
+     }
+     identity capwapDot11Profile {
+       base iana-interface-type;
+       description
+         &quot;WLAN Profile Interface.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc5834">RFC 5834</a> - Control and Provisioning of Wireless Access
+                     Points (CAPWAP) Protocol Binding MIB for
+                     IEEE 802.11&quot;;
+     }
+     identity capwapDot11Bss {
+       base iana-interface-type;
+       description
+         &quot;WLAN BSS Interface.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc5834">RFC 5834</a> - Control and Provisioning of Wireless Access
+                     Points (CAPWAP) Protocol Binding MIB for
+                     IEEE 802.11&quot;;
+     }
+     identity capwapWtpVirtualRadio {
+       base iana-interface-type;
+       description
+         &quot;WTP Virtual Radio Interface.&quot;;
+       reference
+         &quot;<a href="https://tools.ietf.org/html/rfc5833">RFC 5833</a> - Control and Provisioning of Wireless Access
+                     Points (CAPWAP) Protocol Base MIB&quot;;
+     }
+     identity bits {
+       base iana-interface-type;
+       description
+         &quot;bitsport.&quot;;
+     }
+     identity docsCableUpstreamRfPort {
+       base iana-interface-type;
+       description
+         &quot;DOCSIS CATV Upstream RF Port.&quot;;
+     }
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 32]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-33" id="page-33" href="https://tools.ietf.org/html/rfc7224#page-33" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity cableDownstreamRfPort {
+       base iana-interface-type;
+       description
+         &quot;CATV downstream RF Port.&quot;;
+     }
+     identity vmwareVirtualNic {
+       base iana-interface-type;
+       description
+         &quot;VMware Virtual Network Interface.&quot;;
+     }
+     identity ieee802154 {
+       base iana-interface-type;
+       description
+         &quot;IEEE 802.15.4 WPAN interface.&quot;;
+       reference
+         &quot;IEEE 802.15.4-2006&quot;;
+     }
+     identity otnOdu {
+       base iana-interface-type;
+       description
+         &quot;OTN Optical Data Unit.&quot;;
+     }
+     identity otnOtu {
+       base iana-interface-type;
+       description
+         &quot;OTN Optical channel Transport Unit.&quot;;
+     }
+     identity ifVfiType {
+       base iana-interface-type;
+       description
+         &quot;VPLS Forwarding Instance Interface Type.&quot;;
+     }
+     identity g9981 {
+       base iana-interface-type;
+       description
+         &quot;G.998.1 bonded interface.&quot;;
+     }
+     identity g9982 {
+       base iana-interface-type;
+       description
+         &quot;G.998.2 bonded interface.&quot;;
+     }
+     identity g9983 {
+       base iana-interface-type;
+       description
+         &quot;G.998.3 bonded interface.&quot;;
+     }
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 33]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-34" id="page-34" href="https://tools.ietf.org/html/rfc7224#page-34" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+     identity aluEpon {
+       base iana-interface-type;
+       description
+         &quot;Ethernet Passive Optical Networks (E-PON).&quot;;
+     }
+     identity aluEponOnu {
+       base iana-interface-type;
+       description
+         &quot;EPON Optical Network Unit.&quot;;
+     }
+     identity aluEponPhysicalUni {
+       base iana-interface-type;
+       description
+         &quot;EPON physical User to Network interface.&quot;;
+     }
+     identity aluEponLogicalLink {
+       base iana-interface-type;
+       description
+         &quot;The emulation of a point-to-point link over the EPON
+          layer.&quot;;
+     }
+     identity aluGponOnu {
+       base iana-interface-type;
+       description
+         &quot;GPON Optical Network Unit.&quot;;
+       reference
+         &quot;ITU-T G.984.2&quot;;
+     }
+     identity aluGponPhysicalUni {
+       base iana-interface-type;
+       description
+         &quot;GPON physical User to Network interface.&quot;;
+       reference
+         &quot;ITU-T G.984.2&quot;;
+     }
+     identity vmwareNicTeam {
+       base iana-interface-type;
+       description
+         &quot;VMware NIC Team.&quot;;
+     }
+   }
+
+   &lt;CODE ENDS&gt;
+
+
+
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 34]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-35" id="page-35" href="https://tools.ietf.org/html/rfc7224#page-35" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc7224#section-3">3</a>. IANA Considerations</h2></span>
+
+   This document defines the initial version of the IANA-maintained
+   iana-if-type YANG module.
+
+   The iana-if-type YANG module is intended to reflect the &quot;ifType
+   definitions&quot; registry [<a href="https://tools.ietf.org/html/rfc7224#ref-IFTYPE-IANA-REGISTRY" title="&quot;ifType Definitions&quot;">IFTYPE-IANA-REGISTRY</a>], exactly like the
+   IANAifType-MIB MIB module [<a href="https://tools.ietf.org/html/rfc7224#ref-IANAifType-MIB" title="&quot;IANAifType Textual Convention definitions&quot;">IANAifType-MIB</a>] reflects the &quot;ifType
+   definitions&quot; registry.
+
+   IANA has added this new note to the &quot;iana-if-type YANG Module&quot;
+   registry:
+
+      Interface types must not be directly added to the iana-if-type
+      YANG module.  They must instead be added to the
+      &quot;ifType definitions&quot; registry.
+
+   When an interface type is added to the &quot;ifType definitions&quot; registry,
+   a new &quot;identity&quot; statement must be added to the iana-if-type YANG
+   module.  The name of the &quot;identity&quot; is the same as the corresponding
+   enumeration in the IANAifType-MIB.  The following substatements to
+   the &quot;identity&quot; statement should be defined:
+
+      &quot;base&quot;: Contains the value &quot;iana-interface-type&quot;.
+
+      &quot;status&quot;: Include only if a registration has been deprecated (use
+                the value &quot;deprecated&quot;) or obsoleted (use the value
+                &quot;obsolete&quot;).
+
+      &quot;description&quot;: Replicate the description from the registry,
+                     if any.  Insert line breaks as needed so that the
+                     line does not exceed 72 characters.
+
+      &quot;reference&quot;: Replicate the reference from the registry, if any,
+                   and add the title of the document.
+
+   Unassigned or reserved values are not present in the module.
+
+   When the iana-if-type YANG module is updated, a new &quot;revision&quot;
+   statement must be added in front of the existing revision statements.
+
+   IANA has added this new note to the &quot;ifType definitions&quot; registry:
+
+      When this registry is modified, the YANG module iana-if-type
+      must be updated as defined in <a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>.
+
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 35]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-36" id="page-36" href="https://tools.ietf.org/html/rfc7224#page-36" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+   The &quot;Reference&quot; text in the &quot;ifType definitions&quot; registry has been
+   updated as:
+
+      OLD:
+        [<a href="https://tools.ietf.org/html/rfc1213">RFC1213</a>][RFC2863]
+
+      NEW:
+        [<a href="https://tools.ietf.org/html/rfc1213">RFC1213</a>][RFC2863][<a href="https://tools.ietf.org/html/rfc7224">RFC7224</a>]
+
+<span class="h3"><h3><a class="selflink" name="section-3.1" href="https://tools.ietf.org/html/rfc7224#section-3.1">3.1</a>. URI Registrations</h3></span>
+
+   This document registers a URI in the &quot;IETF XML&quot; registry [<a href="https://tools.ietf.org/html/rfc3688" title="&quot;The IETF XML Registry&quot;">RFC3688</a>].
+   Following the format in <a href="https://tools.ietf.org/html/rfc3688">RFC 3688</a>, the following registration has been
+   made.
+
+      URI: urn:ietf:params:xml:ns:yang:iana-if-type
+
+      Registrant Contact: IANA.
+
+      XML: N/A; the requested URI is an XML namespace.
+
+<span class="h3"><h3><a class="selflink" name="section-3.2" href="https://tools.ietf.org/html/rfc7224#section-3.2">3.2</a>. YANG Module Registrations</h3></span>
+
+   This document registers a YANG module in the &quot;YANG Module Names&quot;
+   registry [<a href="https://tools.ietf.org/html/rfc6020" title="&quot;YANG - A Data Modeling Language for the Network Configuration Protocol (NETCONF)&quot;">RFC6020</a>].
+
+      name:         iana-if-type
+      namespace:    urn:ietf:params:xml:ns:yang:iana-if-type
+      prefix:       ianaift
+      reference:    <a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc7224#section-4">4</a>. Security Considerations</h2></span>
+
+   Since this document does not introduce any technology or protocol,
+   there are no security issues to be considered for this document
+   itself.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Bjorklund                    Standards Track                   [Page 36]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-37" id="page-37" href="https://tools.ietf.org/html/rfc7224#page-37" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7224">RFC 7224</a>             IANA Interface Type YANG Module            May 2014</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc7224#section-5">5</a>. Normative References</h2></span>
+
+   [<a name="ref-IANAifType-MIB" id="ref-IANAifType-MIB">IANAifType-MIB</a>]
+              Internet Assigned Numbers Authority, &quot;IANAifType Textual
+              Convention definitions&quot;,
+              &lt;<a href="http://www.iana.org/assignments/ianaiftype-mib">http://www.iana.org/assignments/ianaiftype-mib</a>&gt;.
+
+   [<a name="ref-IFTYPE-IANA-REGISTRY" id="ref-IFTYPE-IANA-REGISTRY">IFTYPE-IANA-REGISTRY</a>]
+              Internet Assigned Numbers Authority, &quot;ifType Definitions&quot;,
+              &lt;<a href="http://www.iana.org/assignments/smi-numbers">http://www.iana.org/assignments/smi-numbers</a>&gt;.
+
+   [<a name="ref-RFC3688" id="ref-RFC3688">RFC3688</a>]  Mealling, M., &quot;The IETF XML Registry&quot;, <a href="https://tools.ietf.org/html/bcp81">BCP 81</a>, <a href="https://tools.ietf.org/html/rfc3688">RFC 3688</a>,
+              January 2004.
+
+   [<a name="ref-RFC6020" id="ref-RFC6020">RFC6020</a>]  Bjorklund, M., &quot;YANG - A Data Modeling Language for the
+              Network Configuration Protocol (NETCONF)&quot;, <a href="https://tools.ietf.org/html/rfc6020">RFC 6020</a>,
+              October 2010.
+
+   [<a name="ref-RFC7223" id="ref-RFC7223">RFC7223</a>]  Bjorklund, M., &quot;A YANG Data Model for Interface
+              Management&quot;, <a href="https://tools.ietf.org/html/rfc7223">RFC 7223</a>, May 2014.
+
+Author's Address
+
+   Martin Bjorklund
+   Tail-f Systems
+
+   EMail: mbj@tail-f.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bjorklund                    Standards Track                   [Page 37]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

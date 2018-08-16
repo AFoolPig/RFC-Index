@@ -1,0 +1,3603 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Relation.Replaces" content="draft-zebrose-trill-rbridge-mib" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:6850" /> 
+  <meta name="DC.Date.Issued" content="January, 2013" /> 
+  <meta name="DC.Creator" content="Zebrose, Kate" /> 
+  <meta name="DC.Creator" content="Rijhsinghani, Anil" /> 
+  <meta name="DC.Description.Abstract" content="This memo defines a portion of the Management Information Base (MIB)
+for use with network management protocols. In particular, it defines
+objects for managing a Routing Bridge (RBridge), also known as a TRILL
+Switch, based on the IETF TRILL (Transparent Interconnection of Lots
+of Links) protocol. [STANDARDS-TRACK]" /> 
+  <meta name="DC.Title" content="Definitions of Managed Objects for Routing Bridges (RBridges)" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 6850 - Definitions of Managed Objects for Routing Bridges (RBridges)</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgblue" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc6850.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc6850" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-ietf-trill-rbridge-mib" title="draft-ietf-trill-rbridge-mib">draft-ietf-tril...</a>] [<a href="https://datatracker.ietf.org/doc/rfc6850" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc6850" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc6850" title="Side-by-side diff">Diff2</a>] </span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> PROPOSED STANDARD</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <pre>Internet Engineering Task Force (IETF)                   A. Rijhsinghani
+Request for Comments: 6850                               Hewlett-Packard
+Category: Standards Track                                     K. Zebrose
+ISSN: 2070-1721                                              HW Embedded
+                                                            January 2013
+
+
+     <span class="h1"><h1>Definitions of Managed Objects for Routing Bridges (RBridges)</h1></span>
+
+Abstract
+
+   This memo defines a portion of the Management Information Base (MIB)
+   for use with network management protocols.  In particular, it defines
+   objects for managing a Routing Bridge (RBridge), also known as a
+   TRILL Switch, based on the IETF TRILL (Transparent Interconnection of
+   Lots of Links) protocol.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in <a href="https://tools.ietf.org/html/rfc5741#section-2">Section&nbsp;2 of RFC 5741</a>.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   <a href="http://www.rfc-editor.org/info/rfc6850">http://www.rfc-editor.org/info/rfc6850</a>.
+
+Copyright Notice
+
+   Copyright (c) 2013 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                    [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc6850#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc6850#section-1">1</a>. Introduction ....................................................<a href="https://tools.ietf.org/html/rfc6850#page-2">2</a>
+   <a href="https://tools.ietf.org/html/rfc6850#section-2">2</a>. The Internet-Standard Management Framework ......................<a href="https://tools.ietf.org/html/rfc6850#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc6850#section-3">3</a>. Overview ........................................................<a href="https://tools.ietf.org/html/rfc6850#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc6850#section-4">4</a>. Conventions .....................................................<a href="https://tools.ietf.org/html/rfc6850#page-4">4</a>
+   <a href="https://tools.ietf.org/html/rfc6850#section-5">5</a>. Structure of the MIB Module .....................................<a href="https://tools.ietf.org/html/rfc6850#page-4">4</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-5.1">5.1</a>. Textual Conventions ........................................<a href="https://tools.ietf.org/html/rfc6850#page-4">4</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-5.2">5.2</a>. The rbridgeBase Subtree ....................................<a href="https://tools.ietf.org/html/rfc6850#page-4">4</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-5.3">5.3</a>. The rbridgeFdb Subtree .....................................<a href="https://tools.ietf.org/html/rfc6850#page-4">4</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-5.4">5.4</a>. The rbridgeVlan Subtree ....................................<a href="https://tools.ietf.org/html/rfc6850#page-4">4</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-5.5">5.5</a>. The rbridgeEsadi Subtree ...................................<a href="https://tools.ietf.org/html/rfc6850#page-4">4</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-5.6">5.6</a>. The rbridgeCounters Subtree ................................<a href="https://tools.ietf.org/html/rfc6850#page-4">4</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-5.7">5.7</a>. The rbridgeSnooping Subtree ................................<a href="https://tools.ietf.org/html/rfc6850#page-5">5</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-5.8">5.8</a>. The rbridgeDtree Subtree ...................................<a href="https://tools.ietf.org/html/rfc6850#page-5">5</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-5.9">5.9</a>. The rbridgeTrill Subtree ...................................<a href="https://tools.ietf.org/html/rfc6850#page-5">5</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-5.10">5.10</a>. The Notifications Subtree .................................<a href="https://tools.ietf.org/html/rfc6850#page-5">5</a>
+   <a href="https://tools.ietf.org/html/rfc6850#section-6">6</a>. Relationship to Other MIB Modules ...............................<a href="https://tools.ietf.org/html/rfc6850#page-5">5</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-6.1">6.1</a>. Relationship to IF-MIB .....................................<a href="https://tools.ietf.org/html/rfc6850#page-5">5</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-6.2">6.2</a>. Relationship to BRIDGE-MIB .................................<a href="https://tools.ietf.org/html/rfc6850#page-6">6</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-6.3">6.3</a>. Relationship to P-BRIDGE-MIB ...............................<a href="https://tools.ietf.org/html/rfc6850#page-6">6</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-6.4">6.4</a>. Relationship to Q-BRIDGE-MIB ...............................<a href="https://tools.ietf.org/html/rfc6850#page-6">6</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-6.5">6.5</a>. Relationship to IEEE8021-BRIDGE-MIB ........................<a href="https://tools.ietf.org/html/rfc6850#page-7">7</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-6.6">6.6</a>. Relationship to IEEE8021-Q-BRIDGE-MIB ......................<a href="https://tools.ietf.org/html/rfc6850#page-7">7</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-6.7">6.7</a>. Relationship to ISIS-MIB ...................................<a href="https://tools.ietf.org/html/rfc6850#page-8">8</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-6.8">6.8</a>. MIB Modules Required for IMPORTS ...........................<a href="https://tools.ietf.org/html/rfc6850#page-8">8</a>
+   <a href="https://tools.ietf.org/html/rfc6850#section-7">7</a>. Definition of the RBridge MIB Module ............................<a href="https://tools.ietf.org/html/rfc6850#page-9">9</a>
+   <a href="https://tools.ietf.org/html/rfc6850#section-8">8</a>. Security Considerations ........................................<a href="https://tools.ietf.org/html/rfc6850#page-55">55</a>
+   <a href="https://tools.ietf.org/html/rfc6850#section-9">9</a>. IANA Considerations ............................................<a href="https://tools.ietf.org/html/rfc6850#page-56">56</a>
+   <a href="https://tools.ietf.org/html/rfc6850#section-10">10</a>. Contributors ..................................................<a href="https://tools.ietf.org/html/rfc6850#page-56">56</a>
+   <a href="https://tools.ietf.org/html/rfc6850#section-11">11</a>. References ....................................................<a href="https://tools.ietf.org/html/rfc6850#page-57">57</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-11.1">11.1</a>. Normative References .....................................<a href="https://tools.ietf.org/html/rfc6850#page-57">57</a>
+      <a href="https://tools.ietf.org/html/rfc6850#section-11.2">11.2</a>. Informative References ...................................<a href="https://tools.ietf.org/html/rfc6850#page-58">58</a>
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc6850#section-1">1</a>. Introduction</h2></span>
+
+   This document describes a model for managing Routing Bridges
+   (RBridges), also known as TRILL Switches, as defined in [<a href="https://tools.ietf.org/html/rfc6325" title="&quot;Routing Bridges (RBridges): Base Protocol Specification&quot;">RFC6325</a>].
+   RBridges provide optimal pair-wise forwarding without configuration
+   using IS-IS routing and encapsulation of traffic.  RBridges are
+   compatible with previous IEEE 802.1 customer bridges as well as IPv4
+   and IPv6 routers and end nodes.  They are as invisible to current IP
+   routers as bridges are and, like routers, they terminate the bridge
+   spanning tree protocol.  In creating an RBridge management model, the
+   device is viewed primarily as a customer bridge.  For a discussion of
+   the problem addressed by TRILL (Transparent Interconnection of Lots
+   of Links), see [<a href="https://tools.ietf.org/html/rfc5556" title="&quot;Transparent Interconnection of Lots of Links (TRILL): Problem and Applicability Statement&quot;">RFC5556</a>].
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                    [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc6850#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   RBridges support features specified for transparent bridges in
+   IEEE 802.1, and the corresponding MIB modules are used to manage
+   those features.  For IS-IS purposes, the corresponding MIB module is
+   used to manage the protocol.  This MIB module specifies those objects
+   that are TRILL-specific and hence not available in other MIB modules.
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc6850#section-2">2</a>. The Internet-Standard Management Framework</h2></span>
+
+   For a detailed overview of the documents that describe the current
+   Internet-Standard Management Framework, please refer to <a href="https://tools.ietf.org/html/rfc3410#section-7">section&nbsp;7 of
+   RFC 3410</a> [<a href="https://tools.ietf.org/html/rfc3410" title="&quot;Introduction and Applicability Statements for Internet- Standard Management Framework&quot;">RFC3410</a>].
+
+   Managed objects are accessed via a virtual information store, termed
+   the Management Information Base or MIB.  MIB objects are generally
+   accessed through the Simple Network Management Protocol (SNMP).
+   Objects in the MIB are defined using the mechanisms defined in the
+   Structure of Management Information (SMI).  This memo specifies a MIB
+   module that is compliant to the SMIv2, which is described in STD 58,
+   <a href="https://tools.ietf.org/html/rfc2578">RFC 2578</a> [<a href="https://tools.ietf.org/html/rfc2578" title="&quot;Structure of Management Information Version 2 (SMIv2)&quot;">RFC2578</a>], STD 58, <a href="https://tools.ietf.org/html/rfc2579">RFC 2579</a> [<a href="https://tools.ietf.org/html/rfc2579" title="&quot;Textual Conventions for SMIv2&quot;">RFC2579</a>] and STD 58, <a href="https://tools.ietf.org/html/rfc2580">RFC 2580</a>
+   [<a href="https://tools.ietf.org/html/rfc2580" title="&quot;Conformance Statements for SMIv2&quot;">RFC2580</a>].
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc6850#section-3">3</a>. Overview</h2></span>
+
+   The RBridge MIB module is intended as an overall framework for
+   managing RBridges, also known as TRILL Switches.  Where possible, the
+   MIB references existing MIB definitions in order to maximize reuse.
+   This results in a considerable emphasis on the relationship with
+   other MIB modules.
+
+   Starting with the physical interfaces, there are requirements for
+   certain elements of the IF-MIB to be implemented.  These elements are
+   required in order to connect the per-port parameters to higher-level
+   functions of the physical device.
+
+   Transparent bridging, VLANs, traffic classes, and multicast filtering
+   are supported by the TRILL protocol, and the corresponding management
+   is expected to conform to the BRIDGE-MIB module [<a href="https://tools.ietf.org/html/rfc4188" title="&quot;Definitions of Managed Objects for Bridges&quot;">RFC4188</a>] and to the
+   P-BRIDGE-MIB and Q-BRIDGE-MIB modules [<a href="https://tools.ietf.org/html/rfc4363" title="&quot;Definitions of Managed Objects for Bridges with Traffic Classes, Multicast Filtering, and Virtual LAN Extensions&quot;">RFC4363</a>].
+
+   The IS-IS routing protocol is used in order to determine the optimum
+   pair-wise forwarding path.  This protocol is managed using the IS-IS
+   MIB module defined in [<a href="https://tools.ietf.org/html/rfc4444" title="&quot;Management Information Base for Intermediate System to Intermediate System (IS-IS)&quot;">RFC4444</a>].  Since the TRILL protocol specifies
+   the use of a single level and a fixed area address of zero, some
+   IS-IS MIB objects are not applicable.  Some IS-IS MIB objects are
+   used in the TRILL protocol.
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                    [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc6850#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc6850#section-4">4</a>. Conventions</h2></span>
+
+   The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;NOT RECOMMENDED&quot;, &quot;MAY&quot;, and
+   &quot;OPTIONAL&quot; in this document are to be interpreted as described in
+   <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a> [<a href="https://tools.ietf.org/html/rfc2119" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">RFC2119</a>].
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc6850#section-5">5</a>. Structure of the MIB Module</h2></span>
+
+   Objects in this MIB module are arranged into subtrees.  Each subtree
+   is organized as a set of related objects.  The various subtrees are
+   shown below.  These are supplemented with required elements of the
+   IF-MIB, ISIS-MIB, BRIDGE-MIB, P-BRIDGE-MIB, Q-BRIDGE-MIB, and IEEE
+   Bridge MIB modules.
+
+<span class="h3"><h3><a class="selflink" name="section-5.1" href="https://tools.ietf.org/html/rfc6850#section-5.1">5.1</a>. Textual Conventions</h3></span>
+
+   Textual conventions are defined to represent object types relevant to
+   TRILL.
+
+<span class="h3"><h3><a class="selflink" name="section-5.2" href="https://tools.ietf.org/html/rfc6850#section-5.2">5.2</a>. The rbridgeBase Subtree</h3></span>
+
+   This subtree contains system- and port-specific objects applicable to
+   all RBridges.
+
+<span class="h3"><h3><a class="selflink" name="section-5.3" href="https://tools.ietf.org/html/rfc6850#section-5.3">5.3</a>. The rbridgeFdb Subtree</h3></span>
+
+   This subtree contains objects applicable to the forwarding database
+   used by the RBridge in making packet-forwarding decisions.  Because
+   it contains additional information used by the TRILL protocol not
+   applicable to 802.1D/Q bridges, it is a superset of the corresponding
+   subtrees defined in the BRIDGE-MIB and Q-BRIDGE-MIB.
+
+<span class="h3"><h3><a class="selflink" name="section-5.4" href="https://tools.ietf.org/html/rfc6850#section-5.4">5.4</a>. The rbridgeVlan Subtree</h3></span>
+
+   This subtree describes objects applicable to VLANs configured on the
+   RBridge.
+
+<span class="h3"><h3><a class="selflink" name="section-5.5" href="https://tools.ietf.org/html/rfc6850#section-5.5">5.5</a>. The rbridgeEsadi Subtree</h3></span>
+
+   This subtree describes objects relevant to RBridges that support the
+   optional End-Station Address Distribution Information (ESADI)
+   protocol.
+
+<span class="h3"><h3><a class="selflink" name="section-5.6" href="https://tools.ietf.org/html/rfc6850#section-5.6">5.6</a>. The rbridgeCounters Subtree</h3></span>
+
+   This subtree contains statistics maintained by RBridges that can aid
+   in monitoring and troubleshooting networks connected by them.
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                    [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc6850#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-5.7" href="https://tools.ietf.org/html/rfc6850#section-5.7">5.7</a>. The rbridgeSnooping Subtree</h3></span>
+
+   This subtree describes objects applicable to RBridges capable of
+   snooping IPv4 and/or IPv6 multicast control frames and pruning IP
+   multicast traffic based on detection of IP multicast routers and
+   listeners.
+
+<span class="h3"><h3><a class="selflink" name="section-5.8" href="https://tools.ietf.org/html/rfc6850#section-5.8">5.8</a>. The rbridgeDtree Subtree</h3></span>
+
+   This subtree contains objects relevant to distribution trees computed
+   by RBridges for the forwarding of multi-destination frames.
+
+<span class="h3"><h3><a class="selflink" name="section-5.9" href="https://tools.ietf.org/html/rfc6850#section-5.9">5.9</a>. The rbridgeTrill Subtree</h3></span>
+
+   This subtree contains objects applicable to the TRILL IS-IS protocol,
+   beyond what is available in the ISIS-MIB.
+
+<span class="h3"><h3><a class="selflink" name="section-5.10" href="https://tools.ietf.org/html/rfc6850#section-5.10">5.10</a>. The Notifications Subtree</h3></span>
+
+   The defined notifications are focused on the TRILL protocol
+   functionality.  Notifications are defined for changes in the
+   Designated RBridge status and the topology.
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc6850#section-6">6</a>. Relationship to Other MIB Modules</h2></span>
+
+   The IF-MIB, BRIDGE-MIB, P-BRIDGE-MIB, Q-BRIDGE-MIB,
+   IEEE8021-BRIDGE-MIB, IEEE8021-Q-BRIDGE-MIB, and ISIS-MIB modules all
+   contain objects relevant to the RBridge MIB.  Management objects
+   contained in these modules are not duplicated here, to reduce overlap
+   to the extent possible.
+
+   The Bridge MIB modules were originally written in the IETF and
+   implemented by many vendors.  Per [<a href="https://tools.ietf.org/html/rfc4663" title="&quot;Transferring MIB Work from IETF Bridge MIB WG to IEEE 802.1 WG&quot;">RFC4663</a>], this has recently been
+   transferred to the IEEE 802.1 working group.  As vendors may have
+   implemented either the IETF or IEEE Bridge MIB modules, this RBridge
+   MIB module is designed to work with either one.
+
+<span class="h3"><h3><a class="selflink" name="section-6.1" href="https://tools.ietf.org/html/rfc6850#section-6.1">6.1</a>. Relationship to IF-MIB</h3></span>
+
+   The port identification elements MUST be implemented in order to
+   allow them to be cross-referenced.  The Interfaces MIB [<a href="https://tools.ietf.org/html/rfc2863" title="&quot;The Interfaces Group MIB&quot;">RFC2863</a>]
+   requires that any MIB module that is an adjunct of the Interfaces MIB
+   clarify specific areas within the Interfaces MIB module.  These areas
+   were intentionally left vague in the Interfaces MIB module to avoid
+   over-constraining the MIB, thereby precluding management of certain
+   media types.  <a href="https://tools.ietf.org/html/rfc2863#section-4">Section&nbsp;4 of [RFC2863]</a> enumerates several areas that a
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                    [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc6850#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   media-specific MIB module must clarify.  The implementor is referred
+   to [<a href="https://tools.ietf.org/html/rfc2863" title="&quot;The Interfaces Group MIB&quot;">RFC2863</a>] in order to understand the general intent of these
+   areas.
+
+<span class="h3"><h3><a class="selflink" name="section-6.2" href="https://tools.ietf.org/html/rfc6850#section-6.2">6.2</a>. Relationship to BRIDGE-MIB</h3></span>
+
+   The following subtrees in the BRIDGE-MIB [<a href="https://tools.ietf.org/html/rfc4188" title="&quot;Definitions of Managed Objects for Bridges&quot;">RFC4188</a>] contain
+   information relevant to RBridges when the corresponding functionality
+   is implemented.
+
+   o  dot1dBase
+
+   o  dot1dTp
+
+   o  dot1dStatic
+
+<span class="h3"><h3><a class="selflink" name="section-6.3" href="https://tools.ietf.org/html/rfc6850#section-6.3">6.3</a>. Relationship to P-BRIDGE-MIB</h3></span>
+
+   The following subtrees in the P-BRIDGE-MIB [<a href="https://tools.ietf.org/html/rfc4363" title="&quot;Definitions of Managed Objects for Bridges with Traffic Classes, Multicast Filtering, and Virtual LAN Extensions&quot;">RFC4363</a>] contain
+   information relevant to RBridges when the corresponding functionality
+   is implemented.
+
+   o  dot1dExtBase
+
+   o  dot1dPriority
+
+   o  dot1dGarp
+
+   o  dot1dGmrp
+
+   o  dot1dTpHCPortTable
+
+   o  dot1dTpPortOverflowTable
+
+<span class="h3"><h3><a class="selflink" name="section-6.4" href="https://tools.ietf.org/html/rfc6850#section-6.4">6.4</a>. Relationship to Q-BRIDGE-MIB</h3></span>
+
+   The following groups in the Q-BRIDGE-MIB [<a href="https://tools.ietf.org/html/rfc4363" title="&quot;Definitions of Managed Objects for Bridges with Traffic Classes, Multicast Filtering, and Virtual LAN Extensions&quot;">RFC4363</a>] contain
+   information relevant to RBridges when the corresponding functionality
+   is implemented.  This functionality is also contained in the
+   IEEE8021-Q-BRIDGE-MIB.
+
+   o  dot1qBase
+
+   o  dot1qTp
+
+   o  dot1qStatic
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                    [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc6850#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   o  dot1qVlan
+
+   o  dot1vProtocol
+
+<span class="h3"><h3><a class="selflink" name="section-6.5" href="https://tools.ietf.org/html/rfc6850#section-6.5">6.5</a>. Relationship to IEEE8021-BRIDGE-MIB</h3></span>
+
+   The following subtrees in the IEEE8021-BRIDGE-MIB contain information
+   relevant to RBridges when the corresponding functionality is
+   implemented.
+
+   o  ieee8021BridgeBase
+
+   o  ieee8021BridgeTp
+
+   o  ieee8021BridgePriority
+
+   o  ieee8021BridgeMrp
+
+   o  ieee8021BridgeMmrp
+
+   o  ieee8021BridgeInternalLan
+
+   o  ieee8021BridgeDot1d
+
+<span class="h3"><h3><a class="selflink" name="section-6.6" href="https://tools.ietf.org/html/rfc6850#section-6.6">6.6</a>. Relationship to IEEE8021-Q-BRIDGE-MIB</h3></span>
+
+   The following subtrees in the IEEE8021-Q-BRIDGE-MIB contain
+   information relevant to RBridges when the corresponding functionality
+   is implemented.
+
+   o  ieee8021QBridgeBase
+
+   o  ieee8021QBridgeTp
+
+   o  ieee8021QBridgeStatic
+
+   o  ieee8021QBridgeVlan
+
+   o  ieee8021QBridgeProtocol
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                    [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc6850#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-6.7" href="https://tools.ietf.org/html/rfc6850#section-6.7">6.7</a>. Relationship to ISIS-MIB</h3></span>
+
+   &quot;Management Information Base for Intermediate System to Intermediate
+   System (IS-IS)&quot; [<a href="https://tools.ietf.org/html/rfc4444" title="&quot;Management Information Base for Intermediate System to Intermediate System (IS-IS)&quot;">RFC4444</a>] defines a MIB module for the IS-IS routing
+   protocol when it is used to construct routing tables for IP networks.
+   While most of these objects are applicable to the TRILL layer 2
+   implementation, note the IS-IS constraints for the current version of
+   TRILL [<a href="https://tools.ietf.org/html/rfc6325" title="&quot;Routing Bridges (RBridges): Base Protocol Specification&quot;">RFC6325</a>]:
+
+   o  The TRILL IS-IS instance uses a single Level 1 IS-IS area.
+
+   o  The TRILL Level 1 IS-IS area uses the fixed area address zero.
+
+   o  The TRILL IS-IS instance is not used for IP address advertisement.
+
+   o  The TRILL IS-IS instance is used for only a single protocol:
+      TRILL.
+
+   Accordingly, tables that report IP address reachability and tables
+   that allow configuration or reporting of multiple IS-IS areas,
+   multiple IS-IS levels, or multiple protocols will be empty in the
+   ISIS-MIB module for the current version of TRILL.
+
+   Note also that when more than one instance of the IS-IS protocol is
+   running on a device, as in the case of a device performing both
+   RBridge and IS-IS IP router functions, multiple instances of the
+   ISIS-MIB module can be distinguished by the use of SNMPv3 contexts or
+   SNMPv1 communities.
+
+<span class="h3"><h3><a class="selflink" name="section-6.8" href="https://tools.ietf.org/html/rfc6850#section-6.8">6.8</a>. MIB Modules Required for IMPORTS</h3></span>
+
+   The following MIB module imports objects from the SNMPv2-SMI
+   [<a href="https://tools.ietf.org/html/rfc2578" title="&quot;Structure of Management Information Version 2 (SMIv2)&quot;">RFC2578</a>], SNMPv2-TC [<a href="https://tools.ietf.org/html/rfc2579" title="&quot;Textual Conventions for SMIv2&quot;">RFC2579</a>], SNMPv2-CONF [<a href="https://tools.ietf.org/html/rfc2580" title="&quot;Conformance Statements for SMIv2&quot;">RFC2580</a>], IF-MIB
+   [<a href="https://tools.ietf.org/html/rfc2863" title="&quot;The Interfaces Group MIB&quot;">RFC2863</a>], INET-ADDRESS-MIB [<a href="https://tools.ietf.org/html/rfc4001" title="&quot;Textual Conventions for Internet Network Addresses&quot;">RFC4001</a>], BRIDGE-MIB [<a href="https://tools.ietf.org/html/rfc4188" title="&quot;Definitions of Managed Objects for Bridges&quot;">RFC4188</a>],
+   and Q-BRIDGE-MIB [<a href="https://tools.ietf.org/html/rfc4363" title="&quot;Definitions of Managed Objects for Bridges with Traffic Classes, Multicast Filtering, and Virtual LAN Extensions&quot;">RFC4363</a>].  (The IEEE Bridge MIB modules import
+   similar TCs.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                    [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc6850#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc6850#section-7">7</a>. Definition of the RBridge MIB Module</h2></span>
+
+   RBRIDGE-MIB DEFINITIONS ::= BEGIN
+
+   -- ---------------------------------------------------------- --
+   -- MIB for RBRIDGE devices, also known as TRILL Switches
+   -- ---------------------------------------------------------- --
+   IMPORTS
+       MODULE-IDENTITY, OBJECT-TYPE, NOTIFICATION-TYPE,
+       Counter32, Counter64, Unsigned32, mib-2
+           FROM SNMPv2-SMI            -- <a href="https://tools.ietf.org/html/rfc2578">RFC2578</a>
+       TEXTUAL-CONVENTION, TruthValue, MacAddress, RowStatus
+           FROM SNMPv2-TC             -- <a href="https://tools.ietf.org/html/rfc2579">RFC2579</a>
+       MODULE-COMPLIANCE, OBJECT-GROUP, NOTIFICATION-GROUP
+           FROM SNMPv2-CONF           -- <a href="https://tools.ietf.org/html/rfc2580">RFC2580</a>
+       VlanId, PortList
+           FROM Q-BRIDGE-MIB          -- <a href="https://tools.ietf.org/html/rfc4363">RFC4363</a>
+       InetAddress, InetAddressType
+           FROM INET-ADDRESS-MIB      -- <a href="https://tools.ietf.org/html/rfc4001">RFC4001</a>
+       BridgeId
+           FROM BRIDGE-MIB            -- <a href="https://tools.ietf.org/html/rfc4188">RFC4188</a>
+       InterfaceIndex
+           FROM IF-MIB                -- <a href="https://tools.ietf.org/html/rfc2863">RFC2863</a>
+       ;
+
+   rbridgeMIB MODULE-IDENTITY
+   LAST-UPDATED &quot;201301070000Z&quot;
+   ORGANIZATION &quot;IETF TRILL Working Group&quot;
+   CONTACT-INFO
+        &quot;<a href="http://datatracker.ietf.org/wg/trill/charter/">http://datatracker.ietf.org/wg/trill/charter/</a>
+        Email: trill@ietf.org
+
+               Anil Rijhsinghani
+               Hewlett-Packard
+          Tel: +1 508 323 1251
+        Email: anil@charter.net
+
+               Kate Zebrose
+               HW Embedded
+          Tel: +1 617 840 9673
+        Email: zebrose@alum.mit.edu&quot;
+
+       DESCRIPTION
+           &quot;The RBridge MIB module for managing switches that support
+           the TRILL protocol.&quot;
+
+   REVISION     &quot;201301070000Z&quot;
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                    [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc6850#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   DESCRIPTION
+        &quot;Initial version, published as <a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>.
+
+        Copyright (c) 2013 IETF Trust and the persons identified as
+        authors of the code.  All rights reserved.
+
+        Redistribution and use in source and binary forms, with or
+        without modification, is permitted pursuant to, and subject to
+        the license terms contained in, the Simplified BSD License set
+        forth in <a href="https://tools.ietf.org/html/rfc6850#section-4">Section 4</a>.c of the IETF Trust's Legal Provisions
+        Relating to IETF Documents
+        (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>).&quot;
+
+        ::= { mib-2 214 }
+
+
+   -- ---------------------------------------------------------- --
+   -- Subtrees in the RBridge MIB
+   -- ---------------------------------------------------------- --
+
+   rbridgeNotifications  OBJECT IDENTIFIER ::= { rbridgeMIB 0 }
+   rbridgeObjects        OBJECT IDENTIFIER ::= { rbridgeMIB 1 }
+   rbridgeConformance    OBJECT IDENTIFIER ::= { rbridgeMIB 2 }
+
+   rbridgeBase           OBJECT IDENTIFIER ::= { rbridgeObjects 1 }
+   rbridgeFdb            OBJECT IDENTIFIER ::= { rbridgeObjects 2 }
+   rbridgeVlan           OBJECT IDENTIFIER ::= { rbridgeObjects 3 }
+   rbridgeEsadi          OBJECT IDENTIFIER ::= { rbridgeObjects 4 }
+   rbridgeCounter        OBJECT IDENTIFIER ::= { rbridgeObjects 5 }
+   rbridgeSnooping       OBJECT IDENTIFIER ::= { rbridgeObjects 6 }
+   rbridgeDtree          OBJECT IDENTIFIER ::= { rbridgeObjects 7 }
+   rbridgeTrill          OBJECT IDENTIFIER ::= { rbridgeObjects 8 }
+
+   -- ---------------------------------------------------------- --
+   -- Type Definitions
+   -- ---------------------------------------------------------- --
+
+   RbridgeAddress ::= TEXTUAL-CONVENTION
+       DISPLAY-HINT &quot;1x:&quot;
+       STATUS current
+       DESCRIPTION
+           &quot;The Media Access Control (MAC) address used by an RBridge
+           port.  This may match the RBridge IS-IS SystemID.&quot;
+       SYNTAX OCTET STRING (SIZE (6))
+
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc6850#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   RbridgeNickname ::= TEXTUAL-CONVENTION
+       DISPLAY-HINT &quot;d&quot;
+       STATUS current
+       DESCRIPTION
+           &quot;The 16-bit identifier used in TRILL as an
+           abbreviation for the RBridge's 48-bit IS-IS System ID.
+           The value 0 means a nickname is not specified, the values
+           0xFFC0 through 0xFFFE are reserved for future allocation,
+           and the value 0xFFFF is permanently reserved.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-3.7">RFC 6325, Section&nbsp;3.7</a>&quot;
+       SYNTAX Unsigned32 (0..65471)
+
+   --
+   -- the rbridgeBase subtree
+   --
+   -- Implementation of the rbridgeBase subtree is mandatory for all
+   -- RBridges.
+   --
+
+   rbridgeBaseTrillVersion OBJECT-TYPE
+       SYNTAX      Unsigned32
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The maximum TRILL version number that this RBridge
+           supports.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-3.2">RFC 6325, Section&nbsp;3.2</a>&quot;
+       ::= { rbridgeBase 1 }
+
+   rbridgeBaseNumPorts OBJECT-TYPE
+       SYNTAX      Unsigned32
+       UNITS       &quot;ports&quot;
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The number of ports controlled by this RBridge.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-2.6.1">RFC 6325, Section&nbsp;2.6.1</a>&quot;
+       ::= { rbridgeBase 2 }
+
+   rbridgeBaseForwardDelay OBJECT-TYPE
+       SYNTAX      Unsigned32 (4..30)
+       UNITS       &quot;seconds&quot;
+       MAX-ACCESS  read-write
+       STATUS      current
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc6850#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       DESCRIPTION
+           &quot;Modified aging time for address entries after an appointed
+           forwarder change.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.8.3">RFC 6325, Section&nbsp;4.8.3</a>&quot;
+       ::= { rbridgeBase 3 }
+
+   rbridgeBaseUniMultipathEnable OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;The enabled status of unicast TRILL multipathing.
+           It is enabled when true.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#appendix-C">RFC 6325, Appendix&nbsp;C</a>&quot;
+       ::= { rbridgeBase 4 }
+
+   rbridgeBaseMultiMultipathEnable OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;The enabled status of multi-destination TRILL multipathing.
+           It is enabled when true.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#appendix-C">RFC 6325, Appendix&nbsp;C</a>&quot;
+       ::= { rbridgeBase 5 }
+
+   rbridgeBaseAcceptEncapNonadj OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;Accept TRILL-encapsulated frames from a neighbor with which
+           this RBridge does not have an IS-IS adjacency, when the value
+           of this object is 'true'.
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-13" id="page-13" href="https://tools.ietf.org/html/rfc6850#page-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.6.2">RFC 6325, Section&nbsp;4.6.2</a>&quot;
+       ::= { rbridgeBase 6 }
+
+   rbridgeBaseNicknameNumber OBJECT-TYPE
+       SYNTAX      Unsigned32 (1..256)
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;The number of nicknames this RBridge should acquire.
+           These can be acquired dynamically or configured
+           statically.  This value represents the maximum
+           number of entries in rbridgeBaseNicknameTable.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-3.7.3">RFC 6325, Section&nbsp;3.7.3</a>&quot;
+       ::= { rbridgeBase 7 }
+
+   -- ---------------------------------------------------------- --
+   -- The RBridge Base Nickname Table
+   -- ---------------------------------------------------------- --
+
+   rbridgeBaseNicknameTable OBJECT-TYPE
+       SYNTAX      SEQUENCE OF RbridgeBaseNicknameEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A table that contains information about nicknames
+           configured by an operator or learned dynamically
+           by this RBridge.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-3.7">RFC 6325, Section&nbsp;3.7</a>&quot;
+       ::= { rbridgeBase 8 }
+
+   rbridgeBaseNicknameEntry OBJECT-TYPE
+       SYNTAX      RbridgeBaseNicknameEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A list of information for each nickname of the RBridge.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-3.7">RFC 6325, Section&nbsp;3.7</a>&quot;
+       INDEX  { rbridgeBaseNicknameName }
+       ::= { rbridgeBaseNicknameTable 1 }
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 13]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-14" id="page-14" href="https://tools.ietf.org/html/rfc6850#page-14" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   RbridgeBaseNicknameEntry ::=
+       SEQUENCE {
+           rbridgeBaseNicknameName
+               RbridgeNickname,
+           rbridgeBaseNicknamePriority
+               Unsigned32,
+           rbridgeBaseNicknameDtrPriority
+               Unsigned32,
+           rbridgeBaseNicknameType
+               INTEGER,
+           rbridgeBaseNicknameRowStatus
+               RowStatus
+       }
+
+   rbridgeBaseNicknameName OBJECT-TYPE
+       SYNTAX      RbridgeNickname
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;Nicknames are 16-bit quantities that act as
+           abbreviations for RBridge's 48-bit IS-IS System ID to
+           achieve a more compact encoding.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-3.7">RFC 6325, Section&nbsp;3.7</a>&quot;
+       ::= { rbridgeBaseNicknameEntry 1 }
+
+   rbridgeBaseNicknamePriority OBJECT-TYPE
+       SYNTAX      Unsigned32 (0..255)
+       MAX-ACCESS  read-create
+       STATUS      current
+       DESCRIPTION
+           &quot;This RBridge's priority to hold this nickname.  When
+           the nickname is configured, the default value of this
+           object is 192.  When the nickname is configured, the most
+           significant bit (0x80) must be set and the bottom 7 bits
+           have the default value of 0x40, so 0x80 + 0x40 == 0xC0,
+           which is 192 decimal.  Additionally, the bottom 7 bits
+           could be configured to a value other than 0x40.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-3.7">RFC 6325, Section&nbsp;3.7</a>&quot;
+       DEFVAL      { 192 }
+       ::= { rbridgeBaseNicknameEntry 2 }
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 14]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-15" id="page-15" href="https://tools.ietf.org/html/rfc6850#page-15" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   rbridgeBaseNicknameDtrPriority OBJECT-TYPE
+       SYNTAX      Unsigned32 (1..65535)
+       MAX-ACCESS  read-create
+       STATUS      current
+       DESCRIPTION
+           &quot;The distribution tree root priority for this nickname.
+           The default value of this object is 32768.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.5">RFC 6325, Section&nbsp;4.5</a>&quot;
+       DEFVAL      { 32768 }
+       ::= { rbridgeBaseNicknameEntry 3 }
+
+   rbridgeBaseNicknameType OBJECT-TYPE
+       SYNTAX      INTEGER {
+                       static(1),
+                       dynamic(2)
+                   }
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;This object indicates the status of the entry.  The
+           default value is static(1).
+               static(1) - this entry has been configured and
+                   will remain after the next reset of the RBridge.
+               dynamic(2) - this entry has been acquired by the
+                   RBridge nickname acquisition protocol.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-3.7">RFC 6325, Section&nbsp;3.7</a>&quot;
+       DEFVAL      { static }
+       ::= { rbridgeBaseNicknameEntry 4 }
+
+   rbridgeBaseNicknameRowStatus OBJECT-TYPE
+       SYNTAX      RowStatus
+       MAX-ACCESS  read-create
+       STATUS      current
+       DESCRIPTION
+           &quot;This object indicates the status of the entry.&quot;
+       ::= { rbridgeBaseNicknameEntry 5 }
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 15]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-16" id="page-16" href="https://tools.ietf.org/html/rfc6850#page-16" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   -- ---------------------------------------------------------- --
+   -- The RBridge Port Table
+   -- ---------------------------------------------------------- --
+
+   rbridgeBasePortTable OBJECT-TYPE
+       SYNTAX      SEQUENCE OF RbridgeBasePortEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A table that contains generic information about every
+           port that is associated with this RBridge.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-5.3">RFC 6325, Section&nbsp;5.3</a>&quot;
+       ::= { rbridgeBase 9 }
+
+   rbridgeBasePortEntry OBJECT-TYPE
+       SYNTAX      RbridgeBasePortEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A list of information for each port of the bridge.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-5.3">RFC 6325, Section&nbsp;5.3</a>&quot;
+       INDEX  { rbridgeBasePort }
+       ::= { rbridgeBasePortTable 1 }
+
+   RbridgeBasePortEntry ::=
+       SEQUENCE {
+           rbridgeBasePort
+               Unsigned32,
+           rbridgeBasePortIfIndex
+               InterfaceIndex,
+           rbridgeBasePortDisable
+               TruthValue,
+           rbridgeBasePortTrunkPort
+               TruthValue,
+           rbridgeBasePortAccessPort
+               TruthValue,
+           rbridgeBasePortP2pHellos
+               TruthValue,
+           rbridgeBasePortState
+               INTEGER,
+           rbridgeBasePortInhibitionTime
+               Unsigned32,
+           rbridgeBasePortDisableLearning
+               TruthValue,
+           rbridgeBasePortDesiredDesigVlan
+               VlanId,
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 16]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-17" id="page-17" href="https://tools.ietf.org/html/rfc6850#page-17" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+           rbridgeBasePortDesigVlan
+               VlanId,
+           rbridgeBasePortStpRoot
+               BridgeId,
+           rbridgeBasePortStpRootChanges
+               Counter32,
+           rbridgeBasePortStpWiringCloset
+               BridgeId
+   }
+
+   rbridgeBasePort OBJECT-TYPE
+       SYNTAX      Unsigned32 (1..65535)
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;The port number of the port for which this entry
+           contains RBridge management information.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-5.3">RFC 6325, Section&nbsp;5.3</a>&quot;
+       ::= { rbridgeBasePortEntry 1 }
+
+   rbridgeBasePortIfIndex OBJECT-TYPE
+       SYNTAX      InterfaceIndex
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The value of the instance of the ifIndex object,
+           defined in the IF-MIB, for the interface corresponding
+           to this port.  The RBridge port sits on top of
+           this interface.&quot;
+       ::= { rbridgeBasePortEntry 2 }
+
+   rbridgeBasePortDisable OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;Disable port bit.  When this bit is set (true), all frames
+           received or to be transmitted are discarded, with the
+           possible exception of some layer 2 control frames that may
+           be generated and transmitted or received and processed
+           locally.  Default value is 'false'.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 17]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-18" id="page-18" href="https://tools.ietf.org/html/rfc6850#page-18" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.9.1">RFC 6325, Section&nbsp;4.9.1</a>&quot;
+       DEFVAL      { false }
+       ::= { rbridgeBasePortEntry 3 }
+
+   rbridgeBasePortTrunkPort OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;End-station service disable (trunk port) bit.  When this bit
+           is set (true), all native frames received on the port and all
+           native frames that would have been sent on the port are
+           discarded.  Default value is 'false'.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.9.1">RFC 6325, Section&nbsp;4.9.1</a>&quot;
+       DEFVAL      { false }
+       ::= { rbridgeBasePortEntry 4 }
+
+   rbridgeBasePortAccessPort OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;TRILL traffic disable (access port) bit.  If this bit is
+           set, the goal is to avoid sending any TRILL frames, except
+           TRILL-Hello frames, on the port, since it is intended only
+           for native end-station traffic.  This ensures that the link
+           is not on the shortest path for any destination.  Default
+           value is 'false'.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.9.1">RFC 6325, Section&nbsp;4.9.1</a>&quot;
+       DEFVAL      { false }
+       ::= { rbridgeBasePortEntry 5 }
+
+   rbridgeBasePortP2pHellos OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;Use point-to-point (P2P) Hellos bit.  If this bit is set,
+           Hellos sent on this port are IS-IS P2P Hellos, not the
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 18]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-19" id="page-19" href="https://tools.ietf.org/html/rfc6850#page-19" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+           default TRILL-Hellos.  In addition, the IS-IS P2P three-way
+           handshake is used on P2P RBridge links.  Default value is
+           'false'.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.9.1">RFC 6325, Section&nbsp;4.9.1</a>&quot;
+       DEFVAL      { false }
+       ::= { rbridgeBasePortEntry 6 }
+
+   rbridgeBasePortState OBJECT-TYPE
+       SYNTAX      INTEGER {
+                          uninhibited(1),
+                          portInhibited(2),
+                          vlanInhibited(3),
+                          disabled(4),
+                          broken(5)
+                      }
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The port's current state.  If the entire port is
+           inhibited, its state is portInhibited(2).  If specific VLANs
+           are inhibited, the state is vlanInhibited(3), and
+           rbridgeVlanPortTable will tell which VLANs are inhibited.
+           For ports that are disabled (see rbridgeBasePortDisable),
+           this object will have a value of disabled(4).  If the
+           RBridge has detected a port that is malfunctioning, it will
+           place that port into the broken(5) state.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.2.4.3">RFC 6325, Section&nbsp;4.2.4.3</a>&quot;
+       ::= { rbridgeBasePortEntry 7 }
+
+   rbridgeBasePortInhibitionTime OBJECT-TYPE
+       SYNTAX      Unsigned32
+       UNITS       &quot;seconds&quot;
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;Time in seconds that this RBridge will inhibit forwarding
+           on this port after it observes a spanning tree root bridge
+           change on a link or receives conflicting VLAN forwarder
+           information.  The default value is 30.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 19]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-20" id="page-20" href="https://tools.ietf.org/html/rfc6850#page-20" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.2.4.3">RFC 6325, Section&nbsp;4.2.4.3</a>&quot;
+       DEFVAL      { 30 }
+       ::= { rbridgeBasePortEntry 8 }
+
+   rbridgeBasePortDisableLearning OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;Disable learning of MAC addresses seen on this port.
+           To disable learning, the value of this object must be
+           set to 'true'.  The default is 'false'.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.8">RFC 6325, Section&nbsp;4.8</a>&quot;
+       DEFVAL      { false }
+       ::= { rbridgeBasePortEntry 9 }
+
+   rbridgeBasePortDesiredDesigVlan OBJECT-TYPE
+       SYNTAX      VlanId
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;The VLAN that a Designated RBridge (DRB) will specify in
+           its TRILL-Hellos as the VLAN to be used by all RBridges on
+           the link for TRILL frames.  This VLAN must be enabled on
+           this port.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.4.3">RFC 6325, Section&nbsp;4.4.3</a>&quot;
+       ::= { rbridgeBasePortEntry 10 }
+
+   rbridgeBasePortDesigVlan OBJECT-TYPE
+       SYNTAX      VlanId
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The VLAN being used on this link for TRILL frames.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.4.3">RFC 6325, Section&nbsp;4.4.3</a>&quot;
+       ::= { rbridgeBasePortEntry 11 }
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 20]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-21" id="page-21" href="https://tools.ietf.org/html/rfc6850#page-21" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   rbridgeBasePortStpRoot OBJECT-TYPE
+       SYNTAX      BridgeId
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The bridge identifier of the root of the spanning tree,
+           as learned from a Bridge PDU (BPDU) received on this port.
+           For the Multiple Spanning Tree Protocol (MSTP), this is
+           the root bridge of the Common and Internal Spanning Tree
+           (CIST).  If no BPDU has been heard, the value returned
+           is a string of zeros.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.2.4.3">RFC 6325, Section&nbsp;4.2.4.3</a>&quot;
+       ::= { rbridgeBasePortEntry 12 }
+
+   rbridgeBasePortStpRootChanges OBJECT-TYPE
+       SYNTAX      Counter32
+       UNITS       &quot;changes&quot;
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The number of times a change in the root bridge is seen from
+           spanning tree BPDUs received on this port, indicating a
+           change in bridged LAN topology.  Each such change may cause
+           the port to be inhibited for a period of time.  This counter
+           should be synchronized with ifCounterDiscontinuityTime.
+
+           Discontinuities in the value of this counter can occur
+           at re-initialization of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.9.3.2">RFC 6325, Section&nbsp;4.9.3.2</a>&quot;
+       ::= { rbridgeBasePortEntry 13 }
+
+   rbridgeBasePortStpWiringCloset OBJECT-TYPE
+       SYNTAX      BridgeId
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;The Bridge ID to be used as the spanning tree root in BPDUs
+           sent for the Wiring Closet topology solution described in
+           [<a href="https://tools.ietf.org/html/rfc6325" title="&quot;Routing Bridges (RBridges): Base Protocol Specification&quot;">RFC6325</a>].  Note that the same value of this object must be
+           set on all RBridge ports participating in this solution.
+           The default value is all 0s.  A non-zero value configured
+           into this object indicates that this solution is in use.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 21]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-22" id="page-22" href="https://tools.ietf.org/html/rfc6850#page-22" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#appendix-A.3.3">RFC 6325, Appendix&nbsp;A.3.3</a>&quot;
+       ::= { rbridgeBasePortEntry 14 }
+
+   -- -------------------------------------------------------------
+   -- RBridge Forwarding Database
+   -- -------------------------------------------------------------
+
+   rbridgeConfidenceNative OBJECT-TYPE
+       SYNTAX      Unsigned32 (0..255)
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;The confidence level associated with MAC addresses
+           learned from native frames.  This is applicable to
+           all RBridge ports.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.8.1">RFC 6325, Section&nbsp;4.8.1</a>&quot;
+       ::= { rbridgeFdb 1 }
+
+   rbridgeConfidenceDecap OBJECT-TYPE
+       SYNTAX      Unsigned32 (0..255)
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;The confidence level associated with inner MAC addresses
+           learned after decapsulation of a TRILL data frame.
+           This is applicable to all RBridge ports.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.8.1">RFC 6325, Section&nbsp;4.8.1</a>&quot;
+       ::= { rbridgeFdb 2 }
+
+   rbridgeConfidenceStatic OBJECT-TYPE
+       SYNTAX      Unsigned32 (0..255)
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;The confidence level associated with MAC addresses that
+           are statically configured.  The default value is 255.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 22]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-23" id="page-23" href="https://tools.ietf.org/html/rfc6850#page-23" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.8.2">RFC 6325, Section&nbsp;4.8.2</a>&quot;
+       DEFVAL      { 255 }
+       ::= { rbridgeFdb 3 }
+
+
+   -- -------------------------------------------------------------
+   -- Multiple Forwarding Databases for RBridges
+   --
+   -- This allows for an instance per FdbId, as defined in the
+   -- Bridge MIB.
+   --
+   -- Each VLAN may have an independent FDB, or multiple VLANs may
+   -- share one.
+   -- -------------------------------------------------------------
+
+   rbridgeUniFdbTable OBJECT-TYPE
+       SYNTAX      SEQUENCE OF RbridgeUniFdbEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A table that contains information about unicast entries
+           for which the device has forwarding and/or filtering
+           information.  This information is used by the
+           transparent bridging function in determining how to
+           propagate a received frame.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.8">RFC 6325, Section&nbsp;4.8</a>&quot;
+       ::= { rbridgeFdb 4 }
+
+   rbridgeUniFdbEntry OBJECT-TYPE
+       SYNTAX      RbridgeUniFdbEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;Information about a specific unicast MAC address for
+           which the RBridge has some forwarding and/or filtering
+           information.&quot;
+       INDEX   { rbridgeFdbId, rbridgeUniFdbAddr }
+       ::= { rbridgeUniFdbTable 1 }
+
+   RbridgeUniFdbEntry ::=
+       SEQUENCE {
+           rbridgeFdbId
+               Unsigned32,
+           rbridgeUniFdbAddr
+               MacAddress,
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 23]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-24" id="page-24" href="https://tools.ietf.org/html/rfc6850#page-24" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+           rbridgeUniFdbPort
+               Unsigned32,
+           rbridgeUniFdbNickname
+               RbridgeNickname,
+           rbridgeUniFdbConfidence
+               Unsigned32,
+           rbridgeUniFdbStatus
+               INTEGER
+       }
+
+   rbridgeFdbId OBJECT-TYPE
+       SYNTAX      Unsigned32 (0..4294967295)
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;The identity of this Filtering Database.&quot;
+       ::= { rbridgeUniFdbEntry 1 }
+
+   rbridgeUniFdbAddr OBJECT-TYPE
+       SYNTAX      MacAddress
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A unicast MAC address for which the device has
+           forwarding information.&quot;
+       ::= { rbridgeUniFdbEntry 2 }
+
+   rbridgeUniFdbPort OBJECT-TYPE
+       SYNTAX      Unsigned32 (0..65535)
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;Either the value '0', or the RBridge port number of the
+           port on which a frame having a source address equal to the
+           value of the corresponding instance of rbridgeUniFdbAddr
+           has been seen.  A value of '0' indicates that the port
+           number has not been learned but that the device does have
+           some information about this MAC address.
+
+           Implementors are encouraged to assign the port value to
+           this object whenever it is available, even for addresses
+           for which the corresponding value of rbridgeUniFdbStatus is
+           not learned(3).&quot;
+       ::= { rbridgeUniFdbEntry 3 }
+
+   rbridgeUniFdbNickname OBJECT-TYPE
+       SYNTAX      RbridgeNickname
+       MAX-ACCESS  read-only
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 24]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-25" id="page-25" href="https://tools.ietf.org/html/rfc6850#page-25" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       STATUS      current
+       DESCRIPTION
+           &quot;The RBridge nickname that is placed in the egress
+           nickname field of a TRILL frame sent to this
+           rbridgeFdbAddress in this rbridgeFdbId.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.8.1">RFC 6325, Section&nbsp;4.8.1</a>&quot;
+       ::= { rbridgeUniFdbEntry 4 }
+
+   rbridgeUniFdbConfidence OBJECT-TYPE
+       SYNTAX      Unsigned32 (0..255)
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The confidence level associated with this entry.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.8.1">RFC 6325, Section&nbsp;4.8.1</a>&quot;
+       ::= { rbridgeUniFdbEntry 5 }
+
+   rbridgeUniFdbStatus OBJECT-TYPE
+       SYNTAX      INTEGER {
+                       other(1),
+                       invalid(2),
+                       learned(3),
+                       self(4),
+                       mgmt(5),
+                       esadi(6)
+                   }
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The status of this entry.  The meanings of the values
+           are:
+               other(1) - none of the following.
+               invalid(2) - this entry is no longer valid (e.g., it
+                   was learned but has since aged out) but has not
+                   yet been flushed from the table.
+               learned(3) - the information in this entry was learned
+                   and is being used.
+               self(4) - the value of the corresponding instance of
+                   rbridgeFdbAddress represents one of the device's
+                   addresses.  The corresponding instance of
+                   rbridgeFdbPort indicates which of the device's
+                   ports has this address.
+
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 25]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-26" id="page-26" href="https://tools.ietf.org/html/rfc6850#page-26" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+               mgmt(5) - the value of the corresponding instance of
+                   rbridgeFdbAddress was configured by management.
+               esadi(6) - the value of the corresponding instance of
+                   rbridgeFdbAddress was learned from ESADI.&quot;
+       ::= { rbridgeUniFdbEntry 6 }
+
+   -- -------------------------------------------------------------
+   -- RBridge Forwarding Information Base (FIB)
+   -- -------------------------------------------------------------
+
+   rbridgeUniFibTable OBJECT-TYPE
+       SYNTAX      SEQUENCE OF RbridgeUniFibEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A table that contains information about nicknames known by
+           the RBridge.  If Equal-Cost Multipath (ECMP) is implemented,
+           there are as many entries for a nickname as there are ECMP
+           paths available for it.&quot;
+       ::= { rbridgeFdb 5 }
+
+   rbridgeUniFibEntry OBJECT-TYPE
+       SYNTAX      RbridgeUniFibEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A list of information about nicknames known by the RBridge.
+           If ECMP is implemented, there are as many entries as there
+           are ECMP paths available for a given nickname.&quot;
+       INDEX   { rbridgeUniFibNickname, rbridgeUniFibPort,
+                 rbridgeUniFibNextHop }
+       ::= { rbridgeUniFibTable 1 }
+
+   RbridgeUniFibEntry ::=
+       SEQUENCE {
+           rbridgeUniFibNickname
+               RbridgeNickname,
+           rbridgeUniFibPort
+               Unsigned32,
+           rbridgeUniFibNextHop
+               RbridgeNickname,
+           rbridgeUniFibHopCount
+               Unsigned32
+       }
+
+   rbridgeUniFibNickname OBJECT-TYPE
+       SYNTAX      RbridgeNickname
+       MAX-ACCESS  not-accessible
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 26]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-27" id="page-27" href="https://tools.ietf.org/html/rfc6850#page-27" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       STATUS      current
+       DESCRIPTION
+           &quot;An RBridge nickname for which this RBridge has
+           forwarding information.&quot;
+       ::= { rbridgeUniFibEntry 1 }
+
+   rbridgeUniFibPort OBJECT-TYPE
+       SYNTAX      Unsigned32 (0..65535)
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;The RBridge port number of the port attached to the
+           next-hop RBridge for the path towards the RBridge whose
+           nickname is specified in this entry.&quot;
+       ::= { rbridgeUniFibEntry 2 }
+
+   rbridgeUniFibNextHop OBJECT-TYPE
+       SYNTAX      RbridgeNickname
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;The nickname of the next-hop RBridge for the path
+           towards the RBridge whose nickname is specified in this
+           entry.&quot;
+       ::= { rbridgeUniFibEntry 3 }
+
+   rbridgeUniFibHopCount OBJECT-TYPE
+       SYNTAX      Unsigned32
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The hop count from this ingress RBridge to the egress
+           RBridge whose nickname is specified in
+           rbridgeUniFibNickname.&quot;
+       ::= { rbridgeUniFibEntry 4 }
+
+   rbridgeMultiFibTable OBJECT-TYPE
+       SYNTAX      SEQUENCE OF RbridgeMultiFibEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A table that contains information about egress nicknames
+           used for multi-destination frame forwarding by this
+           RBridge.&quot;
+       ::= { rbridgeFdb 6 }
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 27]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-28" id="page-28" href="https://tools.ietf.org/html/rfc6850#page-28" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   rbridgeMultiFibEntry OBJECT-TYPE
+       SYNTAX      RbridgeMultiFibEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A list of information about egress nicknames used for
+           multi-destination frame forwarding by this RBridge.&quot;
+       INDEX   { rbridgeMultiFibNickname }
+       ::= { rbridgeMultiFibTable 1 }
+
+   RbridgeMultiFibEntry ::=
+       SEQUENCE {
+           rbridgeMultiFibNickname
+               RbridgeNickname,
+           rbridgeMultiFibPorts
+               PortList
+       }
+
+   rbridgeMultiFibNickname OBJECT-TYPE
+       SYNTAX      RbridgeNickname
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;The nickname of the multicast distribution tree.&quot;
+       ::= { rbridgeMultiFibEntry 1 }
+
+   rbridgeMultiFibPorts OBJECT-TYPE
+       SYNTAX      PortList
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The list of ports to which a frame destined to this
+           multicast distribution tree is flooded.  This may be pruned
+           further based on other forwarding information.&quot;
+       ::= { rbridgeMultiFibEntry 2 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 28]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-29" id="page-29" href="https://tools.ietf.org/html/rfc6850#page-29" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   -- ---------------------------------------------------------- --
+   -- The RBridge VLAN Table
+   -- ---------------------------------------------------------- --
+
+   rbridgeVlanTable  OBJECT-TYPE
+       SYNTAX      SEQUENCE OF RbridgeVlanEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A table that contains information about VLANs on the
+           RBridge.&quot;
+       ::= { rbridgeVlan 1 }
+
+   rbridgeVlanEntry OBJECT-TYPE
+       SYNTAX      RbridgeVlanEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A list of information about VLANs on the RBridge.&quot;
+       INDEX   { rbridgeVlanIndex }
+       ::= { rbridgeVlanTable 1 }
+
+   RbridgeVlanEntry ::=
+       SEQUENCE {
+           rbridgeVlanIndex
+               Unsigned32,
+           rbridgeVlanForwarderLosts
+               Counter32,
+           rbridgeVlanDisableLearning
+               TruthValue,
+           rbridgeVlanSnooping
+               INTEGER
+       }
+
+   rbridgeVlanIndex OBJECT-TYPE
+       SYNTAX      Unsigned32 (1..4094|4096..4294967295)
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;The VLAN-ID referring to this VLAN.&quot;
+       ::= { rbridgeVlanEntry 1 }
+
+   rbridgeVlanForwarderLosts OBJECT-TYPE
+       SYNTAX      Counter32
+       UNITS       &quot;times&quot;
+       MAX-ACCESS  read-only
+       STATUS      current
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 29]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-30" id="page-30" href="https://tools.ietf.org/html/rfc6850#page-30" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       DESCRIPTION
+           &quot;The number of times this RBridge has lost appointed
+           forwarder status for this VLAN on any of its ports.
+
+           Discontinuities in the value of this counter can occur
+           at re-initialization of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.8.3">RFC 6325, Section&nbsp;4.8.3</a>&quot;
+       ::= { rbridgeVlanEntry 2 }
+
+   rbridgeVlanDisableLearning OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;Disable learning of MAC addresses seen in this VLAN.
+           One application of this may be to restrict learning to
+           ESADI.  To disable learning, the value of this object
+           should be set to 'true'.  The default is 'false'.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.8">RFC 6325, Section&nbsp;4.8</a>&quot;
+       DEFVAL      { false }
+       ::= { rbridgeVlanEntry 3 }
+
+   rbridgeVlanSnooping OBJECT-TYPE
+       SYNTAX      INTEGER {
+                       notSupported(1),
+                       ipv4(2),
+                       ipv6(3),
+                       ipv4v6(4)
+                   }
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;IP Multicast Snooping on this VLAN.  For RBridges
+           performing both IPv4 and IPv6 IP Multicast Snooping, the
+           value returned is ipv4v6(4).&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.7">RFC 6325, Section&nbsp;4.7</a>&quot;
+       ::= { rbridgeVlanEntry 4 }
+
+
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 30]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-31" id="page-31" href="https://tools.ietf.org/html/rfc6850#page-31" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   -- ---------------------------------------------------------- --
+   -- The RBridge VLAN Port Table
+   -- ---------------------------------------------------------- --
+
+   rbridgeVlanPortTable  OBJECT-TYPE
+       SYNTAX      SEQUENCE OF RbridgeVlanPortEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A table that contains information about VLANs on an RBridge
+           port.&quot;
+       ::= { rbridgeVlan 2 }
+
+   rbridgeVlanPortEntry OBJECT-TYPE
+       SYNTAX      RbridgeVlanPortEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A list of information about VLANs on the RBridge port.&quot;
+       INDEX   { rbridgeBasePort, rbridgeVlanIndex }
+       ::= { rbridgeVlanPortTable 1 }
+
+   RbridgeVlanPortEntry ::=
+       SEQUENCE {
+           rbridgeVlanPortInhibited
+               TruthValue,
+           rbridgeVlanPortForwarder
+               TruthValue,
+           rbridgeVlanPortAnnouncing
+               TruthValue,
+           rbridgeVlanPortDetectedVlanMapping
+               TruthValue
+       }
+
+   rbridgeVlanPortInhibited OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;This VLAN has been inhibited by the RBridge due to
+           conflicting forwarder information received from another
+           RBridge, when the value of this object is 'true'.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.2.4.3">RFC 6325, Section&nbsp;4.2.4.3</a>&quot;
+       ::= { rbridgeVlanPortEntry 1 }
+
+   rbridgeVlanPortForwarder OBJECT-TYPE
+       SYNTAX      TruthValue
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 31]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-32" id="page-32" href="https://tools.ietf.org/html/rfc6850#page-32" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;This RBridge is an appointed forwarder for this VLAN
+           on this port, when the value of this object is 'true'.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.2.4.3">RFC 6325, Section&nbsp;4.2.4.3</a>&quot;
+       ::= { rbridgeVlanPortEntry 2 }
+
+   rbridgeVlanPortAnnouncing OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;TRILL-Hellos tagged with this VLAN can be sent by this
+           RBridge on this port, when the value of this object
+           is 'true'.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.4.3">RFC 6325, Section&nbsp;4.4.3</a>&quot;
+       DEFVAL      { true }
+       ::= { rbridgeVlanPortEntry 3 }
+
+   rbridgeVlanPortDetectedVlanMapping OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;VLAN mapping has been detected on the link attached
+           to this port, when the value of this object is 'true'.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.4.5">RFC 6325, Section&nbsp;4.4.5</a>&quot;
+       ::= { rbridgeVlanPortEntry 4 }
+
+
+   -- ---------------------------------------------------------- --
+   -- The RBridge Port Counter Table
+   --
+   -- These counters supplement counters in the Bridge MIB.
+   --
+   -- For example, total frames received by a bridge port and total
+   -- frames transmitted by a bridge port are reported in the
+   -- Port In Frames and Port Out Frames counters of the Bridge MIB.
+   -- These total bridge frame counters include native as well as
+   -- encapsulated frames.
+   --
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 32]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-33" id="page-33" href="https://tools.ietf.org/html/rfc6850#page-33" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   -- As another example, frames discarded due to excessive frame
+   -- size are reported in the port counter MTU Exceeded Discards
+   -- in the Bridge MIB.
+   -- ---------------------------------------------------------- --
+
+   rbridgePortCounterTable  OBJECT-TYPE
+       SYNTAX      SEQUENCE OF RbridgePortCounterEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A table that contains per-port counters for this RBridge.&quot;
+       ::= { rbridgeCounter 1 }
+
+   rbridgePortCounterEntry OBJECT-TYPE
+       SYNTAX      RbridgePortCounterEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;Counters for a port on this RBridge.&quot;
+       INDEX   { rbridgeBasePort }
+       ::= { rbridgePortCounterTable 1 }
+
+   RbridgePortCounterEntry ::=
+       SEQUENCE {
+           rbridgePortRpfCheckFails
+               Counter32,
+           rbridgePortHopCountExceeds
+               Counter32,
+           rbridgePortOptionDrops
+               Counter32,
+           rbridgePortTrillInFrames
+               Counter64,
+           rbridgePortTrillOutFrames
+               Counter64
+       }
+
+   rbridgePortRpfCheckFails OBJECT-TYPE
+       SYNTAX      Counter32
+       UNITS       &quot;frames&quot;
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The number of times a multi-destination frame was
+           dropped on this port because the Reverse Path Forwarding
+           (RPF) check failed.
+
+           Discontinuities in the value of this counter can occur
+           at re-initialization of the management system, and at
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 33]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-34" id="page-34" href="https://tools.ietf.org/html/rfc6850#page-34" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+           other times as indicated by the value of the
+           ifCounterDiscontinuityTime object of the associated
+           interface.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.5.2">RFC 6325, Section&nbsp;4.5.2</a>&quot;
+       ::= { rbridgePortCounterEntry 1 }
+
+   rbridgePortHopCountExceeds OBJECT-TYPE
+       SYNTAX      Counter32
+       UNITS       &quot;frames&quot;
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The number of times a frame was dropped on this port
+           because its hop count was zero.
+
+           Discontinuities in the value of this counter can occur
+           at re-initialization of the management system, and at
+           other times as indicated by the value of the
+           ifCounterDiscontinuityTime object of the associated
+           interface.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-3.6">RFC 6325, Section&nbsp;3.6</a>&quot;
+       ::= { rbridgePortCounterEntry 2 }
+
+   rbridgePortOptionDrops OBJECT-TYPE
+       SYNTAX      Counter32
+       UNITS       &quot;frames&quot;
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The number of times a frame was dropped on this port
+           because it contained unsupported options.
+
+           Discontinuities in the value of this counter can occur
+           at re-initialization of the management system, and at
+           other times as indicated by the value of the
+           ifCounterDiscontinuityTime object of the associated
+           interface.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-3.5">RFC 6325, Section&nbsp;3.5</a>&quot;
+       ::= { rbridgePortCounterEntry 3 }
+
+   rbridgePortTrillInFrames OBJECT-TYPE
+       SYNTAX      Counter64
+       UNITS       &quot;frames&quot;
+       MAX-ACCESS  read-only
+       STATUS      current
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 34]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-35" id="page-35" href="https://tools.ietf.org/html/rfc6850#page-35" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       DESCRIPTION
+           &quot;The number of TRILL-encapsulated frames that have been
+           received by this port from its attached link, including
+           management frames.
+
+           Discontinuities in the value of this counter can occur
+           at re-initialization of the management system, and at
+           other times as indicated by the value of the
+           ifCounterDiscontinuityTime object of the associated
+           interface.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-2.3">RFC 6325, Section&nbsp;2.3</a>&quot;
+       ::= { rbridgePortCounterEntry 4 }
+
+   rbridgePortTrillOutFrames OBJECT-TYPE
+       SYNTAX      Counter64
+       UNITS       &quot;frames&quot;
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The number of TRILL-encapsulated frames that have been
+           transmitted by this port to its attached link, including
+           management frames.
+
+           Discontinuities in the value of this counter can occur
+           at re-initialization of the management system, and at
+           other times as indicated by the value of the
+           ifCounterDiscontinuityTime object of the associated
+           interface.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-2.3">RFC 6325, Section&nbsp;2.3</a>&quot;
+       ::= { rbridgePortCounterEntry 5 }
+
+   -- ---------------------------------------------------------- --
+   -- The RBridge VLAN ESADI Table
+   -- ---------------------------------------------------------- --
+
+   rbridgeEsadiTable  OBJECT-TYPE
+       SYNTAX      SEQUENCE OF RbridgeEsadiEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;A table that contains information about ESADI instances on
+           VLANs, if available.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.2.5">RFC 6325, Section&nbsp;4.2.5</a>&quot;
+       ::= { rbridgeEsadi 1 }
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 35]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-36" id="page-36" href="https://tools.ietf.org/html/rfc6850#page-36" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   rbridgeEsadiEntry OBJECT-TYPE
+       SYNTAX      RbridgeEsadiEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;Information about an ESADI instance on a VLAN.&quot;
+       INDEX   { rbridgeVlanIndex }
+       ::= { rbridgeEsadiTable 1 }
+
+   RbridgeEsadiEntry ::=
+       SEQUENCE {
+           rbridgeEsadiEnable
+               TruthValue,
+           rbridgeEsadiConfidence
+               Unsigned32,
+           rbridgeEsadiDrbPriority
+               Unsigned32,
+           rbridgeEsadiDrb
+               RbridgeAddress,
+           rbridgeEsadiDrbHoldingTime
+               Unsigned32,
+           rbridgeEsadiRowStatus
+               RowStatus
+       }
+
+   rbridgeEsadiEnable OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-create
+       STATUS      current
+       DESCRIPTION
+           &quot;If the RBridge is participating in an ESADI instance for
+           this VLAN, the value of this object is 'true'.  To disable
+           participation, set it to 'false'.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.2.5">RFC 6325, Section&nbsp;4.2.5</a>&quot;
+       DEFVAL      { true }
+       ::= { rbridgeEsadiEntry 1 }
+
+   rbridgeEsadiConfidence OBJECT-TYPE
+       SYNTAX      Unsigned32 (0..255)
+       MAX-ACCESS  read-create
+       STATUS      current
+       DESCRIPTION
+           &quot;Confidence level of address entries sent by this
+           ESADI instance.  The default is 16.
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 36]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-37" id="page-37" href="https://tools.ietf.org/html/rfc6850#page-37" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.2.5">RFC 6325, Section&nbsp;4.2.5</a>&quot;
+       DEFVAL      { 16 }
+       ::= { rbridgeEsadiEntry 2 }
+
+   rbridgeEsadiDrbPriority OBJECT-TYPE
+       SYNTAX      Unsigned32 (0..127)
+       MAX-ACCESS  read-create
+       STATUS      current
+       DESCRIPTION
+           &quot;The priority of this RBridge for being selected as the
+           DRB for this ESADI instance.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.2.5">RFC 6325, Section&nbsp;4.2.5</a>&quot;
+       ::= { rbridgeEsadiEntry 3 }
+
+   rbridgeEsadiDrb OBJECT-TYPE
+       SYNTAX      RbridgeAddress
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The DRB on this ESADI instance's virtual link.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.2.5">RFC 6325, Section&nbsp;4.2.5</a>&quot;
+       ::= { rbridgeEsadiEntry 4 }
+
+   rbridgeEsadiDrbHoldingTime OBJECT-TYPE
+       SYNTAX      Unsigned32 (0..127)
+       MAX-ACCESS  read-create
+       STATUS      current
+       DESCRIPTION
+           &quot;The holding time for this ESADI instance.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.2.5">RFC 6325, Section&nbsp;4.2.5</a>&quot;
+       ::= { rbridgeEsadiEntry 5 }
+
+   rbridgeEsadiRowStatus OBJECT-TYPE
+       SYNTAX      RowStatus
+       MAX-ACCESS  read-create
+       STATUS      current
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 37]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-38" id="page-38" href="https://tools.ietf.org/html/rfc6850#page-38" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       DESCRIPTION
+           &quot;This object indicates the status of the entry.&quot;
+       ::= { rbridgeEsadiEntry 6 }
+
+
+   -- ---------------------------------------------------------- --
+   -- The RBridge IP Multicast Snooping Port Table
+   -- ---------------------------------------------------------- --
+
+   rbridgeSnoopingPortTable OBJECT-TYPE
+       SYNTAX      SEQUENCE OF RbridgeSnoopingPortEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;For RBridges implementing IP Multicast Snooping,
+           information about ports on which the presence of IPv4
+           or IPv6 multicast routers has been detected.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.7">RFC 6325, Section&nbsp;4.7</a>&quot;
+       ::= { rbridgeSnooping 1 }
+
+   rbridgeSnoopingPortEntry OBJECT-TYPE
+       SYNTAX      RbridgeSnoopingPortEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;Information about ports on which the presence of IPv4
+           or IPv6 multicast routers has been detected for a
+           VLAN.&quot;
+       INDEX   { rbridgeBasePort, rbridgeVlanIndex }
+       ::= { rbridgeSnoopingPortTable 1 }
+
+   RbridgeSnoopingPortEntry ::=
+       SEQUENCE {
+           rbridgeSnoopingPortAddrType
+               INTEGER
+       }
+
+   rbridgeSnoopingPortAddrType OBJECT-TYPE
+       SYNTAX      INTEGER {
+                       ipv4(1),
+                       ipv6(2),
+                       ipv4v6(3)
+                   }
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The IP address type of an IP multicast router detected
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 38]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-39" id="page-39" href="https://tools.ietf.org/html/rfc6850#page-39" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+           on this port and VLAN.  If only IPv4 router(s)
+           are detected, the value returned is 'ipv4'.  If only
+           IPv6 routers are detected, the value returned is
+           'ipv6'.  If both IPv4 and IPv6 routers are detected on
+           this port and VLAN, the value returned is 'ipv4v6'.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.7">RFC 6325, Section&nbsp;4.7</a>&quot;
+       ::= { rbridgeSnoopingPortEntry 1 }
+
+   -- ---------------------------------------------------------- --
+   -- The RBridge IP Multicast Snooping Address Table
+   -- ---------------------------------------------------------- --
+
+   rbridgeSnoopingAddrTable OBJECT-TYPE
+       SYNTAX      SEQUENCE OF RbridgeSnoopingAddrEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;For RBridges implementing IP Multicast Snooping,
+           information about IP multicast addresses being
+           snooped.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.8">RFC 6325, Section&nbsp;4.8</a>&quot;
+       ::= { rbridgeSnooping 2 }
+
+   rbridgeSnoopingAddrEntry OBJECT-TYPE
+       SYNTAX      RbridgeSnoopingAddrEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;Information about IP multicast addresses being
+           snooped.&quot;
+       INDEX  { rbridgeVlanIndex, rbridgeSnoopingAddrType,
+                rbridgeSnoopingAddr }
+       ::= { rbridgeSnoopingAddrTable 1 }
+
+   RbridgeSnoopingAddrEntry ::=
+       SEQUENCE {
+           rbridgeSnoopingAddrType
+               InetAddressType,
+           rbridgeSnoopingAddr
+               InetAddress,
+           rbridgeSnoopingAddrPorts
+               PortList
+       }
+
+   rbridgeSnoopingAddrType OBJECT-TYPE
+       SYNTAX      InetAddressType
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 39]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-40" id="page-40" href="https://tools.ietf.org/html/rfc6850#page-40" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;The IP multicast address type for which a listener has been
+           detected by this RBridge.  This MIB requires support for only
+           IPv4 and IPv6 address types.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.7">RFC 6325, Section&nbsp;4.7</a>&quot;
+       ::= { rbridgeSnoopingAddrEntry 1 }
+
+   rbridgeSnoopingAddr OBJECT-TYPE
+       SYNTAX      InetAddress
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;The IP multicast address for which a listener has been
+           detected by this RBridge.  The address type of this object
+           is specified in rbridgeSnoopingAddrType.  This MIB requires
+           support for only global IPv4 and IPv6 addresses, so the
+           length of the object can be either 4 or 16 bytes.  Hence,
+           the index will not exceed the OID size limit.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.7">RFC 6325, Section&nbsp;4.7</a>&quot;
+       ::= { rbridgeSnoopingAddrEntry 2 }
+
+   rbridgeSnoopingAddrPorts OBJECT-TYPE
+       SYNTAX      PortList
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The set of ports on which a listener has been detected
+           for this IP multicast address.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.7">RFC 6325, Section&nbsp;4.7</a>&quot;
+       ::= { rbridgeSnoopingAddrEntry 3 }
+
+
+   -- ---------------------------------------------------------- --
+   -- Distribution Trees
+   -- ---------------------------------------------------------- --
+
+   rbridgeDtreePriority OBJECT-TYPE
+
+       SYNTAX      Unsigned32 (1..65535)
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;The distribution tree root priority for this RBridge.
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 40]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-41" id="page-41" href="https://tools.ietf.org/html/rfc6850#page-41" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+           The default value of this object is 32768.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.5">RFC 6325, Section&nbsp;4.5</a>&quot;
+       ::= { rbridgeDtree 1 }
+
+   rbridgeDtreeActiveTrees OBJECT-TYPE
+       SYNTAX      Unsigned32
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The total number of trees being computed by all RBridges
+           in the campus.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.5">RFC 6325, Section&nbsp;4.5</a>&quot;
+       ::= { rbridgeDtree 2 }
+
+   rbridgeDtreeMaxTrees OBJECT-TYPE
+       SYNTAX      Unsigned32
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The maximum number of trees this RBridge can compute.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.5">RFC 6325, Section&nbsp;4.5</a>&quot;
+       ::= { rbridgeDtree 3 }
+
+   rbridgeDtreeDesiredUseTrees OBJECT-TYPE
+       SYNTAX      Unsigned32
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The maximum number of trees this RBridge would like to
+           use for transmission of ingress multi-destination frames.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.5">RFC 6325, Section&nbsp;4.5</a>&quot;
+       ::= { rbridgeDtree 4 }
+
+   rbridgeDtreeTable OBJECT-TYPE
+       SYNTAX      SEQUENCE OF RbridgeDtreeEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;Information about distribution trees being computed
+           by this RBridge.&quot;
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 41]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-42" id="page-42" href="https://tools.ietf.org/html/rfc6850#page-42" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.5">RFC 6325, Section&nbsp;4.5</a>&quot;
+       ::= { rbridgeDtree 5 }
+
+   rbridgeDtreeEntry OBJECT-TYPE
+       SYNTAX      RbridgeDtreeEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;List of information about distribution trees being computed
+           by this RBridge.&quot;
+       INDEX  { rbridgeDtreeNumber }
+       ::= { rbridgeDtreeTable 1 }
+
+   RbridgeDtreeEntry ::=
+       SEQUENCE {
+           rbridgeDtreeNumber
+               Unsigned32,
+           rbridgeDtreeNickname
+               RbridgeNickname,
+           rbridgeDtreeIngress
+               TruthValue
+       }
+
+   rbridgeDtreeNumber OBJECT-TYPE
+       SYNTAX      Unsigned32 (0..65535)
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;The tree number of a distribution tree being computed by
+           this RBridge.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.5">RFC 6325, Section&nbsp;4.5</a>&quot;
+       ::= { rbridgeDtreeEntry 1 }
+
+   rbridgeDtreeNickname OBJECT-TYPE
+       SYNTAX      RbridgeNickname
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The nickname of the distribution tree.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.5">RFC 6325, Section&nbsp;4.5</a>&quot;
+       ::= { rbridgeDtreeEntry 2 }
+
+   rbridgeDtreeIngress OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-only
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 42]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-43" id="page-43" href="https://tools.ietf.org/html/rfc6850#page-43" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       STATUS      current
+       DESCRIPTION
+           &quot;Indicates whether this RBridge might choose this
+           distribution tree to ingress a multi-destination frame.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.5">RFC 6325, Section&nbsp;4.5</a>&quot;
+       ::= { rbridgeDtreeEntry 3 }
+
+
+   -- ---------------------------------------------------------- --
+   -- TRILL Neighbor List
+   -- ---------------------------------------------------------- --
+
+   rbridgeTrillMinMtuDesired OBJECT-TYPE
+       SYNTAX      Unsigned32
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;The desired minimum acceptable inter-RBridge link MTU for
+           the campus, that is, originatingLSPBufferSize.
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.3">RFC 6325, Section&nbsp;4.3</a>&quot;
+       ::= { rbridgeTrill 1 }
+
+   rbridgeTrillSz OBJECT-TYPE
+       SYNTAX      Unsigned32
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;The minimum acceptable inter-RBridge link size for the
+           campus for the proper operation of TRILL IS-IS.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.3">RFC 6325, Section&nbsp;4.3</a>&quot;
+       ::= { rbridgeTrill 2 }
+
+   rbridgeTrillMaxMtuProbes OBJECT-TYPE
+       SYNTAX      Unsigned32 (1..255)
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+           &quot;The number of failed MTU-probes before the RBridge
+           concludes that a particular MTU is not supported by
+           a neighbor.
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 43]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-44" id="page-44" href="https://tools.ietf.org/html/rfc6850#page-44" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+           The value of this object MUST be retained across
+           re-initializations of the management system.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.3">RFC 6325, Section&nbsp;4.3</a>&quot;
+       ::= { rbridgeTrill 3 }
+
+   rbridgeTrillNbrTable OBJECT-TYPE
+       SYNTAX      SEQUENCE OF RbridgeTrillNbrEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;Information about this RBridge's TRILL neighbors.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.4.2.1">RFC 6325, Section&nbsp;4.4.2.1</a>&quot;
+       ::= { rbridgeTrill 4 }
+
+   rbridgeTrillNbrEntry OBJECT-TYPE
+       SYNTAX      RbridgeTrillNbrEntry
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;List of information about this RBridge's TRILL neighbors.&quot;
+       INDEX  { rbridgeTrillNbrMacAddr }
+       ::= { rbridgeTrillNbrTable 1 }
+
+   RbridgeTrillNbrEntry ::=
+       SEQUENCE {
+           rbridgeTrillNbrMacAddr
+               MacAddress,
+           rbridgeTrillNbrMtu
+               Unsigned32,
+           rbridgeTrillNbrFailedMtuTest
+               TruthValue
+       }
+
+   rbridgeTrillNbrMacAddr OBJECT-TYPE
+       SYNTAX      MacAddress
+       MAX-ACCESS  not-accessible
+       STATUS      current
+       DESCRIPTION
+           &quot;The MAC address of a neighbor of this RBridge.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.4.2.1">RFC 6325, Section&nbsp;4.4.2.1</a>&quot;
+       ::= { rbridgeTrillNbrEntry 1 }
+
+   rbridgeTrillNbrMtu OBJECT-TYPE
+       SYNTAX      Unsigned32
+       MAX-ACCESS  read-only
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 44]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-45" id="page-45" href="https://tools.ietf.org/html/rfc6850#page-45" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+       STATUS      current
+       DESCRIPTION
+           &quot;MTU size for this neighbor for IS-IS communication
+           purposes.&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.3.2">RFC 6325, Section&nbsp;4.3.2</a>&quot;
+       ::= { rbridgeTrillNbrEntry 2 }
+
+   rbridgeTrillNbrFailedMtuTest OBJECT-TYPE
+       SYNTAX      TruthValue
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION
+           &quot;If true, indicates that the neighbor's tested MTU is less
+           than the minimum acceptable inter-bridge link MTU for the
+           campus (1470).&quot;
+       REFERENCE
+           &quot;<a href="https://tools.ietf.org/html/rfc6325#section-4.3.1">RFC 6325, Section&nbsp;4.3.1</a>&quot;
+       ::= { rbridgeTrillNbrEntry 3 }
+
+
+   -- ---------------------------------------------------------- --
+   -- Notifications for use by RBridges
+   -- ---------------------------------------------------------- --
+
+   rbridgeBaseNewDrb NOTIFICATION-TYPE
+       -- OBJECTS     { }
+       STATUS      current
+       DESCRIPTION
+           &quot;The rbridgeBaseNewDrb notification indicates that the
+           sending agent has become the new Designated RBridge; the
+           notification is sent by an RBridge soon after its election
+           as the new DRB root, e.g., upon expiration of the Topology
+           Change Timer, immediately subsequent to its election.&quot;
+       ::= { rbridgeNotifications 1 }
+
+   rbridgeBaseTopologyChange NOTIFICATION-TYPE
+       -- OBJECTS     { }
+       STATUS      current
+       DESCRIPTION
+           &quot;The rbridgeBaseTopologyChange notification is sent by an
+           RBridge when any of its configured ports transition to/from
+           the VLAN-x designated forwarder.  The notification is not
+           sent if an rbridgeBaseNewDrb notification is sent for the
+           same transition.&quot;
+       ::= { rbridgeNotifications 2 }
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 45]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-46" id="page-46" href="https://tools.ietf.org/html/rfc6850#page-46" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   -- Compliance and Group sections
+
+   rbridgeCompliances    OBJECT IDENTIFIER ::= { rbridgeConformance 1 }
+
+   rbridgeGroup          OBJECT IDENTIFIER ::= { rbridgeConformance 2 }
+
+
+   -- ---------------------------------------------------------- --
+   -- Units of Conformance
+   -- ---------------------------------------------------------- --
+
+   rbridgeBaseGroup OBJECT-GROUP
+       OBJECTS {
+           rbridgeBaseTrillVersion,
+           rbridgeBaseNumPorts,
+           rbridgeBaseForwardDelay,
+           rbridgeBaseUniMultipathEnable,
+           rbridgeBaseMultiMultipathEnable,
+           rbridgeBaseAcceptEncapNonadj,
+           rbridgeBaseNicknameNumber
+       }
+       STATUS      current
+       DESCRIPTION
+           &quot;A collection of objects providing basic control
+           and status information for the RBridge.&quot;
+       ::= { rbridgeGroup 1 }
+
+   rbridgeBaseNicknameGroup OBJECT-GROUP
+       OBJECTS {
+           rbridgeBaseNicknamePriority,
+           rbridgeBaseNicknameDtrPriority,
+           rbridgeBaseNicknameType,
+           rbridgeBaseNicknameRowStatus
+       }
+       STATUS      current
+       DESCRIPTION
+           &quot;A collection of objects providing basic control
+           and status information for RBridge nicknames.&quot;
+       ::= { rbridgeGroup 2 }
+
+   rbridgeBasePortGroup OBJECT-GROUP
+       OBJECTS {
+           rbridgeBasePortIfIndex,
+           rbridgeBasePortDisable,
+           rbridgeBasePortTrunkPort,
+           rbridgeBasePortAccessPort,
+           rbridgeBasePortP2pHellos,
+           rbridgeBasePortState,
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 46]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-47" id="page-47" href="https://tools.ietf.org/html/rfc6850#page-47" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+           rbridgeBasePortDesiredDesigVlan,
+           rbridgeBasePortDesigVlan,
+           rbridgeBasePortInhibitionTime,
+           rbridgeBasePortDisableLearning,
+           rbridgeBasePortStpRoot,
+           rbridgeBasePortStpRootChanges,
+           rbridgeBasePortStpWiringCloset
+       }
+       STATUS      current
+       DESCRIPTION
+           &quot;A collection of objects providing basic control
+           and status information for RBridge ports.&quot;
+       ::= { rbridgeGroup 3 }
+
+   rbridgeFdbGroup OBJECT-GROUP
+       OBJECTS {
+           rbridgeConfidenceNative,
+           rbridgeConfidenceDecap,
+           rbridgeConfidenceStatic,
+           rbridgeUniFdbPort,
+           rbridgeUniFdbNickname,
+           rbridgeUniFdbConfidence,
+           rbridgeUniFdbStatus
+       }
+       STATUS      current
+       DESCRIPTION
+           &quot;A collection of objects providing information
+           about the Unicast Address Database.&quot;
+       ::= { rbridgeGroup 4 }
+
+   rbridgeFibGroup OBJECT-GROUP
+       OBJECTS {
+           rbridgeUniFibHopCount,
+           rbridgeMultiFibPorts
+       }
+       STATUS      current
+       DESCRIPTION
+           &quot;A collection of objects providing information
+           about the Unicast and Multicast FIBs.&quot;
+       ::= { rbridgeGroup 5 }
+
+   rbridgeVlanGroup OBJECT-GROUP
+       OBJECTS {
+           rbridgeVlanForwarderLosts,
+           rbridgeVlanDisableLearning,
+           rbridgeVlanSnooping,
+           rbridgeVlanPortInhibited,
+           rbridgeVlanPortForwarder,
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 47]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-48" id="page-48" href="https://tools.ietf.org/html/rfc6850#page-48" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+           rbridgeVlanPortAnnouncing,
+           rbridgeVlanPortDetectedVlanMapping
+       }
+       STATUS      current
+       DESCRIPTION
+           &quot;A collection of objects providing information
+           about VLANs on the RBridge.&quot;
+       ::= { rbridgeGroup 6 }
+
+   rbridgePortCounterGroup OBJECT-GROUP
+       OBJECTS {
+           rbridgePortRpfCheckFails,
+           rbridgePortHopCountExceeds,
+           rbridgePortOptionDrops,
+           rbridgePortTrillInFrames,
+           rbridgePortTrillOutFrames
+       }
+       STATUS      current
+       DESCRIPTION
+           &quot;A collection of objects providing per-port
+           counters for the RBridge.&quot;
+       ::= { rbridgeGroup 7 }
+
+   rbridgeEsadiGroup OBJECT-GROUP
+       OBJECTS {
+           rbridgeEsadiEnable,
+           rbridgeEsadiConfidence,
+           rbridgeEsadiDrbPriority,
+           rbridgeEsadiDrb,
+           rbridgeEsadiDrbHoldingTime,
+           rbridgeEsadiRowStatus
+       }
+       STATUS      current
+       DESCRIPTION
+           &quot;A collection of objects providing information
+           about ESADI instances on the RBridge.&quot;
+       ::= { rbridgeGroup 8 }
+
+   rbridgeSnoopingGroup OBJECT-GROUP
+       OBJECTS {
+           rbridgeSnoopingPortAddrType,
+           rbridgeSnoopingAddrPorts
+       }
+       STATUS      current
+       DESCRIPTION
+           &quot;A collection of objects providing information about
+           IP Multicast Snooping.  This MIB requires support for
+           only global IPv4 and IPv6 address types in
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 48]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-49" id="page-49" href="https://tools.ietf.org/html/rfc6850#page-49" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+           rbridgeSnoopingPortAddrType and rbridgeSnoopingAddrType,
+           so the length of rbridgeSnoopingAddr can be either 4 or
+           16 bytes.&quot;
+       ::= { rbridgeGroup 9 }
+
+   rbridgeDtreeGroup OBJECT-GROUP
+       OBJECTS {
+           rbridgeDtreePriority,
+           rbridgeDtreeActiveTrees,
+           rbridgeDtreeMaxTrees,
+           rbridgeDtreeDesiredUseTrees,
+           rbridgeDtreeNickname,
+           rbridgeDtreeIngress
+       }
+       STATUS      current
+       DESCRIPTION
+           &quot;A collection of objects providing information
+           about distribution trees.&quot;
+       ::= { rbridgeGroup 10 }
+
+   rbridgeTrillGroup OBJECT-GROUP
+       OBJECTS {
+           rbridgeTrillMinMtuDesired,
+           rbridgeTrillSz,
+           rbridgeTrillMaxMtuProbes,
+           rbridgeTrillNbrMtu,
+           rbridgeTrillNbrFailedMtuTest
+       }
+       STATUS      current
+       DESCRIPTION
+           &quot;A collection of objects providing information
+           about TRILL neighbors.&quot;
+       ::= { rbridgeGroup 11 }
+
+   rbridgeNotificationGroup NOTIFICATION-GROUP
+       NOTIFICATIONS {
+           rbridgeBaseNewDrb,
+           rbridgeBaseTopologyChange
+       }
+       STATUS      current
+       DESCRIPTION
+           &quot;A collection of objects describing notifications (traps).&quot;
+       ::= { rbridgeGroup 12 }
+
+
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 49]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-50" id="page-50" href="https://tools.ietf.org/html/rfc6850#page-50" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   -- ---------------------------------------------------------- --
+   -- Compliance Statement
+   -- ---------------------------------------------------------- --
+
+   rbridgeCompliance MODULE-COMPLIANCE
+          STATUS      current
+          DESCRIPTION
+              &quot;The compliance statement for support of RBridge
+              services.&quot;
+
+          MODULE
+              MANDATORY-GROUPS {
+                  rbridgeBaseGroup,
+                  rbridgeBaseNicknameGroup,
+                  rbridgeBasePortGroup,
+                  rbridgeFdbGroup,
+                  rbridgeFibGroup,
+                  rbridgeVlanGroup,
+                  rbridgeDtreeGroup,
+                  rbridgeTrillGroup,
+                  rbridgeNotificationGroup
+              }
+
+          GROUP   rbridgePortCounterGroup
+          DESCRIPTION
+              &quot;Implementation of this group is optional.&quot;
+
+          GROUP   rbridgeEsadiGroup
+          DESCRIPTION
+              &quot;Implementation of this group is optional.&quot;
+
+          GROUP   rbridgeSnoopingGroup
+          DESCRIPTION
+              &quot;Implementation of this group is optional.&quot;
+
+          ::= { rbridgeCompliances 1 }
+
+   rbridgeReadOnlyCompliance MODULE-COMPLIANCE
+          STATUS      current
+          DESCRIPTION
+              &quot;When this MIB is implemented in read-only mode, then
+              the implementation can claim read-only compliance.
+              In that case, RBridge objects can be monitored but
+              cannot be configured with this implementation.&quot;
+
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 50]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-51" id="page-51" href="https://tools.ietf.org/html/rfc6850#page-51" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+          MODULE
+              MANDATORY-GROUPS {
+                  rbridgeBaseGroup,
+                  rbridgeBaseNicknameGroup,
+                  rbridgeBasePortGroup,
+                  rbridgeFdbGroup,
+                  rbridgeFibGroup,
+                  rbridgeVlanGroup,
+                  rbridgeDtreeGroup,
+                  rbridgeTrillGroup,
+                  rbridgeNotificationGroup
+              }
+
+          OBJECT  rbridgeBaseForwardDelay
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeBaseUniMultipathEnable
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeBaseMultiMultipathEnable
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeBaseAcceptEncapNonadj
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeBaseNicknameNumber
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeBaseNicknamePriority
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeBaseNicknameDtrPriority
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 51]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-52" id="page-52" href="https://tools.ietf.org/html/rfc6850#page-52" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+          OBJECT  rbridgeBaseNicknameRowStatus
+          SYNTAX  INTEGER { active(1) }
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required, and 'active' is the only
+              status that needs to be supported.&quot;
+
+          OBJECT  rbridgeBasePortDisable
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeBasePortTrunkPort
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeBasePortAccessPort
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeBasePortP2pHellos
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeBasePortInhibitionTime
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeBasePortDisableLearning
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeBasePortDesiredDesigVlan
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeBasePortStpWiringCloset
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 52]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-53" id="page-53" href="https://tools.ietf.org/html/rfc6850#page-53" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+          OBJECT  rbridgeConfidenceNative
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeConfidenceDecap
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeConfidenceStatic
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeVlanDisableLearning
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeVlanPortAnnouncing
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeEsadiEnable
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeEsadiConfidence
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeEsadiDrbPriority
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeEsadiDrbHoldingTime
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeEsadiRowStatus
+          SYNTAX  INTEGER { active(1) }
+          MIN-ACCESS  read-only
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 53]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-54" id="page-54" href="https://tools.ietf.org/html/rfc6850#page-54" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+          DESCRIPTION
+              &quot;Write access is not required, and 'active' is the only
+              status that needs to be supported.&quot;
+
+          OBJECT  rbridgeDtreePriority
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeTrillMinMtuDesired
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          OBJECT  rbridgeTrillMaxMtuProbes
+          MIN-ACCESS  read-only
+          DESCRIPTION
+              &quot;Write access is not required.&quot;
+
+          GROUP   rbridgePortCounterGroup
+          DESCRIPTION
+              &quot;Implementation of this group is optional.&quot;
+
+          GROUP   rbridgeEsadiGroup
+          DESCRIPTION
+              &quot;Implementation of this group is optional.&quot;
+
+          GROUP   rbridgeSnoopingGroup
+          DESCRIPTION
+              &quot;Implementation of this group is optional.&quot;
+
+          ::= { rbridgeCompliances 2 }
+
+      END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 54]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-55" id="page-55" href="https://tools.ietf.org/html/rfc6850#page-55" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-8" href="https://tools.ietf.org/html/rfc6850#section-8">8</a>. Security Considerations</h2></span>
+
+   This MIB relates to a system that will provide network connectivity
+   and packet-forwarding services.  As such, improper manipulation of
+   the objects represented by this MIB may result in denial of service
+   to a large number of end-users.
+
+   There are a number of management objects defined in this MIB module
+   with a MAX-ACCESS clause of read-write and/or read-create.  Such
+   objects may be considered sensitive or vulnerable in some network
+   environments.  The support for SET operations in a non-secure
+   environment without proper protection can have a negative effect on
+   network operations.  These are the tables and objects and their
+   sensitivity/vulnerability:
+
+   The following tables and objects in the RBRIDGE-MIB can be
+   manipulated to interfere with the operation of RBridges:
+
+   o  rbridgeBaseUniMultipathEnable affects the ability of the RBridge
+      to route unicast traffic over multiple paths, and
+      rbridgeBaseMultiMultipathEnable affects the ability of the RBridge
+      to route multi-destination traffic over multiple paths.
+
+   o  rbridgeBasePortTable contains a number of objects that may affect
+      network connectivity.  Actions that may be triggered by
+      manipulating objects in this table include disabling of an RBridge
+      port, discarding of native packets, disabling learning, and
+      others.
+
+   o  rbridgeEsadiTable contains objects that affect the operation of
+      the ESADI protocol used for learning, and manipulation of the
+      objects contained therein can be used to confuse the learning
+      ability of RBridges.
+
+   o  rbridgeDtreePriority can affect computation of distribution trees
+      within an RBridge campus, thereby affecting the forwarding of
+      multi-destination traffic.
+
+   o  rbridgeTrillMinMtuDesired can affect the size of packets being
+      used to exchange information between RBridges.
+
+   Some of the readable objects in this MIB module (i.e., objects with a
+   MAX-ACCESS other than not-accessible) may be considered sensitive or
+   vulnerable in some network environments.  It is thus important to
+   control even GET and/or NOTIFY access to these objects and possibly
+   to even encrypt the values of these objects when sending them over
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 55]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-56" id="page-56" href="https://tools.ietf.org/html/rfc6850#page-56" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   the network via SNMP.  For example, access to network topology and
+   RBridge attributes can reveal information that should not be
+   available to all users of the network.
+
+   SNMP versions prior to SNMPv3 did not include adequate security.
+   Even if the network itself is secure (for example by using IPsec),
+   there is no control as to who on the secure network is allowed to
+   access and GET/SET (read/change/create/delete) the objects in this
+   MIB module.
+
+   Implementations SHOULD provide the security features described by the
+   SNMPv3 framework (see [<a href="https://tools.ietf.org/html/rfc3410" title="&quot;Introduction and Applicability Statements for Internet- Standard Management Framework&quot;">RFC3410</a>]), and implementations claiming
+   compliance to the SNMPv3 standard MUST include full support for
+   authentication and privacy via the User-based Security Model (USM)
+   [<a href="https://tools.ietf.org/html/rfc3414" title="&quot;User-based Security Model (USM) for version 3 of the Simple Network Management Protocol (SNMPv3)&quot;">RFC3414</a>] with the AES cipher algorithm [<a href="https://tools.ietf.org/html/rfc3826" title="&quot;The Advanced Encryption Standard (AES) Cipher Algorithm in the SNMP User-based Security Model&quot;">RFC3826</a>].  Implementations
+   MAY also provide support for the Transport Security Model (TSM)
+   [<a href="https://tools.ietf.org/html/rfc5591" title="&quot;Transport Security Model for the Simple Network Management Protocol (SNMP)&quot;">RFC5591</a>] in combination with a secure transport such as SSH
+   [<a href="https://tools.ietf.org/html/rfc5592" title="&quot;Secure Shell Transport Model for the Simple Network Management Protocol (SNMP)&quot;">RFC5592</a>] or TLS/DTLS [<a href="https://tools.ietf.org/html/rfc6353" title="&quot;Transport Layer Security (TLS) Transport Model for the Simple Network Management Protocol (SNMP)&quot;">RFC6353</a>].
+
+   Further, deployment of SNMP versions prior to SNMPv3 is NOT
+   RECOMMENDED.  Instead, it is RECOMMENDED to deploy SNMPv3 and to
+   enable cryptographic security.  It is then a customer/operator
+   responsibility to ensure that the SNMP entity giving access to an
+   instance of this MIB module is properly configured to give access to
+   the objects only to those principals (users) that have legitimate
+   rights to indeed GET or SET (change/create/delete) them.
+
+   For other RBridge security considerations, see [<a href="https://tools.ietf.org/html/rfc6325" title="&quot;Routing Bridges (RBridges): Base Protocol Specification&quot;">RFC6325</a>].
+
+<span class="h2"><h2><a class="selflink" name="section-9" href="https://tools.ietf.org/html/rfc6850#section-9">9</a>. IANA Considerations</h2></span>
+
+   The MIB module in this document uses the following IANA-assigned
+   OBJECT IDENTIFIER value recorded in the SMI Numbers registry:
+
+      Descriptor   OBJECT IDENTIFIER value
+      ----------   -----------------------
+
+      rbridgeMIB   { mib-2 214 }
+
+<span class="h2"><h2><a class="selflink" name="section-10" href="https://tools.ietf.org/html/rfc6850#section-10">10</a>. Contributors</h2></span>
+
+   The authors would like to acknowledge the contributions of Donald
+   Eastlake, Radia Perlman, Anoop Ghanwani, Dan Romascanu, Mahesh Akula,
+   Sue Hares, and Joan Cucchiara.
+
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 56]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-57" id="page-57" href="https://tools.ietf.org/html/rfc6850#page-57" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-11" href="https://tools.ietf.org/html/rfc6850#section-11">11</a>. References</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-11.1" href="https://tools.ietf.org/html/rfc6850#section-11.1">11.1</a>. Normative References</h3></span>
+
+   [<a name="ref-RFC2119" id="ref-RFC2119">RFC2119</a>]   Bradner, S., &quot;Key words for use in RFCs to Indicate
+               Requirement Levels&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>, March 1997.
+
+   [<a name="ref-RFC2578" id="ref-RFC2578">RFC2578</a>]   McCloghrie, K., Ed., Perkins, D., Ed., and J.
+               Schoenwaelder, Ed., &quot;Structure of Management Information
+               Version 2 (SMIv2)&quot;, STD 58, <a href="https://tools.ietf.org/html/rfc2578">RFC 2578</a>, April 1999.
+
+   [<a name="ref-RFC2579" id="ref-RFC2579">RFC2579</a>]   McCloghrie, K., Ed., Perkins, D., Ed., and J.
+               Schoenwaelder, Ed., &quot;Textual Conventions for SMIv2&quot;,
+               STD 58, <a href="https://tools.ietf.org/html/rfc2579">RFC 2579</a>, April 1999.
+
+   [<a name="ref-RFC2580" id="ref-RFC2580">RFC2580</a>]   McCloghrie, K., Ed., Perkins, D., Ed., and J.
+               Schoenwaelder, Ed., &quot;Conformance Statements for SMIv2&quot;,
+               STD 58, <a href="https://tools.ietf.org/html/rfc2580">RFC 2580</a>, April 1999.
+
+   [<a name="ref-RFC2863" id="ref-RFC2863">RFC2863</a>]   McCloghrie, K. and F. Kastenholz, &quot;The Interfaces Group
+               MIB&quot;, <a href="https://tools.ietf.org/html/rfc2863">RFC 2863</a>, June 2000.
+
+   [<a name="ref-RFC3414" id="ref-RFC3414">RFC3414</a>]   Blumenthal, U. and B. Wijnen, &quot;User-based Security Model
+               (USM) for version 3 of the Simple Network Management
+               Protocol (SNMPv3)&quot;, STD 62, <a href="https://tools.ietf.org/html/rfc3414">RFC 3414</a>, December 2002.
+
+   [<a name="ref-RFC3826" id="ref-RFC3826">RFC3826</a>]   Blumenthal, U., Maino, F., and K. McCloghrie, &quot;The
+               Advanced Encryption Standard (AES) Cipher Algorithm in
+               the SNMP User-based Security Model&quot;, <a href="https://tools.ietf.org/html/rfc3826">RFC 3826</a>, June 2004.
+
+   [<a name="ref-RFC4001" id="ref-RFC4001">RFC4001</a>]   Daniele, M., Haberman, B., Routhier, S., and J.
+               Schoenwaelder, &quot;Textual Conventions for Internet Network
+               Addresses&quot;, <a href="https://tools.ietf.org/html/rfc4001">RFC 4001</a>, February 2005.
+
+   [<a name="ref-RFC4188" id="ref-RFC4188">RFC4188</a>]   Norseth, K., Ed., and E. Bell, Ed., &quot;Definitions of
+               Managed Objects for Bridges&quot;, <a href="https://tools.ietf.org/html/rfc4188">RFC 4188</a>, September 2005.
+
+   [<a name="ref-RFC4363" id="ref-RFC4363">RFC4363</a>]   Levi, D. and D. Harrington, &quot;Definitions of Managed
+               Objects for Bridges with Traffic Classes, Multicast
+               Filtering, and Virtual LAN Extensions&quot;, <a href="https://tools.ietf.org/html/rfc4363">RFC 4363</a>,
+               January 2006.
+
+   [<a name="ref-RFC4444" id="ref-RFC4444">RFC4444</a>]   Parker, J., Ed., &quot;Management Information Base for
+               Intermediate System to Intermediate System (IS-IS)&quot;,
+               <a href="https://tools.ietf.org/html/rfc4444">RFC 4444</a>, April 2006.
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 57]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-58" id="page-58" href="https://tools.ietf.org/html/rfc6850#page-58" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+   [<a name="ref-RFC5591" id="ref-RFC5591">RFC5591</a>]   Harrington, D. and W. Hardaker, &quot;Transport Security Model
+               for the Simple Network Management Protocol (SNMP)&quot;,
+               <a href="https://tools.ietf.org/html/rfc5591">RFC 5591</a>, June 2009.
+
+   [<a name="ref-RFC5592" id="ref-RFC5592">RFC5592</a>]   Harrington, D., Salowey, J., and W. Hardaker, &quot;Secure
+               Shell Transport Model for the Simple Network Management
+               Protocol (SNMP)&quot;, <a href="https://tools.ietf.org/html/rfc5592">RFC 5592</a>, June 2009.
+
+   [<a name="ref-RFC6325" id="ref-RFC6325">RFC6325</a>]   Perlman, R., Eastlake 3rd, D., Dutt, D., Gai, S., and A.
+               Ghanwani, &quot;Routing Bridges (RBridges): Base Protocol
+               Specification&quot;, <a href="https://tools.ietf.org/html/rfc6325">RFC 6325</a>, July 2011.
+
+   [<a name="ref-RFC6353" id="ref-RFC6353">RFC6353</a>]   Hardaker, W., &quot;Transport Layer Security (TLS) Transport
+               Model for the Simple Network Management Protocol (SNMP)&quot;,
+               <a href="https://tools.ietf.org/html/rfc6353">RFC 6353</a>, July 2011.
+
+<span class="h3"><h3><a class="selflink" name="section-11.2" href="https://tools.ietf.org/html/rfc6850#section-11.2">11.2</a>. Informative References</h3></span>
+
+   [<a name="ref-RFC3410" id="ref-RFC3410">RFC3410</a>]   Case, J., Mundy, R., Partain, D., and B. Stewart,
+               &quot;Introduction and Applicability Statements for Internet-
+               Standard Management Framework&quot;, <a href="https://tools.ietf.org/html/rfc3410">RFC 3410</a>, December 2002.
+
+   [<a name="ref-RFC4663" id="ref-RFC4663">RFC4663</a>]   Harrington, D., &quot;Transferring MIB Work from IETF Bridge
+               MIB WG to IEEE 802.1 WG&quot;, <a href="https://tools.ietf.org/html/rfc4663">RFC 4663</a>, September 2006.
+
+   [<a name="ref-RFC5556" id="ref-RFC5556">RFC5556</a>]   Touch, J. and R. Perlman, &quot;Transparent Interconnection of
+               Lots of Links (TRILL): Problem and Applicability
+               Statement&quot;, <a href="https://tools.ietf.org/html/rfc5556">RFC 5556</a>, May 2009.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Rijhsinghani &amp; Zebrose       Standards Track                   [Page 58]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-59" id="page-59" href="https://tools.ietf.org/html/rfc6850#page-59" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6850">RFC 6850</a>                RBridges: TRILL Base MIB            January 2013</span>
+
+
+Authors' Addresses
+
+   Anil Rijhsinghani
+   Hewlett-Packard
+   153 Taylor St.
+   Littleton, MA
+   USA
+
+   Phone: +1 508 323 1251
+   EMail: anil@charter.net
+
+
+   Kate Zebrose
+   HW Embedded
+   26 Josephine Ave.
+   Somerville, MA
+   USA
+
+   Phone: +1 617 840 9673
+   EMail: zebrose@alum.mit.edu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Rijhsinghani &amp; Zebrose       Standards Track                   [Page 59]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

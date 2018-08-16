@@ -1,0 +1,534 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:6919" /> 
+  <meta name="DC.Description.Abstract" content="RFC 2119 defines a standard set of key words for describing
+requirements of a specification. Many IETF documents have found that
+these words cannot accurately capture the nuanced requirements of
+their specification. This document defines additional key words that
+can be used to address alternative requirements scenarios. Authors who
+follow these guidelines should incorporate this phrase near the
+beginning of their document:  The key words &quot;MUST (BUT WE KNOW YOU
+WON\'T)&quot;, &quot;SHOULD CONSIDER&quot;, &quot;REALLY SHOULD NOT&quot;, &quot;OUGHT TO&quot;,
+&quot;WOULD PROBABLY&quot;, &quot;MAY WISH TO&quot;, &quot;COULD&quot;, &quot;POSSIBLE&quot;, and &quot;MIGHT&quot; in
+this document are to be interpreted as described in RFC 6919." /> 
+  <meta name="DC.Creator" content="Rescorla, E." /> 
+  <meta name="DC.Creator" content="Kent, S." /> 
+  <meta name="DC.Creator" content="Barnes, R." /> 
+  <meta name="DC.Date.Issued" content="April, 2013" /> 
+  <meta name="DC.Title" content="Further Key Words for Use in RFCs to Indicate Requirement Levels" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 6919 - Further Key Words for Use in RFCs to Indicate Requirement Levels</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgyellow" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc6919.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc6919" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-barnes-2119bis" title="draft-barnes-2119bis">draft-barnes-21...</a>] [<a href="https://datatracker.ietf.org/doc/rfc6919" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc6919" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc6919" title="Side-by-side diff">Diff2</a>] </span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> EXPERIMENTAL</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <pre>Independent Submission                                         R. Barnes
+Request for Comments: 6919                                       S. Kent
+Category: Experimental                                               BBN
+ISSN: 2070-1721                                              E. Rescorla
+                                                              RTFM, Inc.
+                                                            1 April 2013
+
+
+    <span class="h1"><h1>Further Key Words for Use in RFCs to Indicate Requirement Levels</h1></span>
+
+Abstract
+
+   <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a> defines a standard set of key words for describing
+   requirements of a specification.  Many IETF documents have found that
+   these words cannot accurately capture the nuanced requirements of
+   their specification.  This document defines additional key words that
+   can be used to address alternative requirements scenarios.  Authors
+   who follow these guidelines should incorporate this phrase near the
+   beginning of their document:
+
+   The key words &quot;MUST (BUT WE KNOW YOU WON'T)&quot;, &quot;SHOULD CONSIDER&quot;,
+   &quot;REALLY SHOULD NOT&quot;, &quot;OUGHT TO&quot;, &quot;WOULD PROBABLY&quot;, &quot;MAY WISH TO&quot;,
+   &quot;COULD&quot;, &quot;POSSIBLE&quot;, and &quot;MIGHT&quot; in this document are to be
+   interpreted as described in <a href="https://tools.ietf.org/html/rfc6919">RFC 6919</a>.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for examination, experimental implementation, and
+   evaluation.
+
+   This document defines an Experimental Protocol for the Internet
+   community.  This is a contribution to the RFC Series, independently
+   of any other RFC stream.  The RFC Editor has chosen to publish this
+   document at its discretion and makes no statement about its value for
+   implementation or deployment.  Documents approved for publication by
+   the RFC Editor are not a candidate for any level of Internet
+   Standard; see <a href="https://tools.ietf.org/html/rfc5741#section-2">Section&nbsp;2 of RFC 5741</a>.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   <a href="http://www.rfc-editor.org/info/rfc6919">http://www.rfc-editor.org/info/rfc6919</a>.
+
+
+
+
+
+
+
+
+
+<span class="grey">Barnes, et al.                Experimental                      [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc6919#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6919">RFC 6919</a>                  Further RFC Key Words             1 April 2013</span>
+
+
+Copyright Notice
+
+   Copyright (c) 2013 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc6919#section-1">1</a>.  MUST (BUT WE KNOW YOU WON'T)  . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6919#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc6919#section-2">2</a>.  SHOULD CONSIDER . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6919#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc6919#section-3">3</a>.  REALLY SHOULD NOT . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6919#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc6919#section-4">4</a>.  OUGHT TO  . . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6919#page-4">4</a>
+   <a href="https://tools.ietf.org/html/rfc6919#section-5">5</a>.  WOULD PROBABLY  . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6919#page-4">4</a>
+   <a href="https://tools.ietf.org/html/rfc6919#section-6">6</a>.  MAY WISH TO . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6919#page-4">4</a>
+   <a href="https://tools.ietf.org/html/rfc6919#section-7">7</a>.  COULD . . . . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6919#page-4">4</a>
+   <a href="https://tools.ietf.org/html/rfc6919#section-8">8</a>.  POSSIBLE  . . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6919#page-5">5</a>
+   <a href="https://tools.ietf.org/html/rfc6919#section-9">9</a>.  MIGHT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6919#page-5">5</a>
+   <a href="https://tools.ietf.org/html/rfc6919#section-10">10</a>. Security Considerations . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6919#page-5">5</a>
+   <a href="https://tools.ietf.org/html/rfc6919#section-11">11</a>. References  . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6919#page-5">5</a>
+     <a href="https://tools.ietf.org/html/rfc6919#section-11.1">11.1</a>.  Normative References . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6919#page-5">5</a>
+     <a href="https://tools.ietf.org/html/rfc6919#section-11.2">11.2</a>.  Informative References . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6919#page-5">5</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Barnes, et al.                Experimental                      [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc6919#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6919">RFC 6919</a>                  Further RFC Key Words             1 April 2013</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc6919#section-1">1</a>. MUST (BUT WE KNOW YOU WON'T)</h2></span>
+
+   The phrase &quot;MUST (BUT WE KNOW YOU WON'T)&quot; is used to indicate
+   requirements that are needed to meet formal review criteria (e.g.,
+   mandatory-to-implement security mechanisms), when these mechanisms
+   are too inconvenient for implementers to actually implement.
+
+   This phrase is frequently used in a contracted form in which the
+   parenthetical is omitted.  The parenthetical may also be moved later
+   in the sentence for stylistic reasons.  If the parenthetical is
+   present, authors MUST provide a reason why they know implementors
+   will not heed this instruction in the parenthetical, as in the
+   example (BUT WE KNOW YOU WON'T).  In the below example, we show a
+   case from <a href="https://tools.ietf.org/html/rfc6120">RFC 6120</a> where the original text omitted the parenthetical,
+   and we have indicated an appropriate parenthetical.
+
+   For example: &quot;For authentication only, servers and clients MUST
+   support the SASL Salted Challenge Response Authentication Mechanism
+   [SCRAM] -- in particular, the SCRAM-SHA-1 and SCRAM-SHA-1-PLUS
+   variants [(BUT WE KNOW YOU WON'T, because your TLS library doesn't
+   support extracting channel binding information)].&quot;  [<a href="https://tools.ietf.org/html/rfc6120" title="&quot;Extensible Messaging and Presence Protocol (XMPP): Core&quot;">RFC6120</a>]
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc6919#section-2">2</a>. SHOULD CONSIDER</h2></span>
+
+   The phrase &quot;SHOULD CONSIDER&quot; indicates that the authors of the
+   specification think that implementations should do something, but
+   they're not sure quite what.
+
+   For example: &quot;Applications that take advantage of typed links should
+   consider the attack vectors opened by automatically following,
+   trusting, or otherwise using links gathered from HTTP headers.&quot;
+   [<a href="https://tools.ietf.org/html/rfc5988" title="&quot;Web Linking&quot;">RFC5988</a>]
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc6919#section-3">3</a>. REALLY SHOULD NOT</h2></span>
+
+   The phrase &quot;REALLY SHOULD NOT&quot; is used to indicate dangerous
+   behaviors that some important vendor still does and therefore we were
+   unable to make MUST NOT.
+
+   For example: &quot;This command really should not be used&quot; [<a href="https://tools.ietf.org/html/rfc0493" title="&quot;GRAPHICS PROTOCOL&quot;">RFC0493</a>]
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Barnes, et al.                Experimental                      [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc6919#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6919">RFC 6919</a>                  Further RFC Key Words             1 April 2013</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc6919#section-4">4</a>. OUGHT TO</h2></span>
+
+   The phrase &quot;OUGHT TO&quot; conveys an optimistic assertion of an
+   implementation behavior that is clearly morally right, and thus does
+   not require substantiation.
+
+   For example: &quot;If a decision might affect semantic transparency, the
+   implementor ought to err on the side of maintaining transparency
+   unless a careful and complete analysis shows significant benefits in
+   breaking transparency.&quot;  [<a href="https://tools.ietf.org/html/rfc2616" title="&quot;Hypertext Transfer Protocol -- HTTP/1.1&quot;">RFC2616</a>]
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc6919#section-5">5</a>. WOULD PROBABLY</h2></span>
+
+   The phrase &quot;WOULD PROBABLY&quot; indicates the authors expectation about
+   what a reasonable implementation is likely to do in a given case.
+   There is no requirement for implementations to be reasonable.
+
+   This phrase is also a good example of an aspect of English grammar
+   that is often useful in specification writing, namely the passive-
+   aggressive voice, which provides a meaning in between the active and
+   the passive voice.
+
+   For example: &quot;A SMTP client would probably only want to authenticate
+   an SMTP server whose server certificate has a domain name that is the
+   domain name that the client thought it was connecting to.&quot;  [<a href="https://tools.ietf.org/html/rfc3207" title="&quot;SMTP Service Extension for Secure SMTP over Transport Layer Security&quot;">RFC3207</a>]
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc6919#section-6">6</a>. MAY WISH TO</h2></span>
+
+   The phrase &quot;MAY WISH TO&quot; indicates a behavior that might seem
+   appealing to some people, but which is regarded as ridiculous or
+   unnecessary by others.  This phrase is frequently used to avoid
+   further delay in approval of a document.
+
+   For example: &quot;Verifiers MAY wish to track testing mode results to
+   assist the Signer.&quot;  [<a href="https://tools.ietf.org/html/rfc6376" title="&quot;DomainKeys Identified Mail (DKIM) Signatures&quot;">RFC6376</a>]
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc6919#section-7">7</a>. COULD</h2></span>
+
+   The phrase &quot;COULD&quot; provides a way for specification authors to
+   articulate existential possibilities, in order to provide a hint that
+   might be critical to reliable or secure operation, but without a hard
+   requirement.  The lack of a requirement allows for vendor product
+   differentiation.
+
+   For example: &quot;An implementation could mitigate this race condition,
+   for example, using timers.&quot;  [<a href="https://tools.ietf.org/html/rfc6733" title="&quot;Diameter Base Protocol&quot;">RFC6733</a>]
+
+
+
+
+
+<span class="grey">Barnes, et al.                Experimental                      [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc6919#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6919">RFC 6919</a>                  Further RFC Key Words             1 April 2013</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-8" href="https://tools.ietf.org/html/rfc6919#section-8">8</a>. POSSIBLE</h2></span>
+
+   The phrase &quot;POSSIBLE&quot; describes what some of the working group
+   members thought of as an edge case that will never happen, but in
+   practice allows the protocol to work at the most fundamental level.
+
+   For example: &quot;It is also possible for the server to send a completion
+   response for some other command (if multiple commands are in
+   progress), or untagged data.&quot;  [<a href="https://tools.ietf.org/html/rfc3501" title="&quot;INTERNET MESSAGE ACCESS PROTOCOL - VERSION 4rev1&quot;">RFC3501</a>]
+
+<span class="h2"><h2><a class="selflink" name="section-9" href="https://tools.ietf.org/html/rfc6919#section-9">9</a>. MIGHT</h2></span>
+
+   The phrase &quot;MIGHT&quot; conveys a requirement in an intentionally stealthy
+   fashion, to facilitate product differentiation (cf. &quot;COULD&quot; above).
+
+   For example: &quot;In the case of audio and different &quot;m&quot; lines for
+   different codecs, an implementation might decide to act as a mixer
+   with the different incoming RTP sessions, which is the correct
+   behavior.&quot;  [<a href="https://tools.ietf.org/html/rfc5888" title="&quot;The Session Description Protocol (SDP) Grouping Framework&quot;">RFC5888</a>]
+
+<span class="h2"><h2><a class="selflink" name="section-10" href="https://tools.ietf.org/html/rfc6919#section-10">10</a>. Security Considerations</h2></span>
+
+   Traditionally, security requirements in IETF documents have been
+   expressed with a mixture of requirements words from <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>
+   [<a href="https://tools.ietf.org/html/rfc2119" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">RFC2119</a>] and the phrases used above.  The key words in <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a> are
+   principally useful when threats and mitigations are clear and well
+   defined.  The key words in this document can be applied when the
+   threat model is ambiguous, and mitigations are unclear or
+   inconvenient.
+
+<span class="h2"><h2><a class="selflink" name="section-11" href="https://tools.ietf.org/html/rfc6919#section-11">11</a>. References</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-11.1" href="https://tools.ietf.org/html/rfc6919#section-11.1">11.1</a>. Normative References</h3></span>
+
+   [<a name="ref-RFC2119" id="ref-RFC2119">RFC2119</a>]  Bradner, S., &quot;Key words for use in RFCs to Indicate
+              Requirement Levels&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>, March 1997.
+
+<span class="h3"><h3><a class="selflink" name="section-11.2" href="https://tools.ietf.org/html/rfc6919#section-11.2">11.2</a>. Informative References</h3></span>
+
+   [<a name="ref-RFC0493" id="ref-RFC0493">RFC0493</a>]  Michener, J., Cotton, I., Kelley, K., Liddle, D., and E.
+              Meyer, &quot;GRAPHICS PROTOCOL&quot;, <a href="https://tools.ietf.org/html/rfc493">RFC 493</a>, April 1973.
+
+   [<a name="ref-RFC2616" id="ref-RFC2616">RFC2616</a>]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
+              Masinter, L., Leach, P., and T. Berners-Lee, &quot;Hypertext
+              Transfer Protocol -- HTTP/1.1&quot;, <a href="https://tools.ietf.org/html/rfc2616">RFC 2616</a>, June 1999.
+
+   [<a name="ref-RFC3207" id="ref-RFC3207">RFC3207</a>]  Hoffman, P., &quot;SMTP Service Extension for Secure SMTP over
+              Transport Layer Security&quot;, <a href="https://tools.ietf.org/html/rfc3207">RFC 3207</a>, February 2002.
+
+
+
+<span class="grey">Barnes, et al.                Experimental                      [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc6919#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6919">RFC 6919</a>                  Further RFC Key Words             1 April 2013</span>
+
+
+   [<a name="ref-RFC3501" id="ref-RFC3501">RFC3501</a>]  Crispin, M., &quot;INTERNET MESSAGE ACCESS PROTOCOL - VERSION
+              4rev1&quot;, <a href="https://tools.ietf.org/html/rfc3501">RFC 3501</a>, March 2003.
+
+   [<a name="ref-RFC5888" id="ref-RFC5888">RFC5888</a>]  Camarillo, G. and H. Schulzrinne, &quot;The Session Description
+              Protocol (SDP) Grouping Framework&quot;, <a href="https://tools.ietf.org/html/rfc5888">RFC 5888</a>, June 2010.
+
+   [<a name="ref-RFC5988" id="ref-RFC5988">RFC5988</a>]  Nottingham, M., &quot;Web Linking&quot;, <a href="https://tools.ietf.org/html/rfc5988">RFC 5988</a>, October 2010.
+
+   [<a name="ref-RFC6120" id="ref-RFC6120">RFC6120</a>]  Saint-Andre, P., &quot;Extensible Messaging and Presence
+              Protocol (XMPP): Core&quot;, <a href="https://tools.ietf.org/html/rfc6120">RFC 6120</a>, March 2011.
+
+   [<a name="ref-RFC6376" id="ref-RFC6376">RFC6376</a>]  Crocker, D., Hansen, T., and M. Kucherawy, &quot;DomainKeys
+              Identified Mail (DKIM) Signatures&quot;, <a href="https://tools.ietf.org/html/rfc6376">RFC 6376</a>,
+              September 2011.
+
+   [<a name="ref-RFC6733" id="ref-RFC6733">RFC6733</a>]  Fajardo, V., Arkko, J., Loughney, J., and G. Zorn,
+              &quot;Diameter Base Protocol&quot;, <a href="https://tools.ietf.org/html/rfc6733">RFC 6733</a>, October 2012.
+
+Authors' Addresses
+
+   Richard Barnes
+   BBN
+   1300 N 17th St
+   Arlington, VA  22209
+   US
+
+   EMail: rlb@ipv.sx
+
+
+   Stephen Kent
+   BBN
+   10 Moulton St
+   Cambridge, MA  02138
+   US
+
+   EMail: kent@bbn.com
+
+
+   Eric Rescorla
+   RTFM, Inc.
+   2064 Edgewood Drive
+   Palo Alto, CA  94303
+   US
+
+   EMail: ekr@rtfm.com
+
+
+
+
+
+
+Barnes, et al.                Experimental                      [Page 6]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

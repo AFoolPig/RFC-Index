@@ -1,0 +1,1919 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:2648" /> 
+  <meta name="DC.Description.Abstract" content="This document proposes the &quot;ietf&quot; namespace, which consists of the RFC
+family of documents (RFCs, STDs, FYIs, and BCPs) developed by the IETF
+and published by the RFC Editor and the minutes of working groups (WG)
+and birds of a feather (BOF) meetings that occur during IETF
+conferences. [STANDARDS-TRACK]" /> 
+  <meta name="DC.Creator" content="Ryan Moats &lt;jayhawk@att.com&gt;" /> 
+  <meta name="DC.Date.Issued" content="August, 1999" /> 
+  <meta name="DC.Title" content="A URN Namespace for IETF Documents" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 2648 - A URN Namespace for IETF Documents</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgorange" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc2648.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc2648" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-ietf-urn-ietf" title="draft-ietf-urn-ietf">draft-ietf-urn-...</a>] [<a href="https://datatracker.ietf.org/doc/rfc2648" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc2648" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc2648" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=2648">Errata</a>]</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo">Updated by: <a href="https://tools.ietf.org/html/rfc6924">6924</a> INFORMATIONAL</span>
+   <br /> 
+   <span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span>
+   <br /> 
+   <pre>Network Working Group                                           R. Moats
+Request for Comments: 2648                                          AT&amp;T
+Category: Informational                                      August 1999
+
+
+                   <span class="h1"><h1>A URN Namespace for IETF Documents</h1></span>
+
+Status of this Memo
+
+   This memo provides information for the Internet community.  It does
+   not specify an Internet standard of any kind.  Distribution of this
+   memo is unlimited.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (1999).  All Rights Reserved.
+
+Abstract
+
+   A system for Uniform Resource Names (URNs) must be capable of
+   supporting new naming systems.  As an example of proposing a new
+   namespace, this document proposes the &quot;ietf&quot; namespace.  This
+   namespace consists of the RFC family of documents (RFCs, STDs, FYIs,
+   and BCPs) developed by the IETF and published by the RFC Editor, the
+   minutes of working groups (WG) and birds of a feather (BOF) meetings
+   that occur during IETF conferences, and the Internet Drafts published
+   by the Internet Drafts Editor.  Both the current URN framework and
+   URN syntax support this namespace.
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc2648#section-1">1</a>. Introduction</h2></span>
+
+   This document proposes the &quot;ietf&quot; namespace, which consists of the
+   RFC family of documents (RFCs, STDs, FYIs, and BCPs) developed by the
+   IETF and published by the RFC editor and the minutes of working
+   groups (WG) and birds of a feather (BOF) meetings that occur during
+   IETF conferences.
+
+   The namespace specification is for a formal namespace.
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc2648#section-2">2</a>. Specification Template</h2></span>
+
+      Namespace ID:
+
+            &quot;ietf&quot; requested.
+
+
+
+
+
+
+
+<span class="grey">Moats                        Informational                      [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc2648#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+      Registration Information:
+
+            Registration version number: 1
+            Registration date: 1999-04-22
+
+      Declared registrant of the namespace:
+
+            Ryan Moats
+            jayhawk@att.com
+            AT&amp;T
+            15621 Drexel Circle
+            Omaha, NE 68135-2358
+
+      Declaration of structure:
+
+            The identifier has the following ABNF [<a href="https://tools.ietf.org/html/rfc2648#ref-2" title="&quot;Augmented BNF for Syntax Specifications: ABNF&quot;">2</a>] specification:
+
+            NSS = rfc-nss / fyi-nss / std-nss / bcp-nss /
+                  <a href="https://tools.ietf.org/html/draft-nss">draft-nss</a> / mtg-nss / other-nss
+
+            rfc-nss = &quot;rfc:&quot; 1*DIGIT
+            fyi-nss = &quot;fyi:&quot; 1*DIGIT
+            std-nss = &quot;std:&quot; 1*DIGIT
+            bcp-nss = &quot;bcp:&quot; 1*DIGIT
+            <a href="https://tools.ietf.org/html/draft-nss">draft-nss</a> = &quot;id:&quot; string
+            mtg-nss = &quot;mtg:&quot; string
+            other-nss = string
+              ; beginning with a prefix other than one of those
+              ; above for future expansion
+
+            string = 1*(DIGIT / ALPHA / &quot;-&quot;)
+
+            If the IESG (or it successor) adds a new document series,
+            this ABNF specification will need to be updated.  Further,
+            if a working group or BOF is created that used characters
+            outside the range of this ABNF specification, this
+            specification will need to be updated.  Any system intended
+            to resolve names for this namespace should be written with
+            the awareness that this could occur at any time.
+
+      Relevant ancillary documentation:
+
+            Relevant documentation is in <a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>.
+
+
+
+
+
+
+
+
+<span class="grey">Moats                        Informational                      [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc2648#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+      Identifier uniqueness considerations:
+
+            Because the rfc-editor assigns the RFC number uniquely these
+            URNs are unique.  Since the mapping between RFCs and other
+            rfc-editor document series (STDs, FYIs or BCPs) is not
+            necessarily one-to-one, uniqueness of STDs, FYIs and BCPs
+            are defined based on the document mappings maintained by the
+            RFC Editor (the index files &quot;rfc-index.txt&quot;, &quot;fyi-
+            index.txt&quot;, &quot;bcp-index.txt&quot;, &quot;std-index.txt&quot;) are defined to
+            be the definitive statement of the assignment of RFC Family
+            URNs in this namespace.  The meeting minutes portion of the
+            namespace is guaranteed unique because the URN includes the
+            sequence number of the IETF conference.  The document
+            mapping maintained by the Internet Drafts editor (&quot;1id-
+            abstracts.txt&quot;) is defined as the definitive statement of
+            the assignment of URNs for the internet draft portion of
+            this namespace.
+
+      Identifier persistence considerations:
+
+            Persistence of the URNs of this namespace is independent of
+            the mutability of the underlying documents.  A URN once
+            assigned will never be reassigned to a different resource;
+            the assignment is persistent and immutable.  Immutability of
+            RFCs, STDs, FYIs and BCPs is at the discretion of the RFC
+            Editor.  They may be composites of one or more RFCs and the
+            set of RFCs that includes them may change with time.  It is
+            important to note that this mutability of some resources is
+            independent of the immutability of URN assignment to a
+            resource.
+
+      Process of identifier assignment:
+
+            Assignment of URNs from this namespace occurs in three ways.
+            The first is through publication of a new RFC, FYI, STD or
+            BCP is by the RFC Editor. This new document will have a new
+            series number and will therefore define a new URN.  The
+            document mappings maintained by the RFC Editor (the index
+            files &quot;rfc-index.txt&quot;, &quot;fyi-index.txt&quot;, &quot;bcp-index.txt&quot; and
+            &quot;std-index.txt&quot;) are defined to be the definitive statement
+            of the assignment of RFC Family URNs in this namespace.
+
+            The second way a URN is assigned is through the filing of
+            meeting minutes by a working group or birds of a feather as
+            part of an IETF conference.  The list of minutes maintained
+            by the IETF for each working group and conference in the
+            subtree pointed at by the URL <a href="ftp://ietf.org/ietf/">ftp://ietf.org/ietf/</a> is
+            considered the definitive assignment of URNs for working
+
+
+
+<span class="grey">Moats                        Informational                      [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc2648#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+            group or birds of a feather minutes.
+
+            The third way a URN is assigned is through the publication
+            of a new internet-draft by the Internet Draft Editor.  This
+            draft will have a distinct name (and version number) and
+            therefore defined a new URN.  The document mapping
+            maintained by the Internet Drafts editor (&quot;1id-
+            abstracts.txt&quot;) is defined as the definitive statement of
+            the assignment of URNs for this portion of the namespace.
+
+      Process of identifier resolution:
+
+            A mirrored copy of the underlying documentation is required
+            to resolve these URNs.  Resolution via HTTP is done by a set
+            of simple Perl cgi-bin scripts presented in <a href="https://tools.ietf.org/html/rfc2648#appendix-A">Appendix A</a>.
+
+      Rules for Lexical Equivalence:
+
+            The entire URN is case-insensitive.
+
+      Conformance with URN Syntax:
+
+            There are no additional characters reserved.
+
+      Validation mechanism:
+
+            None additional to resolution specified
+
+      Scope:
+
+            Global.
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc2648#section-3">3</a>. Examples</h2></span>
+
+   The following are examples of URNs that a resolver for this namespace
+   can resolve:
+
+         urn:ietf:rfc:2141
+         urn:ietf:std:50
+         urn:ietf:id:ietf-urn-ietf-06
+         urn:ietf:mtg:41-urn
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Moats                        Informational                      [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc2648#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc2648#section-4">4</a>. Security Considerations</h2></span>
+
+   Because this namespace defines no additional reserved characters, it
+   does not add any security considerations beyond those inherent from
+   the existence of the reserved characters from [<a href="https://tools.ietf.org/html/rfc2648#ref-1" title="&quot;URN Syntax&quot;">1</a>].  Further, none of
+   the reserved characters from [<a href="https://tools.ietf.org/html/rfc2648#ref-1" title="&quot;URN Syntax&quot;">1</a>] are used in the definition of the
+   NSS. This means that resolvers for this namespace may be considered
+   &quot;secure&quot; in the sense that any escaping of characters in the NSS MUST
+   result in the resolver indicating that the URN has incorrect syntax.
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc2648#section-5">5</a>. Acknowledgments</h2></span>
+
+   Thanks to various members of the URN working group for comments on
+   earlier drafts of this document.  The work described in this document
+   is partially supported by the National Science Foundation,
+   Cooperative Agreement NCR-9218179.
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc2648#section-6">6</a>. References</h2></span>
+
+   Request For Comments (RFC) and Internet Draft documents are available
+   from numerous mirror sites.
+
+   [<a name="ref-1" id="ref-1">1</a>]  Moats, R., &quot;URN Syntax&quot;, <a href="https://tools.ietf.org/html/rfc2141">RFC 2141</a>, May 1997.
+
+   [<a name="ref-2" id="ref-2">2</a>]  Crocker, D. and P. Overell, &quot;Augmented BNF for Syntax
+        Specifications: ABNF&quot;, <a href="https://tools.ietf.org/html/rfc2234">RFC 2234</a>, November 1997.
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc2648#section-7">7</a>. Author's Address</h2></span>
+
+   Ryan Moats
+   AT&amp;T
+   15621 Drexel Circle
+   Omaha, NE 68135-2358
+   USA
+
+   EMail:  jayhawk@att.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Moats                        Informational                      [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc2648#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+<span class="h2"><h2><a class="selflink" name="appendix-A" href="https://tools.ietf.org/html/rfc2648#appendix-A">Appendix A</a>. Example Resolution Scripts</h2></span>
+
+   The following scripts are examples that can be used for resolving
+   URNs in this namespace.
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.1" href="https://tools.ietf.org/html/rfc2648#appendix-A.1">A.1</a> I2C</h3></span>
+
+#!/usr/local/bin/perl
+
+use strict;
+
+#
+# this is a URN 2 URC resolver for the ietf namespace
+#
+
+my(%cite) = (
+  bcp =&gt; &quot;/ftp/rfc/bcp-index.txt&quot;,
+  fyi =&gt; &quot;/ftp/fyi/fyi-index.txt&quot;,
+  id =&gt; &quot;/ftp/internet-drafts/1id-abstracts.txt&quot;,
+  rfc =&gt; &quot;/ftp/rfc/rfc-index.txt&quot;,
+  std =&gt; &quot;/ftp/std/std-index.txt&quot;
+);
+my(%number2date) = (
+  44 =&gt; &quot;99mar&quot;,
+  43 =&gt; &quot;98dec&quot;, 42 =&gt; &quot;98aug&quot;, 41 =&gt; &quot;98apr&quot;,
+  40 =&gt; &quot;97dec&quot;, 39 =&gt; &quot;97aug&quot;, 38 =&gt; &quot;97apr&quot;,
+  37 =&gt; &quot;96dec&quot;, 36 =&gt; &quot;96jun&quot;, 35 =&gt; &quot;96mar&quot;,
+  34 =&gt; &quot;95dec&quot;, 33 =&gt; &quot;95jul&quot;, 32 =&gt; &quot;95apr&quot;,
+  31 =&gt; &quot;94dec&quot;, 30 =&gt; &quot;94jul&quot;, 29 =&gt; &quot;94mar&quot;,
+  28 =&gt; &quot;93nov&quot;, 27 =&gt; &quot;93jul&quot;, 26 =&gt; &quot;93mar&quot;,
+  25 =&gt; &quot;92nov&quot;, 24 =&gt; &quot;92jul&quot;, 23 =&gt; &quot;92mar&quot;,
+  22 =&gt; &quot;91nov&quot;, 21 =&gt; &quot;91jul&quot;, 20 =&gt; &quot;91mar&quot;,
+  19 =&gt; &quot;90dec&quot; );
+
+my($wgpath) = &quot;/ftp/ietf&quot;;
+my($urn) = $ENV{'QUERY_STRING'};
+my($host) = $ENV{'SERVER_NAME'}; #get my host name for ftp: URLs
+my($accept) = $ENV{'HTTP_ACCEPT'}; #this is the &quot;Accept:&quot; HTTP header
+
+(&amp;resolveid($1), exit) if ($urn =~ /urn:ietf:id:(\S+)/i);
+(&amp;resolverfc($1, $2), exit) if ($urn =~ /urn:ietf:(\w*):(\d*)/i);
+(&amp;resolvemtg($1, $2), exit) if ($urn =~ /urn:ietf:mtg:(\d*)-(\w*)/i);
+&amp;urn_error(&quot;400 Bad Request\n&quot;);
+
+sub resolvemtg {
+  my($ietfnum, $sesnam) = @_;
+  &amp;urn_error(&quot;404 Not Found\n&quot;) if (!defined $number2date{$ietfnum});
+  my($date)=$number2date{$ietfnum};
+
+
+
+<span class="grey">Moats                        Informational                      [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc2648#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+  my($link)=&quot;$wgpath/$sesnam/$sesnam-minutes-$date.txt&quot;;
+  if (-f $link) {
+    print &quot;Status:  200 OK\r\n&quot;;
+    print &quot;Content-type: text/html\r\n\r\n&quot;;
+    print &quot;&lt;HTML&gt;\n&lt;TITLE&gt;Citation for $urn&lt;/TITLE&gt;\n&quot;;
+    print &quot;&lt;BODY&gt;\n&quot;;
+    print &quot;&lt;H1&gt;&lt;A HREF=\&quot;$link\&quot;&gt;$urn&lt;/A&gt;:&lt;/H1&gt;\n&quot;;
+    print &quot;Minutes of the $sesnam working group from the &quot;
+          . &amp;end($ietfnum) . &quot; IETF&quot;;
+    print &quot;&lt;/BODY&gt;\n&lt;/HTML&gt;\n&quot;;
+    return;
+  }
+  my($link)=&quot;$wgpath/$date/$sesnam-minutes-$date.txt&quot;;
+  if (-f $link) {
+    print &quot;Status:  200 OK\r\n&quot;;
+    print &quot;Content-type: text/html\r\n\r\n&quot;;
+    print &quot;&lt;HTML&gt;\n&lt;TITLE&gt;Citation for $urn&lt;/TITLE&gt;\n&quot;;
+    print &quot;&lt;BODY&gt;\n&quot;;
+    print &quot;&lt;H1&gt;&lt;A HREF=\&quot;$link\&quot;&gt;$urn&lt;/A&gt;:&lt;/H1&gt;\n&quot;;
+    print &quot;Minutes of the $sesnam working group from the &quot;
+           . &amp;end($ietfnum) . &quot; IETF&quot;;
+    print &quot;&lt;/BODY&gt;\n&lt;/HTML&gt;\n&quot;;
+    return;
+  }
+  &amp;urn_error(&quot;404 Not Found\n&quot;);
+}
+
+sub end {
+  my($inarg)=@_;
+  return $inarg . &quot;st&quot; if ($inarg =~ /1$/);
+  return $inarg . &quot;nd&quot; if ($inarg =~ /2$/);
+  return $inarg . &quot;rd&quot; if ($inarg =~ /3$/);
+  return $inarg . &quot;th&quot;;
+}
+
+sub resolverfc {
+  my($flag,@bib,$i,$k,$j,$done,@ref);
+  my($l,$link);
+  my($scheme, $value) = @_;
+  $scheme =~ tr/A-Z/a-z/;
+  if (!defined $cite{$scheme}) {
+    &amp;urn_error(&quot;404 Not Found\n&quot;);
+  }
+
+  $flag = 0;
+  open(INPUT, &quot;$cite{$scheme}&quot;);
+  while (&lt;INPUT&gt;) {
+    $flag = 1 if (/^0*$value /);
+
+
+
+<span class="grey">Moats                        Informational                      [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc2648#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+    if ($flag == 1) {
+      last if (/^$/);
+      chop;
+      push @bib,$_;
+    }
+  }
+
+  if ($scheme ne &quot;rfc&quot;) {
+    print &quot;Status:  200 OK\r\n&quot;;
+    print &quot;Content-type: text/html\r\n\r\n&quot;;
+    $bib[0] =~ s/^[0-9]*\s*/&lt;B&gt;/;
+    for ($i=0; $i&lt;=$#bib; $i+=1) {
+      last if ($bib[$i] =~ s/\./.&lt;\/B&gt;/);
+    }
+    for ($i=0;$i&lt;=$#bib;$i+=1) {
+      $k=$bib[$i];
+      while ($k =~ /(fyi|std|rfc|bcp)([0-9]+)(.*)/i) {
+        push @ref,&quot;$1$2&quot;;
+        $k=$3;
+      }
+      $done=&quot;&quot;;
+      foreach $j (@ref) {
+        next if ($done =~ $j);
+        $done .= &quot;$j &quot;;
+        $l = $j;
+        $l =~ tr/A-Z/a-z/;
+        $link=&amp;make_link(&quot;$l&quot;);
+        $bib[$i] =~ s/$j/&lt;A HREF=&quot;$link&quot;&gt;$j&lt;\/A&gt;/g;
+      }
+    }
+    print &quot;&lt;HTML&gt;\n&lt;TITLE&gt;Citation for $urn&lt;/TITLE&gt;\n&quot;;
+    print &quot;&lt;BODY&gt;\n&quot;;
+    $link=&amp;make_link(&quot;$scheme$value&quot;);
+    print &quot;&lt;H1&gt;&lt;A HREF=\&quot;$link\&quot;&gt;$scheme$value&lt;/A&gt;:&lt;/H1&gt;\n&quot;;
+    foreach $i (@bib) {
+      print &quot;$i\n&quot;;
+    }
+    print &quot;&lt;/BODY&gt;\n&lt;/HTML&gt;\n&quot;;
+  } else {
+    print &quot;Status:  200 OK\r\n&quot;;
+    print &quot;Content-type: text/html\r\n\r\n&quot;;
+    $bib[0] =~ s/^[0-9]*\s*//;
+    $j=0;
+    for ($i=0; $i&lt;=$#bib; $i+=1) {
+      $j += ($bib[$i] =~ s/, &quot;/, &lt;B&gt;&quot;/);
+      $j += ($bib[$i] =~ s/&quot;,/&quot;&lt;\/B&gt;,/);
+    }
+    for ($i=0;$i&lt;=$#bib;$i+=1) {
+
+
+
+<span class="grey">Moats                        Informational                      [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc2648#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+      $k=$bib[$i];
+      while ($k =~ /(fyi\s|std\s|rfc|bcp)([0-9]+)(.*)/i) {
+        push @ref,&quot;$1$2&quot;;
+        $k=$3;
+      }
+      $done=&quot;&quot;;
+      foreach $j (@ref) {
+        next if ($done =~ $j);
+        $done .= &quot;$j &quot;;
+        $l = $j;
+        $l =~ s/\s//g;
+        $l =~ tr/A-Z/a-z/;
+        $link=&amp;make_link(&quot;$l&quot;);
+        $bib[$i] =~ s/$j/&lt;A HREF=&quot;$link&quot;&gt;$j&lt;\/A&gt;/g;
+      }
+    }
+    print &quot;&lt;HTML&gt;\n&lt;TITLE&gt;Citation for $urn&lt;/TITLE&gt;\n&quot;;
+    print &quot;&lt;BODY&gt;\n&quot;;
+    $link=&amp;make_link(&quot;$scheme$value&quot;);
+    print &quot;&lt;H1&gt;&lt;A HREF=\&quot;$link\&quot;&gt;$scheme$value&lt;/A&gt;:&lt;/H1&gt;\n&quot;;
+    foreach $i (@bib) {
+      print &quot;$i\n&quot;;
+    }
+    print &quot;&lt;/BODY&gt;\n&lt;/HTML&gt;\n&quot;;
+  }
+}
+
+sub make_link {
+  my($sc);
+  my($inarg)=@_;
+  ($sc=$1) if ($inarg =~ /([a-z]*)/);
+  return &quot;/$sc/$inarg.ps&quot; if (-e &quot;/ftp/$sc/$inarg.ps&quot;);
+  return &quot;/$sc/$inarg.html&quot; if (-e &quot;/ftp/$sc/$inarg.html&quot;);
+  return &quot;/$sc/$inarg.txt&quot;;
+}
+
+sub urn_error {
+  my($code) = @_; #store failure code here...
+
+  print &quot;Status:  $code&quot;;
+  print &quot;Content-type: text/html\n\n&lt;HTML&gt;\n&quot;;
+  print &quot;&lt;head&gt;&lt;title&gt;URN Resolution: I2C $code&lt;/title&gt;&lt;/head&gt;\n&quot;;
+  print &quot;&lt;BODY&gt;\n&quot;;
+  print &quot;&lt;h1&gt;URN to URC resolution failed for the URN:&lt;/h1&gt;\n&quot;;
+  print &quot;&lt;hr&gt;&lt;h3&gt;$urn&lt;/h3&gt;\n&quot;;
+  print &quot;&lt;/body&gt;\n&quot;;
+  print &quot;&lt;/html&gt;\n&quot;;
+  exit;
+
+
+
+<span class="grey">Moats                        Informational                      [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc2648#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+};
+
+sub resolveid {
+  my($flag,@bib,$i,$k,$j,$count,@ref);
+  my($l,$link, $hdr, $done);
+  my($value) = @_;
+  my($scheme) = &quot;id&quot;;
+
+  open(INPUT, &quot;$cite{$scheme}&quot;);
+  while (&lt;INPUT&gt;) {
+#
+# capture record
+#
+    if ($flag == 1 || /^\s+\&quot;/) {
+      push @bib,$_;
+      ($hdr = -1, $count = 0, $flag = 1) if (/^\s+\&quot;/);
+      $count++ if (/^\s+$/);
+    }
+    if ($count == 1) {
+      $hdr = $#bib if ($hdr == -1);
+    }
+    if ($count == 2) {
+      for ($i=0; $i&lt;=$hdr; $i+=1) {
+            if ($bib[$i] =~ /&lt;(.*)&gt;/) {
+              $l = $1;
+              if ($l eq &quot;draft-$value.txt&quot; || $l eq &quot;draft-$value.ps&quot;) {
+                print &quot;Status:  200 OK\r\n&quot;;
+                print &quot;Content-type: text/html\r\n\r\n&quot;;
+                print &quot;&lt;HTML&gt;\n&lt;TITLE&gt;Citation for $urn&lt;/TITLE&gt;\n&quot;;
+                print &quot;&lt;BODY&gt;\n&quot;;
+                print &quot;&lt;a
+href=\&quot;<a href="http://blackhole.vip.att">http://blackhole.vip.att</a>.net/internet-drafts/$l\&quot;&gt;$l&lt;/a&gt;:\n&quot;;
+                print &quot;&lt;pre&gt;\n&quot;;
+                foreach $i (@bib) {
+                  print &quot;$i&quot;;
+                }
+                print &quot;&lt;/pre&gt;\n&quot;;
+                print &quot;&lt;/BODY&gt;\n&lt;/HTML&gt;\n&quot;;
+                exit;
+              }
+            }
+      }
+      $flag = 0;
+      @bib = ();
+    }
+  }
+  &amp;urn_error(&quot;404 Not Found\n&quot;);
+}
+
+
+
+<span class="grey">Moats                        Informational                     [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc2648#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.2" href="https://tools.ietf.org/html/rfc2648#appendix-A.2">A.2</a> I2L</h3></span>
+
+#!/usr/local/bin/perl
+
+use strict;
+
+#
+# this is a URN 2 URL resolver for the ietf namespace
+#
+
+my(%pathbase) = (
+  rfc =&gt; &quot;rfc/rfc&quot;,
+  fyi =&gt; &quot;fyi/fyi&quot;,
+  std =&gt; &quot;std/std&quot;,
+  bcp =&gt; &quot;bcp/bcp&quot;,
+  id =&gt; &quot;internet-drafts/draft-&quot;
+);
+
+my(%number2date) = (
+  44 =&gt; &quot;99mar&quot;,
+  43 =&gt; &quot;98dec&quot;, 42 =&gt; &quot;98aug&quot;, 41 =&gt; &quot;98apr&quot;,
+  40 =&gt; &quot;97dec&quot;, 39 =&gt; &quot;97aug&quot;, 38 =&gt; &quot;97apr&quot;,
+  37 =&gt; &quot;96dec&quot;, 36 =&gt; &quot;96jun&quot;, 35 =&gt; &quot;96mar&quot;,
+  34 =&gt; &quot;95dec&quot;, 33 =&gt; &quot;95jul&quot;, 32 =&gt; &quot;95apr&quot;,
+  31 =&gt; &quot;94dec&quot;, 30 =&gt; &quot;94jul&quot;, 29 =&gt; &quot;94mar&quot;,
+  28 =&gt; &quot;93nov&quot;, 27 =&gt; &quot;93jul&quot;, 26 =&gt; &quot;93mar&quot;,
+  25 =&gt; &quot;92nov&quot;, 24 =&gt; &quot;92jul&quot;, 23 =&gt; &quot;92mar&quot;,
+  22 =&gt; &quot;91nov&quot;, 21 =&gt; &quot;91jul&quot;, 20 =&gt; &quot;91mar&quot;,
+  19 =&gt; &quot;90dec&quot; );
+
+my($wgpath) = &quot;/ftp/ietf&quot;;
+my($urn) = $ENV{'QUERY_STRING'};
+my($host) = $ENV{'SERVER_NAME'}; #get my host name for ftp: URLs
+my($accept) = $ENV{'HTTP_ACCEPT'}; #this is the &quot;Accept:&quot; HTTP header
+
+(&amp;resolveid($1), exit) if ($urn =~ /urn:ietf:id:(\S+)/i);
+(&amp;resolverfc($1, $2), exit) if ($urn =~ /urn:ietf:(\w*):(\d*)/i);
+(&amp;resolvemtg($1, $2), exit) if ($urn =~ /urn:ietf:mtg:(\d*)-(\w*)/i);
+&amp;urn_error(&quot;400 Bad Request\n&quot;);
+
+sub resolvemtg {
+  my($ietfnum, $sesnam) = @_;
+  &amp;urn_error(&quot;404 Not Found\n&quot;) if (!defined $number2date{$ietfnum});
+  my($date)=$number2date{$ietfnum};
+  my($link)=&quot;$wgpath/$sesnam/$sesnam-minutes-$date.txt&quot;;
+  if (-f $link) {
+    print &quot;Status:  302 Moved temporarily\n&quot;;
+    print &quot;Location: $link\n&quot;;
+
+
+
+<span class="grey">Moats                        Informational                     [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc2648#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+    return;
+  }
+  my($link)=&quot;$wgpath/$date/$sesnam-minutes-$date.txt&quot;;
+  if (-f $link) {
+    print &quot;Status:  302 Moved temporarily\n&quot;;
+    print &quot;Location: $link\n&quot;;
+    return;
+  }
+  &amp;urn_error(&quot;404 Not Found\n&quot;);
+}
+
+sub end {
+  my($inarg)=@_;
+  return $inarg . &quot;st&quot; if ($inarg =~ /1$/);
+  return $inarg . &quot;nd&quot; if ($inarg =~ /2$/);
+  return $inarg . &quot;rd&quot; if ($inarg =~ /3$/);
+  return $inarg . &quot;th&quot;;
+}
+
+sub resolverfc {
+  my($flag,@bib,$i,$k,$j,$done,@ref);
+  my($l,$link);
+  my($scheme, $value) = @_;
+  $scheme =~ tr/A-Z/a-z/;
+  &amp;urn_error(&quot;404 Not Found\n&quot;)if (!defined $pathbase{$scheme});
+  my($txttry)=&quot;/ftp/$pathbase{$scheme}$value.txt&quot;;
+  my($pstry)=&quot;/ftp/$pathbase{$scheme}$value.ps&quot;;
+  my($htmltry)=&quot;/ftp/$pathbase{$scheme}$value.html&quot;;
+MIME_SWITCH: {
+    if ($accept =~ /application\/postscript/ &amp;&amp; -f $pstry) {
+      print &quot;Status:  302 Moved temporarily\n&quot;;
+      print &quot;Location: http://$host/$pathbase{$scheme}$value.ps\n\n&quot;;
+      last MIME_SWITCH;
+    }
+    if ($accept =~ /text\/html/ &amp;&amp; -f $htmltry) {
+      print &quot;Status:  302 Moved temporarily0;
+      print &quot;Location: http://$host/$pathbase{$scheme}$value.html\n\n&quot;;
+      last MIME_SWITCH;
+    }
+    if ($accept =~ /\*\/\*|text\/plain/ &amp;&amp; -f $txttry) {
+      print &quot;Status:  302 Moved temporarily\n&quot;;
+      print &quot;Location: http://$host/$pathbase{$scheme}$value.txt\n\n&quot;;
+      last MIME_SWITCH;
+    }
+    &amp;urn_error(&quot;404 Not Found\n&quot;);
+  }
+}
+
+
+
+
+<span class="grey">Moats                        Informational                     [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-13" id="page-13" href="https://tools.ietf.org/html/rfc2648#page-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+sub urn_error {
+  my($code) = @_; #store failure code here...
+
+  print &quot;Status:  $code&quot;;
+  print &quot;Content-type: text/html\n\n&lt;HTML&gt;\n&quot;;
+  print &quot;&lt;head&gt;&lt;title&gt;URN Resolution: I2L $code&lt;/title&gt;&lt;/head&gt;\n&quot;;
+  print &quot;&lt;BODY&gt;\n&quot;;
+  print &quot;&lt;h1&gt;URN to URL resolution failed for the URN:&lt;/h1&gt;\n&quot;;
+  print &quot;&lt;hr&gt;&lt;h3&gt;$urn&lt;/h3&gt;\n&quot;;
+  print &quot;&lt;/body&gt;\n&quot;;
+  print &quot;&lt;/html&gt;\n&quot;;
+  exit;
+}
+
+sub resolveid {
+  my($flag,@bib,$i,$k,$j,$done,@ref);
+  my($l,$link);
+  my($scheme) = &quot;id&quot;;
+  my($value) = @_;
+  $scheme =~ tr/A-Z/a-z/;
+  &amp;urn_error(&quot;404 Not Found\n&quot;)if (!defined $pathbase{$scheme});
+  my($txttry)=&quot;/ftp/$pathbase{$scheme}$value.txt&quot;;
+  my($pstry)=&quot;/ftp/$pathbase{$scheme}$value.ps&quot;;
+  my($htmltry)=&quot;/ftp/$pathbase{$scheme}$value.html&quot;;
+MIME_SWITCH: {
+    if ($accept =~ /application\/postscript/ &amp;&amp; -f $pstry) {
+      print &quot;Status:  302 Moved temporarily\n&quot;;
+      print &quot;Location: http://$host/$pathbase{$scheme}$value.ps\n\n&quot;;
+      last MIME_SWITCH;
+    }
+    if ($accept =~ /text\/html/ &amp;&amp; -f $htmltry) {
+      print &quot;Status:  302 Moved temporarily\n&quot;;
+      print &quot;Location: http://$host/$pathbase{$scheme}$value.html\n\n&quot;;
+      last MIME_SWITCH;
+    }
+    if ($accept =~ /\*\/\*|text\/plain/ &amp;&amp; -f $txttry) {
+      print &quot;Status:  302 Moved temporarily\n&quot;;
+      print &quot;Location: http://$host/$pathbase{$scheme}$value.txt\n\n&quot;;
+      last MIME_SWITCH;
+    }
+    &amp;urn_error(&quot;404 Not Found\n&quot;);
+  }
+}
+
+
+
+
+
+
+
+
+<span class="grey">Moats                        Informational                     [Page 13]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-14" id="page-14" href="https://tools.ietf.org/html/rfc2648#page-14" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.3" href="https://tools.ietf.org/html/rfc2648#appendix-A.3">A.3</a> I2Ls</h3></span>
+
+#!/usr/local/bin/perl
+
+use strict;
+
+#
+# this is a URN 2 URLs resolver for the ietf namespace
+#
+
+my(@urls);
+
+my(%pathbase) = (
+  rfc =&gt; &quot;rfc/rfc&quot;,
+  fyi =&gt; &quot;fyi/fyi&quot;,
+  std =&gt; &quot;std/std&quot;,
+  bcp =&gt; &quot;bcp/bcp&quot;,
+  id =&gt; &quot;internet-drafts/draft-&quot;
+);
+
+my(%number2date) = (
+  44 =&gt; &quot;99mar&quot;,
+  43 =&gt; &quot;98dec&quot;, 42 =&gt; &quot;98aug&quot;, 41 =&gt; &quot;98apr&quot;,
+  40 =&gt; &quot;97dec&quot;, 39 =&gt; &quot;97aug&quot;, 38 =&gt; &quot;97apr&quot;,
+  37 =&gt; &quot;96dec&quot;, 36 =&gt; &quot;96jun&quot;, 35 =&gt; &quot;96mar&quot;,
+  34 =&gt; &quot;95dec&quot;, 33 =&gt; &quot;95jul&quot;, 32 =&gt; &quot;95apr&quot;,
+  31 =&gt; &quot;94dec&quot;, 30 =&gt; &quot;94jul&quot;, 29 =&gt; &quot;94mar&quot;,
+  28 =&gt; &quot;93nov&quot;, 27 =&gt; &quot;93jul&quot;, 26 =&gt; &quot;93mar&quot;,
+  25 =&gt; &quot;92nov&quot;, 24 =&gt; &quot;92jul&quot;, 23 =&gt; &quot;92mar&quot;,
+  22 =&gt; &quot;91nov&quot;, 21 =&gt; &quot;91jul&quot;, 20 =&gt; &quot;91mar&quot;,
+  19 =&gt; &quot;90dec&quot; );
+
+my($wgpath) = &quot;/ftp/ietf&quot;;
+my($urn) = $ENV{'QUERY_STRING'};
+my($host) = $ENV{'SERVER_NAME'}; #get my host name for ftp: URLs
+my($accept) = $ENV{'HTTP_ACCEPT'}; #this is the &quot;Accept:&quot; HTTP header
+
+(&amp;resolveid($1), exit) if ($urn =~ /urn:ietf:id:(\S+)/i);
+(&amp;resolve1($1, $2), exit) if ($urn =~ /urn:ietf:(\w*):(\d*)/i);
+(&amp;resolve2($1, $2), exit) if ($urn =~ /urn:ietf:mtg:(\d*)-(\w*)/i);
+&amp;urn_error(&quot;400 Bad Request\n&quot;);
+
+sub resolve2 {
+  my($ietfnum, $sesnam) = @_;
+  &amp;urn_error(&quot;404 Not Found\n&quot;) if (!defined $number2date{$ietfnum});
+  my($date)=$number2date{$ietfnum};
+  my($link)=&quot;$wgpath/$sesnam/$sesnam-minutes-$date.txt&quot;;
+  if (-f $link) {
+
+
+
+<span class="grey">Moats                        Informational                     [Page 14]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-15" id="page-15" href="https://tools.ietf.org/html/rfc2648#page-15" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+    $link=~s/^\/ftp\///;
+    my($ftplink)=&quot;ftp://$host/$link&quot;;
+    my($httplink)=&quot;http://$host/$link&quot;;
+    my($glink)=&quot;gopher://$host:70/0/$link&quot;;
+
+    if ($accept =~ /text\/uri-list/) { #look for text/uri-list,
+        otherwise text/html
+      print &quot;Status: 200 OK\n&quot;;
+      print &quot;Content-type: text/uri-list\n\n\n&quot;;
+      print &quot;#$urn\n&quot;;
+      print &quot;$ftplink\n&quot;;
+      print &quot;$httplink\n&quot;;
+      print &quot;$glink\n&quot;;
+    }
+    if ($accept =~ /\*\/\*|text\/html/) {
+      print &quot;Status: 200 OK\n&quot;;
+      print &quot;Content-type: text/html\n\n&lt;HTML&gt;\n&quot;;
+      print &quot;&lt;head&gt;&lt;title&gt;URN Resolution: I2Ls&lt;/title&gt;&lt;/head&gt;\n&quot;;
+      print &quot;&lt;BODY&gt;\n&quot;;
+      print &quot;&lt;h1&gt;URN $urn resolves to the following URLs:&lt;/h1&gt;\n&quot;;
+      print &quot;&lt;hr&gt;&lt;ul&gt;\n&quot;;
+      print &quot;&lt;a href=\&quot;$ftplink\&quot;&gt;$ftplink&lt;/a&gt;\n&quot;;
+      print &quot;&lt;a href=\&quot;$httplink\&quot;&gt;$httplink&lt;/a&gt;\n&quot;;
+      print &quot;&lt;a href=\&quot;$glink\&quot;&gt;$glink&lt;/a&gt;\n&quot;;
+      print &quot;&lt;/UL&gt;\n&lt;/body&gt;\n&lt;/HTML&gt;\n&quot;;
+    }
+    return;
+  }
+  my($link)=&quot;$wgpath/$date/$sesnam-minutes-$date.txt&quot;;
+  if (-f $link) {
+    $link=~s/^\/ftp\///;
+    my($ftplink)=&quot;ftp://$host/$link&quot;;
+    my($httplink)=&quot;http://$host/$link&quot;;
+    my($glink)=&quot;gopher://$host:70/0/$link&quot;;
+    if ($accept =~ /text\/uri-list/) { #look for text/uri-list,
+        otherwise text/html
+      print &quot;Status: 200 OK\n&quot;;
+      print &quot;Content-type: text/uri-list\n\n\n&quot;;
+      print &quot;#$urn\n&quot;;
+      print &quot;$ftplink\n&quot;;
+      print &quot;$httplink\n&quot;;
+      print &quot;$glink\n&quot;;
+    }
+    if ($accept =~ /\*\/\*|text\/html/) {
+      print &quot;Status: 200 OK\n&quot;;
+      print &quot;Content-type: text/html\n\n&lt;HTML&gt;\n&quot;;
+      print &quot;&lt;head&gt;&lt;title&gt;URN Resolution: I2Ls&lt;/title&gt;&lt;/head&gt;\n&quot;;
+      print &quot;&lt;BODY&gt;\n&quot;;
+
+
+
+<span class="grey">Moats                        Informational                     [Page 15]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-16" id="page-16" href="https://tools.ietf.org/html/rfc2648#page-16" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+      print &quot;&lt;h1&gt;URN $urn resolves to the following URLs:&lt;/h1&gt;\n&quot;;
+      print &quot;&lt;hr&gt;&lt;ul&gt;\n&quot;;
+      print &quot;&lt;a href=\&quot;$ftplink\&quot;&gt;$ftplink&lt;/a&gt;\n&quot;;
+      print &quot;&lt;a href=\&quot;$httplink\&quot;&gt;$httplink&lt;/a&gt;\n&quot;;
+      print &quot;&lt;a href=\&quot;$glink\&quot;&gt;$glink&lt;/a&gt;\n&quot;;
+      print &quot;&lt;/UL&gt;\n&lt;/body&gt;\n&lt;/HTML&gt;\n&quot;;
+    }
+
+    return;
+  }
+  &amp;urn_error(&quot;404 Not Found\n&quot;);
+}
+
+sub resolve1 {
+  my($flag,@bib,$i,$k,$j,$done,@ref);
+  my($l,$link);
+  my($scheme, $value) = @_;
+  $scheme =~ tr/A-Z/a-z/;
+  &amp;urn_error(&quot;404 Not Found\n&quot;)if (!defined $pathbase{$scheme});
+  my($try)=&quot;/ftp/$pathbase{$scheme}$value.txt&quot;;
+  if (-f $try) {
+    push(@urls, &quot;http://$host/$pathbase{$scheme}$value.txt&quot;);
+    push(@urls, &quot;ftp://$host/$pathbase{$scheme}$value.txt&quot;);
+    push(@urls, &quot;gopher://$host:70/0/$pathbase{$scheme}$value.txt&quot;);
+  }
+  $try=&quot;/ftp/$pathbase{$scheme}$value.ps&quot;;
+  if (-f $try) {
+    push(@urls, &quot;http://$host/$pathbase{$scheme}$value.ps&quot;);
+    push(@urls, &quot;ftp://$host/$pathbase{$scheme}$value.ps&quot;);
+    push(@urls, &quot;gopher://$host:70/0/$pathbase{$scheme}$value.ps&quot;);
+  }
+  $try=&quot;/ftp/$pathbase{$scheme}$value.html&quot;;
+  if (-f $try) {
+    push(@urls, &quot;http://$host/$pathbase{$scheme}$value.html&quot;);
+    push(@urls, &quot;ftp://$host/$pathbase{$scheme}$value.html&quot;);
+  }
+
+  &amp;urn_error(&quot;404 Not Found\n&quot;) if ($#urls == -1);
+
+MIME_SWITCH: {
+    if ($accept =~ /text\/uri-list/) { #look for text/uri-list,
+        otherwise text/html
+      print &quot;Status: 200 OK\n&quot;;
+      print &quot;Content-type: text/uri-list\n\n\n&quot;;
+      print &quot;#$urn\n&quot;;
+      foreach $i (@urls) {
+        print &quot;$i\n&quot;;
+      }
+
+
+
+<span class="grey">Moats                        Informational                     [Page 16]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-17" id="page-17" href="https://tools.ietf.org/html/rfc2648#page-17" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+      last MIME_SWITCH;
+    }
+    if ($accept =~ /\*\/\*|text\/html/) {
+      print &quot;Status: 200 OK\n&quot;;
+      print &quot;Content-type: text/html\n\n&lt;HTML&gt;\n&quot;;
+      print &quot;&lt;head&gt;&lt;title&gt;URN Resolution: I2Ls&lt;/title&gt;&lt;/head&gt;\n&quot;;
+      print &quot;&lt;BODY&gt;\n&quot;;
+      print &quot;&lt;h1&gt;URN $urn resolves to the following URLs:&lt;/h1&gt;\n&quot;;
+      print &quot;&lt;hr&gt;&lt;ul&gt;\n&quot;;
+      foreach $i (@urls) {
+        print &quot;&lt;LI&gt;&lt;A HREF=\&quot;$i\&quot;&gt;$i&lt;/A&gt;\n&quot;;
+      }
+      print &quot;&lt;/UL&gt;\n&lt;/body&gt;\n&lt;/HTML&gt;\n&quot;;
+      last MIME_SWITCH;
+    }
+  }
+}
+
+sub urn_error {
+  my($code) = @_; #store failure code here...
+
+  print &quot;Status: $code&quot;;
+  print &quot;Content-type: text/html\n\n&lt;HTML&gt;\n&quot;;
+  print &quot;&lt;head&gt;&lt;title&gt;URN Resolution: I2L $code&lt;/title&gt;&lt;/head&gt;\n&quot;;
+  print &quot;&lt;BODY&gt;\n&quot;;
+  print &quot;&lt;h1&gt;URN to URL resolution failed for the URN:&lt;/h1&gt;\n&quot;;
+  print &quot;&lt;hr&gt;&lt;h3&gt;$urn&lt;/h3&gt;\n&quot;;
+  print &quot;&lt;/body&gt;\n&quot;;
+  print &quot;&lt;/html&gt;\n&quot;;
+  exit;
+}
+
+sub resolveid {
+  my($flag,@bib,$i,$k,$j,$done,@ref);
+  my($l,$link);
+  my($value) = @_;
+  my($scheme) = &quot;id&quot;;
+  $scheme =~ tr/A-Z/a-z/;
+  &amp;urn_error(&quot;404 Not Found\n&quot;)if (!defined $pathbase{$scheme});
+  my($try)=&quot;/ftp/$pathbase{$scheme}$value.txt&quot;;
+  if (-f $try) {
+    push(@urls, &quot;http://$host/$pathbase{$scheme}$value.txt&quot;);
+    push(@urls, &quot;ftp://$host/$pathbase{$scheme}$value.txt&quot;);
+    push(@urls, &quot;gopher://$host:70/0/$pathbase{$scheme}$value.txt&quot;);
+  }
+  $try=&quot;/ftp/$pathbase{$scheme}$value.ps&quot;;
+  if (-f $try) {
+    push(@urls, &quot;http://$host/$pathbase{$scheme}$value.ps&quot;);
+
+
+
+<span class="grey">Moats                        Informational                     [Page 17]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-18" id="page-18" href="https://tools.ietf.org/html/rfc2648#page-18" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+    push(@urls, &quot;ftp://$host/$pathbase{$scheme}$value.ps&quot;);
+    push(@urls, &quot;gopher://$host:70/0/$pathbase{$scheme}$value.ps&quot;);
+  }
+  $try=&quot;/ftp/$pathbase{$scheme}$value.html&quot;;
+  if (-f $try) {
+    push(@urls, &quot;http://$host/$pathbase{$scheme}$value.html&quot;);
+    push(@urls, &quot;ftp://$host/$pathbase{$scheme}$value.html&quot;);
+  }
+
+  &amp;urn_error(&quot;404 Not Found\n&quot;) if ($#urls == -1);
+
+MIME_SWITCH: {
+    if ($accept =~ /text\/uri-list/) { #look for text/uri-list,
+        otherwise text/html
+      print &quot;Status: 200 OK\n&quot;;
+      print &quot;Content-type: text/uri-list\n\n\n&quot;;
+      print &quot;#$urn\n&quot;;
+      foreach $i (@urls) {
+        print &quot;$i\n&quot;;
+      }
+      last MIME_SWITCH;
+    }
+    if ($accept =~ /\*\/\*|text\/html/) {
+      print &quot;Status: 200 OK\n&quot;;
+      print &quot;Content-type: text/html\n\n&lt;HTML&gt;\n&quot;;
+      print &quot;&lt;head&gt;&lt;title&gt;URN Resolution: I2Ls&lt;/title&gt;&lt;/head&gt;\n&quot;;
+      print &quot;&lt;BODY&gt;\n&quot;;
+      print &quot;&lt;h1&gt;URN $urn resolves to the following URLs:&lt;/h1&gt;\n&quot;;
+      print &quot;&lt;hr&gt;&lt;ul&gt;\n&quot;;
+      foreach $i (@urls) {
+        print &quot;&lt;LI&gt;&lt;A HREF=\&quot;$i\&quot;&gt;$i&lt;/A&gt;\n&quot;;
+      }
+      print &quot;&lt;/UL&gt;\n&lt;/body&gt;\n&lt;/HTML&gt;\n&quot;;
+      last MIME_SWITCH;
+    }
+  }
+}
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.4" href="https://tools.ietf.org/html/rfc2648#appendix-A.4">A.4</a> I2Ns</h3></span>
+
+#!/usr/local/bin/perl
+
+use strict;
+
+#
+# this is a URN 2 URNs resolver for the ietf namespace
+#
+
+
+
+
+<span class="grey">Moats                        Informational                     [Page 18]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-19" id="page-19" href="https://tools.ietf.org/html/rfc2648#page-19" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+my(%cite) = (
+  rfc =&gt; &quot;/ftp/rfc/rfc-index.txt&quot;,
+  fyi =&gt; &quot;/ftp/fyi/fyi-index.txt&quot;,
+  std =&gt; &quot;/ftp/std/std-index.txt&quot;,
+  bcp =&gt; &quot;/ftp/rfc/bcp-index.txt&quot;
+);
+
+my(%number2date) = (
+  44 =&gt; &quot;99mar&quot;,
+  43 =&gt; &quot;98dec&quot;, 42 =&gt; &quot;98aug&quot;, 41 =&gt; &quot;98apr&quot;,
+  40 =&gt; &quot;97dec&quot;, 39 =&gt; &quot;97aug&quot;, 38 =&gt; &quot;97apr&quot;,
+  37 =&gt; &quot;96dec&quot;, 36 =&gt; &quot;96jun&quot;, 35 =&gt; &quot;96mar&quot;,
+  34 =&gt; &quot;95dec&quot;, 33 =&gt; &quot;95jul&quot;, 32 =&gt; &quot;95apr&quot;,
+  31 =&gt; &quot;94dec&quot;, 30 =&gt; &quot;94jul&quot;, 29 =&gt; &quot;94mar&quot;,
+  28 =&gt; &quot;93nov&quot;, 27 =&gt; &quot;93jul&quot;, 26 =&gt; &quot;93mar&quot;,
+  25 =&gt; &quot;92nov&quot;, 24 =&gt; &quot;92jul&quot;, 23 =&gt; &quot;92mar&quot;,
+  22 =&gt; &quot;91nov&quot;, 21 =&gt; &quot;91jul&quot;, 20 =&gt; &quot;91mar&quot;,
+  19 =&gt; &quot;90dec&quot; );
+
+my($wgpath) = &quot;/ftp/ietf&quot;;
+my($urn) = $ENV{'QUERY_STRING'};
+my($host) = $ENV{'SERVER_NAME'}; #get my host name for ftp: URLs
+my($port) = $ENV={'SERVER_PORT'};
+my($accept) = $ENV{'HTTP_ACCEPT'}; #this is the &quot;Accept:&quot; HTTP header
+
+(&amp;resolve1($1, $2), exit) if ($urn =~ /urn:ietf:(\w*):(\d*)/i);
+(&amp;resolve2($1, $2), exit) if ($urn =~ /urn:ietf:mtg:(\d*)-(\w*)/i);
+&amp;urn_error(&quot;400 Bad Request\n&quot;);
+
+sub resolve2 {
+  my($ietfnum, $sesnam) = @_;
+  &amp;urn_error(&quot;404 Not Found\n&quot;) if (!defined $number2date{$ietfnum});
+  my($date)=$number2date{$ietfnum};
+  my($link)=&quot;$wgpath/$sesnam/$sesnam-minutes-$date.txt&quot;;
+  if (-f $link) {
+    if ($accept =~ /text\/uri-list/) {
+        print &quot;Status: 200 OK\n&quot;;
+        print &quot;Content-type: text/uri-list\n\n\n&quot;;
+        print &quot;#$urn\n&quot;;
+        return;
+    }
+    if ($accept =~ /\*\/\*|text]\/html/) {
+      print &quot;Status: 200 OK\n&quot;;
+      print &quot;Content-type: text/html\n\n&lt;HTML&gt;\n&quot;;
+      print &quot;&lt;head&gt;&lt;title&gt;URN Resolution: I2Ns&lt;/title&gt;&lt;/head&gt;\n&quot;;
+      print &quot;&lt;BODY&gt;\n&quot;;
+      print &quot;&lt;h1&gt;URN $urn resolves to the following URNs:&lt;/h1&gt;\n&quot;;
+      print &quot;&lt;hr&gt;&lt;ul&gt;\n&quot;;
+
+
+
+<span class="grey">Moats                        Informational                     [Page 19]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-20" id="page-20" href="https://tools.ietf.org/html/rfc2648#page-20" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+      print &quot;&lt;/UL&gt;\n&lt;/body&gt;\n&lt;/HTML&gt;\n&quot;;
+      return;
+    }
+  }
+  my($link)=&quot;$wgpath/$date/$sesnam-minutes-$date.txt&quot;;
+  if (-f $link) {
+    if ($accept =~ /text\/uri-list/) {
+        print &quot;Status: 200 OK\n&quot;;
+        print &quot;Content-type: text/uri-list\n\n\n&quot;;
+        print &quot;#$urn\n&quot;;
+        return;
+    }
+    if ($accept =~ /\*\/\*|text\/html/) {
+        print &quot;Status: 200 OK\n&quot;;
+        print &quot;Content-type: text/html\n\n&lt;HTML&gt;\n&quot;;
+        print &quot;&lt;head&gt;&lt;title&gt;URN Resolution: I2Ns&lt;/title&gt;&lt;/head&gt;\n&quot;;
+        print &quot;&lt;BODY&gt;\n&quot;;
+        print &quot;&lt;h1&gt;URN $urn resolves to the following URNs:&lt;/h1&gt;\n&quot;;
+        print &quot;&lt;hr&gt;&lt;ul&gt;\n&quot;;
+        print &quot;&lt;/UL&gt;\n&lt;/body&gt;\n&lt;/HTML&gt;\n&quot;;
+        return;
+    }
+  }
+  &amp;urn_error(&quot;404 Not Found\n&quot;);
+}
+
+sub end {
+  my($inarg)=@_;
+  return $inarg . &quot;st&quot; if ($inarg =~ /1$/);
+  return $inarg . &quot;nd&quot; if ($inarg =~ /2$/);
+  return $inarg . &quot;rd&quot; if ($inarg =~ /3$/);
+  return $inarg . &quot;th&quot;;
+}
+
+sub resolve1 {
+  my($flag,@bib,$i,$k,$j,$done,@ref);
+  my($l,$link);
+  my($scheme, $value) = @_;
+  $scheme =~ tr/A-Z/a-z/;
+  if (!defined $cite{$scheme}) {
+    &amp;urn_error(&quot;404 Not Found\n&quot;);
+  }
+
+  $flag = 0;
+  open(INPUT, &quot;$cite{$scheme}&quot;);
+  while (&lt;INPUT&gt;) {
+    $flag = 1 if (/^0*$value /);
+    if ($flag == 1) {
+
+
+
+<span class="grey">Moats                        Informational                     [Page 20]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-21" id="page-21" href="https://tools.ietf.org/html/rfc2648#page-21" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+      last if (/^$/);
+      chop;
+      push @bib,$_;
+    }
+  }
+
+  $k=join &quot; &quot;,@bib;
+  while ($k =~ /(\S*)\s*(fyi|std|rfc|bcp)\s*([0-9]+)(.*)/i) {
+    $k=$4;
+    $a=$2; $b=$3;
+    if (($a ne $scheme || $b ne $value) &amp;&amp; ($1 !~ /obso/i)){
+      $a =~ tr/A-Z/a-z/;
+      $b =~ s/^0*//;
+      push @ref,&quot;urn:ietf:$a:$b&quot;;
+    }
+  }
+
+MIME_SWITCH: {
+    if ($accept =~ /text\/uri-list/) {
+        print &quot;Status: 200 OK\n&quot;;
+        print &quot;Content-type: text/uri-list\n\n\n&quot;;
+        print &quot;#$urn\n&quot;;
+        foreach $i (@ref) {
+            print &quot;$i\n&quot;;
+        }
+        last MIME_SWITCH;
+    }
+  if ($accept =~ /\*\/\*|text\/html/) {
+    print &quot;Status: 200 OK\n&quot;;
+    print &quot;Content-type: text/html\n\n&lt;HTML&gt;\n&quot;;
+    print &quot;&lt;head&gt;&lt;title&gt;URN Resolution: I2Ns&lt;/title&gt;&lt;/head&gt;\n&quot;;
+    print &quot;&lt;BODY&gt;\n&quot;;
+    print &quot;&lt;h1&gt;URN $urn resolves to the following URNs:&lt;/h1&gt;\n&quot;;
+    print &quot;&lt;hr&gt;&lt;ul&gt;\n&quot;;
+        foreach $i (@ref) {
+            print &quot;&lt;li&gt;$i: Click to resolve using\n&quot;;
+            print &quot;&lt;a
+href=\&quot;http://$host:$port/uri-res/I2C?$i\&quot;&gt;I2C&lt;/a&gt;,\n&quot;;
+            print &quot;&lt;a
+href=\&quot;http://$host:$port/uri-res/I2L?$i\&quot;&gt;I2L&lt;/a&gt;,\n&quot;;
+            print &quot;&lt;a
+href=\&quot;http://$host:$port/uri-res/I2Ls?$i\&quot;&gt;I2Ls&lt;/a&gt;,\n&quot;;
+            print &quot;&lt;a
+href=\&quot;http://$host:$port/uri-res/I2R?$i\&quot;&gt;I2R&lt;/a&gt;,\n&quot;;
+            print &quot;&lt;a
+href=\&quot;http://$host:$port/uri-res/I2Rs?$i\&quot;&gt;I2Rs&lt;/a&gt;\n&quot;;
+        }
+    print &quot;&lt;/UL&gt;\n&lt;/body&gt;\n&lt;/HTML&gt;\n&quot;;
+
+
+
+<span class="grey">Moats                        Informational                     [Page 21]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-22" id="page-22" href="https://tools.ietf.org/html/rfc2648#page-22" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+  }
+}
+}
+
+sub make_link {
+  my($sc);
+  my($inarg)=@_;
+  ($sc=$1) if ($inarg =~ /([a-z]*)/);
+  return &quot;/$sc/$inarg.ps&quot; if (-e &quot;/ftp/$sc/$inarg.ps&quot;);
+  return &quot;/$sc/$inarg.html&quot; if (-e &quot;/ftp/$sc/$inarg.html&quot;);
+  return &quot;/$sc/$inarg.txt&quot;;
+}
+
+sub urn_error {
+  my($code) = @_; #store failure code here...
+
+  print &quot;Status: $code&quot;;
+  print &quot;Content-type: text/html\n\n&lt;HTML&gt;\n&quot;;
+  print &quot;&lt;head&gt;&lt;title&gt;URN Resolution: I2Ns $code&lt;/title&gt;&lt;/head&gt;\n&quot;;
+  print &quot;&lt;BODY&gt;\n&quot;;
+  print &quot;&lt;h1&gt;URN to URN resolution failed for the URN:&lt;/h1&gt;\n&quot;;
+  print &quot;&lt;hr&gt;&lt;h3&gt;$urn&lt;/h3&gt;\n&quot;;
+  print &quot;&lt;/body&gt;\n&quot;;
+  print &quot;&lt;/html&gt;\n&quot;;
+  exit;
+};
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.5" href="https://tools.ietf.org/html/rfc2648#appendix-A.5">A.5</a> I2R</h3></span>
+
+#!/usr/local/bin/perl
+
+use strict;
+
+#
+# this is a URN 2 resource resolver for the ietf namespace
+#
+
+my(%pathbase) = (
+  rfc =&gt; &quot;rfc/rfc&quot;,
+  fyi =&gt; &quot;fyi/fyi&quot;,
+  std =&gt; &quot;std/std&quot;,
+  bcp =&gt; &quot;bcp/bcp&quot;,
+  id =&gt; &quot;internet-drafts/draft-&quot;
+);
+
+my(%number2date) = (
+  44 =&gt; &quot;99mar&quot;,
+  43 =&gt; &quot;98dec&quot;, 42 =&gt; &quot;98aug&quot;, 41 =&gt; &quot;98apr&quot;,
+
+
+
+<span class="grey">Moats                        Informational                     [Page 22]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-23" id="page-23" href="https://tools.ietf.org/html/rfc2648#page-23" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+  40 =&gt; &quot;97dec&quot;, 39 =&gt; &quot;97aug&quot;, 38 =&gt; &quot;97apr&quot;,
+  37 =&gt; &quot;96dec&quot;, 36 =&gt; &quot;96jun&quot;, 35 =&gt; &quot;96mar&quot;,
+  34 =&gt; &quot;95dec&quot;, 33 =&gt; &quot;95jul&quot;, 32 =&gt; &quot;95apr&quot;,
+  31 =&gt; &quot;94dec&quot;, 30 =&gt; &quot;94jul&quot;, 29 =&gt; &quot;94mar&quot;,
+  28 =&gt; &quot;93nov&quot;, 27 =&gt; &quot;93jul&quot;, 26 =&gt; &quot;93mar&quot;,
+  25 =&gt; &quot;92nov&quot;, 24 =&gt; &quot;92jul&quot;, 23 =&gt; &quot;92mar&quot;,
+  22 =&gt; &quot;91nov&quot;, 21 =&gt; &quot;91jul&quot;, 20 =&gt; &quot;91mar&quot;,
+  19 =&gt; &quot;90dec&quot; );
+
+my($wgpath) = &quot;/ftp/ietf&quot;;
+my($urn) = $ENV{'QUERY_STRING'};
+my($host) = $ENV{'SERVER_NAME'}; #get my host name for ftp: URLs
+my($accept) = $ENV{'HTTP_ACCEPT'}; #this is the &quot;Accept:&quot; HTTP header
+
+print &quot;$urn\n&quot;;
+(&amp;resolveid($1), exit) if ($urn =~ /urn:ietf:id:(\S+)/i);
+(&amp;resolve1($1, $2), exit) if ($urn =~ /urn:ietf:(\w*):(\d*)/i);
+(&amp;resolve2($1, $2), exit) if ($urn =~ /urn:ietf:mtg:(\d*)-(\w*)/i);
+&amp;urn_error(&quot;400 Bad Request\n&quot;);
+
+sub resolve2 {
+  my($ietfnum, $sesnam) = @_;
+  &amp;urn_error(&quot;404 Not Found\n&quot;) if (!defined $number2date{$ietfnum});
+  my($date)=$number2date{$ietfnum};
+  my($link)=&quot;$wgpath/$sesnam/$sesnam-minutes-$date.txt&quot;;
+  if (-f $link) {
+      print &quot;Status:  200 OK\n&quot;;
+      print &quot;Content-type: text/plain\n\n&quot;;
+      open(FILE, &quot;$link&quot;);
+      while (&lt;FILE&gt;) {
+          print $_;
+      }
+      close FILE;
+    return;
+  }
+  my($link)=&quot;$wgpath/$date/$sesnam-minutes-$date.txt&quot;;
+  if (-f $link) {
+      print &quot;Status:  200 OK\n&quot;;
+      print &quot;Content-type: text/plain\n\n&quot;;
+      open(FILE, &quot;$link&quot;);
+      while (&lt;FILE&gt;) {
+          print $_;
+      }
+      close FILE;
+    return;
+  }
+  &amp;urn_error(&quot;404 Not Found\n&quot;);
+}
+
+
+
+<span class="grey">Moats                        Informational                     [Page 23]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-24" id="page-24" href="https://tools.ietf.org/html/rfc2648#page-24" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+sub end {
+  my($inarg)=@_;
+  return $inarg . &quot;st&quot; if ($inarg =~ /1$/);
+  return $inarg . &quot;nd&quot; if ($inarg =~ /2$/);
+  return $inarg . &quot;rd&quot; if ($inarg =~ /3$/);
+  return $inarg . &quot;th&quot;;
+}
+
+sub resolve1 {
+  my($flag,@bib,$i,$k,$j,$done,@ref);
+  my($l,$link);
+  my($scheme, $value) = @_;
+  $scheme =~ tr/A-Z/a-z/;
+  &amp;urn_error(&quot;404 Not Found\n&quot;)if (!defined $pathbase{$scheme});
+  my($txttry)=&quot;/ftp/$pathbase{$scheme}$value.txt&quot;;
+  my($pstry)=&quot;/ftp/$pathbase{$scheme}$value.ps&quot;;
+  my($htmltry)=&quot;/ftp/$pathbase{$scheme}$value.html&quot;;
+MIME_SWITCH: {
+    if ($accept =~ /application\/postscript/ &amp;&amp; -f $pstry) {
+      print &quot;Status:  200 OK\n&quot;;
+      print &quot;Content-type: application/postscript\n\n&quot;;
+      open(FILE, &quot;$pstry&quot;);
+      while (&lt;FILE&gt;) {
+          print $_;
+      }
+      close FILE;
+      last MIME_SWITCH;
+    }
+    if ($accept =~ /text\/html/ &amp;&amp; -f $htmltry) {
+        print &quot;Status:  200 OK\n&quot;;
+        print &quot;Content-type: text/html\n\n&quot;;
+        open(FILE, &quot;$htmltry&quot;);
+        while (&lt;FILE&gt;) {
+            print $_;
+        }
+        close FILE;
+        last MIME_SWITCH;
+    }
+    if ($accept =~ /\*\/\*|text\/plain/ &amp;&amp; -f $txttry) {
+        print &quot;Status:  200 OK\n&quot;;
+        print &quot;Content-type: text/plain\n\n&quot;;
+        open(FILE, &quot;$txttry&quot;);
+        while (&lt;FILE&gt;) {
+            print $_;
+        }
+        close FILE;
+        last MIME_SWITCH;
+    }
+
+
+
+<span class="grey">Moats                        Informational                     [Page 24]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-25" id="page-25" href="https://tools.ietf.org/html/rfc2648#page-25" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+    &amp;urn_error(&quot;404 Not Found\n&quot;);
+  }
+}
+
+sub resolveid {
+  my($flag,@bib,$i,$k,$j,$done,@ref);
+  my($l,$link);
+  my($scheme) = &quot;id&quot;;
+  my($value) = @_;
+  $scheme =~ tr/A-Z/a-z/;
+  &amp;urn_error(&quot;404 Not Found\n&quot;)if (!defined $pathbase{$scheme});
+  my($txttry)=&quot;/ftp/$pathbase{$scheme}$value.txt&quot;;
+  my($pstry)=&quot;/ftp/$pathbase{$scheme}$value.ps&quot;;
+  my($htmltry)=&quot;/ftp/$pathbase{$scheme}$value.html&quot;;
+MIME_SWITCH: {
+    if ($accept =~ /application\/postscript/ &amp;&amp; -f $pstry) {
+      print &quot;Status:  200 OK\n&quot;;
+      print &quot;Content-type: application/postscript\n\n&quot;;
+      open(FILE, &quot;$pstry&quot;);
+      while (&lt;FILE&gt;) {
+          print $_;
+      }
+      close FILE;
+      last MIME_SWITCH;
+    }
+    if ($accept =~ /text\/html/ &amp;&amp; -f $htmltry) {
+        print &quot;Status:  200 OK\n&quot;;
+        print &quot;Content-type: text/html\n\n&quot;;
+        open(FILE, &quot;$htmltry&quot;);
+        while (&lt;FILE&gt;) {
+            print $_;
+        }
+        close FILE;
+        last MIME_SWITCH;
+    }
+    if ($accept =~ /\*\/\*|text\/plain/ &amp;&amp; -f $txttry) {
+        print &quot;Status:  200 OK\n&quot;;
+        print &quot;Content-type: text/plain\n\n&quot;;
+        open(FILE, &quot;$txttry&quot;);
+        while (&lt;FILE&gt;) {
+            print $_;
+        }
+        close FILE;
+        last MIME_SWITCH;
+    }
+    &amp;urn_error(&quot;404 Not Found\n&quot;);
+  }
+}
+
+
+
+<span class="grey">Moats                        Informational                     [Page 25]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-26" id="page-26" href="https://tools.ietf.org/html/rfc2648#page-26" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+sub urn_error {
+  my($code) = @_; #store failure code here...
+
+  print &quot;Status:  $code&quot;;
+  print &quot;Content-type: text/html\n\n&lt;HTML&gt;\n&quot;;
+  print &quot;&lt;head&gt;&lt;title&gt;URN Resolution: I2R $code&lt;/title&gt;&lt;/head&gt;\n&quot;;
+  print &quot;&lt;BODY&gt;\n&quot;;
+  print &quot;&lt;h1&gt;URN to URL resolution failed for the URN:&lt;/h1&gt;\n&quot;;
+  print &quot;&lt;hr&gt;&lt;h3&gt;$urn&lt;/h3&gt;\n&quot;;
+  print &quot;&lt;/body&gt;\n&quot;;
+  print &quot;&lt;/html&gt;\n&quot;;
+  exit;
+}
+
+<span class="h3"><h3><a class="selflink" name="appendix-A.6" href="https://tools.ietf.org/html/rfc2648#appendix-A.6">A.6</a> I2Rs</h3></span>
+
+#!/usr/local/bin/perl
+
+use strict;
+
+#
+# this is a URN 2 resources resolver for the ietf namespace
+#
+
+my(@urls);
+
+my(%pathbase) = (
+  rfc =&gt; &quot;rfc/rfc&quot;,
+  fyi =&gt; &quot;fyi/fyi&quot;,
+  std =&gt; &quot;std/std&quot;,
+  bcp =&gt; &quot;bcp/bcp&quot;,
+  id =&gt; &quot;internet-drafts/draft-&quot;
+);
+
+my(%number2date) = (
+  44 =&gt; &quot;99mar&quot;,
+  43 =&gt; &quot;98dec&quot;, 42 =&gt; &quot;98aug&quot;, 41 =&gt; &quot;98apr&quot;,
+  40 =&gt; &quot;97dec&quot;, 39 =&gt; &quot;97aug&quot;, 38 =&gt; &quot;97apr&quot;,
+  37 =&gt; &quot;96dec&quot;, 36 =&gt; &quot;96jun&quot;, 35 =&gt; &quot;96mar&quot;,
+  34 =&gt; &quot;95dec&quot;, 33 =&gt; &quot;95jul&quot;, 32 =&gt; &quot;95apr&quot;,
+  31 =&gt; &quot;94dec&quot;, 30 =&gt; &quot;94jul&quot;, 29 =&gt; &quot;94mar&quot;,
+  28 =&gt; &quot;93nov&quot;, 27 =&gt; &quot;93jul&quot;, 26 =&gt; &quot;93mar&quot;,
+  25 =&gt; &quot;92nov&quot;, 24 =&gt; &quot;92jul&quot;, 23 =&gt; &quot;92mar&quot;,
+  22 =&gt; &quot;91nov&quot;, 21 =&gt; &quot;91jul&quot;, 20 =&gt; &quot;91mar&quot;,
+  19 =&gt; &quot;90dec&quot; );
+
+my($wgpath) = &quot;/ftp/ietf&quot;;
+my($urn) = $ENV{'QUERY_STRING'};
+
+
+
+<span class="grey">Moats                        Informational                     [Page 26]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-27" id="page-27" href="https://tools.ietf.org/html/rfc2648#page-27" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+my($host) = $ENV{'SERVER_NAME'}; #get my host name for ftp: URLs
+my($accept) = $ENV{'HTTP_ACCEPT'}; #this is the &quot;Accept:&quot; HTTP header
+
+(&amp;resolveid($1), exit) if ($urn =~ /urn:ietf:id:(\s*)/i);
+(&amp;resolve1($1, $2), exit) if ($urn =~ /urn:ietf:(\w*):(\d*)/i);
+(&amp;resolve2($1, $2), exit) if ($urn =~ /urn:ietf:mtg:(\d*)-(\w*)/i);
+&amp;urn_error(&quot;400 Bad Request\n&quot;);
+
+sub resolve2 {
+  my($ietfnum, $sesnam) = @_;
+  my(@vers,$i);
+  &amp;urn_error(&quot;404 Not Found\n&quot;) if (!defined $number2date{$ietfnum});
+  my($date)=$number2date{$ietfnum};
+  my($link)=&quot;$wgpath/$sesnam/$sesnam-minutes-$date.txt&quot;;
+
+  if (-f $link) {
+      push(@vers,$link);
+  }
+  $link=&quot;$wgpath/$date/$sesnam-minutes-$date.txt&quot;;
+  if (-f $link) {
+      push(@vers,$link);
+  }
+  &amp;urn_error(&quot;404 Not Found\n&quot;) if ($#vers==-1);
+
+  print &quot;Status: 200 OK\n&quot;;
+  print &quot;Content-type: multipart/alternative; boundary=endpart\n\n&quot;;
+  foreach $i (@vers) {
+      print &quot;--endpart\n&quot;;
+      if ($i =~ /html$/) {
+          print &quot;Content-Type: text/html\n\n&quot;;
+      }
+      if ($i =~ /txt$/) {
+          print &quot;Content-Type: text/plain\n\n&quot;;
+      }
+      if ($i =~ /ps$/) {
+          print &quot;Content-Type: application/postscript\n\n&quot;;
+      }
+      open(FILE, &quot;$i&quot;);
+      while (&lt;FILE&gt;) {
+          print &quot;$_&quot;;
+      }
+      close FILE;
+  }
+  print &quot;--endpart\n&quot;;
+}
+
+sub resolve1 {
+  my($flag,@bib,$i,$k,$j,$done,@ref);
+
+
+
+<span class="grey">Moats                        Informational                     [Page 27]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-28" id="page-28" href="https://tools.ietf.org/html/rfc2648#page-28" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+  my($l,$link,@vers);
+  my($scheme, $value) = @_;
+  $scheme =~ tr/A-Z/a-z/;
+  &amp;urn_error(&quot;404 Not Found\n&quot;)if (!defined $pathbase{$scheme});
+  my($try)=&quot;/ftp/$pathbase{$scheme}$value.txt&quot;;
+  if (-f $try) {
+      push(@vers, $try);
+  }
+  $try=&quot;/ftp/$pathbase{$scheme}$value.ps&quot;;
+  if (-f $try) {
+      push(@vers, $try);
+  }
+  $try=&quot;/ftp/$pathbase{$scheme}$value.html&quot;;
+  if (-f $try) {
+      push(@vers, $try);
+
+  }
+  print &quot;Status: 200 OK\n&quot;;
+  print &quot;Content-type: multipart/alternative; boundary=endpart\n\n&quot;;
+  foreach $i (@vers) {
+      print &quot;--endpart\n&quot;;
+      if ($i =~ /html$/) {
+          print &quot;Content-Type: text/html\n\n&quot;;
+      }
+      if ($i =~ /txt$/) {
+          print &quot;Content-Type: text/plain\n\n&quot;;
+      }
+      if ($i =~ /ps$/) {
+          print &quot;Content-Type: application/postscript\n\n&quot;;
+      }
+      open(FILE, &quot;$i&quot;);
+      while (&lt;FILE&gt;) {
+          print &quot;$_&quot;;
+      }
+      close FILE;
+  }
+  print &quot;--endpart\n&quot;;
+}
+
+sub resolveid {
+  my($flag,@bib,$i,$k,$j,$done,@ref);
+  my($l,$link,@vers);
+  my($scheme) = &quot;id&quot;;
+  my($value) = @_;
+  $scheme =~ tr/A-Z/a-z/;
+  &amp;urn_error(&quot;404 Not Found\n&quot;)if (!defined $pathbase{$scheme});
+  my($try)=&quot;/ftp/$pathbase{$scheme}$value.txt&quot;;
+  if (-f $try) {
+
+
+
+<span class="grey">Moats                        Informational                     [Page 28]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-29" id="page-29" href="https://tools.ietf.org/html/rfc2648#page-29" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+      push(@vers, $try);
+  }
+  $try=&quot;/ftp/$pathbase{$scheme}$value.ps&quot;;
+  if (-f $try) {
+      push(@vers, $try);
+  }
+  $try=&quot;/ftp/$pathbase{$scheme}$value.html&quot;;
+  if (-f $try) {
+      push(@vers, $try);
+  }
+  print &quot;Status: 200 OK\n&quot;;
+  print &quot;Content-type: multipart/alternative; boundary=endpart\n\n&quot;;
+  foreach $i (@vers) {
+      print &quot;--endpart\n&quot;;
+      if ($i =~ /html$/) {
+          print &quot;Content-Type: text/html\n\n&quot;;
+
+      }
+      if ($i =~ /txt$/) {
+          print &quot;Content-Type: text/plain\n\n&quot;;
+      }
+      if ($i =~ /ps$/) {
+          print &quot;Content-Type: application/postscript\n\n&quot;;
+      }
+      open(FILE, &quot;$i&quot;);
+      while (&lt;FILE&gt;) {
+          print &quot;$_&quot;;
+      }
+      close FILE;
+  }
+  print &quot;--endpart\n&quot;;
+}
+sub urn_error {
+  my($code) = @_; #store failure code here...
+
+  print &quot;Status: $code&quot;;
+  print &quot;Content-type: text/html\n\n&lt;HTML&gt;\n&quot;;
+  print &quot;&lt;head&gt;&lt;title&gt;URN Resolution: I2Rs $code&lt;/title&gt;&lt;/head&gt;\n&quot;;
+  print &quot;&lt;BODY&gt;\n&quot;;
+  print &quot;&lt;h1&gt;URN to URL resolution failed for the URN:&lt;/h1&gt;\n&quot;;
+  print &quot;&lt;hr&gt;&lt;h3&gt;$urn&lt;/h3&gt;\n&quot;;
+  print &quot;&lt;/body&gt;\n&quot;;
+  print &quot;&lt;/html&gt;\n&quot;;
+  exit;
+}
+
+
+
+
+
+
+<span class="grey">Moats                        Informational                     [Page 29]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-30" id="page-30" href="https://tools.ietf.org/html/rfc2648#page-30" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2648">RFC 2648</a>           A URN Namespace for IETF Documents        August 1999</span>
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (1999).  All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works.  However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assigns.
+
+   This document and the information contained herein is provided on an
+   &quot;AS IS&quot; basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Acknowledgement
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Moats                        Informational                     [Page 30]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

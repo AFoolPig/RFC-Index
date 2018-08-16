@@ -1,0 +1,1981 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Relation.Replaces" content="draft-haleplidis-forces-model-extension" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:7408" /> 
+  <meta name="DC.Date.Issued" content="November, 2014" /> 
+  <meta name="DC.Creator" content="Evangelos Haleplidis &lt;ehalep@ece.upatras.gr&gt;" /> 
+  <meta name="DC.Description.Abstract" content="This memo extends the Forwarding and Control Element Separation
+(ForCES) model defined in RFC 5812 and updates that RFC to allow
+complex data types for metadata, optional default values for data
+types, and optional access types for structures. It also fixes an
+issue with Logical Functional Block (LFB) inheritance and introduces
+two new features: a new event condition called eventBecomesEqualTo and
+LFB properties. The changes introduced in this memo do not alter the
+protocol and retain backward compatibility with older LFB models." /> 
+  <meta name="DC.Title" content="Forwarding and Control Element Separation (ForCES) Model Extension" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 7408 - Forwarding and Control Element Separation (ForCES) Model Extension</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgblue" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc7408.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc7408" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-ietf-forces-model-extension" title="draft-ietf-forces-model-extension">draft-ietf-forc...</a>] [<a href="https://datatracker.ietf.org/doc/rfc7408" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc7408" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc7408" title="Side-by-side diff">Diff2</a>] </span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> PROPOSED STANDARD</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <pre>Internet Engineering Task Force (IETF)                     E. Haleplidis
+Request for Comments: 7408                          University of Patras
+Updates: <a href="https://tools.ietf.org/html/rfc5812">5812</a>                                              November 2014
+Category: Standards Track
+ISSN: 2070-1721
+
+
+   <span class="h1"><h1>Forwarding and Control Element Separation (ForCES) Model Extension</h1></span>
+
+Abstract
+
+   This memo extends the Forwarding and Control Element Separation
+   (ForCES) model defined in <a href="https://tools.ietf.org/html/rfc5812">RFC 5812</a> and updates that RFC to allow
+   complex data types for metadata, optional default values for data
+   types, and optional access types for structures.  It also fixes an
+   issue with Logical Functional Block (LFB) inheritance and introduces
+   two new features: a new event condition called eventBecomesEqualTo
+   and LFB properties.  The changes introduced in this memo do not alter
+   the protocol and retain backward compatibility with older LFB models.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in <a href="https://tools.ietf.org/html/rfc5741#section-2">Section&nbsp;2 of RFC 5741</a>.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   <a href="http://www.rfc-editor.org/info/rfc7408">http://www.rfc-editor.org/info/rfc7408</a>.
+
+Copyright Notice
+
+   Copyright (c) 2014 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+<span class="grey">Haleplidis                   Standards Track                    [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc7408#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc7408#section-1">1</a>. Introduction ....................................................<a href="https://tools.ietf.org/html/rfc7408#page-2">2</a>
+      <a href="https://tools.ietf.org/html/rfc7408#section-1.1">1.1</a>. Requirements Language ......................................<a href="https://tools.ietf.org/html/rfc7408#page-3">3</a>
+      <a href="https://tools.ietf.org/html/rfc7408#section-1.2">1.2</a>. Terminology ................................................<a href="https://tools.ietf.org/html/rfc7408#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc7408#section-2">2</a>. ForCES Model Extensions .........................................<a href="https://tools.ietf.org/html/rfc7408#page-3">3</a>
+      <a href="https://tools.ietf.org/html/rfc7408#section-2.1">2.1</a>. Complex Data Types for Metadata ............................<a href="https://tools.ietf.org/html/rfc7408#page-3">3</a>
+      <a href="https://tools.ietf.org/html/rfc7408#section-2.2">2.2</a>. Optional Default Values for Data Types .....................<a href="https://tools.ietf.org/html/rfc7408#page-5">5</a>
+      <a href="https://tools.ietf.org/html/rfc7408#section-2.3">2.3</a>. Optional Access Types for Structs ..........................<a href="https://tools.ietf.org/html/rfc7408#page-8">8</a>
+      <a href="https://tools.ietf.org/html/rfc7408#section-2.4">2.4</a>. New Event Condition: eventBecomesEqualTo ..................<a href="https://tools.ietf.org/html/rfc7408#page-11">11</a>
+      <a href="https://tools.ietf.org/html/rfc7408#section-2.5">2.5</a>. LFB Properties ............................................<a href="https://tools.ietf.org/html/rfc7408#page-12">12</a>
+      <a href="https://tools.ietf.org/html/rfc7408#section-2.6">2.6</a>. LFB Class Inheritance .....................................<a href="https://tools.ietf.org/html/rfc7408#page-14">14</a>
+      <a href="https://tools.ietf.org/html/rfc7408#section-2.7">2.7</a>. Enhancing XML Validation ..................................<a href="https://tools.ietf.org/html/rfc7408#page-15">15</a>
+   <a href="https://tools.ietf.org/html/rfc7408#section-3">3</a>. XML Extension Schema for LFB Class Library Documents ...........<a href="https://tools.ietf.org/html/rfc7408#page-15">15</a>
+   <a href="https://tools.ietf.org/html/rfc7408#section-4">4</a>. IANA Considerations ............................................<a href="https://tools.ietf.org/html/rfc7408#page-29">29</a>
+   <a href="https://tools.ietf.org/html/rfc7408#section-5">5</a>. Security Considerations ........................................<a href="https://tools.ietf.org/html/rfc7408#page-29">29</a>
+   <a href="https://tools.ietf.org/html/rfc7408#section-6">6</a>. References .....................................................<a href="https://tools.ietf.org/html/rfc7408#page-30">30</a>
+      <a href="https://tools.ietf.org/html/rfc7408#section-6.1">6.1</a>. Normative References ......................................<a href="https://tools.ietf.org/html/rfc7408#page-30">30</a>
+      <a href="https://tools.ietf.org/html/rfc7408#section-6.2">6.2</a>. Informative References ....................................<a href="https://tools.ietf.org/html/rfc7408#page-30">30</a>
+   Acknowledgements ..................................................<a href="https://tools.ietf.org/html/rfc7408#page-31">31</a>
+   Author's Address ..................................................<a href="https://tools.ietf.org/html/rfc7408#page-31">31</a>
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc7408#section-1">1</a>. Introduction</h2></span>
+
+   The ForCES model [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>] presents a formal way to define Forwarding
+   Element (FE) Logical Functional Blocks (LFBs) using the eXtensible
+   Markup Language (XML).  [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>] was published several years before
+   this document, and experience with its use has demonstrated the need
+   to add new modeling concepts and change existing ones.
+
+   Specifically, this document updates the ForCES model [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>] to
+   allow complex data types for metadata (<a href="https://tools.ietf.org/html/rfc7408#section-2.1">Section 2.1</a>), optional default
+   values for data types (<a href="https://tools.ietf.org/html/rfc7408#section-2.2">Section 2.2</a>), and optional access types for
+   structures (<a href="https://tools.ietf.org/html/rfc7408#section-2.3">Section 2.3</a>).  It also fixes an issue with LFB class
+   inheritance (<a href="https://tools.ietf.org/html/rfc7408#section-2.6">Section 2.6</a>).  Additionally, the document introduces two
+   new features: a new event condition named eventBecomesEqualTo
+   (<a href="https://tools.ietf.org/html/rfc7408#section-2.4">Section 2.4</a>) and LFB properties (<a href="https://tools.ietf.org/html/rfc7408#section-2.5">Section 2.5</a>).
+
+   These extensions are an update to the ForCES model [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>] and do
+   not require any changes to the ForCES protocol [<a href="https://tools.ietf.org/html/rfc5810" title="&quot;Forwarding and Control Element Separation (ForCES) Protocol Specification&quot;">RFC5810</a>] as they are
+   simply changes to the schema definition.  Additionally, backward
+   compatibility is ensured as XML libraries produced with the earlier
+   schema are still valid with the new one.  In order for XML libraries
+   produced by the new schema to be compatible with existing ForCES
+   implementations, the XML libraries MUST NOT include any of the
+   features described in this document.
+
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                    [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc7408#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+   Extensions to the schema and excerpts of the schema include the tags
+   &lt;!-- Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt; and &lt;!-- /Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;, which
+   designate the beginning and ending of extension text specified by
+   this document in respect to the schema in the original ForCES model
+   [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>].
+
+<span class="h3"><h3><a class="selflink" name="section-1.1" href="https://tools.ietf.org/html/rfc7408#section-1.1">1.1</a>. Requirements Language</h3></span>
+
+   The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
+   document are to be interpreted as described in [<a href="https://tools.ietf.org/html/rfc2119" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">RFC2119</a>].
+
+<span class="h3"><h3><a class="selflink" name="section-1.2" href="https://tools.ietf.org/html/rfc7408#section-1.2">1.2</a>. Terminology</h3></span>
+
+   This document uses the terminology defined in the ForCES model
+   [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>].  In particular, the reader is expected to be familiar with
+   the following terms:
+
+      FE Model
+
+      LFB (Logical Functional Block) Class (or type)
+
+      LFB Instance
+
+      LFB Model
+
+      Element
+
+      Attribute
+
+      LFB Metadata
+
+      ForCES Component
+
+      LFB Class Library
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc7408#section-2">2</a>. ForCES Model Extensions</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-2.1" href="https://tools.ietf.org/html/rfc7408#section-2.1">2.1</a>. Complex Data Types for Metadata</h3></span>
+
+   <a href="https://tools.ietf.org/html/rfc7408#section-4.6">Section 4.6</a> (&quot;&lt;metadataDefs&gt; Element for Metadata Definitions&quot;) of
+   the ForCES model [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>] limits the data type use in metadata to
+   only atomic types.  Figure 1 shows the XML schema excerpt where only
+   typeRef and atomic are allowed for a metadata definition.
+
+
+
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                    [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc7408#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+     &lt;xsd:complexType name=&quot;metadataDefsType&quot;&gt;
+       &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;metadataDef&quot; maxOccurs=&quot;unbounded&quot;&gt;
+           &lt;xsd:complexType&gt;
+             &lt;xsd:sequence&gt;
+               &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+               &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+               &lt;xsd:element name=&quot;metadataID&quot; type=&quot;xsd:integer&quot;/&gt;
+               &lt;xsd:element ref=&quot;description&quot; minOccurs=&quot;0&quot;/&gt;
+               &lt;xsd:choice&gt;
+                 &lt;xsd:element name=&quot;typeRef&quot; type=&quot;typeRefNMTOKEN&quot;/&gt;
+                 &lt;xsd:element name=&quot;atomic&quot; type=&quot;atomicType&quot;/&gt;
+               &lt;/xsd:choice&gt;
+             &lt;/xsd:sequence&gt;
+           &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+       &lt;/xsd:sequence&gt;
+     &lt;/xsd:complexType&gt;
+
+        Figure 1: Initial metadataDefsType Definition in the Schema
+
+   However, there are cases where complex metadata are used in the
+   datapath: for example, two simple use cases are described in version
+   1.1.0 (and subsequent versions) of the OpenFlow Switch Specification
+   [<a href="https://tools.ietf.org/html/rfc7408#ref-OpenFlowSpec1.1" title="&quot;OpenFlow Switch Specification&quot;">OpenFlowSpec1.1</a>]:
+
+   1.  The Action Set metadata is an array of actions descriptors, which
+       traverses the processing pipeline along with the packet data.
+
+   2.  When a packet is received from a controller, it may be
+       accompanied by a list of actions, as metadata, to be performed on
+       it prior to being sent on the processing pipeline.  This list of
+       actions is also an array.
+
+   With the extension shown in Figure 2, complex data types are also
+   allowed, specifically structs and arrays as metadata.  The key
+   declarations are required to check for validity of content keys in
+   arrays and componentIDs in structs.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                    [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc7408#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+     &lt;xsd:complexType name=&quot;metadataDefsType&quot;&gt;
+       &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;metadataDef&quot; maxOccurs=&quot;unbounded&quot;&gt;
+           &lt;xsd:complexType&gt;
+             &lt;xsd:sequence&gt;
+               &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+               &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+               &lt;xsd:element name=&quot;metadataID&quot; type=&quot;xsd:integer&quot;/&gt;
+               &lt;xsd:element ref=&quot;description&quot; minOccurs=&quot;0&quot;/&gt;
+               &lt;xsd:choice&gt;
+                 &lt;xsd:element name=&quot;typeRef&quot; type=&quot;typeRefNMTOKEN&quot;/&gt;
+                 &lt;xsd:element name=&quot;atomic&quot; type=&quot;atomicType&quot;/&gt;
+                 &lt;!-- Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+                 &lt;xsd:element name=&quot;array&quot; type=&quot;arrayType&quot;&gt;
+                   &lt;xsd:key name=&quot;contentKeyID1&quot;&gt;
+                     &lt;xsd:selector xpath=&quot;lfb:contentKey&quot;/&gt;
+                     &lt;xsd:field xpath=&quot;@contentKeyID&quot;/&gt;
+                   &lt;/xsd:key&gt;
+                 &lt;/xsd:element&gt;
+                 &lt;xsd:element name=&quot;struct&quot; type=&quot;structType&quot;&gt;
+                   &lt;xsd:key name=&quot;structComponentID1&quot;&gt;
+                     &lt;xsd:selector xpath=&quot;lfb:component&quot;/&gt;
+                     &lt;xsd:field xpath=&quot;@componentID&quot;/&gt;
+                   &lt;/xsd:key&gt;
+                 &lt;/xsd:element&gt;
+                 &lt;!-- /Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+               &lt;/xsd:choice&gt;
+             &lt;/xsd:sequence&gt;
+           &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+       &lt;/xsd:sequence&gt;
+     &lt;/xsd:complexType&gt;
+
+          Figure 2: New metadataDefsType Definition in the Schema
+
+<span class="h3"><h3><a class="selflink" name="section-2.2" href="https://tools.ietf.org/html/rfc7408#section-2.2">2.2</a>. Optional Default Values for Data Types</h3></span>
+
+   In the original schema, default values can only be defined for data
+   types defined inside LFB components and not inside structures or
+   arrays.  Therefore, default values for data types that are constantly
+   being reused, e.g., counters with default value of 0, have to be
+   constantly respecified.  Additionally, data types inside complex data
+   types cannot be defined with a default value, e.g., a counter inside
+   a struct that has a default value of 0.
+
+   This extension allows the option to add default values to data types.
+   These data types can then be referenced as simple components or
+   within complex data types such as structs.  A simple use case would
+
+
+
+<span class="grey">Haleplidis                   Standards Track                    [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc7408#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+   be to have a struct component where one of the components is a
+   counter with a default value of zero.  To achieve that, the counter
+   must first be defined as a data type with the required default value
+   and then referenced in the struct.  Default values MUST adhere the
+   following formal restrictions:
+
+   1.  Default values MUST be ignored if the data type is not an atomic
+       or a base data type.
+
+   2.  When a data type X with default value A is referenced from a data
+       type Y with a default value B, the default value of the data type
+       that references overrides the referenced default value, e.g., in
+       this case, Y's default value will be B.
+
+   3.  Default values of LFB components override any default value
+       specified from the dataTypeDef definition.
+
+   4.  Default values of data types referenced in capabilities or
+       metadata MUST be ignored.
+
+   This extension simply adds to the definition of dataTypeDefsType in
+   the XML schema shown in Figure 3 to allow default values for
+   dataTypeDefsType.  The new definition is shown in Figure 4.
+
+     &lt;xsd:complexType name=&quot;dataTypeDefsType&quot;&gt;
+       &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;dataTypeDef&quot; maxOccurs=&quot;unbounded&quot;&gt;
+           &lt;xsd:complexType&gt;
+             &lt;xsd:sequence&gt;
+               &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+               &lt;xsd:element name=&quot;derivedFrom&quot; type=&quot;xsd:NMTOKEN&quot;
+                  minOccurs=&quot;0&quot;/&gt;
+               &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+               &lt;xsd:element ref=&quot;description&quot; minOccurs=&quot;0&quot;/&gt;
+               &lt;xsd:group ref=&quot;typeDeclarationGroup&quot;/&gt;
+             &lt;/xsd:sequence&gt;
+           &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+       &lt;/xsd:sequence&gt;
+     &lt;/xsd:complexType&gt;
+
+      Figure 3: Initial Excerpt of dataTypeDefsType Definition in the
+                                  Schema
+
+
+
+
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                    [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc7408#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+     &lt;xsd:complexType name=&quot;dataTypeDefsType&quot;&gt;
+       &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;dataTypeDef&quot; maxOccurs=&quot;unbounded&quot;&gt;
+           &lt;xsd:complexType&gt;
+             &lt;xsd:sequence&gt;
+               &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+               &lt;xsd:element name=&quot;derivedFrom&quot; type=&quot;xsd:NMTOKEN&quot;
+                  minOccurs=&quot;0&quot;/&gt;
+               &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+               &lt;xsd:element ref=&quot;description&quot; minOccurs=&quot;0&quot;/&gt;
+               &lt;xsd:group ref=&quot;typeDeclarationGroup&quot;/&gt;
+               &lt;!-- Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+               &lt;xsd:element name=&quot;defaultValue&quot; type=&quot;xsd:token&quot;
+                  minOccurs=&quot;0&quot;/&gt;
+               &lt;!-- /Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+             &lt;/xsd:sequence&gt;
+           &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+       &lt;/xsd:sequence&gt;
+     &lt;/xsd:complexType&gt;
+
+    Figure 4: New Excerpt of dataTypeDefsType Definition in the Schema
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                    [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc7408#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+   Examples of using default values is depicted in Figure 5.
+
+     &lt;dataTypeDef&gt;
+       &lt;name&gt;ZeroCounter&lt;/name&gt;
+       &lt;synopsis&gt;A counter with default 0&lt;/synopsis&gt;
+       &lt;typeRef&gt;uint32&lt;/typeRef&gt;
+       &lt;defaultValue&gt;0&lt;/defaultValue&gt;
+     &lt;/dataTypeDef&gt;
+     &lt;dataTypeDef&gt;
+       &lt;name&gt;CounterValues&lt;/name&gt;
+       &lt;synopsis&gt;Example default values in struct&lt;/synopsis&gt;
+       &lt;struct&gt;
+         &lt;component componentID=&quot;1&quot;&gt;
+           &lt;name&gt;GoodPacketCounter&lt;/name&gt;
+           &lt;synopsis&gt;A counter for good packets&lt;/synopsis&gt;
+           &lt;typeRef&gt;ZeroCounter&lt;/typeRef&gt;
+         &lt;/component&gt;
+         &lt;component componentID=&quot;2&quot;&gt;
+           &lt;name&gt;BadPacketCounter&lt;/name&gt;
+           &lt;synopsis&gt;A counter for bad packets&lt;/synopsis&gt;
+           &lt;typeRef&gt;ZeroCounter&lt;/typeRef&gt;
+         &lt;/component&gt;
+       &lt;/struct&gt;
+     &lt;/dataTypeDef&gt;
+
+               Figure 5: Example of Optional Default Values
+
+<span class="h3"><h3><a class="selflink" name="section-2.3" href="https://tools.ietf.org/html/rfc7408#section-2.3">2.3</a>. Optional Access Types for Structs</h3></span>
+
+   In the original schema, the access type can only be defined on
+   components of an LFB and not on components within structs or arrays.
+   That means that when it is a struct data type, it is not possible to
+   fine-tune access type per component within the struct.  A simple use
+   case would be to have a read-write struct component where one of the
+   components is a counter with an access type that could be read-reset
+   or read-only, e.g., a read-reset or a read-only counter inside a
+   struct.
+
+   This extension allows the definition of the access type for a struct
+   component either in the data type definitions or in the LFB component
+   definitions.
+
+   When optional access types for components within a struct are
+   defined, the access types for these components MUST override the
+   access type of the struct.  For example, if a struct has an access
+   type of read-write but has a component that is a read-only counter,
+   the counter's access type MUST be read-only.
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                    [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc7408#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+   Per [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>], the access type for a component in a capability is
+   always read-only.  If an access type is provided for a component in a
+   capability, the access type MUST be ignored.  Similarly, if an access
+   type is provided for a struct in a metadata, the access type MUST be
+   ignored.
+
+   This extension alters the definition of the struct in the XML schema
+   from the initial definition shown in Figure 6 to the new shown in
+   Figure 7.
+
+     &lt;xsd:complexType name=&quot;structType&quot;&gt;
+       &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;derivedFrom&quot; type=&quot;typeRefNMTOKEN&quot;
+           minOccurs=&quot;0&quot;/&gt;
+         &lt;xsd:element name=&quot;component&quot; maxOccurs=&quot;unbounded&quot;&gt;
+           &lt;xsd:complexType&gt;
+             &lt;xsd:sequence&gt;
+               &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+               &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+               &lt;xsd:element ref=&quot;description&quot; minOccurs=&quot;0&quot;/&gt;
+               &lt;xsd:element name=&quot;optional&quot; minOccurs=&quot;0&quot;/&gt;
+               &lt;xsd:group ref=&quot;typeDeclarationGroup&quot;/&gt;
+             &lt;/xsd:sequence&gt;
+             &lt;xsd:attribute name=&quot;componentID&quot; type=&quot;xsd:unsignedInt&quot;
+              use=&quot;required&quot;/&gt;
+           &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+       &lt;/xsd:sequence&gt;
+     &lt;/xsd:complexType&gt;
+
+       Figure 6: Initial XML for the Struct Definition in the Schema
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                    [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc7408#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+     &lt;xsd:complexType name=&quot;structType&quot;&gt;
+       &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;derivedFrom&quot; type=&quot;typeRefNMTOKEN&quot;
+           minOccurs=&quot;0&quot;/&gt;
+         &lt;xsd:element name=&quot;component&quot; maxOccurs=&quot;unbounded&quot;&gt;
+           &lt;xsd:complexType&gt;
+             &lt;xsd:sequence&gt;
+               &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+               &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+               &lt;xsd:element ref=&quot;description&quot; minOccurs=&quot;0&quot;/&gt;
+               &lt;xsd:element name=&quot;optional&quot; minOccurs=&quot;0&quot;/&gt;
+               &lt;xsd:group ref=&quot;typeDeclarationGroup&quot;/&gt;
+             &lt;/xsd:sequence&gt;
+             &lt;!-- Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+             &lt;xsd:attribute name=&quot;access&quot; use=&quot;optional&quot;
+               default=&quot;read-write&quot;&gt;
+               &lt;xsd:simpleType&gt;
+                 &lt;xsd:list itemType=&quot;accessModeType&quot;/&gt;
+               &lt;/xsd:simpleType&gt;
+             &lt;/xsd:attribute&gt;
+             &lt;!-- /Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+             &lt;xsd:attribute name=&quot;componentID&quot; type=&quot;xsd:unsignedInt&quot;
+               use=&quot;required&quot;/&gt;
+           &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+       &lt;/xsd:sequence&gt;
+     &lt;/xsd:complexType&gt;
+
+         Figure 7: New XML for the Struct Definition in the Schema
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc7408#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+   An example of using optional access types for structs is depicted in
+   Figure 8.
+
+      &lt;component componentID=&quot;1&quot; access=&quot;read-write&quot;&gt;
+         &lt;name&gt;PacketFlows&lt;/name&gt;
+         &lt;synopsis&gt;Packet Flows, match and counter&lt;/synopsis&gt;
+         &lt;struct&gt;
+          &lt;component componentID=&quot;1&quot;&gt;
+            &lt;name&gt;FlowMatch&lt;/name&gt;
+            &lt;synopsis&gt;Flow Match&lt;/synopsis&gt;
+            &lt;typeRef&gt;MatchType&lt;/typeRef&gt;
+          &lt;/component&gt;
+          &lt;component componentID=&quot;2&quot; access=&quot;read-only&quot;&gt;
+            &lt;name&gt;MatchCounter&lt;/name&gt;
+            &lt;synopsis&gt;Packets matching the flow match&lt;/synopsis&gt;
+            &lt;typeRef&gt;ZeroCounter&lt;/typeRef&gt;
+          &lt;/component&gt;
+        &lt;/struct&gt;
+      &lt;/component&gt;
+
+           Figure 8: Example of Optional Access Types for Struct
+
+<span class="h3"><h3><a class="selflink" name="section-2.4" href="https://tools.ietf.org/html/rfc7408#section-2.4">2.4</a>. New Event Condition: eventBecomesEqualTo</h3></span>
+
+   This extension adds one more event condition in the model schema,
+   eventBecomesEqualTo.  eventBecomesEqualTo is different from
+   eventGreaterThan and eventLessThan because the event is triggered
+   when the value is exactly that of the eventBecomesEqualTo threshold.
+   This event condition is particularly useful when there is a need to
+   monitor one or more states of an LFB or the FE.  For example, in the
+   Control Element High Availability (CEHA) document [<a href="https://tools.ietf.org/html/rfc7121" title="&quot;High Availability within a Forwarding and Control Element Separation (ForCES) Network Element&quot;">RFC7121</a>], it may
+   be useful for the master CE to know which backup CEs have just become
+   associated in order to connect to them and begin synchronizing the
+   state of the FE.  The master CE could always poll for such
+   information, but getting such an event will speed up the process, and
+   the event may be useful in other cases as well for monitoring state.
+
+   The event MUST be triggered only when the value of the targeted
+   component becomes equal to the event condition value.
+   Implementations MUST NOT generate subsequent events while the
+   targeted component's value remains equal to the event condition's
+   value.
+
+
+
+
+
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc7408#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+   eventBecomesEqualTo is appended to the schema as shown in Figure 9.
+
+     &lt;xsd:element name=&quot;eventBecomesEqualTo&quot;
+       substitutionGroup=&quot;eventCondition&quot;/&gt;
+
+       Figure 9: New Excerpt of eventBecomesEqualTo Event Condition
+                         Definition in the Schema
+
+   It can become useful for the CE to be notified when the state has
+   changed once the eventBecomesEqualTo event has been triggered, e.g.,
+   the CE may need to know when a backup CE has lost association.  Such
+   an event can be generated either by defining a second event on the
+   same component (namely, an eventChanged) or by simply reusing
+   eventBecomesEqualTo and using event properties (in particular,
+   eventHysteresis).  We append the following definition to the
+   eventHysteresis defined in <a href="https://tools.ietf.org/html/rfc5812#section-4.8.5.2">Section&nbsp;4.8.5.2 of [RFC5812]</a>, with V being
+   the hysteresis value:
+
+   o  For an eventBecomesEqualTo condition, after the last notification,
+      a new eventBecomesEqualTo notification MUST be generated only one
+      time once the value has changed by +/- V.
+
+   For example, using the value of 1 for V will, in effect, create a
+   singular event that will notify the CE that the value has changed by
+   at least 1.
+
+   A developer of a CE should consider using count or time filtering to
+   avoid being overrun by messages, e.g., in the case of rapid state
+   changes.
+
+<span class="h3"><h3><a class="selflink" name="section-2.5" href="https://tools.ietf.org/html/rfc7408#section-2.5">2.5</a>. LFB Properties</h3></span>
+
+   The previous model definition specifies properties for components of
+   LFBs.  Experience has shown that, at least for debug reasons, it
+   would be useful to have statistics per LFB instance to monitor sent
+   and received messages and errors in communication between a CE and
+   FE.  These properties are read-only.
+
+   In order to avoid ambiguity on protocol path semantics, this document
+   specifies that the LFB componentID 0 specifically MUST refer to LFB
+   properties and ID 0 MUST NOT be used for any component definition.
+   This disallowance is backward compatible as no known LFB definition
+   uses an LFB componentID 0.  Any command with a path starting from LFB
+   componentID 0 refers to LFB properties.  Figures 10 and 11 illustrate
+   the change in the XML schema that disallows usage of LFB componentID
+   0:
+
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-13" id="page-13" href="https://tools.ietf.org/html/rfc7408#page-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+      &lt;xsd:attribute name=&quot;componentID&quot; type=&quot;xsd:unsignedInt&quot;
+       use=&quot;required&quot;&gt;
+
+                Figure 10: Initial XML for LFB componentIDs
+
+      &lt;!-- Extension added restriction to componentID --&gt;
+      &lt;xsd:attribute name=&quot;componentID&quot; use=&quot;required&quot;&gt;
+        &lt;xsd:simpleType&gt;
+          &lt;xsd:restriction base=&quot;xsd:unsignedInt&quot;&gt;
+            &lt;xsd:minExclusive value=&quot;0&quot;/&gt;
+          &lt;/xsd:restriction&gt;
+        &lt;/xsd:simpleType&gt;
+      &lt;/xsd:attribute&gt;
+      &lt;!-- End of extension --&gt;
+
+         Figure 11: New XML to Disallow Usage of LFB componentID 0
+
+   The following data type definitions are to be used as properties for
+   LFB instances.
+
+      &lt;dataTypeDef&gt;
+         &lt;name&gt;LFBProperties&lt;/name&gt;
+         &lt;synopsis&gt;LFB Properties definition&lt;/synopsis&gt;
+         &lt;struct&gt;
+            &lt;component componentID=&quot;1&quot;&gt;
+               &lt;name&gt;PacketsSentToCE&lt;/name&gt;
+               &lt;synopsis&gt;Packets sent to CE&lt;/synopsis&gt;
+               &lt;typeRef&gt;uint32&lt;/typeRef&gt;
+            &lt;/component&gt;
+            &lt;component componentID=&quot;2&quot;&gt;
+               &lt;name&gt;SentErrorPacketsToCE&lt;/name&gt;
+               &lt;synopsis&gt;Error Packets sent to CE&lt;/synopsis&gt;
+               &lt;typeRef&gt;uint32&lt;/typeRef&gt;
+            &lt;/component&gt;
+            &lt;component componentID=&quot;3&quot;&gt;
+               &lt;name&gt;BytesSentToCE&lt;/name&gt;
+               &lt;synopsis&gt;Bytes sent to CE&lt;/synopsis&gt;
+               &lt;typeRef&gt;uint32&lt;/typeRef&gt;
+            &lt;/component&gt;
+            &lt;component componentID=&quot;4&quot;&gt;
+               &lt;name&gt;SentErrorBytesToCE&lt;/name&gt;
+               &lt;synopsis&gt;Error Bytes sent to CE&lt;/synopsis&gt;
+               &lt;typeRef&gt;uint32&lt;/typeRef&gt;
+            &lt;/component&gt;
+            &lt;component componentID=&quot;5&quot;&gt;
+               &lt;name&gt;PacketsReceivedFromCE&lt;/name&gt;
+               &lt;synopsis&gt;Packets received from CE&lt;/synopsis&gt;
+               &lt;typeRef&gt;uint32&lt;/typeRef&gt;
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 13]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-14" id="page-14" href="https://tools.ietf.org/html/rfc7408#page-14" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+            &lt;/component&gt;
+            &lt;component componentID=&quot;6&quot;&gt;
+               &lt;name&gt;ReceivedErrorPacketsFromCE&lt;/name&gt;
+               &lt;synopsis&gt;Error Packets received from CE&lt;/synopsis&gt;
+               &lt;typeRef&gt;uint32&lt;/typeRef&gt;
+            &lt;/component&gt;
+            &lt;component componentID=&quot;7&quot;&gt;
+               &lt;name&gt;BytesReceivedFromCE&lt;/name&gt;
+               &lt;synopsis&gt;Bytes received from CE&lt;/synopsis&gt;
+               &lt;typeRef&gt;uint32&lt;/typeRef&gt;
+            &lt;/component&gt;
+            &lt;component componentID=&quot;8&quot;&gt;
+               &lt;name&gt;ReceivedErrorBytesFromCE&lt;/name&gt;
+               &lt;synopsis&gt;Error Bytes received from CE&lt;/synopsis&gt;
+               &lt;typeRef&gt;uint32&lt;/typeRef&gt;
+            &lt;/component&gt;
+         &lt;/struct&gt;
+      &lt;/dataTypeDef&gt;
+
+                  Figure 12: Properties for LFB Instances
+
+<span class="h3"><h3><a class="selflink" name="section-2.6" href="https://tools.ietf.org/html/rfc7408#section-2.6">2.6</a>. LFB Class Inheritance</h3></span>
+
+   The ForCES model [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>] allows inheritance for LFB classes.
+   However, the XML schema defines only the LFB class from which an LFB
+   class inherits.  Recent implementations have identified an issue
+   where ambiguity rises when different versions of the parent LFB class
+   exist.  This document augments the derivedFrom part of the LFB class
+   definition with an optional version attribute when the derivedFrom
+   field is used.
+
+   Having the version attribute as optional was a decision based on the
+   need to maintain backward compatibility with the XML schema defined
+   in [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>].  However, if the version is omitted, then derivedFrom
+   will always specify the first version of the parent LFB class, which
+   usually is version 1.0.
+
+   This extension alters the definition of derivedFrom in the XML schema
+   from the initial definition shown in Figure 13 to the new shown in
+   Figure 14.
+
+      &lt;xsd:element name=&quot;derivedFrom&quot; minOccurs=&quot;0&quot;/&gt;
+
+             Figure 13: Initial XML for LFB Class Inheritance
+
+
+
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 14]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-15" id="page-15" href="https://tools.ietf.org/html/rfc7408#page-15" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+      &lt;xsd:element name=&quot;derivedFrom&quot; minOccurs=&quot;0&quot;&gt;
+        &lt;xsd:complexType&gt;
+          &lt;xsd:simpleContent&gt;
+            &lt;xsd:extension base=&quot;xsd:NMTOKEN&quot;&gt;
+              &lt;xsd:attribute name=&quot;version&quot;
+                type=&quot;versionType&quot; use=&quot;optional&quot;/&gt;
+            &lt;/xsd:extension&gt;
+          &lt;/xsd:simpleContent&gt;
+        &lt;/xsd:complexType&gt;
+      &lt;/xsd:element&gt;
+
+               Figure 14: New XML for LFB Class Inheritance
+
+   An example of the use of the version attribute is given in Figure 15.
+
+      &lt;derivedFrom version=&quot;1.0&quot;&gt;EtherPHYCop&lt;/derivedFrom&gt;
+
+      Figure 15: Example of Use of New XML for LFB Class Inheritance
+
+<span class="h3"><h3><a class="selflink" name="section-2.7" href="https://tools.ietf.org/html/rfc7408#section-2.7">2.7</a>. Enhancing XML Validation</h3></span>
+
+   As specified earlier, this is not an extension but an enhancement of
+   the schema to provide additional validation rules.  This includes
+   adding new key declarations to provide uniqueness as defined by the
+   ForCES model [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>].  Such validations work only within the same
+   XML file.
+
+   This document introduces the following validation rules that did not
+   exist in the original schema in [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>]:
+
+   1.  Each metadataID must be unique.
+
+   2.  LFBClassIDs must be unique.
+
+   3.  componentID, capabilityID, and Event baseID must be unique per
+       LFB.
+
+   4.  eventIDs must be unique per LFB.
+
+   5.  Special values in atomic data types must be unique per atomic
+       data type.
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc7408#section-3">3</a>. XML Extension Schema for LFB Class Library Documents</h2></span>
+
+   This section includes the new XML schema.  Note that the namespace
+   number has been updated from 1.0 to 1.1.
+
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 15]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-16" id="page-16" href="https://tools.ietf.org/html/rfc7408#page-16" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+   The extensions described in this document are backwards compatible in
+   terms of the operation of the ForCES protocol.  In terms of the XML,
+   any definitions that were valid under the old namespace are valid
+   under the new namespace.  It is to be noted that any auxiliary tools
+   that are processing XML definitions written under both namespaces
+   will need to be able to understand both.
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;xsd:schema xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;
+   xmlns=&quot;urn:ietf:params:xml:ns:forces:lfbmodel:1.1&quot;
+   xmlns:lfb=&quot;urn:ietf:params:xml:ns:forces:lfbmodel:1.1&quot;
+   targetNamespace=&quot;urn:ietf:params:xml:ns:forces:lfbmodel:1.1&quot;
+   elementFormDefault=&quot;qualified&quot; attributeFormDefault=&quot;unqualified&quot;&gt;
+   &lt;xsd:annotation&gt;
+      &lt;xsd:documentation xml:lang=&quot;en&quot;&gt;
+         Schema for Defining LFB Classes and associated types
+         (frames, data types for LFB attributes, and metadata).
+      &lt;/xsd:documentation&gt;
+   &lt;/xsd:annotation&gt;
+   &lt;xsd:element name=&quot;description&quot; type=&quot;xsd:string&quot;/&gt;
+   &lt;xsd:element name=&quot;synopsis&quot; type=&quot;xsd:string&quot;/&gt;
+   &lt;!-- Document root element: LFBLibrary --&gt;
+   &lt;xsd:element name=&quot;LFBLibrary&quot;&gt;
+      &lt;xsd:complexType&gt;
+         &lt;xsd:sequence&gt;
+            &lt;xsd:element ref=&quot;description&quot; minOccurs=&quot;0&quot;/&gt;
+            &lt;xsd:element name=&quot;load&quot; type=&quot;loadType&quot;
+               minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;/&gt;
+            &lt;xsd:element name=&quot;frameDefs&quot; type=&quot;frameDefsType&quot;
+               minOccurs=&quot;0&quot;/&gt;
+            &lt;xsd:element name=&quot;dataTypeDefs&quot; type=&quot;dataTypeDefsType&quot;
+               minOccurs=&quot;0&quot;/&gt;
+            &lt;xsd:element name=&quot;metadataDefs&quot; type=&quot;metadataDefsType&quot;
+               minOccurs=&quot;0&quot;/&gt;
+            &lt;xsd:element name=&quot;LFBClassDefs&quot; type=&quot;LFBClassDefsType&quot;
+               minOccurs=&quot;0&quot;/&gt;
+         &lt;/xsd:sequence&gt;
+         &lt;xsd:attribute name=&quot;provides&quot; type=&quot;xsd:Name&quot;
+            use=&quot;required&quot;/&gt;
+      &lt;/xsd:complexType&gt;
+      &lt;!-- Uniqueness constraints --&gt;
+      &lt;xsd:key name=&quot;frame&quot;&gt;
+         &lt;xsd:selector xpath=&quot;lfb:frameDefs/lfb:frameDef&quot;/&gt;
+         &lt;xsd:field xpath=&quot;lfb:name&quot;/&gt;
+      &lt;/xsd:key&gt;
+      &lt;xsd:key name=&quot;dataType&quot;&gt;
+         &lt;xsd:selector xpath=&quot;lfb:dataTypeDefs/lfb:dataTypeDef&quot;/&gt;
+         &lt;xsd:field xpath=&quot;lfb:name&quot;/&gt;
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 16]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-17" id="page-17" href="https://tools.ietf.org/html/rfc7408#page-17" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+      &lt;/xsd:key&gt;
+      &lt;xsd:key name=&quot;metadataDef&quot;&gt;
+         &lt;xsd:selector xpath=&quot;lfb:metadataDefs/lfb:metadataDef&quot;/&gt;
+         &lt;xsd:field xpath=&quot;lfb:name&quot;/&gt;
+      &lt;/xsd:key&gt;
+      &lt;xsd:key name=&quot;metadataDefID&quot;&gt;
+         &lt;xsd:selector xpath=&quot;lfb:metadataDefs/lfb:metadataDef&quot;/&gt;
+         &lt;xsd:field xpath=&quot;lfb:metadataID&quot;/&gt;
+      &lt;/xsd:key&gt;
+      &lt;xsd:key name=&quot;LFBClassDef&quot;&gt;
+         &lt;xsd:selector xpath=&quot;lfb:LFBClassDefs/lfb:LFBClassDef&quot;/&gt;
+         &lt;xsd:field xpath=&quot;lfb:name&quot;/&gt;
+      &lt;/xsd:key&gt;
+      &lt;xsd:key name=&quot;LFBClassDefID&quot;&gt;
+         &lt;xsd:selector xpath=&quot;lfb:LFBClassDefs/lfb:LFBClassDef&quot;/&gt;
+         &lt;xsd:field xpath=&quot;@LFBClassID&quot;/&gt;
+      &lt;/xsd:key&gt;
+   &lt;/xsd:element&gt;
+   &lt;xsd:complexType name=&quot;loadType&quot;&gt;
+      &lt;xsd:attribute name=&quot;library&quot; type=&quot;xsd:Name&quot; use=&quot;required&quot;/&gt;
+      &lt;xsd:attribute name=&quot;location&quot; type=&quot;xsd:anyURI&quot;
+         use=&quot;optional&quot;/&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;frameDefsType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;frameDef&quot; maxOccurs=&quot;unbounded&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+                  &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+                  &lt;xsd:element ref=&quot;description&quot;
+                     minOccurs=&quot;0&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;dataTypeDefsType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;dataTypeDef&quot; maxOccurs=&quot;unbounded&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+                  &lt;xsd:element name=&quot;derivedFrom&quot; type=&quot;xsd:NMTOKEN&quot;
+                     minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+                  &lt;xsd:element ref=&quot;description&quot;
+                     minOccurs=&quot;0&quot;/&gt;
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 17]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-18" id="page-18" href="https://tools.ietf.org/html/rfc7408#page-18" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+                  &lt;xsd:group ref=&quot;typeDeclarationGroup&quot;/&gt;
+                  &lt;!-- Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+                  &lt;xsd:element name=&quot;defaultValue&quot; type=&quot;xsd:token&quot;
+                     minOccurs=&quot;0&quot;/&gt;
+                  &lt;!-- /Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;!-- Predefined (built-in) atomic data-types are: char, uchar,
+   int16, uint16, int32, uint32, int64, uint64, string[N], string,
+   byte[N], boolean, octetstring[N], float32, float64 --&gt;
+   &lt;xsd:group name=&quot;typeDeclarationGroup&quot;&gt;
+      &lt;xsd:choice&gt;
+         &lt;xsd:element name=&quot;typeRef&quot; type=&quot;typeRefNMTOKEN&quot;/&gt;
+         &lt;xsd:element name=&quot;atomic&quot; type=&quot;atomicType&quot;/&gt;
+         &lt;xsd:element name=&quot;array&quot; type=&quot;arrayType&quot;&gt;
+            &lt;!-- Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+            &lt;!-- declare keys to have unique IDs --&gt;
+            &lt;xsd:key name=&quot;contentKeyID&quot;&gt;
+               &lt;xsd:selector xpath=&quot;lfb:contentKey&quot;/&gt;
+               &lt;xsd:field xpath=&quot;@contentKeyID&quot;/&gt;
+            &lt;/xsd:key&gt;
+            &lt;!-- /Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;struct&quot; type=&quot;structType&quot;&gt;
+            &lt;!-- Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+            &lt;!-- key declaration to make componentIDs
+              unique in a struct --&gt;
+            &lt;xsd:key name=&quot;structComponentID&quot;&gt;
+               &lt;xsd:selector xpath=&quot;lfb:component&quot;/&gt;
+               &lt;xsd:field xpath=&quot;@componentID&quot;/&gt;
+            &lt;/xsd:key&gt;
+            &lt;!-- /Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;union&quot; type=&quot;structType&quot;/&gt;
+         &lt;xsd:element name=&quot;alias&quot; type=&quot;typeRefNMTOKEN&quot;/&gt;
+      &lt;/xsd:choice&gt;
+   &lt;/xsd:group&gt;
+   &lt;xsd:simpleType name=&quot;typeRefNMTOKEN&quot;&gt;
+      &lt;xsd:restriction base=&quot;xsd:token&quot;&gt;
+         &lt;xsd:pattern value=&quot;\c+&quot;/&gt;
+         &lt;xsd:pattern value=&quot;string\[\d+\]&quot;/&gt;
+         &lt;xsd:pattern value=&quot;byte\[\d+\]&quot;/&gt;
+         &lt;xsd:pattern value=&quot;octetstring\[\d+\]&quot;/&gt;
+      &lt;/xsd:restriction&gt;
+   &lt;/xsd:simpleType&gt;
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 18]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-19" id="page-19" href="https://tools.ietf.org/html/rfc7408#page-19" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+   &lt;xsd:complexType name=&quot;atomicType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;baseType&quot; type=&quot;typeRefNMTOKEN&quot;/&gt;
+         &lt;xsd:element name=&quot;rangeRestriction&quot;
+           type=&quot;rangeRestrictionType&quot; minOccurs=&quot;0&quot;/&gt;
+         &lt;xsd:element name=&quot;specialValues&quot; type=&quot;specialValuesType&quot;
+            minOccurs=&quot;0&quot;&gt;
+            &lt;!-- Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+            &lt;xsd:key name=&quot;SpecialValue&quot;&gt;
+               &lt;xsd:selector xpath=&quot;specialValue&quot;/&gt;
+               &lt;xsd:field xpath=&quot;@value&quot;/&gt;
+            &lt;/xsd:key&gt;
+            &lt;!-- /Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;rangeRestrictionType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;allowedRange&quot; maxOccurs=&quot;unbounded&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:attribute name=&quot;min&quot; type=&quot;xsd:integer&quot;
+                  use=&quot;required&quot;/&gt;
+               &lt;xsd:attribute name=&quot;max&quot; type=&quot;xsd:integer&quot;
+                  use=&quot;required&quot;/&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;specialValuesType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;specialValue&quot; maxOccurs=&quot;unbounded&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+                  &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+               &lt;xsd:attribute name=&quot;value&quot; type=&quot;xsd:token&quot;/&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;arrayType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:group ref=&quot;typeDeclarationGroup&quot;/&gt;
+         &lt;xsd:element name=&quot;contentKey&quot; minOccurs=&quot;0&quot;
+            maxOccurs=&quot;unbounded&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 19]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-20" id="page-20" href="https://tools.ietf.org/html/rfc7408#page-20" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+                  &lt;xsd:element name=&quot;contentKeyField&quot;
+                     type=&quot;xsd:string&quot; maxOccurs=&quot;unbounded&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+               &lt;xsd:attribute name=&quot;contentKeyID&quot; type=&quot;xsd:integer&quot;
+                  use=&quot;required&quot;/&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:sequence&gt;
+      &lt;xsd:attribute name=&quot;type&quot; use=&quot;optional&quot; default=&quot;variable-size&quot;&gt;
+         &lt;xsd:simpleType&gt;
+            &lt;xsd:restriction base=&quot;xsd:string&quot;&gt;
+               &lt;xsd:enumeration value=&quot;fixed-size&quot;/&gt;
+               &lt;xsd:enumeration value=&quot;variable-size&quot;/&gt;
+            &lt;/xsd:restriction&gt;
+         &lt;/xsd:simpleType&gt;
+      &lt;/xsd:attribute&gt;
+      &lt;xsd:attribute name=&quot;length&quot; type=&quot;xsd:integer&quot;
+         use=&quot;optional&quot;/&gt;
+      &lt;xsd:attribute name=&quot;maxLength&quot; type=&quot;xsd:integer&quot;
+         use=&quot;optional&quot;/&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;structType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;derivedFrom&quot; type=&quot;typeRefNMTOKEN&quot;
+            minOccurs=&quot;0&quot;/&gt;
+         &lt;xsd:element name=&quot;component&quot; maxOccurs=&quot;unbounded&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+                  &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+                  &lt;xsd:element ref=&quot;description&quot;
+                     minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:element name=&quot;optional&quot; minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:group ref=&quot;typeDeclarationGroup&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+               &lt;!-- Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+               &lt;xsd:attribute name=&quot;access&quot; use=&quot;optional&quot;
+                  default=&quot;read-write&quot;&gt;
+                  &lt;xsd:simpleType&gt;
+                     &lt;xsd:list itemType=&quot;accessModeType&quot;/&gt;
+                  &lt;/xsd:simpleType&gt;
+               &lt;/xsd:attribute&gt;
+               &lt;!-- Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+               &lt;xsd:attribute name=&quot;componentID&quot; type=&quot;xsd:unsignedInt&quot;
+                  use=&quot;required&quot;/&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:sequence&gt;
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 20]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-21" id="page-21" href="https://tools.ietf.org/html/rfc7408#page-21" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;metadataDefsType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;metadataDef&quot; maxOccurs=&quot;unbounded&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+                  &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+                  &lt;xsd:element name=&quot;metadataID&quot; type=&quot;xsd:integer&quot;/&gt;
+                  &lt;xsd:element ref=&quot;description&quot;
+                     minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:choice&gt;
+                     &lt;xsd:element name=&quot;typeRef&quot; type=&quot;typeRefNMTOKEN&quot;/&gt;
+                     &lt;xsd:element name=&quot;atomic&quot; type=&quot;atomicType&quot;/&gt;
+                     &lt;!-- Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+                     &lt;xsd:element name=&quot;array&quot; type=&quot;arrayType&quot;&gt;
+                        &lt;!--declare keys to have unique IDs --&gt;
+                        &lt;xsd:key name=&quot;contentKeyID1&quot;&gt;
+                           &lt;xsd:selector xpath=&quot;lfb:contentKey&quot;/&gt;
+                           &lt;xsd:field xpath=&quot;@contentKeyID&quot;/&gt;
+                        &lt;/xsd:key&gt;
+                        &lt;!-- /Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+                     &lt;/xsd:element&gt;
+                     &lt;xsd:element name=&quot;struct&quot; type=&quot;structType&quot;&gt;
+                        &lt;!-- Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+                        &lt;!-- key declaration to make componentIDs
+                           unique in a struct --&gt;
+                        &lt;xsd:key name=&quot;structComponentID1&quot;&gt;
+                           &lt;xsd:selector xpath=&quot;lfb:component&quot;/&gt;
+                           &lt;xsd:field xpath=&quot;@componentID&quot;/&gt;
+                        &lt;/xsd:key&gt;
+                        &lt;!-- /Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+                     &lt;/xsd:element&gt;
+                  &lt;/xsd:choice&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;LFBClassDefsType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;LFBClassDef&quot; maxOccurs=&quot;unbounded&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+                  &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+                  &lt;xsd:element name=&quot;version&quot; type=&quot;versionType&quot;/&gt;
+                  &lt;xsd:element name=&quot;derivedFrom&quot; minOccurs=&quot;0&quot;&gt;
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 21]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-22" id="page-22" href="https://tools.ietf.org/html/rfc7408#page-22" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+                    &lt;xsd:complexType&gt;
+                      &lt;xsd:simpleContent&gt;
+                        &lt;xsd:extension base=&quot;xsd:NMTOKEN&quot;&gt;
+                          &lt;xsd:attribute name=&quot;version&quot;
+                            type=&quot;versionType&quot; use=&quot;optional&quot;/&gt;
+                        &lt;/xsd:extension&gt;
+                      &lt;/xsd:simpleContent&gt;
+                    &lt;/xsd:complexType&gt;
+                  &lt;/xsd:element&gt;
+                  &lt;xsd:element name=&quot;inputPorts&quot;
+                   type=&quot;inputPortsType&quot; minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:element name=&quot;outputPorts&quot;
+                   type=&quot;outputPortsType&quot; minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:element name=&quot;components&quot;
+                   type=&quot;LFBComponentsType&quot; minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:element name=&quot;capabilities&quot;
+                   type=&quot;LFBCapabilitiesType&quot; minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:element name=&quot;events&quot; type=&quot;eventsType&quot;
+                     minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:element ref=&quot;description&quot;
+                     minOccurs=&quot;0&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+               &lt;xsd:attribute name=&quot;LFBClassID&quot; type=&quot;xsd:unsignedInt&quot;
+                  use=&quot;required&quot;/&gt;
+            &lt;/xsd:complexType&gt;
+            &lt;!-- Key constraint to ensure unique attribute names
+            within a class: --&gt;
+            &lt;xsd:key name=&quot;components&quot;&gt;
+               &lt;xsd:selector xpath=&quot;lfb:components/lfb:component&quot;/&gt;
+               &lt;xsd:field xpath=&quot;lfb:name&quot;/&gt;
+            &lt;/xsd:key&gt;
+            &lt;xsd:key name=&quot;capabilities&quot;&gt;
+               &lt;xsd:selector xpath=&quot;lfb:capabilities/lfb:capability&quot;/&gt;
+               &lt;xsd:field xpath=&quot;lfb:name&quot;/&gt;
+            &lt;/xsd:key&gt;
+            &lt;xsd:key name=&quot;events&quot;&gt;
+               &lt;xsd:selector xpath=&quot;lfb:events/lfb:event&quot;/&gt;
+               &lt;xsd:field xpath=&quot;lfb:name&quot;/&gt;
+            &lt;/xsd:key&gt;
+            &lt;xsd:key name=&quot;eventsIDs&quot;&gt;
+               &lt;xsd:selector xpath=&quot;lfb:events/lfb:event&quot;/&gt;
+               &lt;xsd:field xpath=&quot;@eventID&quot;/&gt;
+            &lt;/xsd:key&gt;
+            &lt;xsd:key name=&quot;componentIDs&quot;&gt;
+               &lt;xsd:selector xpath=&quot;lfb:components/lfb:component&quot;/&gt;
+               &lt;xsd:field xpath=&quot;@componentID&quot;/&gt;
+            &lt;/xsd:key&gt;
+            &lt;xsd:key name=&quot;capabilityIDs&quot;&gt;
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 22]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-23" id="page-23" href="https://tools.ietf.org/html/rfc7408#page-23" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+               &lt;xsd:selector xpath=&quot;lfb:capabilities/lfb:capability&quot;/&gt;
+               &lt;xsd:field xpath=&quot;@componentID&quot;/&gt;
+            &lt;/xsd:key&gt;
+            &lt;xsd:key name=&quot;ComponentCapabilityComponentIDUniqueness&quot;&gt;
+               &lt;xsd:selector
+                  xpath=&quot;lfb:components/lfb:component|
+                  lfb:capabilities/lfb:capability|lfb:events&quot;/&gt;
+               &lt;xsd:field xpath=&quot;@componentID|@baseID&quot;/&gt;
+            &lt;/xsd:key&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:simpleType name=&quot;versionType&quot;&gt;
+      &lt;xsd:restriction base=&quot;xsd:NMTOKEN&quot;&gt;
+         &lt;xsd:pattern value=&quot;[1-9][0-9]*\.([1-9][0-9]*|0)&quot;/&gt;
+      &lt;/xsd:restriction&gt;
+   &lt;/xsd:simpleType&gt;
+   &lt;xsd:complexType name=&quot;inputPortsType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;inputPort&quot; type=&quot;inputPortType&quot;
+            maxOccurs=&quot;unbounded&quot;/&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;inputPortType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+         &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+         &lt;xsd:element name=&quot;expectation&quot; type=&quot;portExpectationType&quot;/&gt;
+         &lt;xsd:element ref=&quot;description&quot; minOccurs=&quot;0&quot;/&gt;
+      &lt;/xsd:sequence&gt;
+      &lt;xsd:attribute name=&quot;group&quot; type=&quot;xsd:boolean&quot;
+         use=&quot;optional&quot; default=&quot;0&quot;/&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;portExpectationType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;frameExpected&quot; minOccurs=&quot;0&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;!-- ref must refer to a name of a defined
+                    frame type --&gt;
+                  &lt;xsd:element name=&quot;ref&quot; type=&quot;xsd:string&quot;
+                     maxOccurs=&quot;unbounded&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;metadataExpected&quot; minOccurs=&quot;0&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:choice maxOccurs=&quot;unbounded&quot;&gt;
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 23]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-24" id="page-24" href="https://tools.ietf.org/html/rfc7408#page-24" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+                  &lt;!--ref must refer to a name of a defined metadata--&gt;
+                  &lt;xsd:element name=&quot;ref&quot; type=&quot;metadataInputRefType&quot;/&gt;
+                  &lt;xsd:element name=&quot;one-of&quot;
+                     type=&quot;metadataInputChoiceType&quot;/&gt;
+               &lt;/xsd:choice&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;metadataInputChoiceType&quot;&gt;
+      &lt;xsd:choice minOccurs=&quot;2&quot; maxOccurs=&quot;unbounded&quot;&gt;
+         &lt;!-- ref must refer to a name of a defined metadata --&gt;
+         &lt;xsd:element name=&quot;ref&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+         &lt;xsd:element name=&quot;one-of&quot; type=&quot;metadataInputChoiceType&quot;/&gt;
+         &lt;xsd:element name=&quot;metadataSet&quot; type=&quot;metadataInputSetType&quot;/&gt;
+      &lt;/xsd:choice&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;metadataInputSetType&quot;&gt;
+      &lt;xsd:choice minOccurs=&quot;2&quot; maxOccurs=&quot;unbounded&quot;&gt;
+         &lt;!-- ref must refer to a name of a defined metadata --&gt;
+         &lt;xsd:element name=&quot;ref&quot; type=&quot;metadataInputRefType&quot;/&gt;
+         &lt;xsd:element name=&quot;one-of&quot; type=&quot;metadataInputChoiceType&quot;/&gt;
+      &lt;/xsd:choice&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;metadataInputRefType&quot;&gt;
+      &lt;xsd:simpleContent&gt;
+         &lt;xsd:extension base=&quot;xsd:NMTOKEN&quot;&gt;
+            &lt;xsd:attribute name=&quot;dependency&quot; use=&quot;optional&quot;
+               default=&quot;required&quot;&gt;
+               &lt;xsd:simpleType&gt;
+                  &lt;xsd:restriction base=&quot;xsd:string&quot;&gt;
+                     &lt;xsd:enumeration value=&quot;required&quot;/&gt;
+                     &lt;xsd:enumeration value=&quot;optional&quot;/&gt;
+                  &lt;/xsd:restriction&gt;
+               &lt;/xsd:simpleType&gt;
+            &lt;/xsd:attribute&gt;
+            &lt;xsd:attribute name=&quot;defaultValue&quot; type=&quot;xsd:token&quot;
+               use=&quot;optional&quot;/&gt;
+         &lt;/xsd:extension&gt;
+      &lt;/xsd:simpleContent&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;outputPortsType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;outputPort&quot; type=&quot;outputPortType&quot;
+            maxOccurs=&quot;unbounded&quot;/&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;outputPortType&quot;&gt;
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 24]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-25" id="page-25" href="https://tools.ietf.org/html/rfc7408#page-25" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+         &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+         &lt;xsd:element name=&quot;product&quot; type=&quot;portProductType&quot;/&gt;
+         &lt;xsd:element ref=&quot;description&quot; minOccurs=&quot;0&quot;/&gt;
+      &lt;/xsd:sequence&gt;
+      &lt;xsd:attribute name=&quot;group&quot; type=&quot;xsd:boolean&quot;
+         use=&quot;optional&quot; default=&quot;0&quot;/&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;portProductType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;frameProduced&quot; minOccurs=&quot;0&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;!-- ref must refer to a name of a defined
+                     frame type --&gt;
+                  &lt;xsd:element name=&quot;ref&quot; type=&quot;xsd:NMTOKEN&quot;
+                     maxOccurs=&quot;unbounded&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;metadataProduced&quot; minOccurs=&quot;0&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:choice maxOccurs=&quot;unbounded&quot;&gt;
+                  &lt;!-- ref must refer to a name of a
+                     defined metadata --&gt;
+                  &lt;xsd:element name=&quot;ref&quot;
+                     type=&quot;metadataOutputRefType&quot;/&gt;
+                  &lt;xsd:element name=&quot;one-of&quot;
+                     type=&quot;metadataOutputChoiceType&quot;/&gt;
+               &lt;/xsd:choice&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;metadataOutputChoiceType&quot;&gt;
+      &lt;xsd:choice minOccurs=&quot;2&quot; maxOccurs=&quot;unbounded&quot;&gt;
+         &lt;!-- ref must refer to a name of a defined metadata --&gt;
+         &lt;xsd:element name=&quot;ref&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+         &lt;xsd:element name=&quot;one-of&quot; type=&quot;metadataOutputChoiceType&quot;/&gt;
+         &lt;xsd:element name=&quot;metadataSet&quot; type=&quot;metadataOutputSetType&quot;/&gt;
+      &lt;/xsd:choice&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;metadataOutputSetType&quot;&gt;
+      &lt;xsd:choice minOccurs=&quot;2&quot; maxOccurs=&quot;unbounded&quot;&gt;
+         &lt;!-- ref must refer to a name of a defined metadata --&gt;
+         &lt;xsd:element name=&quot;ref&quot; type=&quot;metadataOutputRefType&quot;/&gt;
+         &lt;xsd:element name=&quot;one-of&quot; type=&quot;metadataOutputChoiceType&quot;/&gt;
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 25]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-26" id="page-26" href="https://tools.ietf.org/html/rfc7408#page-26" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+      &lt;/xsd:choice&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;metadataOutputRefType&quot;&gt;
+      &lt;xsd:simpleContent&gt;
+         &lt;xsd:extension base=&quot;xsd:NMTOKEN&quot;&gt;
+            &lt;xsd:attribute name=&quot;availability&quot; use=&quot;optional&quot;
+               default=&quot;unconditional&quot;&gt;
+               &lt;xsd:simpleType&gt;
+                  &lt;xsd:restriction base=&quot;xsd:string&quot;&gt;
+                     &lt;xsd:enumeration value=&quot;unconditional&quot;/&gt;
+                     &lt;xsd:enumeration value=&quot;conditional&quot;/&gt;
+                  &lt;/xsd:restriction&gt;
+               &lt;/xsd:simpleType&gt;
+            &lt;/xsd:attribute&gt;
+         &lt;/xsd:extension&gt;
+      &lt;/xsd:simpleContent&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;LFBComponentsType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;component&quot; maxOccurs=&quot;unbounded&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+                  &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+                  &lt;xsd:element ref=&quot;description&quot;
+                     minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:element name=&quot;optional&quot; minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:group ref=&quot;typeDeclarationGroup&quot;/&gt;
+                  &lt;xsd:element name=&quot;defaultValue&quot; type=&quot;xsd:token&quot;
+                     minOccurs=&quot;0&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+               &lt;xsd:attribute name=&quot;access&quot; use=&quot;optional&quot;
+                  default=&quot;read-write&quot;&gt;
+                  &lt;xsd:simpleType&gt;
+                     &lt;xsd:list itemType=&quot;accessModeType&quot;/&gt;
+                  &lt;/xsd:simpleType&gt;
+               &lt;/xsd:attribute&gt;
+               &lt;!-- Extension added restriction to componentID --&gt;
+               &lt;xsd:attribute name=&quot;componentID&quot; use=&quot;required&quot;&gt;
+                  &lt;xsd:simpleType&gt;
+                     &lt;xsd:restriction base=&quot;xsd:unsignedInt&quot;&gt;
+                        &lt;xsd:minExclusive value=&quot;0&quot;/&gt;
+                     &lt;/xsd:restriction&gt;
+                  &lt;/xsd:simpleType&gt;
+               &lt;/xsd:attribute&gt;
+               &lt;!-- End of extension --&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 26]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-27" id="page-27" href="https://tools.ietf.org/html/rfc7408#page-27" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:simpleType name=&quot;accessModeType&quot;&gt;
+      &lt;xsd:restriction base=&quot;xsd:NMTOKEN&quot;&gt;
+         &lt;xsd:enumeration value=&quot;read-only&quot;/&gt;
+         &lt;xsd:enumeration value=&quot;read-write&quot;/&gt;
+         &lt;xsd:enumeration value=&quot;write-only&quot;/&gt;
+         &lt;xsd:enumeration value=&quot;read-reset&quot;/&gt;
+         &lt;xsd:enumeration value=&quot;trigger-only&quot;/&gt;
+      &lt;/xsd:restriction&gt;
+   &lt;/xsd:simpleType&gt;
+   &lt;xsd:complexType name=&quot;LFBCapabilitiesType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;capability&quot; maxOccurs=&quot;unbounded&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+                  &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+                  &lt;xsd:element ref=&quot;description&quot;
+                     minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:element name=&quot;optional&quot; minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:group ref=&quot;typeDeclarationGroup&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+               &lt;xsd:attribute name=&quot;componentID&quot; type=&quot;xsd:integer&quot;
+                  use=&quot;required&quot;/&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:complexType name=&quot;eventsType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;event&quot; maxOccurs=&quot;unbounded&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;name&quot; type=&quot;xsd:NMTOKEN&quot;/&gt;
+                  &lt;xsd:element ref=&quot;synopsis&quot;/&gt;
+                  &lt;xsd:element name=&quot;eventTarget&quot;
+                    type=&quot;eventPathType&quot;/&gt;
+                  &lt;xsd:element ref=&quot;eventCondition&quot;/&gt;
+                  &lt;xsd:element name=&quot;eventReports&quot;
+                   type=&quot;eventReportsType&quot; minOccurs=&quot;0&quot;/&gt;
+                  &lt;xsd:element ref=&quot;description&quot;
+                     minOccurs=&quot;0&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+               &lt;xsd:attribute name=&quot;eventID&quot; type=&quot;xsd:integer&quot;
+                  use=&quot;required&quot;/&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 27]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-28" id="page-28" href="https://tools.ietf.org/html/rfc7408#page-28" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+      &lt;/xsd:sequence&gt;
+      &lt;xsd:attribute name=&quot;baseID&quot; type=&quot;xsd:integer&quot;
+         use=&quot;optional&quot;/&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;!-- the substitution group for the event conditions --&gt;
+   &lt;xsd:element name=&quot;eventCondition&quot; abstract=&quot;true&quot;/&gt;
+   &lt;xsd:element name=&quot;eventCreated&quot;
+    substitutionGroup=&quot;eventCondition&quot;/&gt;
+   &lt;xsd:element name=&quot;eventDeleted&quot;
+    substitutionGroup=&quot;eventCondition&quot;/&gt;
+   &lt;xsd:element name=&quot;eventChanged&quot;
+    substitutionGroup=&quot;eventCondition&quot;/&gt;
+   &lt;xsd:element name=&quot;eventGreaterThan&quot;
+    substitutionGroup=&quot;eventCondition&quot;/&gt;
+   &lt;xsd:element name=&quot;eventLessThan&quot;
+    substitutionGroup=&quot;eventCondition&quot;/&gt;
+   &lt;!-- Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+   &lt;xsd:element name=&quot;eventBecomesEqualTo&quot;
+      substitutionGroup=&quot;eventCondition&quot;/&gt;
+   &lt;!-- /Extension <a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a> --&gt;
+   &lt;xsd:complexType name=&quot;eventPathType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element ref=&quot;eventPathPart&quot; maxOccurs=&quot;unbounded&quot;/&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;!-- the substitution group for the event path parts --&gt;
+   &lt;xsd:element name=&quot;eventPathPart&quot; type=&quot;xsd:string&quot;
+      abstract=&quot;true&quot;/&gt;
+   &lt;xsd:element name=&quot;eventField&quot; type=&quot;xsd:string&quot;
+      substitutionGroup=&quot;eventPathPart&quot;/&gt;
+   &lt;xsd:element name=&quot;eventSubscript&quot; type=&quot;xsd:string&quot;
+      substitutionGroup=&quot;eventPathPart&quot;/&gt;
+   &lt;xsd:complexType name=&quot;eventReportsType&quot;&gt;
+      &lt;xsd:sequence&gt;
+         &lt;xsd:element name=&quot;eventReport&quot; type=&quot;eventPathType&quot;
+            maxOccurs=&quot;unbounded&quot;/&gt;
+      &lt;/xsd:sequence&gt;
+   &lt;/xsd:complexType&gt;
+   &lt;xsd:simpleType name=&quot;booleanType&quot;&gt;
+      &lt;xsd:restriction base=&quot;xsd:string&quot;&gt;
+         &lt;xsd:enumeration value=&quot;0&quot;/&gt;
+         &lt;xsd:enumeration value=&quot;1&quot;/&gt;
+      &lt;/xsd:restriction&gt;
+   &lt;/xsd:simpleType&gt;
+&lt;/xsd:schema&gt;
+
+                           ForCES LFB XML Schema
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 28]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-29" id="page-29" href="https://tools.ietf.org/html/rfc7408#page-29" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc7408#section-4">4</a>. IANA Considerations</h2></span>
+
+   IANA has registered a new XML namespace, as per the guidelines in <a href="https://tools.ietf.org/html/rfc3688">RFC</a>
+   <a href="https://tools.ietf.org/html/rfc3688">3688</a> [<a href="https://tools.ietf.org/html/rfc3688" title="&quot;The IETF XML Registry&quot;">RFC3688</a>].
+
+   URI: The URI for this namespace is:
+
+      urn:ietf:params:xml:ns:forces:lfbmodel:1.1
+
+   Registrant Contact: IESG
+
+   XML: none, this is an XML namespace
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc7408#section-5">5</a>. Security Considerations</h2></span>
+
+   This specification adds only a few constructs to the initial model
+   defined in [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>], namely, a new event, some new properties, and a
+   way to define optional access types and complex metadata.  In
+   addition, this document addresses and clarifies an issue with the
+   inheritance model by introducing the version of the derivedFrom LFB
+   class.  These constructs and the update to the inheritance model do
+   not change the nature of the initial model.
+
+   Thus, the security considerations defined in [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>] apply to this
+   specification as well, as the changes proposed here are simply
+   constructs to write XML library definitions, as [<a href="https://tools.ietf.org/html/rfc5812" title="&quot;Forwarding and Control Element Separation (ForCES) Forwarding Element Model&quot;">RFC5812</a>] does.
+   These changes, as well as the clarification of the inheritance issue
+   of the initial model, have no effect on the security semantics of the
+   protocol.
+
+   In regard to pervasive monitoring (PM), as discussed in [<a href="https://tools.ietf.org/html/rfc7258" title="&quot;Pervasive Monitoring Is an Attack&quot;">RFC7258</a>],
+   this specification defines ways to expose more complex information
+   (namely, metadata) exchanged between LFBs and between CEs and FEs and
+   a new event.  These changes have very little or no effect in terms of
+   making PM simpler or more effective to an attacker who controls the
+   LFBs.  The new metadata might make for slightly more elegant PM, but
+   does not enable any new ways to (ab)use LFBs for PM.  The same
+   applies for the new event.
+
+   Finally, this document does not provide any protocol specification
+   and, as such, does not specify how information will be transmitted
+   between respective entities.  Thus, PM mitigation for a passive
+   attacker that simply wants to eavesdrop on the information exchanged
+   is out of the scope of this document.
+
+
+
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 29]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-30" id="page-30" href="https://tools.ietf.org/html/rfc7408#page-30" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc7408#section-6">6</a>. References</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-6.1" href="https://tools.ietf.org/html/rfc7408#section-6.1">6.1</a>. Normative References</h3></span>
+
+   [<a name="ref-RFC2119" id="ref-RFC2119">RFC2119</a>]  Bradner, S., &quot;Key words for use in RFCs to Indicate
+              Requirement Levels&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>, March 1997,
+              &lt;<a href="http://www.rfc-editor.org/info/rfc2119">http://www.rfc-editor.org/info/rfc2119</a>&gt;.
+
+   [<a name="ref-RFC3688" id="ref-RFC3688">RFC3688</a>]  Mealling, M., &quot;The IETF XML Registry&quot;, <a href="https://tools.ietf.org/html/bcp81">BCP 81</a>, <a href="https://tools.ietf.org/html/rfc3688">RFC 3688</a>,
+              January 2004, &lt;<a href="http://www.rfc-editor.org/info/rfc3688">http://www.rfc-editor.org/info/rfc3688</a>&gt;.
+
+   [<a name="ref-RFC5810" id="ref-RFC5810">RFC5810</a>]  Doria, A., Hadi Salim, J., Haas, R., Khosravi, H., Wang,
+              W., Dong, L., Gopal, R., and J. Halpern, &quot;Forwarding and
+              Control Element Separation (ForCES) Protocol
+              Specification&quot;, <a href="https://tools.ietf.org/html/rfc5810">RFC 5810</a>, March 2010,
+              &lt;<a href="http://www.rfc-editor.org/info/rfc5810">http://www.rfc-editor.org/info/rfc5810</a>&gt;.
+
+   [<a name="ref-RFC5812" id="ref-RFC5812">RFC5812</a>]  Halpern, J. and J. Hadi Salim, &quot;Forwarding and Control
+              Element Separation (ForCES) Forwarding Element Model&quot;, <a href="https://tools.ietf.org/html/rfc5812">RFC</a>
+              <a href="https://tools.ietf.org/html/rfc5812">5812</a>, March 2010,
+              &lt;<a href="http://www.rfc-editor.org/info/rfc5812">http://www.rfc-editor.org/info/rfc5812</a>&gt;.
+
+   [<a name="ref-RFC7121" id="ref-RFC7121">RFC7121</a>]  Ogawa, K., Wang, W., Haleplidis, E., and J. Hadi Salim,
+              &quot;High Availability within a Forwarding and Control Element
+              Separation (ForCES) Network Element&quot;, <a href="https://tools.ietf.org/html/rfc7121">RFC 7121</a>, February
+              2014, &lt;<a href="http://www.rfc-editor.org/info/rfc7121">http://www.rfc-editor.org/info/rfc7121</a>&gt;.
+
+   [<a name="ref-RFC7258" id="ref-RFC7258">RFC7258</a>]  Farrell, S. and H. Tschofenig, &quot;Pervasive Monitoring Is an
+              Attack&quot;, <a href="https://tools.ietf.org/html/bcp188">BCP 188</a>, <a href="https://tools.ietf.org/html/rfc7258">RFC 7258</a>, May 2014,
+              &lt;<a href="http://www.rfc-editor.org/info/rfc7258">http://www.rfc-editor.org/info/rfc7258</a>&gt;.
+
+<span class="h3"><h3><a class="selflink" name="section-6.2" href="https://tools.ietf.org/html/rfc7408#section-6.2">6.2</a>. Informative References</h3></span>
+
+   [<a name="ref-OpenFlowSpec1.1" id="ref-OpenFlowSpec1.1">OpenFlowSpec1.1</a>]
+              ONF, &quot;OpenFlow Switch Specification&quot;, February 2011,
+              &lt;<a href="https://www.opennetworking.org/images/stories/downloads/sdn-resources/onf-specifications/openflow/openflow-spec-v1.1.0.pdf">https://www.opennetworking.org/images/stories/downloads/</a>
+              <a href="https://www.opennetworking.org/images/stories/downloads/sdn-resources/onf-specifications/openflow/openflow-spec-v1.1.0.pdf">sdn-resources/onf-specifications/openflow/</a>
+              <a href="https://www.opennetworking.org/images/stories/downloads/sdn-resources/onf-specifications/openflow/openflow-spec-v1.1.0.pdf">openflow-spec-v1.1.0.pdf</a>&gt;.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Haleplidis                   Standards Track                   [Page 30]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-31" id="page-31" href="https://tools.ietf.org/html/rfc7408#page-31" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7408">RFC 7408</a>                 ForCES Model Extension            November 2014</span>
+
+
+Acknowledgements
+
+   The author would like to acknowledge Joel Halpern, Jamal Hadi Salim,
+   and Dave Hood for their comments and discussion that helped shape
+   this document for the better.  Special acknowledgements to Joel
+   Halpern for resolving the issue with the default values, Adrian
+   Farrel for his AD review, Ben Campbell for his Gen-ART review, and
+   Tom Yu for his security review, all of which improved the quality of
+   this document.  Additionally, reviews and comments by the following
+   members of the IESG shaped the final version of this document:
+   Stephen Farrel, Barry Leiba, and Ted Lemon.  Finally, the author
+   would like to acknowledge Julian Reschke for input regarding the
+   namespace change issue and Joel Halpern for helping to resolve it.
+
+Author's Address
+
+   Evangelos Haleplidis
+   University of Patras
+   Department of Electrical and Computer Engineering
+   Patras  26500
+   Greece
+
+   EMail: ehalep@ece.upatras.gr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Haleplidis                   Standards Track                   [Page 31]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

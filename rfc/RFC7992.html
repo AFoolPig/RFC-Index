@@ -1,0 +1,2675 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Relation.Replaces" content="draft-hildebrand-html-rfc" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:7992" /> 
+  <meta name="DC.Date.Issued" content="December, 2016" /> 
+  <meta name="DC.Creator" content="Hildebrand, Joe" /> 
+  <meta name="DC.Creator" content="Hoffman, Paul" /> 
+  <meta name="DC.Description.Abstract" content="In order to meet the evolving needs of the Internet community, the
+canonical format for RFCs is changing from a plain-text, ASCII-only
+format to an XML format that will, in turn, be rendered into several
+publication formats. This document defines the HTML format that will
+be rendered for an RFC or Internet-Draft." /> 
+  <meta name="DC.Title" content="HTML Format for RFCs" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 7992 - HTML Format for RFCs</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgorange" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc7992.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc7992" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-iab-html-rfc" title="draft-iab-html-rfc">draft-iab-html-rfc</a>] [<a href="https://datatracker.ietf.org/doc/rfc7992" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc7992" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc7992" title="Side-by-side diff">Diff2</a>] </span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> INFORMATIONAL</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <pre>Internet Architecture Board (IAB)                     J. Hildebrand, Ed.
+Request for Comments: 7992                                       Mozilla
+Category: Informational                                       P. Hoffman
+ISSN: 2070-1721                                                    ICANN
+                                                           December 2016
+
+
+                          <span class="h1"><h1>HTML Format for RFCs</h1></span>
+
+Abstract
+
+   In order to meet the evolving needs of the Internet community, the
+   canonical format for RFCs is changing from a plain-text, ASCII-only
+   format to an XML format that will, in turn, be rendered into several
+   publication formats.  This document defines the HTML format that will
+   be rendered for an RFC or Internet-Draft.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for informational purposes.
+
+   This document is a product of the Internet Architecture Board (IAB)
+   and represents information that the IAB has deemed valuable to
+   provide for permanent record.  It represents the consensus of the
+   Internet Architecture Board (IAB).  Documents approved for
+   publication by the IAB are not a candidate for any level of Internet
+   Standard; see <a href="https://tools.ietf.org/html/rfc7841#section-2">Section&nbsp;2 of RFC 7841</a>.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   <a href="http://www.rfc-editor.org/info/rfc7992">http://www.rfc-editor.org/info/rfc7992</a>.
+
+Copyright Notice
+
+   Copyright (c) 2016 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                     [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc7992#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc7992#section-1">1</a>.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7992#page-4">4</a>
+   <a href="https://tools.ietf.org/html/rfc7992#section-2">2</a>.  Requirements for the HTML Format  . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7992#page-5">5</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-2.1">2.1</a>.  Requirements for Accessibility  . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7992#page-6">6</a>
+   <a href="https://tools.ietf.org/html/rfc7992#section-3">3</a>.  HTML Version  . . . . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7992#page-7">7</a>
+   <a href="https://tools.ietf.org/html/rfc7992#section-4">4</a>.  HTML Syntax . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7992#page-7">7</a>
+   <a href="https://tools.ietf.org/html/rfc7992#section-5">5</a>.  Common Items  . . . . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7992#page-8">8</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-5.1">5.1</a>.  IDs . . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7992#page-8">8</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-5.2">5.2</a>.  Pilcrows  . . . . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7992#page-8">8</a>
+   <a href="https://tools.ietf.org/html/rfc7992#section-6">6</a>.  Front Matter  . . . . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7992#page-9">9</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-6.1">6.1</a>.  DOCTYPE . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7992#page-9">9</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-6.2">6.2</a>.  Root Element  . . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7992#page-9">9</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-6.3">6.3</a>.  &lt;head&gt; Element  . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7992#page-9">9</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-6.3.1">6.3.1</a>.  Charset Declaration . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7992#page-9">9</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-6.3.2">6.3.2</a>.  Document Title  . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-10">10</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-6.3.3">6.3.3</a>.  Document Metadata . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-10">10</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-6.3.4">6.3.4</a>.  Link to XML Source  . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-10">10</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-6.3.5">6.3.5</a>.  Link to License . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-10">10</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-6.3.6">6.3.6</a>.  Style . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-11">11</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-6.3.7">6.3.7</a>.  Links . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-11">11</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-6.4">6.4</a>.  Page Headers and Footers  . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-12">12</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-6.5">6.5</a>.  Document Information  . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-13">13</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-6.6">6.6</a>.  Table of Contents . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-14">14</a>
+   <a href="https://tools.ietf.org/html/rfc7992#section-7">7</a>.  Main Body . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-14">14</a>
+   <a href="https://tools.ietf.org/html/rfc7992#section-8">8</a>.  Back Matter . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-14">14</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-8.1">8.1</a>.  Index . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-14">14</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-8.1.1">8.1.1</a>.  Index Contents  . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-15">15</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-8.1.2">8.1.2</a>.  Index Letters . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-15">15</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-8.1.3">8.1.3</a>.  Index Items . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-16">16</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-8.1.4">8.1.4</a>.  Index Subitems  . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-16">16</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-8.2">8.2</a>.  Authors' Addresses Section  . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-17">17</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-8.3">8.3</a>.  Document Information  . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-18">18</a>
+   <a href="https://tools.ietf.org/html/rfc7992#section-9">9</a>.  Elements  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-18">18</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.1">9.1</a>.  &lt;abstract&gt;  . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-18">18</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.2">9.2</a>.  &lt;address&gt; . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-19">19</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.3">9.3</a>.  &lt;annotation&gt;  . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-19">19</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.4">9.4</a>.  &lt;area&gt;  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-19">19</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.5">9.5</a>.  &lt;artwork&gt; . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-20">20</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-9.5.1">9.5.1</a>.  Text Artwork  . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-20">20</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-9.5.2">9.5.2</a>.  SVG Artwork . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-20">20</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-9.5.3">9.5.3</a>.  Other Artwork . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-21">21</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.6">9.6</a>.  &lt;aside&gt; . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-21">21</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.7">9.7</a>.  &lt;author&gt;  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-21">21</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-9.7.1">9.7.1</a>.  Authors in Document Information . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-22">22</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-9.7.2">9.7.2</a>.  Authors of This Document  . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-22">22</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-9.7.3">9.7.3</a>.  Authors of References . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-24">24</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.8">9.8</a>.  &lt;back&gt;  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-24">24</a>
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                     [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc7992#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.9">9.9</a>.  &lt;<a href="https://tools.ietf.org/html/bcp14">bcp14</a>&gt; . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-25">25</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.10">9.10</a>. &lt;blockquote&gt;  . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-25">25</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.11">9.11</a>. &lt;boilerplate&gt; . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-26">26</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.12">9.12</a>. &lt;br&gt;  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-26">26</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.13">9.13</a>. &lt;city&gt;  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-26">26</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.14">9.14</a>. &lt;code&gt;  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-26">26</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.15">9.15</a>. &lt;country&gt; . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-26">26</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.16">9.16</a>. &lt;cref&gt;  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-27">27</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.17">9.17</a>. &lt;date&gt;  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-27">27</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.18">9.18</a>. &lt;dd&gt;  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-27">27</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.19">9.19</a>. &lt;displayreference&gt;  . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-27">27</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.20">9.20</a>. &lt;dl&gt;  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-27">27</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.21">9.21</a>. &lt;dt&gt;  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-27">27</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.22">9.22</a>. &lt;em&gt;  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-28">28</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.23">9.23</a>. &lt;email&gt; . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-28">28</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.24">9.24</a>. &lt;eref&gt;  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-28">28</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.25">9.25</a>. &lt;figure&gt;  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-28">28</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.26">9.26</a>. &lt;front&gt; . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-28">28</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.27">9.27</a>. &lt;iref&gt;  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-29">29</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.28">9.28</a>. &lt;keyword&gt; . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-29">29</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.29">9.29</a>. &lt;li&gt;  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-29">29</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.30">9.30</a>. &lt;link&gt;  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-29">29</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.31">9.31</a>. &lt;middle&gt;  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-29">29</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.32">9.32</a>. &lt;name&gt;  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-29">29</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.33">9.33</a>. &lt;note&gt;  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-30">30</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.34">9.34</a>. &lt;ol&gt;  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-30">30</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-9.34.1">9.34.1</a>.  Percent Styles . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-30">30</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-9.34.2">9.34.2</a>.  Standard Styles  . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-30">30</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.35">9.35</a>. &lt;organization&gt;  . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-31">31</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.36">9.36</a>. &lt;phone&gt; . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-31">31</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.37">9.37</a>. &lt;postal&gt;  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-31">31</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.38">9.38</a>. &lt;postalLine&gt;  . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-32">32</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.39">9.39</a>. &lt;refcontent&gt;  . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-32">32</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.40">9.40</a>. &lt;reference&gt; . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-33">33</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.41">9.41</a>. &lt;referencegroup&gt;  . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-33">33</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.42">9.42</a>. &lt;references&gt;  . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-34">34</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.43">9.43</a>. &lt;region&gt;  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-34">34</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.44">9.44</a>. &lt;relref&gt;  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-35">35</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-9.44.1">9.44.1</a>.  displayFormat='of' . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-35">35</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-9.44.2">9.44.2</a>.  displayFormat='comma'  . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-35">35</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-9.44.3">9.44.3</a>.  displayFormat='parens' . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-36">36</a>
+       <a href="https://tools.ietf.org/html/rfc7992#section-9.44.4">9.44.4</a>.  displayFormat='bare' . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-36">36</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.45">9.45</a>. &lt;rfc&gt; . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-37">37</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.46">9.46</a>. &lt;section&gt; . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-37">37</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.47">9.47</a>. &lt;seriesInfo&gt;  . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-37">37</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.48">9.48</a>. &lt;sourcecode&gt;  . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-38">38</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.49">9.49</a>. &lt;street&gt;  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-38">38</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.50">9.50</a>. &lt;strong&gt;  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-38">38</a>
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                     [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc7992#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.51">9.51</a>. &lt;sub&gt; . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-38">38</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.52">9.52</a>. &lt;sup&gt; . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-38">38</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.53">9.53</a>. &lt;t&gt; . . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-38">38</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.54">9.54</a>. &lt;table&gt; . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-39">39</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.55">9.55</a>. &lt;tbody&gt; . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-39">39</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.56">9.56</a>. &lt;td&gt;  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-39">39</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.57">9.57</a>. &lt;tfoot&gt; . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-39">39</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.58">9.58</a>. &lt;th&gt;  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-39">39</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.59">9.59</a>. &lt;thead&gt; . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-39">39</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.60">9.60</a>. &lt;title&gt; . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-39">39</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.61">9.61</a>. &lt;tr&gt;  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-39">39</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.62">9.62</a>. &lt;tt&gt;  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-40">40</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.63">9.63</a>. &lt;ul&gt;  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-40">40</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.64">9.64</a>. &lt;uri&gt; . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-40">40</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.65">9.65</a>. &lt;workgroup&gt; . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-40">40</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.66">9.66</a>. &lt;xref&gt;  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-40">40</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-9.67">9.67</a>. &lt;svg xmlns='http://www.w3.org/2000/svg'&gt;  . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-41">41</a>
+   <a href="https://tools.ietf.org/html/rfc7992#section-10">10</a>. Security Considerations . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-41">41</a>
+   <a href="https://tools.ietf.org/html/rfc7992#section-11">11</a>. References  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-41">41</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-11.1">11.1</a>.  Normative References . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-41">41</a>
+     <a href="https://tools.ietf.org/html/rfc7992#section-11.2">11.2</a>.  Informative References . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-42">42</a>
+   IAB Members at the Time of Approval . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-43">43</a>
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-43">43</a>
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7992#page-43">43</a>
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc7992#section-1">1</a>. Introduction</h2></span>
+
+   As described in [<a href="https://tools.ietf.org/html/rfc7990" title="&quot;RFC Format Framework&quot;">RFC7990</a>], the RFC Series is changing.  One of those
+   changes includes the RFC Editor publishing a non-canonical HTML
+   version of RFCs.
+
+   This document describes the HTML format that will be used as one of
+   the publication formats for the RFC Series.  It defines a strict
+   subset of HTML appropriate for RFC Series documents.  The visual
+   layout of the document will be defined through a cascading style
+   sheet (CSS) [<a href="https://tools.ietf.org/html/rfc7992#ref-W3C.REC-CSS2-20110607" title="&quot;Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification&quot;">W3C.REC-CSS2-20110607</a>].  The CSS will be included in the
+   HTML file but will be described in [<a href="https://tools.ietf.org/html/rfc7993" title="&quot;Cascading Style Sheets (CSS) Requirements for RFCs&quot;">RFC7993</a>].
+
+   The details (particularly any vocabularies) described in this
+   document are expected to change based on experience gained in
+   implementing the new publication toolsets.  Revised documents will be
+   published capturing those changes as the toolsets are completed.
+   Other implementers must not expect those changes to remain backwards
+   compatible with the details described in this document.
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                     [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc7992#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc7992#section-2">2</a>. Requirements for the HTML Format</h2></span>
+
+   This section lists the design requirements used to create the HTML
+   format described in this document.  These requirements build on those
+   found in [<a href="https://tools.ietf.org/html/rfc6949" title="&quot;RFC Series Format Requirements and Future Development&quot;">RFC6949</a>].  Many of these requirements are naturally
+   fulfilled by using the output of the preparation tool [<a href="https://tools.ietf.org/html/rfc7998" title="&quot;xml2rfc&quot;">RFC7998</a>].
+
+   o  The HTML has to render correctly on a list of browser versions
+      that the RFC Editor will keep up to date outside of this document.
+
+   o  The format will consist of a subset of HTML deemed to be widely
+      implemented by common browsers at the time the specification is
+      created, likely to continue to be widely implemented, and unlikely
+      to cause security issues.  This will maximize the chances that
+      future HTML renderers (such as new web browsers) will continue to
+      produce readable text from the HTML format without the format
+      needing to be changed frequently.
+
+   o  These requirements are expected to change in the future to reflect
+      the expectation that HTML rendering will be required for current
+      versions of browsers and platforms, while ideally continuing to
+      render correctly on recent versions of those browsers.
+
+   o  The HTML documents from the RFC Editor or Internet-Drafts
+      directory may be re-rendered from the canonical XML format in the
+      future to ensure the ongoing readability of the documents.  The
+      intent is that any re-rendering would be due to exceptional
+      circumstances rather than for minor annoyances.
+
+   o  The HTML must display adequately in at least one text-based
+      browser.  Some consumers of the RFC Series can only access the
+      documents on text-based terminals.
+
+   o  The HTML document will be self-contained, without requiring
+      external files for images, CSS, JavaScript, or the like.  This
+      will allow the HTML file to be moved over various non-HTTP
+      transports (such as email, FTP, and rsync) without breakage.
+
+   o  JavaScript will be supported on a limited basis.  It will not be
+      permitted to overwrite or change any text present in the rendered
+      HTML.  It may, on a limited basis, add additional text that
+      provides post-publication metadata or pointers if warranted.  All
+      such text will be clearly marked as additional.
+
+   o  The HTML document will allow easy local override of the default
+      CSS formatting.  This will allow users who have a different visual
+      style that they prefer to make RFCs display with that style
+      without having to alter the contents of the HTML document.  This
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                     [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc7992#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+      might also be valuable for allowing people with specific
+      accessibility needs to use a customized CSS.
+
+   o  HTML tags in documents will rarely have attributes whose only
+      purpose is to affect the rendered styling, and those will only be
+      used if it would not be possible to specify that styling in a CSS.
+      No such attributes are known at this time.
+
+   o  Both user-defined and auto-generated anchors must be supported and
+      linkable, with user-defined anchors appearing in an &quot;id&quot;
+      attribute.  Auto-generated anchors will be generated for every
+      heading, paragraph, and so on, not just those that do not have
+      user-defined anchors.  User-defined anchors may, and auto-
+      generated anchors will, appear next to paragraphs, figures,
+      tables, blockquotes, and section titles.
+
+   o  All sections, subsections, figures, and paragraphs should have
+      stable numbered link anchors.  Additionally, anchors expressed in
+      the source XML should be exposed as anchors in the HTML output as
+      well.
+
+   o  The HTML must make it easy to separate sections along with all of
+      their subsections into separate files.  This will make creating
+      EPUB documents easier in the future.
+
+   o  The HTML produced for Internet-Drafts will differ from that
+      produced by the RFC Editor due to differences in the output from
+      the prep tool.
+
+   o  The abstract must be marked up or tagged in a way that popular
+      search engines will extract it as a summary.
+
+<span class="h3"><h3><a class="selflink" name="section-2.1" href="https://tools.ietf.org/html/rfc7992#section-2.1">2.1</a>. Requirements for Accessibility</h3></span>
+
+   o  Normative information must be easily accessible to the following
+      consumers:
+
+      *  People with impaired vision, including those that use large
+         fonts and those that use screen readers
+
+      *  People with difficulty distinguishing between colors
+
+      *  People who use devices with small screens, such as cell phones
+
+   o  Specific instances where goals for accessibility are important in
+      the design choices of the format have been called out in the text.
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                     [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc7992#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+   o  Note: designing for these consumers does not preclude the use of
+      features they cannot use, but it does require that key semantic
+      data not be lost when read using the tools and settings that are
+      required by a given constituency.
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc7992#section-3">3</a>. HTML Version</h2></span>
+
+   The RFC Editor will periodically determine which version of the HTML
+   specification will be referenced for tools generating the format
+   defined in this document.  The starting version will be that defined
+   in [<a href="https://tools.ietf.org/html/rfc7992#ref-W3C.REC-html5-20141028" title="&quot;HTML5&quot;">W3C.REC-html5-20141028</a>], commonly known as &quot;HTML5&quot;.  Although the
+   HTML specification mandates several of the syntax and structure rules
+   described in this document, they are called out here for emphasis.
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc7992#section-4">4</a>. HTML Syntax</h2></span>
+
+   The processor emitting HTML from the XML source will follow these
+   rules:
+
+   o  The HTML output is encoded as UTF-8, as specified in [<a href="https://tools.ietf.org/html/rfc3629" title="&quot;UTF-8, a transformation format of ISO 10646&quot;">RFC3629</a>].
+
+   o  The document is valid HTML.
+
+   o  Double quotes (U+0022 QUOTATION MARK: &quot;) are used to quote
+      attribute values unless the HTML specification forbids quoting a
+      particular attribute.
+
+   o  Each logical line is terminated solely with a \n (U+000A: LINE
+      FEED), otherwise known as &quot;Unix-style&quot; line endings.
+
+   o  Code points below (U+0020: SPACE) or character entity references
+      that generate them (e.g. &amp;#9;), other than (U+000A: LINE FEED) may
+      not be used.  Note: this rule explicitly forbids \t (U+0009:
+      CHARACTER TABULATION), \f (U+000C: FORM FEED), and \r (U+000D:
+      CARRIAGE RETURN) from appearing in the HTML output.
+
+   o  Comments in the source XML, if any, will not be copied into the
+      HTML.
+
+   o  The HTML output will be pretty-printed, using whatever consistent
+      rules are deemed best by the developers of the HTML production
+      tools.
+
+   Note: none of these rules affect the rendered output of the HTML, but
+   they are intended to increase the chance that text comparison tools
+   (e.g., &quot;diff&quot;) that operate on the HTML output are easier to write.
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                     [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc7992#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc7992#section-5">5</a>. Common Items</h2></span>
+
+   This section lists items that are common across multiple parts of the
+   HTML document.
+
+<span class="h3"><h3><a class="selflink" name="section-5.1" href="https://tools.ietf.org/html/rfc7992#section-5.1">5.1</a>. IDs</h3></span>
+
+   HTML elements that are generated from XML elements that include an
+   &quot;anchor&quot; attribute will use the value of the &quot;anchor&quot; attribute as
+   the value of the &quot;id&quot; attribute of the corresponding HTML element.
+   The prep tool produces XML with &quot;anchor&quot; attributes in all elements
+   that need them.  Some HTML constructs (such as &lt;section&gt;) will use
+   multiple instances of these identifiers.
+
+<span class="h3"><h3><a class="selflink" name="section-5.2" href="https://tools.ietf.org/html/rfc7992#section-5.2">5.2</a>. Pilcrows</h3></span>
+
+   Each paragraph, artwork, or sourcecode segment outside of a &lt;figure&gt;
+   or &lt;table&gt; element will be appended with a space and a &quot;pilcrow&quot;
+   (U+00B6: PILCROW SIGN), otherwise known as a &quot;paragraph sign&quot;.  For
+   the purposes of clarity in ASCII renderings of this document, in this
+   document pilcrows are rendered as &quot;&amp;para;&quot;.  The pilcrow will be
+   linked to the &quot;id&quot; attribute on the XML entity to which it is
+   associated using an &lt;a&gt; element of class &quot;pilcrow&quot;.  For example:
+
+   &lt;p id=&quot;s-1.1-1&quot;&gt;
+     Some paragraph text. &lt;a class=&quot;pilcrow&quot; href=&quot;#s-1.1-1&quot;&gt;&amp;para;&lt;/a&gt;
+   &lt;/p&gt;
+
+   The pilcrow will normally be invisible unless the element it is
+   attached to is moused over.  The pilcrow will be surrounded by a link
+   that points to the element it is attached to.
+
+   Pilcrows are never included inside a &lt;table&gt; or &lt;figure&gt; element,
+   since the figure number or table number serves as an adequate link
+   target.
+
+   Elements that might otherwise contain a pilcrow do not get marked
+   with a pilcrow if they contain one or more child elements that are
+   marked with a pilcrow.  For example:
+
+   &lt;blockquote id=&quot;s-1.2-1&quot;&gt;
+     &lt;p id=&quot;s-1.2-2&quot;&gt;Four score and seven years ago our fathers brought
+       forth on this continent, a new nation, conceived in Liberty, and
+       dedicated to the proposition that all men are created equal.
+       &lt;a href=&quot;#s-1.2-2&quot; class=&quot;pilcrow&quot;&gt;&amp;para;&lt;/a&gt;&lt;/p&gt;
+     &lt;!-- NO pilcrow here --&gt;
+   &lt;/blockquote&gt;
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                     [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc7992#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc7992#section-6">6</a>. Front Matter</h2></span>
+
+   The front matter of the HTML format contains processing information,
+   metadata of various types, and styling information that applies to
+   the document as a whole.  This section describes HTML that is not
+   necessarily a direct transform from the XML format.  For more details
+   on each of the tags that generate content in this section, see
+   <a href="https://tools.ietf.org/html/rfc7992#section-9">Section 9</a>.
+
+<span class="h3"><h3><a class="selflink" name="section-6.1" href="https://tools.ietf.org/html/rfc7992#section-6.1">6.1</a>. DOCTYPE</h3></span>
+
+   The DOCTYPE of the document is &quot;html&quot;, which declares that the
+   document is compliant with HTML5.  The document will start with
+   exactly this string:
+
+   &lt;!DOCTYPE html&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-6.2" href="https://tools.ietf.org/html/rfc7992#section-6.2">6.2</a>. Root Element</h3></span>
+
+   The root element of the document is &lt;html&gt;.  This element includes a
+   &quot;lang&quot; attribute, whose value is a language tag, as discussed in
+   [<a href="https://tools.ietf.org/html/rfc5646" title="&quot;Tags for Identifying Languages&quot;">RFC5646</a>], that describes the natural language of the document.  The
+   language tag to be included is &quot;en&quot;.  The class of the &lt;html&gt; element
+   will be copied verbatim from the XML &lt;rfc&gt; element's &lt;front&gt;
+   element's &lt;seriesInfo&gt; element's &quot;name&quot; attributes (separated by
+   spaces; see <a href="https://tools.ietf.org/html/rfc7991#section-2.47.3">Section&nbsp;2.47.3 of [RFC7991]</a>), allowing CSS to style RFCs
+   and Internet-Drafts differently from one another (if needed):
+
+   &lt;html lang=&quot;en&quot; class=&quot;RFC&quot;&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-6.3" href="https://tools.ietf.org/html/rfc7992#section-6.3">6.3</a>. &lt;head&gt; Element</h3></span>
+
+   The root &lt;html&gt; will contain a &lt;head&gt; element that contains the
+   following elements, as needed.
+
+<span class="h4"><h4><a class="selflink" name="section-6.3.1" href="https://tools.ietf.org/html/rfc7992#section-6.3.1">6.3.1</a>. Charset Declaration</h4></span>
+
+   In order to be correctly processed by browsers that load the HTML
+   using a mechanism that does not provide a valid content-type or
+   charset (such as from a local file system using a &quot;file:&quot; URL), the
+   HTML &lt;head&gt; element contains a &lt;meta&gt; element, whose &quot;charset&quot;
+   attribute value is &quot;utf-8&quot;:
+
+   &lt;meta charset=&quot;utf-8&quot;&gt;
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                     [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc7992#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h4"><h4><a class="selflink" name="section-6.3.2" href="https://tools.ietf.org/html/rfc7992#section-6.3.2">6.3.2</a>. Document Title</h4></span>
+
+   The contents of the &lt;title&gt; element from the XML source will be
+   placed inside an HTML &lt;title&gt; element in the header.
+
+<span class="h4"><h4><a class="selflink" name="section-6.3.3" href="https://tools.ietf.org/html/rfc7992#section-6.3.3">6.3.3</a>. Document Metadata</h4></span>
+
+   The following &lt;meta&gt; elements will be included:
+
+   o  author - one each for the each of the &quot;fullname&quot;s and
+      &quot;asciiFullname&quot;s of all of the &lt;author&gt;s from the &lt;front&gt; of the
+      XML source
+
+   o  description - the &lt;abstract&gt; from the XML source
+
+   o  generator - the name and version number of the software used to
+      create the HTML
+
+   o  keywords - comma-separated &lt;keyword&gt;s from the XML source
+
+   For example:
+
+   &lt;meta name=&quot;author&quot; content=&quot;Joe Hildebrand&quot;&gt;
+   &lt;meta name=&quot;author&quot; content=&quot;JOE HILDEBRAND&quot;&gt;
+   &lt;meta name=&quot;author&quot; content=&quot;Heather Flanagan&quot;&gt;
+   &lt;meta name=&quot;description&quot; content=&quot;This document defines...&quot;&gt;
+   &lt;meta name=&quot;generator&quot; content=&quot;xmljade v0.2.4&quot;&gt;
+   &lt;meta name=&quot;keywords&quot; content=&quot;html,css,rfc&quot;&gt;
+
+   Note: the HTML &lt;meta&gt; tag does not contain a closing slash.
+
+<span class="h4"><h4><a class="selflink" name="section-6.3.4" href="https://tools.ietf.org/html/rfc7992#section-6.3.4">6.3.4</a>. Link to XML Source</h4></span>
+
+   The &lt;head&gt; element contains a &lt;link&gt; tag, with &quot;rel&quot; attribute of
+   &quot;alternate&quot;, &quot;type&quot; attribute of &quot;application/rfc+xml&quot;, and &quot;href&quot;
+   attribute pointing to the prepared XML source that was used to
+   generate this document.
+
+   &lt;link rel=&quot;alternate&quot; type=&quot;application/rfc+xml&quot; href=&quot;source.xml&quot;&gt;
+
+<span class="h4"><h4><a class="selflink" name="section-6.3.5" href="https://tools.ietf.org/html/rfc7992#section-6.3.5">6.3.5</a>. Link to License</h4></span>
+
+   The &lt;head&gt; element contains a &lt;link&gt; tag, with &quot;rel&quot; attribute of
+   &quot;license&quot; and &quot;href&quot; attribute pointing to the an appropriate
+   copyright license for the document.
+
+   &lt;link rel=&quot;license&quot;
+      href=&quot;https://trustee.ietf.org/trust-legal-provisions.html&quot;&gt;
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc7992#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h4"><h4><a class="selflink" name="section-6.3.6" href="https://tools.ietf.org/html/rfc7992#section-6.3.6">6.3.6</a>. Style</h4></span>
+
+   The &lt;head&gt; element contains an embedded CSS in a &lt;style&gt; element.
+   The styles in the style sheet are to be set consistently between
+   documents by the RFC Editor, according to the best practices of the
+   day.
+
+   To ensure consistent formatting, individual style attributes should
+   not be used in the main portion of the document.
+
+   Different readers of a specification will desire different formatting
+   when reading the HTML versions of RFCs.  To facilitate this, the
+   &lt;head&gt; element also includes a &lt;link&gt; to a style sheet in the same
+   directory as the HTML file, named &quot;rfc-local.css&quot;.  Any formatting in
+   the linked style sheet will override the formatting in the included
+   style sheet.  For example:
+
+   &lt;style&gt;
+     body {}
+     ...
+   &lt;/style&gt;
+   &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;rfc-local.css&quot;&gt;
+
+<span class="h4"><h4><a class="selflink" name="section-6.3.7" href="https://tools.ietf.org/html/rfc7992#section-6.3.7">6.3.7</a>. Links</h4></span>
+
+   Each &lt;link&gt; element from the XML source is copied into the HTML
+   header.  Note: the HTML &lt;link&gt; element does not include a closing
+   slash.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc7992#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-6.4" href="https://tools.ietf.org/html/rfc7992#section-6.4">6.4</a>. Page Headers and Footers</h3></span>
+
+   In order to simplify printing by HTML renderers that implement
+   [<a href="https://tools.ietf.org/html/rfc7992#ref-W3C.WD-css3-page-20130314" title="&quot;CSS Paged Media Module Level 3&quot;">W3C.WD-css3-page-20130314</a>], a hidden HTML &lt;table&gt; tag of class
+   &quot;ears&quot; is added at the beginning of the HTML &lt;body&gt; tag, containing
+   HTML &lt;thead&gt; and &lt;tfoot&gt; tags, each of which contains an HTML &lt;tr&gt;
+   tag, which contains three HTML &lt;td&gt; tags with class &quot;left&quot;, &quot;center&quot;,
+   and &quot;right&quot;, respectively.
+
+   The &lt;thead&gt; corresponds to the top of the page, the &lt;tfoot&gt; to the
+   bottom.  The string &quot;[Page]&quot; can be used as a placeholder for the
+   page number.  In practice, this must always be in the &lt;tfoot&gt;'s right
+   &lt;td&gt;, and no control of the formatting of the page number is implied.
+
+   &lt;table class=&quot;ears&quot;&gt;
+     &lt;thead&gt;
+       &lt;tr&gt;
+         &lt;td class=&quot;left&quot;&gt;Internet-Draft&lt;/td&gt;
+         &lt;td class=&quot;center&quot;&gt;HTML RFC&lt;/td&gt;
+         &lt;td class=&quot;right&quot;&gt;March 2016&lt;/td&gt;
+       &lt;/tr&gt;
+     &lt;/thead&gt;
+     &lt;tfoot&gt;
+       &lt;tr&gt;
+         &lt;td class=&quot;left&quot;&gt;Hildebrand&lt;/td&gt;
+         &lt;td class=&quot;center&quot;&gt;Expires September 2, 2016&lt;/td&gt;
+         &lt;td class=&quot;right&quot;&gt;[Page]&lt;/td&gt;
+       &lt;/tr&gt;
+     &lt;/tfoot&gt;
+   &lt;/table&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-13" id="page-13" href="https://tools.ietf.org/html/rfc7992#page-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-6.5" href="https://tools.ietf.org/html/rfc7992#section-6.5">6.5</a>. Document Information</h3></span>
+
+   Information about the document as a whole will appear as the first
+   child of the HTML &lt;body&gt; element, embedded in an HTML &lt;dl&gt; element
+   with id=&quot;identifiers&quot;.  The defined terms in the definition list are
+   &quot;Workgroup:&quot;, &quot;Series:&quot;, &quot;Status:&quot;, &quot;Published:&quot;, and &quot;Author:&quot; or
+   &quot;Authors:&quot; (as appropriate).  For example:
+
+   &lt;dl id=&quot;identifiers&quot;&gt;
+     &lt;dt&gt;Workgroup:&lt;/dt&gt;
+       &lt;dd class=&quot;workgroup&quot;&gt;rfc-interest&lt;/dd&gt;
+     &lt;dt&gt;Series:&lt;/dt&gt;
+       &lt;dd class=&quot;series&quot;&gt;Internet-Draft&lt;/dd&gt;
+     &lt;dt&gt;Status:&lt;/dt&gt;
+       &lt;dd class=&quot;status&quot;&gt;Informational&lt;/dd&gt;
+     &lt;dt&gt;Published:&lt;/dt&gt;
+       &lt;dd&gt;&lt;time datetime=&quot;2014-10-25&quot;
+                 class=&quot;published&quot;&gt;2014-10-25&lt;/time&gt;&lt;/dd&gt;
+     &lt;dt&gt;Authors:&lt;/dt&gt;
+       &lt;dd class=&quot;authors&quot;&gt;
+         &lt;div class=&quot;author&quot;&gt;
+           &lt;span class=&quot;initial&quot;&gt;J.&lt;/span&gt;
+           &lt;span class=&quot;surname&quot;&gt;Hildebrand&lt;/span&gt;
+           (&lt;span class=&quot;organization&quot;&gt;Cisco Systems, Inc.&lt;/span&gt;)
+           &lt;span class=&quot;editor&quot;&gt;Ed.&lt;/span&gt;
+         &lt;/div&gt;
+         &lt;div class=&quot;author&quot;&gt;
+           &lt;span class=&quot;initial&quot;&gt;H.&lt;/span&gt;
+           &lt;span class=&quot;surname&quot;&gt;Flanagan&lt;/span&gt;
+           (&lt;span class=&quot;organization&quot;&gt;RFC Editor&lt;/span&gt;)
+         &lt;/div&gt;
+       &lt;/dd&gt;
+   &lt;/dl&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 13]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-14" id="page-14" href="https://tools.ietf.org/html/rfc7992#page-14" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-6.6" href="https://tools.ietf.org/html/rfc7992#section-6.6">6.6</a>. Table of Contents</h3></span>
+
+   The table of contents will follow the boilerplate if the XML's &lt;rfc&gt;
+   element's &quot;tocInclude&quot; attribute has the value &quot;true&quot;.  An HTML &lt;h2&gt;
+   heading containing the text &quot;Table of Contents&quot; will be followed by a
+   &lt;nav&gt; element that contains a &lt;ul&gt; element for each depth of the
+   section hierarchy.  Each section will be represented by a &lt;li&gt;
+   element containing links by the section number (from the &quot;pn&quot;
+   attribute) and by the name (from the &quot;slugifiedName&quot; attribute of the
+   &lt;name&gt; child element).  Each &lt;nav&gt;, &lt;ul&gt;, and &lt;li&gt; element will have
+   the class &quot;toc&quot;.
+
+   For example:
+
+   &lt;h2 id=&quot;toc&quot;&gt;Table of Contents&lt;/h2&gt;
+   &lt;nav class=&quot;toc&quot;&gt;
+     &lt;ul class=&quot;toc&quot;&gt;
+       &lt;li class=&quot;toc&quot;&gt;
+         &lt;a href=&quot;s-1&quot;&gt;1&lt;/a&gt;. &lt;a href=&quot;n-introduction&quot;&gt;Introduction&lt;/a&gt;
+       &lt;/li&gt;
+       &lt;ul class=&quot;toc&quot;&gt;
+         &lt;li class=&quot;toc&quot;&gt;
+           &lt;a href=&quot;s-1.1&quot;&gt;1.1&lt;/a&gt;. &lt;a href=&quot;n-sub-intro&quot;&gt;Sub Intro&lt;/a&gt;
+         &lt;/li&gt;
+   ...
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc7992#section-7">7</a>. Main Body</h2></span>
+
+   The main body of the HTML document is processed according to the
+   rules in <a href="https://tools.ietf.org/html/rfc7992#section-9">Section 9</a>.
+
+<span class="h2"><h2><a class="selflink" name="section-8" href="https://tools.ietf.org/html/rfc7992#section-8">8</a>. Back Matter</h2></span>
+
+   The back matter of the HTML document includes an index (if
+   generated), information about the authors, and further information
+   about the document itself.
+
+<span class="h3"><h3><a class="selflink" name="section-8.1" href="https://tools.ietf.org/html/rfc7992#section-8.1">8.1</a>. Index</h3></span>
+
+   The index will be produced as dictated by the RFC Editor's Style
+   Guide [<a href="https://tools.ietf.org/html/rfc7992#ref-RFC-STYLE" title="&quot;Style Guide&quot;">RFC-STYLE</a>] if and only if the XML document's &lt;rfc&gt; element has
+   an &quot;indexInclude&quot; attribute with the value &quot;true&quot; and there is one or
+   more &lt;iref&gt; elements in the document.
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 14]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-15" id="page-15" href="https://tools.ietf.org/html/rfc7992#page-15" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h4"><h4><a class="selflink" name="section-8.1.1" href="https://tools.ietf.org/html/rfc7992#section-8.1.1">8.1.1</a>. Index Contents</h4></span>
+
+   The index section will start with an &lt;h2&gt; heading containing the text
+   &quot;Index&quot;, followed by links to each of the lettered portions of the
+   index.  Links are not generated for letters that do not occur as the
+   first letter of an index item.
+
+   For example:
+
+   &lt;h2&gt;Index&lt;/h2&gt;
+   &lt;div class=&quot;index&quot;&gt;
+     &lt;div class=&quot;indexIndex&quot;&gt;
+       &lt;a href=&quot;#rfc.index.C&quot;&gt;C&lt;/a&gt;
+       &lt;a href=&quot;#rfc.index.P&quot;&gt;P&lt;/a&gt;
+     &lt;/div&gt;
+     ...
+
+<span class="h4"><h4><a class="selflink" name="section-8.1.2" href="https://tools.ietf.org/html/rfc7992#section-8.1.2">8.1.2</a>. Index Letters</h4></span>
+
+   The index letter is followed by a &lt;ul&gt; tag that contains an &lt;li&gt; tag
+   for each first letter represented in the index.  This &lt;li&gt; tag has
+   the class &quot;indexChar&quot; and contains an &lt;a&gt; tag with the id pointed to
+   by the index letter as well as an &quot;href&quot; attribute to itself.  The
+   &lt;li&gt; tag also includes a &lt;ul&gt; tag that will contain the index items.
+
+   For example:
+
+   &lt;ul&gt;
+     &lt;li class=&quot;indexChar&quot;&gt;
+       &lt;a href=&quot;#rfc.index.C&quot; id=&quot;rfc.index.C&quot;&gt;C&lt;/a&gt;
+       &lt;ul&gt;
+         &lt;!-- items go here --&gt;
+       &lt;/ul&gt;
+     &lt;/li&gt;
+     ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 15]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-16" id="page-16" href="https://tools.ietf.org/html/rfc7992#page-16" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h4"><h4><a class="selflink" name="section-8.1.3" href="https://tools.ietf.org/html/rfc7992#section-8.1.3">8.1.3</a>. Index Items</h4></span>
+
+   Each index item can have multiple &lt;iref&gt; elements to point to, all
+   with the same item attribute.  Each index item is represented by an
+   &lt;li&gt; tag of class &quot;indexItem&quot; containing a &lt;span&gt; of class &quot;irefItem&quot;
+   for the item text and one of class &quot;irefRefs&quot; for the generated
+   references (if there is at least one reference to the item not having
+   a subitem).  Each generated reference contains an &lt;a&gt; tag containing
+   the section number where the &lt;iref&gt; is found, with an &quot;href&quot;
+   attribute pointing to the &quot;irefid&quot; attribute of the &lt;iref&gt; element
+   from the XML document.  If the primary attribute of the &lt;iref&gt;
+   element has the value &quot;true&quot;, the &lt;a&gt; element in the HTML document
+   will have the class &quot;indexPrimary&quot;.  Commas may be used to separate
+   the generated references.
+
+   For example:
+
+   &lt;li class=&quot;indexItem&quot;&gt;
+     &lt;span class=&quot;irefItem&quot;&gt;Bullets&lt;/span&gt;
+     &lt;span class=&quot;irefRefs&quot;&gt;
+       &lt;a class=&quot;indexPrimary&quot; href=&quot;#s-Bullets-1&quot;&gt;2&lt;/a&gt;,
+       &lt;a href=&quot;#s-Bullets-2&quot;&gt;2&lt;/a&gt;
+     &lt;/span&gt;
+     &lt;!-- subitems go here --&gt;
+   &lt;/li&gt;
+   ...
+
+<span class="h4"><h4><a class="selflink" name="section-8.1.4" href="https://tools.ietf.org/html/rfc7992#section-8.1.4">8.1.4</a>. Index Subitems</h4></span>
+
+   If an index item has at least one subitem, the &lt;li&gt; of that item will
+   contain a &lt;ul&gt;, with one &lt;li&gt; for each subitem, of class
+   &quot;indexSubItem&quot;.  The format for each subitem is similar to that used
+   for items, except the class of the first &lt;span&gt; tag is &quot;irefSubItem&quot;.
+
+   For example:
+
+   &lt;ul&gt;
+     &lt;li class=&quot;indexSubItem&quot;&gt;
+       &lt;span class=&quot;irefSubItem&quot;&gt;Ordered&lt;/span&gt;
+       &lt;span class=&quot;irefRefs&quot;&gt;
+         &lt;a href=&quot;#s-Bullets-Ordered-1&quot;&gt;2&lt;/a&gt;
+       &lt;/span&gt;
+     &lt;/li&gt;
+   &lt;/ul&gt;
+   ...
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 16]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-17" id="page-17" href="https://tools.ietf.org/html/rfc7992#page-17" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-8.2" href="https://tools.ietf.org/html/rfc7992#section-8.2">8.2</a>. Authors' Addresses Section</h3></span>
+
+   At the end of the document, author information will be included
+   inside an HTML &lt;section&gt; element whose &quot;id&quot; attribute is &quot;author-
+   addresses&quot;.  The class names of the constituent HTML tags have been
+   chosen to match the class names in [<a href="https://tools.ietf.org/html/rfc7992#ref-HCARD" title="&quot;hCard 1.0&quot;">HCARD</a>].
+
+   The information for each author will be separated by an HTML &lt;hr&gt;
+   element with class &quot;addr&quot;.
+
+   &lt;section id=&quot;author-addresses&quot;&gt;
+     &lt;h2&gt;
+       &lt;a class=&quot;selfRef&quot; href=&quot;#author-addresses&quot;&gt;
+         Authors' Addresses
+       &lt;/a&gt;
+     &lt;/h2&gt;
+     &lt;address class=&quot;vcard&quot;&gt;
+       &lt;div class=&quot;nameRole&quot;&gt;&lt;span class=&quot;fn&quot;&gt;Joe Hildebrand&lt;/span&gt;
+         (&lt;span class=&quot;role&quot;&gt;editor&lt;/span&gt;)&lt;/div&gt;
+       &lt;div class=&quot;org&quot;&gt;Cisco Systems, Inc.&lt;/div&gt;
+     &lt;/address&gt;
+     &lt;hr class=&quot;addr&quot;&gt;
+     &lt;address class=&quot;vcard&quot;&gt;
+       &lt;div class=&quot;nameRole&quot;&gt;&lt;span class=&quot;fn&quot;&gt;Heather Flanagan&lt;/span&gt;
+         (&lt;span class=&quot;role&quot;&gt;editor&lt;/span&gt;)&lt;/div&gt;
+       &lt;div class=&quot;org&quot;&gt;RFC Series Editor&lt;/div&gt;
+     &lt;/address&gt;
+   &lt;/section&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 17]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-18" id="page-18" href="https://tools.ietf.org/html/rfc7992#page-18" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-8.3" href="https://tools.ietf.org/html/rfc7992#section-8.3">8.3</a>. Document Information</h3></span>
+
+   A few bits of metadata about the document that are less important to
+   most readers are included after the author information.  These are
+   gathered together into a &lt;div&gt; of class &quot;docInfo&quot;.
+
+   The finalized time is copied from the &lt;rfc&gt; element's &quot;prepTime&quot;
+   attribute.  The rendered time is the time that this HTML was
+   generated.
+
+   For example:
+
+   &lt;div class=&quot;docInfo&quot;&gt;
+     &lt;span class=&quot;finalized&quot;&gt;
+       Finalized: &lt;time
+       datetime=&quot;2015-04-29T18:59:08Z&quot;&gt;2015-04-29T18:59:08Z&lt;/time&gt;
+     &lt;/span&gt;
+     &lt;span class=&quot;rendered&quot;&gt;
+       Rendered: &lt;time
+       datetime=&quot;2015-04-29T18:59:10Z&quot;&gt;2015-04-29T18:59:10Z&lt;/time&gt;
+     &lt;/span&gt;
+   &lt;/div&gt;
+
+<span class="h2"><h2><a class="selflink" name="section-9" href="https://tools.ietf.org/html/rfc7992#section-9">9</a>. Elements</h2></span>
+
+   This section describes how each of the XML elements from [<a href="https://tools.ietf.org/html/rfc7991" title="&quot;The &quot;">RFC7991</a>] is
+   rendered to HTML.  Many of the descriptions have examples to clarify
+   how elements will be rendered.
+
+<span class="h3"><h3><a class="selflink" name="section-9.1" href="https://tools.ietf.org/html/rfc7992#section-9.1">9.1</a>. &lt;abstract&gt;</h3></span>
+
+   The abstract is rendered in a similar fashion to a &lt;section&gt; with
+   anchor=&quot;abstract&quot; and &lt;name&gt;Abstract&lt;/name&gt;, but without a section
+   number.
+
+   &lt;section id=&quot;abstract&quot;&gt;
+     &lt;h2&gt;&lt;a href=&quot;#abstract&quot; class=&quot;selfRef&quot;&gt;Abstract&lt;/a&gt;&lt;/h2&gt;
+     &lt;p id=&quot;s-abstract-1&quot;&gt;This document defines...
+       &lt;a href=&quot;#s-abstract-1&quot; class=&quot;pilcrow&quot;&gt;&amp;para;&lt;/a&gt;
+     &lt;/p&gt;
+   &lt;/section&gt;
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 18]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-19" id="page-19" href="https://tools.ietf.org/html/rfc7992#page-19" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.2" href="https://tools.ietf.org/html/rfc7992#section-9.2">9.2</a>. &lt;address&gt;</h3></span>
+
+   This element is used in the Authors' Addresses section.  It is
+   rendered as an HTML &lt;address&gt; tag of class &quot;vcard&quot;.  If none of the
+   descendant XML elements has an &quot;ascii&quot; attribute, the &lt;address&gt; HTML
+   tag includes the HTML rendering of each of the descendant XML
+   elements.  Otherwise, the &lt;address&gt; HTML tag includes an HTML &lt;div&gt;
+   tag of class &quot;ascii&quot; (containing the HTML rendering of the ASCII
+   variants of each of the descendant XML elements), an HTML &lt;div&gt; tag
+   of class &quot;alternative-contact&quot;, (containing the text &quot;Alternate
+   contact information:&quot;), and an HTML &lt;div&gt; tag of class &quot;non-ascii&quot;
+   (containing the HTML rendering of the non-ASCII variants of each of
+   the descendant XML elements).
+
+   Note: the following example shows some ASCII equivalents that are the
+   same as their nominal equivalents for clarity; normally, the ASCII
+   equivalents would not be included for these cases.
+
+   &lt;address class=&quot;vcard&quot;&gt;
+     &lt;div class=&quot;ascii&quot;&gt;
+       &lt;div class=&quot;nameRole&quot;&gt;&lt;span class=&quot;fn&quot;&gt;Joe Hildebrand&lt;/span&gt;
+         (&lt;span class=&quot;role&quot;&gt;editor&lt;/span&gt;)&lt;/div&gt;
+       &lt;div class=&quot;org&quot;&gt;Cisco Systems, Inc.&lt;/div&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;alternative-contact&quot;&gt;
+       Alternate contact information:
+     &lt;/div&gt;
+     &lt;div class=&quot;non-ascii&quot;&gt;
+       &lt;div class=&quot;nameRole&quot;&gt;&lt;span class=&quot;fn&quot;&gt;Joe Hildebrand&lt;/span&gt;
+         (&lt;span class=&quot;role&quot;&gt;editor&lt;/span&gt;)&lt;/div&gt;
+       &lt;div class=&quot;org&quot;&gt;Cisco Systems, Inc.&lt;/div&gt;
+     &lt;/div&gt;
+   &lt;/address&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.3" href="https://tools.ietf.org/html/rfc7992#section-9.3">9.3</a>. &lt;annotation&gt;</h3></span>
+
+   This element is rendered as the text &quot;, &quot; (a comma and a space)
+   followed by a &lt;span&gt; of class &quot;annotation&quot; at the end of a
+   &lt;reference&gt; element, the &lt;span&gt; containing appropriately transformed
+   elements from the children of the &lt;annotation&gt; tag.
+
+    &lt;span class=&quot;annotation&quot;&gt;Some &lt;em&gt;thing&lt;/em&gt;.&lt;/span&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.4" href="https://tools.ietf.org/html/rfc7992#section-9.4">9.4</a>. &lt;area&gt;</h3></span>
+
+   Not currently rendered to HTML.
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 19]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-20" id="page-20" href="https://tools.ietf.org/html/rfc7992#page-20" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.5" href="https://tools.ietf.org/html/rfc7992#section-9.5">9.5</a>. &lt;artwork&gt;</h3></span>
+
+   Artwork can consist of either inline text or SVG.  If the artwork is
+   not inside a &lt;figure&gt; element, a pilcrow (<a href="https://tools.ietf.org/html/rfc7992#section-5.2">Section 5.2</a>) is included.
+   Inside a &lt;figure&gt; element, the figure title serves the purpose of the
+   pilcrow.  If the &quot;align&quot; attribute has the value &quot;right&quot;, the CSS
+   class &quot;alignRight&quot; will be added.  If the &quot;align&quot; attribute has the
+   value &quot;center&quot;, the CSS class &quot;alignCenter&quot; will be added.
+
+<span class="h4"><h4><a class="selflink" name="section-9.5.1" href="https://tools.ietf.org/html/rfc7992#section-9.5.1">9.5.1</a>. Text Artwork</h4></span>
+
+   Text artwork is rendered inside an HTML &lt;pre&gt; element, which is
+   contained by a &lt;div&gt; element for consistency with SVG artwork.  Note
+   that CDATA blocks are not a part of HTML, so angle brackets and
+   ampersands (i.e., &lt;, &gt;, and &amp;) must be escaped as &amp;lt;, &amp;gt;, and
+   &amp;amp;, respectively.
+
+   The &lt;div&gt; element will have CSS classes of &quot;artwork&quot;, &quot;art-text&quot;, and
+   &quot;art-&quot; prepended to the value of the &lt;artwork&gt; element's &quot;type&quot;
+   attribute, if it exists.
+
+   &lt;div class=&quot;artwork art-text art-ascii-art&quot;  id=&quot;s-1-2&quot;&gt;
+     &lt;pre&gt;
+    ______________
+   &amp;lt; hello, world &amp;gt;
+    --------------
+     \   ^__^
+      \  (oo)\_______
+         (__)\       )\/\
+             ||----w |
+             ||     ||
+     &lt;/pre&gt;
+     &lt;a class=&quot;pilcrow&quot; href=&quot;#s-1-2&quot;&gt;&amp;para;&lt;/a&gt;
+   &lt;/div&gt;
+
+<span class="h4"><h4><a class="selflink" name="section-9.5.2" href="https://tools.ietf.org/html/rfc7992#section-9.5.2">9.5.2</a>. SVG Artwork</h4></span>
+
+   SVG artwork will be included inline.  The SVG is wrapped in a &lt;div&gt;
+   element with CSS classes &quot;artwork&quot; and &quot;art-svg&quot;.
+
+   If the SVG &quot;artwork&quot; element is a child of &lt;figure&gt; and the artwork
+   is specified as align=&quot;right&quot;, an empty HTML &lt;span&gt; element is added
+   directly after the &lt;svg&gt; element, in order to get right alignment to
+   work correctly in HTML rendering engines that do not support the
+   flex-box model.
+
+   Note: the &quot;alt&quot; attribute of &lt;artwork&gt; is not currently used for SVG;
+   instead, the &lt;title&gt; and &lt;desc&gt; tags are used in the SVG.
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 20]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-21" id="page-21" href="https://tools.ietf.org/html/rfc7992#page-21" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+   &lt;div class=&quot;artwork art-svg&quot; id=&quot;s-2-17&quot;&gt;
+     &lt;svg width=&quot;100&quot; height=&quot;100&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+       &lt;desc&gt;Alt text here&lt;/desc&gt;
+       &lt;circle
+         cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;40&quot;
+         stroke=&quot;green&quot; stroke-width=&quot;4&quot; fill=&quot;yellow&quot; /&gt;
+     &lt;/svg&gt;
+     &lt;a href=&quot;#s-2-17&quot; class=&quot;pilcrow&quot;&gt;&amp;para;&lt;/a&gt;
+   &lt;/div&gt;
+
+<span class="h4"><h4><a class="selflink" name="section-9.5.3" href="https://tools.ietf.org/html/rfc7992#section-9.5.3">9.5.3</a>. Other Artwork</h4></span>
+
+   Other artwork will have a &quot;src&quot; attribute that uses the &quot;data&quot; URI
+   scheme defined in [<a href="https://tools.ietf.org/html/rfc2397" title="&quot;The &quot;">RFC2397</a>].  Such artwork is rendered in an HTML
+   &lt;img&gt; element.  Note: the HTML &lt;img&gt; element does not have a closing
+   slash.
+
+   Note: such images are not yet allowed in RFCs even though the format
+   supports them.  A limited set of &quot;data:&quot; mediatypes for artwork may
+   be allowed in the future.
+
+   &lt;div class=&quot;artwork art-logo&quot; id=&quot;s-2-58&quot;&gt;
+     &lt;img alt=&quot;IETF logo&quot;
+          src=&quot;data:image/gif;charset=utf-8;base64,...&quot;&gt;
+     &lt;a class=&quot;pilcrow&quot; href=&quot;#s-2-58&quot;&gt;&amp;para;&lt;/a&gt;
+   &lt;/div&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.6" href="https://tools.ietf.org/html/rfc7992#section-9.6">9.6</a>. &lt;aside&gt;</h3></span>
+
+   This element is rendered as an HTML &lt;aside&gt; element, with all child
+   content appropriately transformed.
+
+   &lt;aside id=&quot;s-2.1-2&quot;&gt;
+     &lt;p id=&quot;s-2.1-2.1&quot;&gt;
+       A little more than kin, and less than kind.
+       &lt;a class=&quot;pilcrow&quot; href=&quot;#s-2.1-2.1&quot;&gt;&amp;para;&lt;/a&gt;
+     &lt;/p&gt;
+   &lt;/aside&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.7" href="https://tools.ietf.org/html/rfc7992#section-9.7">9.7</a>. &lt;author&gt;</h3></span>
+
+   The &lt;author&gt; element is used in several places in the output.
+   Different rendering is used for each.
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 21]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-22" id="page-22" href="https://tools.ietf.org/html/rfc7992#page-22" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h4"><h4><a class="selflink" name="section-9.7.1" href="https://tools.ietf.org/html/rfc7992#section-9.7.1">9.7.1</a>. Authors in Document Information</h4></span>
+
+   As seen in the Document Information at the beginning of the HTML,
+   each document author is rendered as an HTML &lt;div&gt; tag of class
+   &quot;author&quot;.
+
+   Inside the &lt;div class=&quot;author&quot;&gt; HTML tag, the author's initials and
+   surname (or the fullname, if it exists and the others do not) will be
+   rendered in an HTML &lt;div&gt; tag of class &quot;author-name&quot;.  If the
+   &lt;author&gt; contains &quot;asciiInitials&quot; and &quot;asciiSurname&quot; attributes, or
+   contains as &quot;asciiFullname&quot; attribute, the author's name is rendered
+   twice, with the first being the non-ASCII version, wrapped in an HTML
+   &lt;span&gt; tag of class &quot;non-ascii&quot;, followed by the ASCII version
+   wrapped in an HTML &lt;span&gt; tag of class &quot;ascii&quot;, wrapped in
+   parentheses.  If the &lt;author&gt; has a &quot;role&quot; attribute of &quot;editor&quot;, the
+   &lt;div class=&quot;author-name&quot;&gt; will also contain the text &quot;, &quot; (comma,
+   space), followed by an HTML &lt;span&gt; tag of class &quot;editor&quot;, which
+   contains the text &quot;Ed.&quot;.
+
+   If the &lt;author&gt; element contains an &lt;organization&gt; element, it is
+   also rendered inside the &lt;div class=&quot;author&quot;&gt; HTML tag.
+
+   &lt;div class=&quot;author&quot;&gt;
+     &lt;div class=&quot;author-name&quot;&gt;
+       H. Flanagan,
+       &lt;span class=&quot;editor&quot;&gt;Ed.&lt;/span&gt;&lt;/div&gt;
+     &lt;div class=&quot;org&quot;&gt;Test Org&lt;/div&gt;
+   &lt;/div&gt;
+   &lt;div class=&quot;author&quot;&gt;
+     &lt;div class=&quot;author-name&quot;&gt;
+       &lt;span class=&quot;non-ascii&quot;&gt;Hildebrand&lt;/span&gt;
+       (&lt;span class=&quot;ascii&quot;&gt;HILDEBRAND&lt;/span&gt;)
+     &lt;/div&gt;
+     &lt;div class=&quot;org&quot;&gt;
+       &lt;span class=&quot;non-ascii&quot;&gt;Test Org&lt;/span&gt;
+       (&lt;span class=&quot;ascii&quot;&gt;TEST ORG&lt;/span&gt;)
+     &lt;/div&gt;
+   &lt;/div&gt;
+
+<span class="h4"><h4><a class="selflink" name="section-9.7.2" href="https://tools.ietf.org/html/rfc7992#section-9.7.2">9.7.2</a>. Authors of This Document</h4></span>
+
+   As seen in the Authors' Addresses section, at the end of the HTML,
+   each document author is rendered into an HTML &lt;address&gt; element with
+   the CSS class &quot;vcard&quot;.
+
+   The HTML &lt;address&gt; element will contain an HTML &lt;div&gt; with CSS class
+   &quot;nameRole&quot;.  That div will contain an HTML &lt;span&gt; element with CSS
+   class &quot;fn&quot; containing the value of the &quot;fullname&quot; attribute of the
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 22]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-23" id="page-23" href="https://tools.ietf.org/html/rfc7992#page-23" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+   &lt;author&gt; XML element and an HTML &lt;span&gt; element with CSS class &quot;role&quot;
+   containing the value of the &quot;role&quot; attribute of the &lt;author&gt; XML
+   element (if there is a role).  Parentheses will surround the &lt;span
+   class=&quot;role&quot;&gt;, if it exists.
+
+   &lt;address class=&quot;vcard&quot;&gt;
+     &lt;div class=&quot;nameRole&quot;&gt;
+       &lt;span class=&quot;fn&quot;&gt;Joe Hildebrand&lt;/span&gt;
+       (&lt;span class=&quot;role&quot;&gt;editor&lt;/span&gt;)
+     &lt;/div&gt;
+     ...
+
+   After the name, the &lt;organization&gt; and &lt;address&gt; child elements of
+   the author are rendered inside the HTML &lt;address&gt; tag.
+
+   When the &lt;author&gt; element, or any of its descendant elements, has any
+   attribute that starts with &quot;ascii&quot;, all of the author information is
+   displayed twice.  The first version is wrapped in an HTML &lt;div&gt; tag
+   with class &quot;ascii&quot;; this version prefers the ASCII version of
+   information, such as &quot;asciiFullname&quot;, but falls back on the non-ASCII
+   version if the ASCII version doesn't exist.  The second version is
+   wrapped in an HTML &lt;div&gt; tag with class &quot;non-ascii&quot;; this version
+   prefers the non-ASCII version of information, such as &quot;fullname&quot;, but
+   falls back on the ASCII version if the non-ASCII version does not
+   exist.  Between these two HTML &lt;div&gt;s, a third &lt;div&gt; is inserted,
+   with class &quot;alternative-contact&quot;, containing the text &quot;Alternate
+   contact information:&quot;.
+
+   &lt;address class=&quot;vcard&quot;&gt;
+     &lt;div class=&quot;ascii&quot;&gt;
+       &lt;div class=&quot;nameRole&quot;&gt;
+         &lt;span class=&quot;fn&quot;&gt;The ASCII name&lt;/span&gt;
+       &lt;/div&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;alternative-contact&quot;&gt;
+       Alternate contact information:
+     &lt;/div&gt;
+     &lt;div class=&quot;non-ascii&quot;&gt;
+       &lt;div class=&quot;nameRole&quot;&gt;
+         &lt;span class=&quot;fn&quot;&gt;The non-ASCII name&lt;/span&gt;
+         (&lt;span class=&quot;role&quot;&gt;editor&lt;/span&gt;)
+       &lt;/div&gt;
+     &lt;/div&gt;
+   &lt;/address&gt;
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 23]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-24" id="page-24" href="https://tools.ietf.org/html/rfc7992#page-24" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h4"><h4><a class="selflink" name="section-9.7.3" href="https://tools.ietf.org/html/rfc7992#section-9.7.3">9.7.3</a>. Authors of References</h4></span>
+
+   In the output generated from a reference element, author tags are
+   rendered inside an HTML &lt;span&gt; element with CSS class &quot;refAuthor&quot;.
+   See <a href="https://tools.ietf.org/html/rfc7322#section-4.8.6.2">Section&nbsp;4.8.6.2 of [RFC7322]</a> for guidance on how author names are
+   to appear.
+
+   &lt;span class=&quot;refAuthor&quot;&gt;Flanagan, H.&lt;/span&gt; and
+   &lt;span class=&quot;refAuthor&quot;&gt;N. Brownlee&lt;/span&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.8" href="https://tools.ietf.org/html/rfc7992#section-9.8">9.8</a>. &lt;back&gt;</h3></span>
+
+   If there is exactly one &lt;references&gt; child, render that child in a
+   similar way to a &lt;section&gt;.  If there are more than one &lt;references&gt;
+   children, render as a &lt;section&gt; whose name is &quot;References&quot;,
+   containing a &lt;section&gt; for each &lt;references&gt; child.
+
+   After any &lt;references&gt; sections, render each &lt;section&gt; child of
+   &lt;back&gt; as an appendix.
+
+   &lt;section id=&quot;n-references&quot;&gt;
+     &lt;h2 id=&quot;s-2&quot;&gt;
+       &lt;a class=&quot;selfRef&quot; href=&quot;#s-2&quot;&gt;2.&lt;/a&gt;
+       &lt;a class=&quot;selfRef&quot; href=&quot;#n-references&quot;&gt;References&lt;/a&gt;
+     &lt;/h2&gt;
+     &lt;section id=&quot;n-normative&quot;&gt;
+       &lt;h3 id=&quot;s-2.1&quot;&gt;
+         &lt;a class=&quot;selfRef&quot; href=&quot;#s-2.1&quot;&gt;2.1.&lt;/a&gt;
+         &lt;a class=&quot;selfRef&quot; href=&quot;#n-normative&quot;&gt;Normative&lt;/a&gt;
+       &lt;/h3&gt;
+       &lt;dl class=&quot;reference&quot;&gt;&lt;/dl&gt;
+     &lt;/section&gt;
+     &lt;section id=&quot;n-informational&quot;&gt;
+       &lt;h3 id=&quot;s-2.2&quot;&gt;
+         &lt;a class=&quot;selfRef&quot; href=&quot;#s-2.2&quot;&gt;2.2.&lt;/a&gt;
+         &lt;a class=&quot;selfRef&quot; href=&quot;#n-informational&quot;&gt;Informational&lt;/a&gt;
+       &lt;/h3&gt;
+       &lt;dl class=&quot;reference&quot;&gt;&lt;/dl&gt;
+     &lt;/section&gt;
+   &lt;/section&gt;
+   &lt;section id=&quot;n-unimportant&quot;&gt;
+     &lt;h2 id=&quot;s-A&quot;&gt;
+       &lt;a class=&quot;selfRef&quot; href=&quot;#s-A&quot;&gt;Appendix A.&lt;/a&gt;
+       &lt;a class=&quot;selfRef&quot; href=&quot;#n-unimportant&quot;&gt;Unimportant&lt;/a&gt;
+     &lt;/h2&gt;
+   &lt;/section&gt;
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 24]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-25" id="page-25" href="https://tools.ietf.org/html/rfc7992#page-25" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.9" href="https://tools.ietf.org/html/rfc7992#section-9.9">9.9</a>. &lt;<a href="https://tools.ietf.org/html/bcp14">bcp14</a>&gt;</h3></span>
+
+   This element marks up words like MUST and SHOULD [<a href="https://tools.ietf.org/html/rfc7992#ref-BCP14" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">BCP14</a>] with an HTML
+   &lt;span&gt; element with the CSS class &quot;<a href="https://tools.ietf.org/html/bcp14">bcp14</a>&quot;.
+
+   You &lt;span class=&quot;<a href="https://tools.ietf.org/html/bcp14">bcp14</a>&quot;&gt;MUST&lt;/span&gt; be joking.
+
+<span class="h3"><h3><a class="selflink" name="section-9.10" href="https://tools.ietf.org/html/rfc7992#section-9.10">9.10</a>. &lt;blockquote&gt;</h3></span>
+
+   This element renders in a way similar to the HTML &lt;blockquote&gt;
+   element.  If there is a &quot;cite&quot; attribute, it is copied to the HTML
+   &quot;cite&quot; attribute.  If there is a &quot;quoteFrom&quot; attribute, it is placed
+   inside a &lt;cite&gt; element at the end of the quote, with an &lt;a&gt; element
+   surrounding it (if there is a &quot;cite&quot; attribute), linking to the cited
+   URL.
+
+   If the &lt;blockquote&gt; does not contain another element that gets a
+   pilcrow (<a href="https://tools.ietf.org/html/rfc7992#section-5.2">Section 5.2</a>), a pilcrow is added.
+
+   Note that the &quot;&amp;mdash;&quot; at the beginning of the &lt;cite&gt; element should
+   be a proper emdash, which is difficult to show in the display of the
+   current format.
+
+   &lt;blockquote id=&quot;s-1.2-1&quot;
+     cite=&quot;http://...&quot;&gt;
+     &lt;p id=&quot;s-1.2-2&quot;&gt;Four score and seven years ago our fathers
+       brought forth on this continent, a new nation, conceived
+       in Liberty, and dedicated to the proposition that all men
+       are created equal.
+       &lt;a href=&quot;#s-1.2-2&quot; class=&quot;pilcrow&quot;&gt;&amp;para;&lt;/a&gt;
+     &lt;/p&gt;
+     &lt;cite&gt;&amp;mdash; &lt;a href=&quot;http://...&quot;&gt;Abraham Lincoln&lt;/a&gt;&lt;/cite&gt;
+   &lt;/blockquote&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 25]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-26" id="page-26" href="https://tools.ietf.org/html/rfc7992#page-26" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.11" href="https://tools.ietf.org/html/rfc7992#section-9.11">9.11</a>. &lt;boilerplate&gt;</h3></span>
+
+   The Status of This Memo and the Copyright statement, together
+   commonly referred to as the document boilerplate, appear after the
+   Abstract.  The children of the input &lt;boilerplate&gt; element are
+   treated in a similar fashion to unnumbered sections.
+
+   &lt;section id=&quot;status-of-this-memo&quot;&gt;
+     &lt;h2 id=&quot;s-boilerplate-1&quot;&gt;
+       &lt;a href=&quot;#status-of-this-memo&quot; class=&quot;selfRef&quot;&gt;
+         Status of this Memo&lt;/a&gt;
+     &lt;/h2&gt;
+     &lt;p id=&quot;s-boilerplate-1-1&quot;&gt;This Internet-Draft is submitted in full
+       conformance with the provisions of <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and <a href="https://tools.ietf.org/html/bcp79">BCP 79</a>.
+       &lt;a href=&quot;#s-boilerplate-1-1&quot; class=&quot;pilcrow&quot;&gt;&amp;para;&lt;/a&gt;
+     &lt;/p&gt;
+   ...
+
+<span class="h3"><h3><a class="selflink" name="section-9.12" href="https://tools.ietf.org/html/rfc7992#section-9.12">9.12</a>. &lt;br&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.  Note: in
+   HTML, &lt;br&gt; does not have a closing slash.
+
+<span class="h3"><h3><a class="selflink" name="section-9.13" href="https://tools.ietf.org/html/rfc7992#section-9.13">9.13</a>. &lt;city&gt;</h3></span>
+
+   This element is rendered as a &lt;span&gt; element with CSS class
+   &quot;locality&quot;.
+
+   &lt;span class=&quot;locality&quot;&gt;Guilford&lt;/span&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.14" href="https://tools.ietf.org/html/rfc7992#section-9.14">9.14</a>. &lt;code&gt;</h3></span>
+
+   This element is rendered as a &lt;span&gt; element with CSS class &quot;postal-
+   code&quot;.
+
+   &lt;span class=&quot;postal-code&quot;&gt;GU16 7HF&lt;span&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.15" href="https://tools.ietf.org/html/rfc7992#section-9.15">9.15</a>. &lt;country&gt;</h3></span>
+
+   This element is rendered as a &lt;div&gt; element with CSS class &quot;country-
+   name&quot;.
+
+   &lt;div class=&quot;country-name&quot;&gt;England&lt;/div&gt;
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 26]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-27" id="page-27" href="https://tools.ietf.org/html/rfc7992#page-27" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.16" href="https://tools.ietf.org/html/rfc7992#section-9.16">9.16</a>. &lt;cref&gt;</h3></span>
+
+   This element is rendered as a &lt;span&gt; element with CSS class &quot;cref&quot;.
+   Any anchor is copied to the &quot;id&quot; attribute.  If there is a source
+   given, it is contained inside the &quot;cref&quot; &lt;span&gt; element with another
+   &lt;span&gt; element of class &quot;crefSource&quot;.
+
+   &lt;span class=&quot;cref&quot; id=&quot;crefAnchor&quot;&gt;Just a brief comment
+   about something that we need to remember later.
+   &lt;span class=&quot;crefSource&quot;&gt;--life&lt;/span&gt;&lt;/span&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.17" href="https://tools.ietf.org/html/rfc7992#section-9.17">9.17</a>. &lt;date&gt;</h3></span>
+
+   This element is rendered as the HTML &lt;time&gt; element.  If the &quot;year&quot;,
+   &quot;month&quot;, or &quot;day&quot; attribute is included on the XML element, an
+   appropriate &quot;datetime&quot; element will be generated in HTML.
+
+   If this date is a child of the document's &lt;front&gt; element, it gets
+   the CSS class &quot;published&quot;.
+
+   If this date is inside a &lt;reference&gt; element, it gets the CSS class
+   &quot;refDate&quot;.
+
+   &lt;time datetime=&quot;2014-10&quot; class=&quot;published&quot;&gt;October 2014&lt;/time&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.18" href="https://tools.ietf.org/html/rfc7992#section-9.18">9.18</a>. &lt;dd&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+<span class="h3"><h3><a class="selflink" name="section-9.19" href="https://tools.ietf.org/html/rfc7992#section-9.19">9.19</a>. &lt;displayreference&gt;</h3></span>
+
+   This element does not affect the HTML output, but it is used in the
+   generation of the &lt;reference&gt;, &lt;referencegroup&gt;, &lt;relref&gt;, and &lt;xref&gt;
+   elements.
+
+<span class="h3"><h3><a class="selflink" name="section-9.20" href="https://tools.ietf.org/html/rfc7992#section-9.20">9.20</a>. &lt;dl&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+   If the hanging attribute is &quot;false&quot;, add the &quot;dlParallel&quot; class, else
+   add the &quot;dlHanging&quot; class.
+
+   If the spacing attribute is &quot;compact&quot;, add the &quot;dlCompact&quot; class.
+
+<span class="h3"><h3><a class="selflink" name="section-9.21" href="https://tools.ietf.org/html/rfc7992#section-9.21">9.21</a>. &lt;dt&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 27]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-28" id="page-28" href="https://tools.ietf.org/html/rfc7992#page-28" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.22" href="https://tools.ietf.org/html/rfc7992#section-9.22">9.22</a>. &lt;em&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+<span class="h3"><h3><a class="selflink" name="section-9.23" href="https://tools.ietf.org/html/rfc7992#section-9.23">9.23</a>. &lt;email&gt;</h3></span>
+
+   This element is rendered as an HTML &lt;div&gt; containing the string
+   &quot;Email:&quot; and an HTML &lt;a&gt; element with the &quot;href&quot; attribute set to the
+   equivalent &quot;mailto:&quot; URI, a CSS class of &quot;email&quot;, and the contents
+   set to the email address.  If this is the version of the address with
+   ASCII, the &quot;ascii&quot; attribute is preferred to the element text.
+
+   &lt;div&gt;
+     &lt;span&gt;Email:&lt;/span&gt;
+     &lt;a class=&quot;email&quot; href=&quot;mailto:joe@example.com&quot;&gt;joe@example.com&lt;/a&gt;
+   &lt;/div&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.24" href="https://tools.ietf.org/html/rfc7992#section-9.24">9.24</a>. &lt;eref&gt;</h3></span>
+
+   This element is rendered as an HTML &lt;a&gt; element, with the &quot;href&quot;
+   attribute set to the value of the &quot;target&quot; attribute and the CSS
+   class of &quot;eref&quot;.
+
+   &lt;a href=&quot;https://...&quot; class=&quot;eref&quot;&gt;the text&lt;/a&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.25" href="https://tools.ietf.org/html/rfc7992#section-9.25">9.25</a>. &lt;figure&gt;</h3></span>
+
+   This element renders as the HTML &lt;figure&gt; element, containing the
+   artwork or sourcecode indicated and an HTML &lt;figcaption&gt; element.
+   The &lt;figcaption&gt; element will contain an &lt;a&gt; element around the
+   figure number.  It will also contain another &lt;a&gt; element with CSS
+   class &quot;selfRef&quot; around the figure name, if a name was given.
+
+   &lt;figure id=&quot;f-1&quot;&gt;
+     ...
+     &lt;figcaption&gt;
+       &lt;a href=&quot;#f-1&quot;&gt;Figure 1.&lt;/a&gt;
+       &lt;a href=&quot;#n-it-figures&quot; id=&quot;n-it-figures&quot; class=&quot;selfRef&quot;&gt;
+         It figures
+       &lt;/a&gt;
+     &lt;/figcaption&gt;
+   &lt;/figure&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.26" href="https://tools.ietf.org/html/rfc7992#section-9.26">9.26</a>. &lt;front&gt;</h3></span>
+
+   See &quot;Document Information&quot; (<a href="https://tools.ietf.org/html/rfc7992#section-6.5">Section 6.5</a>) for information on this
+   element.
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 28]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-29" id="page-29" href="https://tools.ietf.org/html/rfc7992#page-29" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.27" href="https://tools.ietf.org/html/rfc7992#section-9.27">9.27</a>. &lt;iref&gt;</h3></span>
+
+   This element is rendered as an empty &lt;&gt; tag of class &quot;iref&quot;, with an
+   &quot;id&quot; attribute consisting of the &lt;iref&gt; element's &quot;irefid&quot; attribute:
+
+   &lt;span class=&quot;iref&quot; id=&quot;s-Paragraphs-first-1&quot;/&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.28" href="https://tools.ietf.org/html/rfc7992#section-9.28">9.28</a>. &lt;keyword&gt;</h3></span>
+
+   Each &lt;keyword&gt; element renders its text into the &lt;meta&gt; keywords in
+   the document's header, separated by commas.
+
+   &lt;meta name=&quot;keywords&quot; content=&quot;html,css,rfc&quot;&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.29" href="https://tools.ietf.org/html/rfc7992#section-9.29">9.29</a>. &lt;li&gt;</h3></span>
+
+   This element is rendered as its HTML counterpart.  However, if there
+   is no contained element that has a pilcrow (<a href="https://tools.ietf.org/html/rfc7992#section-5.2">Section 5.2</a>) attached, a
+   pilcrow is added.
+
+   &lt;li id=&quot;s-2-7&quot;&gt;Item &lt;a href=&quot;#s-2-7&quot; class=&quot;pilcrow&quot;&gt;&amp;para;&lt;/a&gt;&lt;/li&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.30" href="https://tools.ietf.org/html/rfc7992#section-9.30">9.30</a>. &lt;link&gt;</h3></span>
+
+   This element is rendered as its HTML counterpart, in the HTML header.
+
+<span class="h3"><h3><a class="selflink" name="section-9.31" href="https://tools.ietf.org/html/rfc7992#section-9.31">9.31</a>. &lt;middle&gt;</h3></span>
+
+   This element does not add any direct output to HTML.
+
+<span class="h3"><h3><a class="selflink" name="section-9.32" href="https://tools.ietf.org/html/rfc7992#section-9.32">9.32</a>. &lt;name&gt;</h3></span>
+
+   This element is never rendered directly; it is only rendered when
+   considering a parent element, such as &lt;figure&gt;, &lt;references&gt;,
+   &lt;section&gt;, or &lt;table&gt;.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 29]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-30" id="page-30" href="https://tools.ietf.org/html/rfc7992#page-30" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.33" href="https://tools.ietf.org/html/rfc7992#section-9.33">9.33</a>. &lt;note&gt;</h3></span>
+
+   This element is rendered like a &lt;section&gt; element, but without a
+   section number and with the CSS class of &quot;note&quot;.  If the
+   &quot;removeInRFC&quot; attribute is set to &quot;yes&quot;, the generated &lt;div&gt; element
+   will also include the CSS class &quot;rfcEditorRemove&quot;.
+
+   &lt;section id=&quot;s-note-1&quot; class=&quot;note rfcEditorRemove&quot;&gt;
+     &lt;h2&gt;
+       &lt;a href=&quot;#n-editorial-note&quot; class=&quot;selfRef&quot;&gt;Editorial Note&lt;/a&gt;
+     &lt;/h2&gt;
+     &lt;p id=&quot;s-note-1-1&quot;&gt;
+       Discussion of this draft takes place...
+       &lt;a href=&quot;#s-note-1-1&quot; class=&quot;pilcrow&quot;&gt;&amp;para;&lt;/a&gt;
+     &lt;/p&gt;
+   &lt;/section&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.34" href="https://tools.ietf.org/html/rfc7992#section-9.34">9.34</a>. &lt;ol&gt;</h3></span>
+
+   The output created from an &lt;ol&gt; element depends upon the &quot;style&quot;
+   attribute.
+
+   If the &quot;spacing&quot; attribute has the value &quot;compact&quot;, a CSS class of
+   &quot;olCompact&quot; will be added.
+
+   The group attribute is not copied; the input XML should have start
+   values added by a prep tool for all grouped &lt;ol&gt; elements.
+
+<span class="h4"><h4><a class="selflink" name="section-9.34.1" href="https://tools.ietf.org/html/rfc7992#section-9.34.1">9.34.1</a>. Percent Styles</h4></span>
+
+   If the style attribute includes the character &quot;%&quot;, the output is a
+   &lt;dl&gt; tag with the class &quot;olPercent&quot;.  Each contained &lt;li&gt; element is
+   emitted as a &lt;dt&gt;/&lt;dd&gt; pair, with the generated label in the &lt;dt&gt; and
+   the contents of the &lt;li&gt; in the &lt;dd&gt;.
+
+   &lt;dl class=&quot;olPercent&quot;&gt;
+     &lt;dt&gt;Requirement xviii:&lt;/dt&gt;
+     &lt;dd&gt;Wheels on a big rig&lt;/dd&gt;
+   &lt;/dl&gt;
+
+<span class="h4"><h4><a class="selflink" name="section-9.34.2" href="https://tools.ietf.org/html/rfc7992#section-9.34.2">9.34.2</a>. Standard Styles</h4></span>
+
+   For all other styles, an &lt;ol&gt; tag is emitted, with any &quot;style&quot;
+   attribute turned into the equivalent HTML attribute.
+
+   &lt;ol class=&quot;compact&quot; type=&quot;I&quot; start=&quot;18&quot;&gt;
+     &lt;li&gt;Wheels on a big rig&lt;/li&gt;
+   &lt;/ol&gt;
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 30]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-31" id="page-31" href="https://tools.ietf.org/html/rfc7992#page-31" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.35" href="https://tools.ietf.org/html/rfc7992#section-9.35">9.35</a>. &lt;organization&gt;</h3></span>
+
+   This element is rendered as an HTML &lt;div&gt; tag with CSS class &quot;org&quot;.
+
+   If the element contains the &quot;ascii&quot; attribute, the organization name
+   is rendered twice: once with the non-ASCII version wrapped in an HTML
+   &lt;span&gt; tag of class &quot;non-ascii&quot; and then as the ASCII version wrapped
+   in an HTML &lt;span&gt; tag of class &quot;ascii&quot; wrapped in parentheses.
+
+   &lt;div class=&quot;org&quot;&gt;
+     &lt;span class=&quot;non-ascii&quot;&gt;Test Org&lt;/span&gt;
+     (&lt;span class=&quot;ascii&quot;&gt;TEST ORG&lt;/span&gt;)
+   &lt;/div&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.36" href="https://tools.ietf.org/html/rfc7992#section-9.36">9.36</a>. &lt;phone&gt;</h3></span>
+
+   This element is rendered as an HTML &lt;div&gt; tag containing the string
+   &quot;Phone:&quot; (wrapped in a span), an HTML &lt;a&gt; tag with CSS class &quot;tel&quot;
+   containing the phone number (and an href with a corresponding &quot;tel:&quot;
+   URI), and an HTML &lt;span&gt; with CSS class &quot;type&quot; containing the string
+   &quot;VOICE&quot;.
+
+   &lt;div&gt;
+     &lt;span&gt;Phone:&lt;/span&gt;
+     &lt;a class=&quot;tel&quot; href=&quot;tel:+1-720-555-1212&quot;&gt;+1-720-555-1212&lt;/a&gt;
+     &lt;span class=&quot;type&quot;&gt;VOICE&lt;/span&gt;
+   &lt;/div&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.37" href="https://tools.ietf.org/html/rfc7992#section-9.37">9.37</a>. &lt;postal&gt;</h3></span>
+
+   This element renders as an HTML &lt;div&gt; with CSS class &quot;adr&quot;, unless it
+   contains one or more &lt;postalLine&gt; child elements; in which case, it
+   renders as an HTML &lt;pre&gt; element with CSS class &quot;label&quot;.
+
+   When there is no &lt;postalLine&gt; child, the following child elements are
+   rendered into the HTML:
+
+   o  Each &lt;street&gt; is rendered
+
+   o  A &lt;div&gt; that includes:
+
+      *  The rendering of all &lt;city&gt; elements
+
+      *  A comma and a space: &quot;, &quot;
+
+      *  The rendering of all &lt;region&gt; elements
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 31]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-32" id="page-32" href="https://tools.ietf.org/html/rfc7992#page-32" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+      *  Whitespace
+
+      *  The rendering of all &lt;code&gt; elements
+
+   o  The rendering of all &lt;country&gt; elements
+
+   &lt;div class=&quot;adr&quot;&gt;
+     &lt;div class=&quot;street-address&quot;&gt;1 Main Street&lt;/div&gt;
+     &lt;div class=&quot;street-address&quot;&gt;Suite 1&lt;/div&gt;
+     &lt;div&gt;
+       &lt;span class=&quot;city&quot;&gt;Denver&lt;/span&gt;,
+       &lt;span class=&quot;region&quot;&gt;CO&lt;/span&gt;
+       &lt;span class=&quot;postal-code&quot;&gt;80212&lt;/span&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;country-name&quot;&gt;United States of America&lt;/div&gt;
+   &lt;/div&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.38" href="https://tools.ietf.org/html/rfc7992#section-9.38">9.38</a>. &lt;postalLine&gt;</h3></span>
+
+   This element renders as the text contained by the element, followed
+   by a newline.  However, the last &lt;postalLine&gt; in a given &lt;postal&gt;
+   element should not be followed by a newline.  For example:
+
+   &lt;postal&gt;
+     &lt;postalLine&gt;In care of:&lt;/postalLine&gt;
+     &lt;postalLine&gt;Computer Sciences Division&lt;/postalLine&gt;
+   &lt;/postal&gt;
+
+   Would be rendered as:
+
+   &lt;pre class=&quot;label&quot;&gt;In care of:
+   Computer Sciences Division&lt;/pre&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.39" href="https://tools.ietf.org/html/rfc7992#section-9.39">9.39</a>. &lt;refcontent&gt;</h3></span>
+
+   This element renders as an HTML &lt;span&gt; with CSS class &quot;refContent&quot;.
+
+   &lt;span class=&quot;refContent&quot;&gt;Self-published pamphlet&lt;/span&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 32]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-33" id="page-33" href="https://tools.ietf.org/html/rfc7992#page-33" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.40" href="https://tools.ietf.org/html/rfc7992#section-9.40">9.40</a>. &lt;reference&gt;</h3></span>
+
+   If the parent of this element is not a &lt;referencegroup&gt;, this element
+   will render as a &lt;dt&gt; &lt;dd&gt; pair with the defined term being the
+   reference &quot;anchor&quot; attribute surrounded by square brackets and the
+   definition including the correct set of bibliographic information as
+   specified by [<a href="https://tools.ietf.org/html/rfc7322" title="&quot;RFC Style Guide&quot;">RFC7322</a>].  The &lt;dt&gt; element will have an &quot;id&quot; attribute
+   of the reference anchor.
+
+   &lt;dl class=&quot;reference&quot;&gt;
+     &lt;dt id=&quot;<a href="https://tools.ietf.org/html/rfc5646">RFC5646</a>&quot;&gt;[<a href="https://tools.ietf.org/html/rfc5646" title="&quot;Tags for Identifying Languages&quot;">RFC5646</a>]&lt;/dt&gt;
+     &lt;dd&gt;
+       &lt;span class=&quot;refAuthor&quot;&gt;Phillips, A.&lt;/span&gt;
+       &lt;span&gt;and&lt;/span&gt;
+       &lt;span class=&quot;refAuthor&quot;&gt;M. Davis&lt;/span&gt;
+       &lt;span class=&quot;refTitle&quot;&gt;&quot;Tags for Identifying Languages&quot;&lt;/span&gt;,
+       ...
+     &lt;/dd&gt;
+   &lt;/dl&gt;
+
+   If the child of a &lt;referencegroup&gt;, this element renders as a &lt;div&gt;
+   of class &quot;refInstance&quot; whose &quot;id&quot; attribute is the value of the
+   &lt;source&gt; element's &quot;anchor&quot; attribute.
+
+   &lt;div class=&quot;refInstance&quot; id=&quot;<a href="https://tools.ietf.org/html/rfc5730">RFC5730</a>&quot;&gt;
+     ...
+   &lt;/div&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.41" href="https://tools.ietf.org/html/rfc7992#section-9.41">9.41</a>. &lt;referencegroup&gt;</h3></span>
+
+   A &lt;referencegroup&gt; is translated into a &lt;dt&gt; &lt;dd&gt; pair, with the
+   defined term being the referencegroup &quot;anchor&quot; attribute surrounded
+   by square brackets, and the definition containing the translated
+   output of all of the child &lt;reference&gt; elements.
+
+   &lt;dt id=&quot;STD69&quot;&gt;[STD69]&lt;/dt&gt;
+   &lt;dd&gt;
+     &lt;div class=&quot;refInstance&quot; id=&quot;<a href="https://tools.ietf.org/html/rfc5730">RFC5730</a>&quot;&gt;
+       &lt;span class=&quot;refAuthor&quot;&gt;Hollenbeck, S.&lt;/span&gt;
+       ...
+     &lt;/div&gt;
+     &lt;div class=&quot;refInstance&quot; id=&quot;<a href="https://tools.ietf.org/html/rfc5731">RFC5731</a>&quot;&gt;
+       &lt;span class=&quot;refAuthor&quot;&gt;Hollenbeck, S.&lt;/span&gt;
+       ...
+     &lt;/div&gt;
+     ...
+   &lt;/dd&gt;
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 33]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-34" id="page-34" href="https://tools.ietf.org/html/rfc7992#page-34" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.42" href="https://tools.ietf.org/html/rfc7992#section-9.42">9.42</a>. &lt;references&gt;</h3></span>
+
+   If there is at exactly one &lt;references&gt; element, a section is added
+   to the document, continuing with the next section number after the
+   last top-level &lt;section&gt; in &lt;middle&gt;.  The &lt;name&gt; element of the
+   &lt;references&gt; element is used as the section name.
+
+   &lt;section id=&quot;n-my-references&quot;&gt;
+     &lt;h2 id=&quot;s-3&quot;&gt;
+       &lt;a href=&quot;#s-3&quot; class=&quot;selfRef&quot;&gt;3.&lt;/a&gt;
+       &lt;a href=&quot;#n-my-references class=&quot;selfRef&quot;&gt;My References&lt;/a&gt;
+     &lt;/h2&gt;
+     ...
+   &lt;/section&gt;
+
+   If there is more than one &lt;references&gt; element, an HTML &lt;section&gt;
+   element is created to contain a subsection for each of the
+   &lt;references&gt;.  The section number will be the next section number
+   after the last top-level &lt;section&gt; in &lt;middle&gt;.  The name of this
+   section will be &quot;References&quot;, and its &quot;id&quot; attribute will be
+   &quot;n-references&quot;.
+
+   &lt;section id=&quot;n-references&quot;&gt;
+     &lt;h2 id=&quot;s-3&quot;&gt;
+       &lt;a href=&quot;#s-3&quot; class=&quot;selfRef&quot;&gt;3.&lt;/a&gt;
+       &lt;a href=&quot;#n-references&quot; class=&quot;selfRef&quot;&gt;References&lt;/a&gt;
+     &lt;/h2&gt;
+     &lt;section id=&quot;n-informative-references&quot;&gt;
+       &lt;h3 id=&quot;s-3.1&quot;&gt;
+         &lt;a href=&quot;#s-3.1&quot; class=&quot;selfRef&quot;&gt;3.1.&lt;/a&gt;
+         &lt;a href=&quot;#n-informative-references&quot; class=&quot;selfRef&quot;&gt;
+           Informative References&lt;/a&gt;&lt;/h3&gt;
+       &lt;dl class=&quot;reference&quot;&gt;...
+       &lt;/dl&gt;
+     &lt;/section&gt;
+     ...
+   &lt;/section&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.43" href="https://tools.ietf.org/html/rfc7992#section-9.43">9.43</a>. &lt;region&gt;</h3></span>
+
+   This element is rendered as a &lt;span&gt; tag with CSS class &quot;region&quot;.
+
+   &lt;span class=&quot;region&quot;&gt;Colorado&lt;/span&gt;
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 34]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-35" id="page-35" href="https://tools.ietf.org/html/rfc7992#page-35" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.44" href="https://tools.ietf.org/html/rfc7992#section-9.44">9.44</a>. &lt;relref&gt;</h3></span>
+
+   This element is rendered as an HTML &lt;a&gt; tag with CSS class &quot;relref&quot;
+   and &quot;href&quot; attribute of the &quot;derivedLink&quot; attribute of the element.
+   Different values of the &quot;displayFormat&quot; attribute cause the text
+   inside that HTML &lt;a&gt; tag to change and cause extra text to be
+   generated.  Some values of the &quot;displayFormat&quot; attribute also cause
+   another HTML &lt;a&gt; tag to be rendered with CSS class &quot;xref&quot; and an
+   &quot;href&quot; of &quot;#&quot; and the &quot;target&quot; attribute (modified by any applicable
+   &lt;displayreference&gt; XML element) and text inside of the &quot;target&quot;
+   attribute (modified by any applicable &lt;displayreference&gt; XML
+   element).  When used, this &lt;a class='xref'&gt; HTML tag is always
+   surrounded by square brackets, for example, &quot;[&lt;a class='xref'
+   href='#foo'&gt;foo&lt;/a&gt;]&quot;.
+
+<span class="h4"><h4><a class="selflink" name="section-9.44.1" href="https://tools.ietf.org/html/rfc7992#section-9.44.1">9.44.1</a>. displayFormat='of'</h4></span>
+
+   The output is an &lt;a class='relref'&gt; HTML tag, with contents of
+   &quot;Section &quot; and the value of the &quot;section&quot; attribute.  This is
+   followed by the word &quot;of&quot; (surrounded by whitespace).  This is
+   followed by the &lt;a class='xref'&gt; HTML tag (surrounded by square
+   brackets).
+
+   For example, with an input of:
+
+   See &lt;relref section=&quot;2.3&quot; target=&quot;<a href="https://tools.ietf.org/html/rfc9999">RFC9999</a>&quot; displayFormat=&quot;of&quot;
+   derivedLink=&quot;http://www.rfc-editor.org/info/rfc9999#s-2.3&quot;/&gt;
+   for an overview.
+
+   The HTML generated will be:
+
+   See &lt;a class=&quot;relref&quot;
+   href=&quot;http://www.rfc-editor.org/info/rfc9999#s-2.3&quot;&gt;<a href="https://tools.ietf.org/html/rfc7992#section-2.3">Section</a>
+   <a href="https://tools.ietf.org/html/rfc7992#section-2.3">2.3</a>&lt;/a&gt; of [&lt;a class=&quot;xref&quot; href=&quot;#<a href="https://tools.ietf.org/html/rfc9999">RFC9999</a>&quot;&gt;<a href="https://tools.ietf.org/html/rfc9999">RFC9999</a>&lt;/a&gt;]
+   for an overview.
+
+<span class="h4"><h4><a class="selflink" name="section-9.44.2" href="https://tools.ietf.org/html/rfc7992#section-9.44.2">9.44.2</a>. displayFormat='comma'</h4></span>
+
+   The output is an &lt;a class='xref'&gt; HTML tag (wrapped by square
+   brackets), followed by a comma (&quot;,&quot;), followed by whitespace,
+   followed by an &lt;a class='relref'&gt; HTML tag, with contents of
+   &quot;Section &quot; and the value of the &quot;section&quot; attribute.
+
+   For example, with an input of:
+
+   See &lt;relref section=&quot;2.3&quot; target=&quot;<a href="https://tools.ietf.org/html/rfc9999">RFC9999</a>&quot; displayFormat=&quot;comma&quot;
+   derivedLink=&quot;http://www.rfc-editor.org/info/rfc9999#s-2.3&quot;/&gt;,
+   for an overview.
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 35]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-36" id="page-36" href="https://tools.ietf.org/html/rfc7992#page-36" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+   The HTML generated will be:
+
+   See [&lt;a class=&quot;xref&quot; href=&quot;#<a href="https://tools.ietf.org/html/rfc9999">RFC9999</a>&quot;&gt;<a href="https://tools.ietf.org/html/rfc9999">RFC9999</a>&lt;/a&gt;], &lt;a class=&quot;relref&quot;
+   href=&quot;http://www.rfc-editor.org/info/rfc9999#s-2.3&quot;&gt;<a href="https://tools.ietf.org/html/rfc7992#section-2.3">Section 2.3</a>&lt;/a&gt;,
+   for an overview.
+
+<span class="h4"><h4><a class="selflink" name="section-9.44.3" href="https://tools.ietf.org/html/rfc7992#section-9.44.3">9.44.3</a>. displayFormat='parens'</h4></span>
+
+   The output is an &lt;a&gt; element with &quot;href&quot; attribute whose value is the
+   value of the &quot;target&quot; attribute prepended by &quot;#&quot;, and whose content
+   is the value of the &quot;target&quot; attribute; the entire element is wrapped
+   in square brackets.  This is followed by whitespace.  This is
+   followed by an &lt;a&gt; element whose &quot;href&quot; attribute is the value of the
+   &quot;derivedLink&quot; attribute and whose content is the value of the
+   &quot;derivedRemoteContent&quot; attribute; the entire element is wrapped in
+   parentheses.
+
+   For example, if <a href="https://tools.ietf.org/html/rfc9999#section-2.3">Section&nbsp;2.3 of RFC 9999</a> has the title &quot;Protocol
+   Overview&quot;, for an input of:
+
+   See &lt;relref section=&quot;2.3&quot; target=&quot;<a href="https://tools.ietf.org/html/rfc9999">RFC9999</a>&quot; displayFormat=&quot;parens&quot;
+   derivedLink=&quot;http://www.rfc-editor.org/info/rfc9999#s-2.3&quot;
+   derivedRemoteContent=&quot;<a href="https://tools.ietf.org/html/rfc7992#section-2.3">Section 2.3</a>&quot;/&gt; for an overview.
+
+   The HTML generated will be:
+
+   See [&lt;a class=&quot;relref&quot; href=&quot;#<a href="https://tools.ietf.org/html/rfc9999">RFC9999</a>&quot;&gt;<a href="https://tools.ietf.org/html/rfc9999">RFC9999</a>&lt;/a&gt;]
+   (&lt;a class=&quot;relref&quot;
+   href=&quot;http://www.rfc-editor.org/info/rfc9999#s-2.3&quot;&gt;<a href="https://tools.ietf.org/html/rfc7992#section-2.3">Section</a>
+   <a href="https://tools.ietf.org/html/rfc7992#section-2.3">2.3</a>&lt;/a&gt;) for an overview.
+
+<span class="h4"><h4><a class="selflink" name="section-9.44.4" href="https://tools.ietf.org/html/rfc7992#section-9.44.4">9.44.4</a>. displayFormat='bare'</h4></span>
+
+   The output is an &lt;a&gt; element whose &quot;href&quot; attribute is the value of
+   the &quot;derivedLink&quot; attribute and whose content is the value of the
+   &quot;derivedRemoteContent&quot; attribute.
+
+   For this input:
+
+   See &lt;relref section=&quot;2.3&quot; target=&quot;<a href="https://tools.ietf.org/html/rfc9999">RFC9999</a>&quot; displayFormat=&quot;bare&quot;
+   derivedLink=&quot;http://www.rfc-editor.org/info/rfc9999#s-2.3&quot;
+   derivedRemoteContent=&quot;<a href="https://tools.ietf.org/html/rfc7992#section-2.3">Section 2.3</a>&quot;/&gt; and ...
+
+   The HTML generated will be:
+
+   See &lt;a class=&quot;relref&quot;
+   href=&quot;http://www.rfc-editor.org/info/rfc9999#s-2.3&quot;&gt;<a href="https://tools.ietf.org/html/rfc7992#section-2.3">Section</a>
+   <a href="https://tools.ietf.org/html/rfc7992#section-2.3">2.3</a>&lt;/a&gt; and ...
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 36]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-37" id="page-37" href="https://tools.ietf.org/html/rfc7992#page-37" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.45" href="https://tools.ietf.org/html/rfc7992#section-9.45">9.45</a>. &lt;rfc&gt;</h3></span>
+
+   Various attributes of this element are represented in different parts
+   of the HTML document.
+
+<span class="h3"><h3><a class="selflink" name="section-9.46" href="https://tools.ietf.org/html/rfc7992#section-9.46">9.46</a>. &lt;section&gt;</h3></span>
+
+   This element is rendered as an HTML &lt;section&gt; element, containing an
+   appropriate level HTML heading element (&lt;h2&gt;-&lt;h6&gt;).  That heading
+   element contains an &lt;a&gt; element around the part number (pn), if
+   applicable (for instance, &lt;abstract&gt; does not get a section number).
+   Another &lt;a&gt; element is included with the section's name.
+
+   &lt;section id=&quot;intro&quot;&gt;
+     &lt;h2 id=&quot;s-1&quot;&gt;
+       &lt;a href=&quot;#s-1&quot; class=&quot;selfRef&quot;&gt;1.&lt;/a&gt;
+       &lt;a href=&quot;#intro&quot; class=&quot;selfRef&quot;&gt;Introduction&lt;/a&gt;
+     &lt;/h2&gt;
+     &lt;p id=&quot;s-1-1&quot;&gt;Paragraph &lt;a href=&quot;#s-1-1&quot; class=&quot;pilcrow&quot;&gt;&amp;para;&lt;/a&gt;
+     &lt;/p&gt;
+   &lt;/section&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.47" href="https://tools.ietf.org/html/rfc7992#section-9.47">9.47</a>. &lt;seriesInfo&gt;</h3></span>
+
+   This element is rendered in an HTML &lt;span&gt; element with CSS name
+   &quot;seriesInfo&quot;.
+
+   &lt;span class=&quot;seriesInfo&quot;&gt;<a href="https://tools.ietf.org/html/rfc5646">RFC 5646</a>&lt;/span&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 37]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-38" id="page-38" href="https://tools.ietf.org/html/rfc7992#page-38" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.48" href="https://tools.ietf.org/html/rfc7992#section-9.48">9.48</a>. &lt;sourcecode&gt;</h3></span>
+
+   This element is rendered in an HTML &lt;pre&gt; element with a CSS class of
+   &quot;sourcecode&quot;.  Note that CDATA blocks do not work consistently in
+   HTML, so all &lt;, &gt;, and &amp; must be escaped as &amp;lt;, &amp;gt;, and &amp;amp;,
+   respectively.  If the input XML has a &quot;type&quot; attribute, another CSS
+   class of &quot;lang-&quot; and the type is added.
+
+   If the sourcecode is not inside a &lt;figure&gt; element, a pilcrow
+   (<a href="https://tools.ietf.org/html/rfc7992#section-5.2">Section 5.2</a>) is included.  Inside a &lt;figure&gt; element, the figure
+   title serves the purpose of the pilcrow.
+
+   &lt;pre class=&quot;sourcecode lang-c&quot;&gt;
+   #include &amp;lt;stdio.h&amp;gt;
+
+   int main(void)
+   {
+       printf(&amp;quot;hello, world\n&amp;quot;);
+       return 0;
+   }
+   &lt;/pre&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.49" href="https://tools.ietf.org/html/rfc7992#section-9.49">9.49</a>. &lt;street&gt;</h3></span>
+
+   This element renders as an HTML &lt;div&gt; element with CSS class &quot;street-
+   address&quot;.
+
+   &lt;div class=&quot;street-address&quot;&gt;1899 Wynkoop St, Suite 600&lt;/div&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.50" href="https://tools.ietf.org/html/rfc7992#section-9.50">9.50</a>. &lt;strong&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+<span class="h3"><h3><a class="selflink" name="section-9.51" href="https://tools.ietf.org/html/rfc7992#section-9.51">9.51</a>. &lt;sub&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+<span class="h3"><h3><a class="selflink" name="section-9.52" href="https://tools.ietf.org/html/rfc7992#section-9.52">9.52</a>. &lt;sup&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+<span class="h3"><h3><a class="selflink" name="section-9.53" href="https://tools.ietf.org/html/rfc7992#section-9.53">9.53</a>. &lt;t&gt;</h3></span>
+
+   This element is rendered as an HTML &lt;p&gt; element.  A pilcrow
+   (<a href="https://tools.ietf.org/html/rfc7992#section-5.2">Section 5.2</a>) is included.
+
+   &lt;p id=&quot;s-1-1&quot;&gt;A paragraph.
+     &lt;a href=&quot;#s-1-1&quot; class=&quot;pilcrow&quot;&gt;&amp;para;&lt;/a&gt;&lt;/p&gt;
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 38]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-39" id="page-39" href="https://tools.ietf.org/html/rfc7992#page-39" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.54" href="https://tools.ietf.org/html/rfc7992#section-9.54">9.54</a>. &lt;table&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+<span class="h3"><h3><a class="selflink" name="section-9.55" href="https://tools.ietf.org/html/rfc7992#section-9.55">9.55</a>. &lt;tbody&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+<span class="h3"><h3><a class="selflink" name="section-9.56" href="https://tools.ietf.org/html/rfc7992#section-9.56">9.56</a>. &lt;td&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+<span class="h3"><h3><a class="selflink" name="section-9.57" href="https://tools.ietf.org/html/rfc7992#section-9.57">9.57</a>. &lt;tfoot&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+<span class="h3"><h3><a class="selflink" name="section-9.58" href="https://tools.ietf.org/html/rfc7992#section-9.58">9.58</a>. &lt;th&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+<span class="h3"><h3><a class="selflink" name="section-9.59" href="https://tools.ietf.org/html/rfc7992#section-9.59">9.59</a>. &lt;thead&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+<span class="h3"><h3><a class="selflink" name="section-9.60" href="https://tools.ietf.org/html/rfc7992#section-9.60">9.60</a>. &lt;title&gt;</h3></span>
+
+   The title of the document appears in a &lt;title&gt; element in the &lt;head&gt;
+   element, as described in <a href="https://tools.ietf.org/html/rfc7992#section-6.3.2">Section 6.3.2</a>.
+
+   The title also appears in an &lt;h1&gt; element and follows directly after
+   the Document Information.  The &lt;h1&gt; element has an &quot;id&quot; attribute
+   with value &quot;title&quot;.
+
+   &lt;h1 id=&quot;title&quot;&gt;HyperText Markup Language Request For
+       Comments Format&lt;/h1&gt;
+
+   Inside a reference, the title is rendered as an HTML &lt;span&gt; tag with
+   CSS class &quot;refTitle&quot;.  The text is surrounded by quotes inside the
+   &lt;span&gt;.
+
+   &lt;span class=&quot;refTitle&quot;&gt;&quot;Tags for Identifying Languages&quot;&lt;/span&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.61" href="https://tools.ietf.org/html/rfc7992#section-9.61">9.61</a>. &lt;tr&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 39]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-40" id="page-40" href="https://tools.ietf.org/html/rfc7992#page-40" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.62" href="https://tools.ietf.org/html/rfc7992#section-9.62">9.62</a>. &lt;tt&gt;</h3></span>
+
+   This element is rendered as an HTML &lt;code&gt; element.
+
+<span class="h3"><h3><a class="selflink" name="section-9.63" href="https://tools.ietf.org/html/rfc7992#section-9.63">9.63</a>. &lt;ul&gt;</h3></span>
+
+   This element is directly rendered as its HTML counterpart.  If the
+   &quot;spacing&quot; attribute has the value &quot;compact&quot;, a CSS class of
+   &quot;ulCompact&quot; will be added.  If the &quot;empty&quot; attribute has the value
+   &quot;true&quot;, a CSS class of &quot;ulEmpty&quot; will be added.
+
+<span class="h3"><h3><a class="selflink" name="section-9.64" href="https://tools.ietf.org/html/rfc7992#section-9.64">9.64</a>. &lt;uri&gt;</h3></span>
+
+   This element is rendered as an HTML &lt;div&gt; containing the string
+   &quot;URI:&quot; and an HTML &lt;a&gt; element with the &quot;href&quot; attribute set to the
+   linked URI, CSS class of &quot;url&quot; (note that the value is &quot;url&quot;, not
+   &quot;uri&quot; as one might expect), and the contents set to the linked URI.
+
+   &lt;div&gt;URI:
+     &lt;a href=&quot;http://www.example.com&quot;
+        class=&quot;url&quot;&gt;http://www.example.com&lt;/a&gt;
+   &lt;/div&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-9.65" href="https://tools.ietf.org/html/rfc7992#section-9.65">9.65</a>. &lt;workgroup&gt;</h3></span>
+
+   This element does not add any direct output to HTML.
+
+<span class="h3"><h3><a class="selflink" name="section-9.66" href="https://tools.ietf.org/html/rfc7992#section-9.66">9.66</a>. &lt;xref&gt;</h3></span>
+
+   This element is rendered as an HTML &lt;a&gt; element containing an
+   appropriate local link as the &quot;href&quot; attribute.  The value of the
+   &quot;href&quot; attribute is taken from the &quot;target&quot; attribute, prepended by
+   &quot;#&quot;.  The &lt;a&gt; element generated will have class &quot;xref&quot;.  The contents
+   of the &lt;a&gt; element are the value of the &quot;derivedContent&quot; attribute.
+   If the &quot;format&quot; attribute has the value &quot;default&quot;, and the &quot;target&quot;
+   attribute points to a &lt;reference&gt; or &lt;referencegroup&gt; element, then
+   the generated &lt;a&gt; element is surrounded by square brackets in the
+   output.
+
+   &lt;a class=&quot;xref&quot; href=&quot;#target&quot;&gt;Table 2&lt;/a&gt;
+
+   or
+
+   [&lt;a class=&quot;xref&quot; href=&quot;#<a href="https://tools.ietf.org/html/rfc1234">RFC1234</a>&quot;&gt;<a href="https://tools.ietf.org/html/rfc1234">RFC1234</a>&lt;/a&gt;]
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 40]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-41" id="page-41" href="https://tools.ietf.org/html/rfc7992#page-41" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-9.67" href="https://tools.ietf.org/html/rfc7992#section-9.67">9.67</a>. &lt;svg xmlns='http://www.w3.org/2000/svg'&gt;</h3></span>
+
+   This element is rendered as part of the &lt;artwork&gt; element.  The
+   &quot;xmlns='http://www.w3.org/2000/svg'&quot; namespace declaration should be
+   included, and the SVG should be serialized as well-formed XML, even
+   for tags that would otherwise not need closing in HTML5.
+
+<span class="h2"><h2><a class="selflink" name="section-10" href="https://tools.ietf.org/html/rfc7992#section-10">10</a>. Security Considerations</h2></span>
+
+   Since RFCs are sometimes exchanged outside the normal Web sandboxing
+   mechanism (such as using the &quot;rsync&quot; program to a mirror site) then
+   loaded from a local file, more care must be taken with the HTML than
+   is ordinary on the web.
+
+<span class="h2"><h2><a class="selflink" name="section-11" href="https://tools.ietf.org/html/rfc7992#section-11">11</a>. References</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-11.1" href="https://tools.ietf.org/html/rfc7992#section-11.1">11.1</a>. Normative References</h3></span>
+
+   [<a name="ref-BCP14" id="ref-BCP14">BCP14</a>]    Bradner, S., &quot;Key words for use in RFCs to Indicate
+              Requirement Levels&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>, March 1997,
+              &lt;<a href="http://www.rfc-editor.org/info/bcp14">http://www.rfc-editor.org/info/bcp14</a>&gt;.
+
+   [<a name="ref-RFC2397" id="ref-RFC2397">RFC2397</a>]  Masinter, L., &quot;The &quot;data&quot; URL scheme&quot;, <a href="https://tools.ietf.org/html/rfc2397">RFC 2397</a>,
+              DOI 10.17487/RFC2397, August 1998,
+              &lt;<a href="http://www.rfc-editor.org/info/rfc2397">http://www.rfc-editor.org/info/rfc2397</a>&gt;.
+
+   [<a name="ref-RFC3629" id="ref-RFC3629">RFC3629</a>]  Yergeau, F., &quot;UTF-8, a transformation format of ISO
+              10646&quot;, STD 63, <a href="https://tools.ietf.org/html/rfc3629">RFC 3629</a>, DOI 10.17487/RFC3629, November
+              2003, &lt;<a href="http://www.rfc-editor.org/info/rfc3629">http://www.rfc-editor.org/info/rfc3629</a>&gt;.
+
+   [<a name="ref-RFC5646" id="ref-RFC5646">RFC5646</a>]  Phillips, A., Ed. and M. Davis, Ed., &quot;Tags for Identifying
+              Languages&quot;, <a href="https://tools.ietf.org/html/bcp47">BCP 47</a>, <a href="https://tools.ietf.org/html/rfc5646">RFC 5646</a>, DOI 10.17487/RFC5646,
+              September 2009, &lt;<a href="http://www.rfc-editor.org/info/rfc5646">http://www.rfc-editor.org/info/rfc5646</a>&gt;.
+
+   [<a name="ref-RFC7322" id="ref-RFC7322">RFC7322</a>]  Flanagan, H. and S. Ginoza, &quot;RFC Style Guide&quot;, <a href="https://tools.ietf.org/html/rfc7322">RFC 7322</a>,
+              DOI 10.17487/RFC7322, September 2014,
+              &lt;<a href="http://www.rfc-editor.org/info/rfc7322">http://www.rfc-editor.org/info/rfc7322</a>&gt;.
+
+   [<a name="ref-RFC7991" id="ref-RFC7991">RFC7991</a>]  Hoffman, P., &quot;The &quot;xml2rfc&quot; Version 3 Vocabulary&quot;,
+              <a href="https://tools.ietf.org/html/rfc7991">RFC 7991</a>, DOI 10.17487/RFC7991, December 2016,
+              &lt;<a href="http://www.rfc-editor.org/info/rfc7991">http://www.rfc-editor.org/info/rfc7991</a>&gt;.
+
+   [<a name="ref-RFC7993" id="ref-RFC7993">RFC7993</a>]  Flanagan, H., &quot;Cascading Style Sheets (CSS) Requirements
+              for RFCs&quot;, <a href="https://tools.ietf.org/html/rfc7993">RFC 7993</a>, DOI 10.17487/RFC7993, December 2016,
+              &lt;<a href="http://www.rfc-editor.org/info/rfc7993">http://www.rfc-editor.org/info/rfc7993</a>&gt;.
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 41]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-42" id="page-42" href="https://tools.ietf.org/html/rfc7992#page-42" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+   [<a name="ref-W3C.REC-CSS2-20110607" id="ref-W3C.REC-CSS2-20110607">W3C.REC-CSS2-20110607</a>]
+              Bos, B., Celik, T., Hickson, I., and H. Lie, &quot;Cascading
+              Style Sheets Level 2 Revision 1 (CSS 2.1) Specification&quot;,
+              World Wide Web Consortium Recommendation
+              REC-CSS2-20110607, June 2011,
+              &lt;<a href="http://www.w3.org/TR/2011/REC-CSS2-20110607">http://www.w3.org/TR/2011/REC-CSS2-20110607</a>&gt;.
+
+   [<a name="ref-W3C.REC-html5-20141028" id="ref-W3C.REC-html5-20141028">W3C.REC-html5-20141028</a>]
+              Hickson, I., Berjon, R., Faulkner, S., Leithead, T.,
+              Navara, E., O'Connor, T., and S. Pfeiffer, &quot;HTML5&quot;, World
+              Wide Web Consortium Recommendation
+              REC-html5-20141028, October 2014,
+              &lt;<a href="http://www.w3.org/TR/2014/REC-html5-20141028">http://www.w3.org/TR/2014/REC-html5-20141028</a>&gt;.
+
+<span class="h3"><h3><a class="selflink" name="section-11.2" href="https://tools.ietf.org/html/rfc7992#section-11.2">11.2</a>. Informative References</h3></span>
+
+   [<a name="ref-HCARD" id="ref-HCARD">HCARD</a>]    Celik, T., &quot;hCard 1.0&quot;, 2015,
+              &lt;<a href="http://microformats.org/wiki/hcard">http://microformats.org/wiki/hcard</a>&gt;.
+
+   [<a name="ref-RFC-STYLE" id="ref-RFC-STYLE">RFC-STYLE</a>]
+              RFC Editor, &quot;Style Guide&quot;,
+              &lt;<a href="https://www.rfc-editor.org/styleguide/">https://www.rfc-editor.org/styleguide/</a>&gt;.
+
+   [<a name="ref-RFC6949" id="ref-RFC6949">RFC6949</a>]  Flanagan, H. and N. Brownlee, &quot;RFC Series Format
+              Requirements and Future Development&quot;, <a href="https://tools.ietf.org/html/rfc6949">RFC 6949</a>,
+              DOI 10.17487/RFC6949, May 2013,
+              &lt;<a href="http://www.rfc-editor.org/info/rfc6949">http://www.rfc-editor.org/info/rfc6949</a>&gt;.
+
+   [<a name="ref-RFC7990" id="ref-RFC7990">RFC7990</a>]  Flanagan, H., &quot;RFC Format Framework&quot;, <a href="https://tools.ietf.org/html/rfc7990">RFC 7990</a>,
+              DOI 10.17487/RFC7990, December 2016,
+              &lt;<a href="http://www.rfc-editor.org/info/rfc7990">http://www.rfc-editor.org/info/rfc7990</a>&gt;.
+
+   [<a name="ref-RFC7998" id="ref-RFC7998">RFC7998</a>]  Hoffman, P. and J. Hildebrand, &quot;&quot;xml2rfc&quot; Version 3
+              Preparation Tool Description&quot;, <a href="https://tools.ietf.org/html/rfc7998">RFC 7998</a>,
+              DOI 10.17487/RFC7998, December 2016,
+              &lt;<a href="http://www.rfc-editor.org/info/rfc7998">http://www.rfc-editor.org/info/rfc7998</a>&gt;.
+
+   [<a name="ref-W3C.WD-css3-page-20130314" id="ref-W3C.WD-css3-page-20130314">W3C.WD-css3-page-20130314</a>]
+              Grant, M., Etemad, E., Lie, H., and S. Sapin, &quot;CSS Paged
+              Media Module Level 3&quot;, World Wide Web Consortium
+              WD WD-css3-page-20130314, March 2013,
+              &lt;<a href="http://www.w3.org/TR/2013/WD-css3-page-20130314">http://www.w3.org/TR/2013/WD-css3-page-20130314</a>&gt;.
+
+
+
+
+
+
+
+
+
+<span class="grey">Hildebrand &amp; Hoffman          Informational                    [Page 42]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-43" id="page-43" href="https://tools.ietf.org/html/rfc7992#page-43" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7992">RFC 7992</a>                      HTML for RFCs                December 2016</span>
+
+
+IAB Members at the Time of Approval
+
+   The IAB members at the time this memo was approved were (in
+   alphabetical order):
+
+      Jari Arkko
+      Ralph Droms
+      Ted Hardie
+      Joe Hildebrand
+      Russ Housley
+      Lee Howard
+      Erik Nordmark
+      Robert Sparks
+      Andrew Sullivan
+      Dave Thaler
+      Martin Thomson
+      Brian Trammell
+      Suzanne Woolf
+
+Acknowledgments
+
+   Heather Flanangan was an early coauthor of this document and helped
+   its formation.  The authors gratefully acknowledge the contributions
+   of: Patrick Linskey and the members of the RFC Format Design Team
+   (Nevil Brownlee (ISE), Tony Hansen, Ted Lemon, Julian Reschke, Adam
+   Roach, Alice Russo, Robert Sparks (Tools Team liaison), and Dave
+   Thaler).
+
+Authors' Addresses
+
+   Joe Hildebrand (editor)
+   Mozilla
+
+   Email: joe-ietf@cursive.net
+
+
+   Paul Hoffman
+   ICANN
+
+   Email: paul.hoffman@icann.org
+
+
+
+
+
+
+
+
+
+
+
+Hildebrand &amp; Hoffman          Informational                    [Page 43]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

@@ -1,0 +1,1630 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Relation.Replaces" content="rfc1938" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:2289" /> 
+  <meta name="DC.Date.Issued" content="February, 1998" /> 
+  <meta name="DC.Creator" content="Metz, Craig" /> 
+  <meta name="DC.Creator" content="Haller, Neil" /> 
+  <meta name="DC.Creator" content="Straw, Mike" /> 
+  <meta name="DC.Description.Abstract" content="This document describes a one-time password authentication system
+(OTP). The system provides authentication for system access (login)
+and other applications requiring authentication that is secure against
+passive attacks based on replaying captured reusable passwords.
+[STANDARDS-TRACK]" /> 
+  <meta name="DC.Title" content="A One-Time Password System" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 2289 - A One-Time Password System</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bggreen" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc2289.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc2289" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-ietf-otp" title="draft-ietf-otp">draft-ietf-otp</a>] [<a href="https://datatracker.ietf.org/doc/rfc2289" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc2289" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc2289" title="Side-by-side diff">Diff2</a>] </span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> INTERNET STANDARD</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <pre>Network Working Group                                        N. Haller
+Request for Comments: 2289                                    Bellcore
+Obsoletes: <a href="https://tools.ietf.org/html/rfc1938">1938</a>                                                C. Metz
+Category: Standards Track                   Kaman Sciences Corporation
+                                                             P. Nesser
+                                            Nesser &amp; Nesser Consulting
+                                                              M. Straw
+                                                              Bellcore
+                                                         February 1998
+
+
+                       <span class="h1"><h1>A One-Time Password System</h1></span>
+
+Status of this Memo
+
+   This document specifies an Internet standards track protocol for the
+   Internet community, and requests discussion and suggestions for
+   improvements.  Please refer to the current edition of the &quot;Internet
+   Official Protocol Standards&quot; (STD 1) for the standardization state
+   and status of this protocol.  Distribution of this memo is unlimited.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (1998).  All Rights Reserved.
+
+<span class="h3"><h3><a class="selflink" name="section-1.0" href="https://tools.ietf.org/html/rfc2289#section-1.0">1.0</a> ABSTRACT</h3></span>
+
+   This document describes a one-time password authentication system
+   (OTP). The system provides authentication for system access (login)
+   and other applications requiring authentication that is secure
+   against passive attacks based on replaying captured reusable
+   passwords. OTP evolved from the S/KEY (S/KEY is a trademark of
+   Bellcore) One-Time Password System that was released by Bellcore and
+   is described in references [<a href="https://tools.ietf.org/html/rfc2289#ref-3" title="&quot;The S/KEY One-Time Password System&quot;">3</a>] and [<a href="https://tools.ietf.org/html/rfc2289#ref-5" title="&quot;The S/KEY One-Time Password System&quot;">5</a>].
+
+<span class="h3"><h3><a class="selflink" name="section-2.0" href="https://tools.ietf.org/html/rfc2289#section-2.0">2.0</a> OVERVIEW</h3></span>
+
+   One form of attack on networked computing systems is eavesdropping on
+   network connections to obtain authentication information such as the
+   login IDs and passwords of legitimate users. Once this information is
+   captured, it can be used at a later time to gain access to the
+   system. One-time password systems are designed to counter this type
+   of attack, called a &quot;replay attack&quot; [<a href="https://tools.ietf.org/html/rfc2289#ref-4" title="&quot;On Internet Authentication&quot;">4</a>].
+
+   The authentication system described in this document uses a secret
+   pass-phrase to generate a sequence of one-time (single use)
+   passwords.  With this system, the user's secret pass-phrase never
+   needs to cross the network at any time such as during authentication
+
+
+
+<span class="grey">Haller                      Standards Track                     [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-2" id="page-1-2" href="https://tools.ietf.org/html/rfc2289#page-1-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+   or during pass-phrase changes. Thus, it is not vulnerable to replay
+   attacks.  Added security is provided by the property that no secret
+   information need be stored on any system, including the server being
+   protected.
+
+   The OTP system protects against external passive attacks against the
+   authentication subsystem. It does not prevent a network eavesdropper
+   from gaining access to private information and does not provide
+   protection against either &quot;social engineering&quot; or active attacks [<a href="https://tools.ietf.org/html/rfc2289#ref-9" title="&quot;IP Spoofing and Hijacked Terminal Connections&quot;">9</a>].
+
+<span class="h3"><h3><a class="selflink" name="section-3.0" href="https://tools.ietf.org/html/rfc2289#section-3.0">3.0</a> INTRODUCTION</h3></span>
+
+   There are two entities in the operation of the OTP one-time password
+   system. The generator must produce the appropriate one-time password
+   from the user's secret pass-phrase and from information provided in
+   the challenge from the server. The server must send a challenge that
+   includes the appropriate generation parameters to the generator, must
+   verify the one-time password received, must store the last valid
+   one-time password it received, and must store the corresponding one-
+   time password sequence number. The server must also facilitate the
+   changing of the user's secret pass-phrase in a secure manner.
+
+   The OTP system generator passes the user's secret pass-phrase, along
+   with a seed received from the server as part of the challenge,
+   through multiple iterations of a secure hash function to produce a
+   one-time password. After each successful authentication, the number
+   of secure hash function iterations is reduced by one.  Thus, a unique
+   sequence of passwords is generated.  The server verifies the one-time
+   password received from the generator by computing the secure hash
+   function once and comparing the result with the previously accepted
+   one-time password.  This technique was first suggested by Leslie
+   Lamport [<a href="https://tools.ietf.org/html/rfc2289#ref-1" title="&quot;Password Authentication with Insecure Communication&quot;">1</a>].
+
+<span class="h3"><h3><a class="selflink" name="section-4.0" href="https://tools.ietf.org/html/rfc2289#section-4.0">4.0</a> REQUIREMENTS TERMINOLOGY</h3></span>
+
+   In this document, the words that are used to define the significance
+   of each particular requirement are usually capitalized.  These words
+   are:
+
+     - MUST
+
+       This word or the adjective &quot;REQUIRED&quot; means that the item is an
+       absolute requirement of the specification.
+
+
+
+
+
+
+
+
+<span class="grey">Haller                      Standards Track                     [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-3" id="page-1-3" href="https://tools.ietf.org/html/rfc2289#page-1-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+     - SHOULD
+
+       This word or the adjective &quot;RECOMMENDED&quot; means that there might
+       exist valid reasons in particular circumstances to ignore this
+       item, but the full implications should be understood and the case
+       carefully weighed before taking a different course.
+
+     - MAY
+
+       This word or the adjective &quot;OPTIONAL&quot; means that this item is
+       truly optional.  One vendor might choose to include the item
+       because a particular marketplace requires it or because it
+       enhances the product, for example; another vendor may omit the
+       same item.
+
+<span class="h3"><h3><a class="selflink" name="section-5.0" href="https://tools.ietf.org/html/rfc2289#section-5.0">5.0</a> SECURE HASH FUNCTION</h3></span>
+
+   The security of the OTP system is based on the non-invertability of a
+   secure hash function. Such a function must be tractable to compute in
+   the forward direction, but computationally infeasible to invert.
+
+   The interfaces are currently defined for three such hash algorithms,
+   MD4 [<a href="https://tools.ietf.org/html/rfc2289#ref-2" title="&quot;The MD4 Message-Digest Algorithm&quot;">2</a>] and MD5 [<a href="https://tools.ietf.org/html/rfc2289#ref-6" title="&quot;The MD5 Message-Digest Algorithm&quot;">6</a>] by Ronald Rivest, and SHA [<a href="https://tools.ietf.org/html/rfc2289#ref-7" title="&quot;Announcing the Secure Hash Standard&quot;">7</a>] by NIST.  All
+   conforming implementations of both server and generators MUST support
+   MD5.  They SHOULD support SHA and MAY also support MD4.  Clearly, the
+   generator and server must use the same algorithm in order to
+   interoperate. Other hash algorithms may be specified for use with
+   this system by publishing the appropriate interfaces.
+
+   The secure hash algorithms listed above have the property that they
+   accept an input that is arbitrarily long and produce a fixed size
+   output. The OTP system folds this output to 64 bits using the
+   algorithms in the <a href="https://tools.ietf.org/html/rfc2289#appendix-A">Appendix A</a>. 64 bits is also the length of the one-
+   time passwords. This is believed to be long enough to be secure and
+   short enough to be entered manually (see below, Form of Output) when
+   necessary.
+
+<span class="h3"><h3><a class="selflink" name="section-6.0" href="https://tools.ietf.org/html/rfc2289#section-6.0">6.0</a> GENERATION OF ONE-TIME PASSWORDS</h3></span>
+
+   This section describes the generation of the one-time passwords.
+   This process consists of an initial step in which all inputs are
+   combined, a computation step where the secure hash function is
+   applied a specified number of times, and an output function where the
+   64 bit one-time password is converted to a human readable form.
+
+   <a href="https://tools.ietf.org/html/rfc2289#appendix-C">Appendix C</a> contains examples of the outputs given a collection of
+   inputs.  It provides implementors with a means of verification the
+   use of these algorithms.
+
+
+
+<span class="grey">Haller                      Standards Track                     [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-4" id="page-1-4" href="https://tools.ietf.org/html/rfc2289#page-1-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+   Initial Step
+
+   In principle, the user's secret pass-phrase may be of any length. To
+   reduce the risk from techniques such as exhaustive search or
+   dictionary attacks, character string pass-phrases MUST contain at
+   least 10 characters (see Form of Inputs below).  All implementations
+   MUST support a pass-phrases of at least 63 characters.  The secret
+   pass-phrase is frequently, but is not required to be, textual
+   information provided by a user.
+
+   In this step, the pass phrase is concatenated with a seed that is
+   transmitted from the server in clear text. This non-secret seed
+   allows clients to use the same secret pass-phrase on multiple
+   machines (using different seeds) and to safely recycle their secret
+   pass-phrases by changing the seed.
+
+   The result of the concatenation is passed through the secure hash
+   function and then is reduced to 64 bits using one of the function
+   dependent algorithms shown in <a href="https://tools.ietf.org/html/rfc2289#appendix-A">Appendix A</a>.
+
+   Computation Step
+
+   A sequence of one-time passwords is produced by applying the secure
+   hash function multiple times to the output of the initial step
+   (called S). That is, the first one-time password to be used is
+   produced by passing S through the secure hash function a number of
+   times (N) specified by the user. The next one-time password to be
+   used is generated by passing S though the secure hash function N-1
+   times. An eavesdropper who has monitored the transmission of a one-
+   time password would not be able to generate the next required
+   password because doing so would mean inverting the hash function.
+
+   Form of Inputs
+
+   The secret pass-phrase is seen only by the OTP generator. To allow
+   interchangeability of generators, all generators MUST support a
+   secret pass-phrase of 10 to 63 characters. Implementations MAY
+   support a longer pass-phrase, but such implementations risk the loss
+   of interchangeability with implementations supporting only the
+   minimum.
+
+   The seed MUST consist of purely alphanumeric characters and MUST be
+   of one to 16 characters in length. The seed is a string of characters
+   that MUST not contain any blanks and SHOULD consist of strictly
+   alphanumeric characters from the ISO-646 Invariant Code Set.  The
+   seed MUST be case insensitive and MUST be internally converted to
+   lower case before it is processed.
+
+
+
+
+<span class="grey">Haller                      Standards Track                     [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-5" id="page-1-5" href="https://tools.ietf.org/html/rfc2289#page-1-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+   The sequence number and seed together constitute a larger unit of
+   data called the challenge. The challenge gives the generator the
+   parameters it needs to calculate the correct one-time password from
+   the secret pass-phrase. The challenge MUST be in a standard syntax so
+   that automated generators can recognize the challenge in context and
+   extract these parameters. The syntax of the challenge is:
+
+           otp-&lt;algorithm identifier&gt; &lt;sequence integer&gt; &lt;seed&gt;
+
+   The three tokens MUST be separated by a white space (defined as any
+   number of spaces and/or tabs) and the entire challenge string MUST be
+   terminated with either a space or a new line. The string &quot;otp-&quot; MUST
+   be in lower case.  The algorithm identifier is case sensitive (the
+   existing identifiers are all lower case), and the seed is case
+   insensitive and converted before use to lower case.  If additional
+   algorithms are defined, appropriate identifiers (short, but not
+   limited to three or four characters) must be defined. The currently
+   defined algorithm identifiers are:
+
+       md4        MD4 Message Digest
+       md5        MD5 Message Digest
+       sha1       NIST Secure Hash Algorithm Revision 1
+
+   An example of an OTP challenge is:   otp-md5 487 dog2
+
+   Form of Output
+
+   The one-time password generated by the above procedure is 64 bits in
+   length. Entering a 64 bit number is a difficult and error prone
+   process. Some generators insert this password into the input stream
+   and some others make it available for system &quot;cut and paste.&quot; Still
+   other arrangements require the one-time password to be entered
+   manually. The OTP system is designed to facilitate this manual entry
+   without impeding automatic methods. The one-time password therefore
+   MAY be converted to, and all servers MUST be capable of accepting it
+   as, a sequence of six short (1 to 4 letter) easily typed words that
+   only use characters from ISO-646 IVCS. Each word is chosen from a
+   dictionary of 2048 words; at 11 bits per word, all one-time passwords
+   may be encoded.
+
+   The two extra bits in this encoding are used to store a checksum.
+   The 64 bits of key are broken down into pairs of bits, then these
+   pairs are summed together. The two least significant bits of this sum
+   are encoded in the last two bits of the six word sequence with the
+   least significant bit of the sum as the last bit encoded. All OTP
+   generators MUST calculate this checksum and all OTP servers MUST
+   verify this checksum explicitly as part of the operation of decoding
+   this representation of the one-time password.
+
+
+
+<span class="grey">Haller                      Standards Track                     [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-6" id="page-1-6" href="https://tools.ietf.org/html/rfc2289#page-1-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+   Generators that produce the six-word format MUST present the words in
+   upper case with single spaces used as separators. All servers MUST
+   accept six-word format without regard to case and white space used as
+   a separator. The two lines below represent the same one-time
+   password.  The first is valid as output from a generator and as input
+   a server, the second is valid only as human input to a server.
+
+            OUST COAT FOAL MUG BEAK TOTE
+            oust coat foal  mug  beak  tote
+
+     Interoperability requires that all OTP servers and generators use
+     the same dictionary. The standard dictionary was originally
+     specified in the &quot;S/KEY One Time Password System&quot; that is described
+     in <a href="https://tools.ietf.org/html/rfc1760">RFC 1760</a> [<a href="https://tools.ietf.org/html/rfc2289#ref-5" title="&quot;The S/KEY One-Time Password System&quot;">5</a>].  This dictionary is included in this document as
+     <a href="https://tools.ietf.org/html/rfc2289#appendix-D">Appendix D</a>.
+
+     To facilitate the implementation of smaller generators, hexadecimal
+     output is an acceptable alternative for the presentation of the
+     one-time password. All implementations of the server software MUST
+     accept case-insensitive hexadecimal as well as six-word format. The
+     hexadecimal digits may be separated by white space so servers are
+     REQUIRED to ignore all white space.  If the representation is
+     partitioned by white space, leading zeros must be retained.
+     Examples of hexadecimal format are:
+
+           Representation                Value
+
+           3503785b369cda8b              0x3503785b369cda8b
+           e5cc a1b8 7c13 096b           0xe5cca1b87c13096b
+           C7 48 90 F4 27 7B A1 CF       0xc74890f4277ba1cf
+           47 9 A68 28 4C 9D 0 1BC       0x479a68284c9d01bc
+
+   In addition to accepting six-word and hexadecimal encodings of the
+   64 bit one-time password, servers SHOULD accept the alternate
+   dictionary encoding described in <a href="https://tools.ietf.org/html/rfc2289#appendix-B">Appendix B</a>.  The six words in this
+   encoding MUST not overlap the set of words in the standard
+   dictionary.  To avoid ambiguity with the hexadecimal representation,
+   words in the alternate dictionary MUST not be comprised solely of
+   the letters A-F.  Decoding words thus encoded does not require any
+   knowledge of the alternative dictionary used so the acceptance of
+   any alternate dictionary implies the acceptance of all alternate
+   dictionaries.  Words in the alternative dictionaries are case
+   sensitive.  Generators and servers MUST preserve the case in the
+   processing of these words.
+
+   In summary, all conforming servers MUST accept six-word input that
+   uses the Standard Dictionary (<a href="https://tools.ietf.org/html/rfc1760">RFC 1760</a> and <a href="https://tools.ietf.org/html/rfc2289#appendix-D">Appendix D</a>), MUST accept
+   hexadecimal encoding, and SHOULD accept six-word input that uses the
+
+
+
+<span class="grey">Haller                      Standards Track                     [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-7" id="page-1-7" href="https://tools.ietf.org/html/rfc2289#page-1-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+   Alternative Dictionary technique (Appendix B).  As there is a remote
+   possibility that a hexadecimal encoding of a one-time password will
+   look like a valid six-word standard dictionary encoding, all
+   implementations MUST use the following scheme.  If a six-word
+   encoded one-time password is valid, it is accepted.  Otherwise, if
+   the one-time password can be interpreted as hexadecimal, and with
+   that decoding it is valid, then it is accepted.
+
+<span class="h3"><h3><a class="selflink" name="section-7.0" href="https://tools.ietf.org/html/rfc2289#section-7.0">7.0</a> VERIFICATION OF ONE-TIME PASSWORDS</h3></span>
+
+   An application on the server system that requires OTP authentication
+   is expected to issue an OTP challenge as described above. Given the
+   parameters from this challenge and the secret pass-phrase, the
+   generator can compute (or lookup) the one-time password that is
+   passed to the server to be verified.
+
+   The server system has a database containing, for each user, the
+   one-time password from the last successful authentication or the
+   first OTP of a newly initialized sequence. To authenticate the user,
+   the server decodes the one-time password received from the generator
+   into a 64-bit key and then runs this key through the secure hash
+   function once. If the result of this operation matches the stored
+   previous OTP, the authentication is successful and the accepted
+   one-time password is stored for future use.
+
+<span class="h3"><h3><a class="selflink" name="section-8.0" href="https://tools.ietf.org/html/rfc2289#section-8.0">8.0</a> PASS-PHRASE CHANGES</h3></span>
+
+   Because the number of hash function applications executed by the
+   generator decreases by one each time, at some point the user must
+   reinitialize the system or be unable to authenticate.
+
+   Although some installations may not permit users to initialize
+   remotely, implementations MUST provide a means to do so that does
+   not reveal the user's secret pass-phrase.  One way is to provide a
+   means to reinitialize the  sequence through explicit specification
+   of the first one-time password.
+
+   When the sequence of one-time passwords is reinitialized,
+   implementations MUST verify that the seed or the pass-phrase is
+   changed.  Installations SHOULD discourage any operation that sends
+   the secret pass-phrase over a network in clear-text as such practice
+   defeats the concept of a one-time password.
+
+   Implementations MAY use the following technique for
+   [re]initialization:
+
+
+
+
+
+
+<span class="grey">Haller                      Standards Track                     [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-8" id="page-1-8" href="https://tools.ietf.org/html/rfc2289#page-1-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+      o  The user picks a new seed and hash count (default values may
+         be offered).  The user provides these, along with the
+         corresponding generated one-time password, to the host system.
+
+      o  The user MAY also provide the corresponding generated one
+         time password for count-1 as an error check.
+
+      o  The user SHOULD provide the generated one-time password for
+         the old seed and old hash count to protect an idle terminal
+         or workstation (this implies that when the count is 1, the
+         user can login but cannot then change the seed or count).
+
+   In the future a specific protocol may be defined for
+   reinitialization that will permit smooth and possibly automated
+   interoperation of all hosts and generators.
+
+<span class="h3"><h3><a class="selflink" name="section-9.0" href="https://tools.ietf.org/html/rfc2289#section-9.0">9.0</a> PROTECTION AGAINST RACE ATTACK</h3></span>
+
+   All conforming server implementations MUST protect against the race
+   condition described in this section.  A defense against this attack
+   is outlined; implementations MAY use this approach or MAY select an
+   alternative defense.
+
+   It is possible for an attacker to listen to most of a one-time
+   password, guess the remainder, and then race the legitimate user to
+   complete the authentication.  Multiple guesses against the last word
+   of the six-word format are likely to succeed.
+
+   One possible defense is to prevent a user from starting multiple
+   simultaneous authentication sessions. This means that once the
+   legitimate user has initiated authentication, an attacker would be
+   blocked until the first authentication process has completed.  In
+   this approach, a timeout is necessary to thwart a denial of service
+   attack.
+
+<span class="h3"><h3><a class="selflink" name="section-10.0" href="https://tools.ietf.org/html/rfc2289#section-10.0">10.0</a> SECURITY CONSIDERATIONS</h3></span>
+
+   This entire document discusses an authentication system that
+   improves security by limiting the danger of eavesdropping/replay
+   attacks that have been used against simple password systems [<a href="https://tools.ietf.org/html/rfc2289#ref-4" title="&quot;On Internet Authentication&quot;">4</a>].
+
+   The use of the OTP system only provides protections against passive
+   eavesdropping/replay attacks.  It does not provide for the privacy
+   of transmitted data, and it does not provide protection against
+   active attacks such as session hijacking that are known to be
+   present in the current Internet [<a href="https://tools.ietf.org/html/rfc2289#ref-9" title="&quot;IP Spoofing and Hijacked Terminal Connections&quot;">9</a>].  The use of IP Security
+   (IPsec), see [<a href="https://tools.ietf.org/html/rfc2289#ref-10" title="&quot;Security Architecture for the Internet Protocol&quot;">10</a>], [<a href="https://tools.ietf.org/html/rfc2289#ref-11" title="&quot;IP Authentication Header&quot;">11</a>], and [<a href="https://tools.ietf.org/html/rfc2289#ref-12" title="&quot;IP Encapsulating Security Payload (ESP)&quot;">12</a>] is recommended to protect against
+   TCP session hijacking.
+
+
+
+<span class="grey">Haller                      Standards Track                     [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-9" id="page-1-9" href="https://tools.ietf.org/html/rfc2289#page-1-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+   The success of the OTP system to protect host systems is dependent
+   on the non-invertability of the secure hash functions used.  To our
+   knowledge, none of the hash algorithms have been broken, but it is
+   generally believed [<a href="https://tools.ietf.org/html/rfc2289#ref-6" title="&quot;The MD5 Message-Digest Algorithm&quot;">6</a>] that MD4 is not as strong as MD5.  If a
+   server supports multiple hash algorithms, it is only as secure as
+   the weakest algorithm.
+
+<span class="h3"><h3><a class="selflink" name="section-11.0" href="https://tools.ietf.org/html/rfc2289#section-11.0">11.0</a> ACKNOWLEDGMENTS</h3></span>
+
+   The idea behind OTP authentication was first proposed by Leslie
+   Lamport [<a href="https://tools.ietf.org/html/rfc2289#ref-1" title="&quot;Password Authentication with Insecure Communication&quot;">1</a>]. Bellcore's S/KEY system, from which OTP is derived, was
+   proposed by Phil Karn, who also wrote most of the Bellcore reference
+   implementation.
+
+<span class="h3"><h3><a class="selflink" name="section-12.0" href="https://tools.ietf.org/html/rfc2289#section-12.0">12.0</a> REFERENCES</h3></span>
+
+   [<a name="ref-1" id="ref-1">1</a>]  Leslie Lamport, &quot;Password Authentication with Insecure
+        Communication&quot;, Communications of the ACM 24.11 (November
+        1981), 770-772
+
+   [<a name="ref-2" id="ref-2">2</a>]  Rivest, R., &quot;The MD4 Message-Digest Algorithm&quot;, <a href="https://tools.ietf.org/html/rfc1320">RFC 1320</a>,
+        April 1992.
+
+   [<a name="ref-3" id="ref-3">3</a>]  Neil Haller, &quot;The S/KEY One-Time Password System&quot;, Proceedings
+        of the ISOC Symposium on Network and Distributed System
+        Security, February 1994, San Diego, CA
+
+   [<a name="ref-4" id="ref-4">4</a>]  Haller, N., and R. Atkinson, &quot;On Internet Authentication&quot;,
+        <a href="https://tools.ietf.org/html/rfc1704">RFC 1704</a>, October 1994.
+
+   [<a name="ref-5" id="ref-5">5</a>]  Haller, N., &quot;The S/KEY One-Time Password System&quot;,
+        <a href="https://tools.ietf.org/html/rfc1760">RFC 1760</a>, February 1995.
+
+   [<a name="ref-6" id="ref-6">6</a>]  Rivest, R., &quot;The MD5 Message-Digest Algorithm&quot;, <a href="https://tools.ietf.org/html/rfc1321">RFC 1321</a>,
+        April 1992.
+
+   [<a name="ref-7" id="ref-7">7</a>]  National Institute of Standards and Technology (NIST),
+        &quot;Announcing the Secure Hash Standard&quot;, FIPS 180-1, U.S.
+        Department of Commerce, April 1995.
+
+   [<a name="ref-8" id="ref-8">8</a>]  International Standard - Information Processing -- ISO 7-bit
+        coded character set for information interchange (Invariant Code
+        Set), ISO-646, International Standards Organization, Geneva,
+        Switzerland, 1983
+
+
+
+
+
+
+
+<span class="grey">Haller                      Standards Track                     [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-10" id="page-1-10" href="https://tools.ietf.org/html/rfc2289#page-1-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+   [<a name="ref-9" id="ref-9">9</a>]  Computer Emergency Response Team (CERT), &quot;IP Spoofing and
+        Hijacked Terminal Connections&quot;, CA-95:01, January 1995.
+        Available via anonymous ftp from info.cert.org in
+        /pub/cert_advisories.
+
+   [<a name="ref-10" id="ref-10">10</a>] Atkinson, R., &quot;Security Architecture for the Internet Protocol&quot;,
+        <a href="https://tools.ietf.org/html/rfc1825">RFC 1825</a>, August 1995.
+
+   [<a name="ref-11" id="ref-11">11</a>] Atkinson, R., &quot;IP Authentication Header&quot;, <a href="https://tools.ietf.org/html/rfc1826">RFC 1826</a>, August
+        1995.
+
+   [<a name="ref-12" id="ref-12">12</a>] Atkinson, R., &quot;IP Encapsulating Security Payload (ESP)&quot;, <a href="https://tools.ietf.org/html/rfc1827">RFC</a>
+        <a href="https://tools.ietf.org/html/rfc1827">1827</a>, August 1995.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-11" id="page-1-11" href="https://tools.ietf.org/html/rfc2289#page-1-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-13.0" href="https://tools.ietf.org/html/rfc2289#section-13.0">13.0</a> AUTHORS' ADDRESSES</h3></span>
+
+   Neil Haller
+   Bellcore
+   MCC 1C-265B
+   445 South Street
+   Morristown, NJ, 07960-6438, USA
+
+   Phone: +1 201 829-4478
+   Fax:   +1 201 829-2504
+   EMail: nmh@bellcore.com
+
+
+   Craig Metz
+   Kaman Sciences Corporation
+   For NRL Code 5544
+   4555 Overlook Avenue, S.W.
+   Washington, DC, 20375-5337, USA
+
+   Phone: +1 202 404-7122
+   Fax:   +1 202 404-7942
+   EMail: cmetz@cs.nrl.navy.mil
+
+
+   Philip J. Nesser II
+   Nesser &amp; Nesser Consulting
+   13501 100th Ave NE
+   Suite 5202
+   Kirkland, WA 98034, USA
+
+   Phone: +1 206 481 4303
+   EMail: pjnesser@martigny.ai.mit.edu
+
+
+   Mike Straw
+   Bellcore
+   RRC 1A-225
+   445 Hoes Lane
+   Piscataway, NJ 08854-4182
+
+   Phone:  +1 908 699-5212
+   EMail:  mess@bellcore.com
+
+
+
+
+
+
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-12" id="page-1-12" href="https://tools.ietf.org/html/rfc2289#page-1-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+Appendix A  -  Interfaces to Secure Hash Algorithms
+
+   Original interoperability tests provided valuable insights into the
+   subtle problems which occur when converting protocol specifications
+   into running code.  In particular, the manipulation of bit ordered
+   data is dependent on the architecture of the hardware, specifically
+   the way in which a computer stores multi-byte data.  The method is
+   typically called big or little &quot;endian.&quot;  A big endian machine stores
+   data with the most significant byte first, while a little endian
+   machine stores the least significant byte first.  Thus, on a big
+   endian machine data is stored left to right, while little endian
+   machines store data right to left.
+
+   For example, the four byte value 0x11AABBCC is stored in a big endian
+   machine as the following series of four bytes, &quot;0x11&quot;, &quot;0xAA&quot;,
+   &quot;0xBB&quot;, and &quot;0xCC&quot;, while on a little endian machine the value would
+   be stored as &quot;0xCC&quot;, &quot;0xBB&quot;, &quot;0xAA&quot;, and &quot;0x11&quot;.
+
+   For historical reasons, and to promote interoperability with existing
+   implementations, it was decided that ALL hashes incorporated into the
+   OTP protocol MUST store the output of their hash function in LITTLE
+   ENDIAN format BEFORE the bit folding to 64 bits occurs.  This is done
+   in the implementations of MD4 and MD5 (see references [<a href="https://tools.ietf.org/html/rfc2289#ref-2" title="&quot;The MD4 Message-Digest Algorithm&quot;">2</a>] and [<a href="https://tools.ietf.org/html/rfc2289#ref-6" title="&quot;The MD5 Message-Digest Algorithm&quot;">6</a>]),
+   while it must be explicitly done for the implementation of SHA1 (see
+   reference [<a href="https://tools.ietf.org/html/rfc2289#ref-7" title="&quot;Announcing the Secure Hash Standard&quot;">7</a>]).
+
+   Any future hash functions implemented into the OTP protocol SHOULD
+   provide a similar reference fragment of code to allow independent
+   implementations to operate successfully.
+
+
+   MD4 Message Digest (see reference [<a href="https://tools.ietf.org/html/rfc2289#ref-2" title="&quot;The MD4 Message-Digest Algorithm&quot;">2</a>])
+
+     MD4_CTX md;
+     unsigned char result[16];
+
+     strcpy(buf, seed);     /* seed must be in lower case */
+     strcat(buf, passwd);
+     MD4Init(&amp;md);
+     MD4Update(&amp;md, (unsigned char *)buf, strlen(buf));
+     MD4Final(result, &amp;md);
+
+     /* Fold the 128 bit result to 64 bits */
+     for (i = 0; i &lt; 8; i++)
+             result[i] ^= result[i+8];
+
+
+
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-13" id="page-1-13" href="https://tools.ietf.org/html/rfc2289#page-1-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+MD5 Message Digest (see reference [<a href="https://tools.ietf.org/html/rfc2289#ref-6" title="&quot;The MD5 Message-Digest Algorithm&quot;">6</a>])
+
+     MD5_CTX md;
+     unsigned char result[16];
+     strcpy(buf, seed);     /* seed must be in lower case */
+     strcat(buf, passwd);
+     MD5Init(&amp;md);
+     MD5Update(&amp;md, (unsigned char *)buf, strlen(buf));
+     MD5Final(result, &amp;md);
+
+     /* Fold the 128 bit result to 64 bits */
+     for (i = 0; i &lt; 8; i++)
+             result[i] ^= result[i+8];
+
+
+SHA Secure Hash Algorithm (see reference [<a href="https://tools.ietf.org/html/rfc2289#ref-7" title="&quot;Announcing the Secure Hash Standard&quot;">7</a>])
+
+     SHA_INFO sha;
+     unsigned char result[16];
+     strcpy(buf, seed);     /* seed must be in lower case */
+     strcat(buf, passwd);
+     sha_init(&amp;sha);
+     sha_update(&amp;sha, (unsigned char *)buf, strlen(buf));
+     sha_final(&amp;sha);       /* NOTE:  no result buffer */
+
+     /* Fold the 160 bit result to 64 bits */
+     sha.digest[0] ^= sha.digest[2];
+     sha.digest[1] ^= sha.digest[3];
+     sha.digest[0] ^= sha.digest[4];
+
+     /*
+      * copy the resulting 64 bits to the result buffer in little endian
+      * fashion (analogous to the way MD4Final() and MD5Final() do).
+      */
+     for (i = 0, j = 0; j &lt; 8; i++, j += 4)
+     {
+             result[j]   = (unsigned char)(sha.digest[i] &amp; 0xff);
+             result[j+1] = (unsigned char)((sha.digest[i] &gt;&gt; 8) &amp; 0xff);
+             result[j+2] = (unsigned char)((sha.digest[i] &gt;&gt; 16) &amp; 0xff);
+             result[j+3] = (unsigned char)((sha.digest[i] &gt;&gt; 24) &amp; 0xff);
+     }
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 13]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-14" id="page-1-14" href="https://tools.ietf.org/html/rfc2289#page-1-14" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+Appendix B   -   Alternative Dictionary Algorithm
+
+   The purpose of alternative dictionary encoding of the OTP one-time
+   password is to allow the use of language specific or friendly words.
+   As case translation is not always well defined, the alternative
+   dictionary encoding is case sensitive.  Servers SHOULD accept this
+   encoding in addition to the standard 6-word and hexadecimal
+   encodings.
+
+
+   GENERATOR ENCODING USING AN ALTERNATE DICTIONARY
+
+     The standard 6-word encoding uses the placement of a word in the
+     dictionary to represent an 11-bit number. The 64-bit one-time
+     password can then be represented by six words.
+
+     An alternative dictionary of 2048 words may be created such that
+     each word W and position of the word in the dictionary N obey the
+     relationship:
+
+             alg( W ) % 2048 == N
+     where
+             alg is the hash algorithm used (e.g. MD4, MD5, SHA1).
+
+     In addition, no words in the standard dictionary may be chosen.
+
+     The generator expands the 64-bit one-time password to 66 bits by
+     computing parity as with the standard 6-word encoding.  The six 11-
+     bit numbers are then converted to words using the dictionary that
+     was created such that the above relationship holds.
+
+   SERVER DECODING OF ALTERNATE DICTIONARY ONE-TIME PASSWORDS
+
+     The server accepting alternative dictionary encoding converts each
+     word to an 11-bit number using the above encoding. These numbers
+     are then used in the same way as the decoded standard dictionary
+     words to form the 66-bit one-time password.
+
+     The server does not need to have access to the alternate dictionary
+     that was used to create the one-time password it is authenticating.
+     This is because the decoding from word to 11-bit number does not
+     make any use of the dictionary.  As a result of the independence of
+     the dictionary, a server accepting one alternate dictionary accept
+     all alternate dictionaries.
+
+
+
+
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 14]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-15" id="page-1-15" href="https://tools.ietf.org/html/rfc2289#page-1-15" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+Appendix C  -  OTP Verification Examples
+
+   This appendix provides a series of inputs and correct outputs for all
+   three of the defined OTP cryptographic hashes, specifically MD4, MD5,
+   and SHA1.  This document is intended to be used by developers for
+   interoperability checks when creating generators or servers.  Output
+   is provided in both hexadecimal notation and the six word encoding
+   documented in <a href="https://tools.ietf.org/html/rfc2289#appendix-D">Appendix D</a>.
+
+   GENERAL CHECKS
+
+   Note that the output given for these checks is not intended to be
+   taken literally, but describes the type of action that should be
+   taken.
+
+   Pass Phrase Length
+
+ Input:
+   Pass Phrase: Too_short
+   Seed: iamvalid
+   Count: 99
+   Hash: ANY
+ Output:
+   ERROR:  Pass Phrase too short
+
+ Input:
+   Pass Phrase:
+     1234567890123456789012345678901234567890123456789012345678901234
+   Seed: iamvalid
+   Count: 99
+   Hash: ANY
+ Output:
+   WARNING: Pass Phrase longer than the recommended maximum length of
+63
+
+Seed Values
+
+ Input:
+   Pass Phrase:  A_Valid_Pass_Phrase
+   Seed: Length_Okay
+   Count: 99
+   Hash: ANY
+ Output:
+   ERROR: Seed must be purely alphanumeric
+
+ Input:
+   Pass Phrase:  A_Valid_Pass_Phrase
+   Seed: LengthOfSeventeen
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 15]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-1-16" id="page-1-16" href="https://tools.ietf.org/html/rfc2289#page-1-16" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+   Count: 99
+   Hash: ANY
+
+ Output:
+   ERROR: Seed must be between 1 and 16 characters in length
+
+ Input:
+   Pass Phrase:  A_Valid_Pass_Phrase
+   Seed: A Seed
+   Count: 99
+   Hash: ANY
+ Output:
+   ERROR: Seed must not contain any spaces
+
+Parity Calculations
+
+ Input:
+   Pass Phrase: A_Valid_Pass_Phrase
+   Seed: AValidSeed
+   Count: 99
+   Hash: MD5
+ Output:
+   Hex: 85c43ee03857765b
+   Six Word(CORRECT):          FOWL KID MASH DEAD DUAL OAF
+   Six Word(INCORRECT PARITY): FOWL KID MASH DEAD DUAL NUT
+   Six Word(INCORRECT PARITY): FOWL KID MASH DEAD DUAL O
+   Six Word(INCORRECT PARITY): FOWL KID MASH DEAD DUAL OAK
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 16]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+MD4 ENCODINGS
+
+Pass Phrase     Seed    Cnt Hex                 Six Word Format
+========================================================================
+This is a test. TeSt     0  D185 4218 EBBB 0B51
+                                           ROME MUG FRED SCAN LIVE LACE
+This is a test. TeSt     1  6347 3EF0 1CD0 B444
+                                           CARD SAD MINI RYE COL KIN
+This is a test. TeSt    99  C5E6 1277 6E6C 237A
+                                           NOTE OUT IBIS SINK NAVE MODE
+AbCdEfGhIjK     alpha1   0  5007 6F47 EB1A DE4E
+                                           AWAY SEN ROOK SALT LICE MAP
+AbCdEfGhIjK     alpha1   1  65D2 0D19 49B5 F7AB
+                                           CHEW GRIM WU HANG BUCK SAID
+AbCdEfGhIjK     alpha1  99  D150 C82C CE6F 62D1
+                                           ROIL FREE COG HUNK WAIT COCA
+OTP's are good  correct  0  849C 79D4 F6F5 5388
+                                           FOOL STEM DONE TOOL BECK NILE
+OTP's are good  correct  1  8C09 92FB 2508 47B1
+                                           GIST AMOS MOOT AIDS FOOD SEEM
+OTP's are good  correct 99  3F3B F4B4 145F D74B
+                                           TAG SLOW NOV MIN WOOL KENO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 17]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+MD5 ENCODINGS
+
+Pass Phrase     Seed    Cnt Hex                 Six Word Format
+========================================================================
+This is a test. TeSt     0  9E87 6134 D904 99DD
+                                           INCH SEA ANNE LONG AHEM TOUR
+This is a test. TeSt     1  7965 E054 36F5 029F
+                                           EASE OIL FUM CURE AWRY AVIS
+This is a test. TeSt    99  50FE 1962 C496 5880
+                                           BAIL TUFT BITS GANG CHEF THY
+AbCdEfGhIjK     alpha1   0  8706 6DD9 644B F206
+                                           FULL PEW DOWN ONCE MORT ARC
+AbCdEfGhIjK     alpha1   1  7CD3 4C10 40AD D14B
+                                           FACT HOOF AT FIST SITE KENT
+AbCdEfGhIjK     alpha1  99  5AA3 7A81 F212 146C
+                                           BODE HOP JAKE STOW JUT RAP
+OTP's are good  correct  0  F205 7539 43DE 4CF9
+                                           ULAN NEW ARMY FUSE SUIT EYED
+OTP's are good  correct  1  DDCD AC95 6F23 4937
+                                           SKIM CULT LOB SLAM POE HOWL
+OTP's are good  correct 99  B203 E28F A525 BE47
+                                           LONG IVY JULY AJAR BOND LEE
+
+
+SHA1 ENCODINGS
+
+Pass Phrase     Seed    Cnt Hex                 Six Word Format
+========================================================================
+This is a test. TeSt     0  BB9E 6AE1 979D 8FF4
+                                           MILT VARY MAST OK SEES WENT
+This is a test. TeSt     1  63D9 3663 9734 385B
+                                           CART OTTO HIVE ODE VAT NUT
+This is a test. TeSt    99  87FE C776 8B73 CCF9
+                                           GAFF WAIT SKID GIG SKY EYED
+AbCdEfGhIjK     alpha1   0  AD85 F658 EBE3 83C9
+                                           LEST OR HEEL SCOT ROB SUIT
+AbCdEfGhIjK     alpha1   1  D07C E229 B5CF 119B
+                                           RITE TAKE GELD COST TUNE RECK
+AbCdEfGhIjK     alpha1  99  27BC 7103 5AAF 3DC6
+                                           MAY STAR TIN LYON VEDA STAN
+OTP's are good  correct  0  D51F 3E99 BF8E 6F0B
+                                           RUST WELT KICK FELL TAIL FRAU
+OTP's are good  correct  1  82AE B52D 9437 74E4
+                                           FLIT DOSE ALSO MEW DRUM DEFY
+OTP's are good  correct 99  4F29 6A74 FE15 67EC
+                                           AURA ALOE HURL WING BERG WAIT
+
+
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 18]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4-19" id="page-4-19" href="https://tools.ietf.org/html/rfc2289#page-4-19" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+Appendix D   -   Dictionary for Converting Between 6-Word and Binary Formats
+
+   This dictionary is from the module put.c in the original Bellcore
+   reference distribution.
+
+{        &quot;A&quot;,     &quot;ABE&quot;,   &quot;ACE&quot;,   &quot;ACT&quot;,   &quot;AD&quot;,    &quot;ADA&quot;,   &quot;ADD&quot;,
+&quot;AGO&quot;,   &quot;AID&quot;,   &quot;AIM&quot;,   &quot;AIR&quot;,   &quot;ALL&quot;,   &quot;ALP&quot;,   &quot;AM&quot;,    &quot;AMY&quot;,
+&quot;AN&quot;,    &quot;ANA&quot;,   &quot;AND&quot;,   &quot;ANN&quot;,   &quot;ANT&quot;,   &quot;ANY&quot;,   &quot;APE&quot;,   &quot;APS&quot;,
+&quot;APT&quot;,   &quot;ARC&quot;,   &quot;ARE&quot;,   &quot;ARK&quot;,   &quot;ARM&quot;,   &quot;ART&quot;,   &quot;AS&quot;,    &quot;ASH&quot;,
+&quot;ASK&quot;,   &quot;AT&quot;,    &quot;ATE&quot;,   &quot;AUG&quot;,   &quot;AUK&quot;,   &quot;AVE&quot;,   &quot;AWE&quot;,   &quot;AWK&quot;,
+&quot;AWL&quot;,   &quot;AWN&quot;,   &quot;AX&quot;,   &quot;AYE&quot;,   &quot;BAD&quot;,   &quot;BAG&quot;,   &quot;BAH&quot;,   &quot;BAM&quot;,
+&quot;BAN&quot;,   &quot;BAR&quot;,   &quot;BAT&quot;,   &quot;BAY&quot;,   &quot;BE&quot;,    &quot;BED&quot;,   &quot;BEE&quot;,   &quot;BEG&quot;,
+&quot;BEN&quot;,   &quot;BET&quot;,   &quot;BEY&quot;,   &quot;BIB&quot;,   &quot;BID&quot;,   &quot;BIG&quot;,   &quot;BIN&quot;,   &quot;BIT&quot;,
+&quot;BOB&quot;,   &quot;BOG&quot;,   &quot;BON&quot;,   &quot;BOO&quot;,   &quot;BOP&quot;,   &quot;BOW&quot;,   &quot;BOY&quot;,   &quot;BUB&quot;,
+&quot;BUD&quot;,   &quot;BUG&quot;,   &quot;BUM&quot;,   &quot;BUN&quot;,   &quot;BUS&quot;,   &quot;BUT&quot;,   &quot;BUY&quot;,   &quot;BY&quot;,
+&quot;BYE&quot;,   &quot;CAB&quot;,   &quot;CAL&quot;,   &quot;CAM&quot;,   &quot;CAN&quot;,   &quot;CAP&quot;,   &quot;CAR&quot;,   &quot;CAT&quot;,
+&quot;CAW&quot;,   &quot;COD&quot;,   &quot;COG&quot;,   &quot;COL&quot;,   &quot;CON&quot;,   &quot;COO&quot;,   &quot;COP&quot;,   &quot;COT&quot;,
+&quot;COW&quot;,   &quot;COY&quot;,   &quot;CRY&quot;,   &quot;CUB&quot;,   &quot;CUE&quot;,   &quot;CUP&quot;,   &quot;CUR&quot;,   &quot;CUT&quot;,
+&quot;DAB&quot;,   &quot;DAD&quot;,   &quot;DAM&quot;,   &quot;DAN&quot;,   &quot;DAR&quot;,   &quot;DAY&quot;,   &quot;DEE&quot;,   &quot;DEL&quot;,
+&quot;DEN&quot;,   &quot;DES&quot;,   &quot;DEW&quot;,   &quot;DID&quot;,   &quot;DIE&quot;,   &quot;DIG&quot;,   &quot;DIN&quot;,   &quot;DIP&quot;,
+&quot;DO&quot;,    &quot;DOE&quot;,   &quot;DOG&quot;,   &quot;DON&quot;,   &quot;DOT&quot;,   &quot;DOW&quot;,   &quot;DRY&quot;,   &quot;DUB&quot;,
+&quot;DUD&quot;,   &quot;DUE&quot;,   &quot;DUG&quot;,   &quot;DUN&quot;,   &quot;EAR&quot;,   &quot;EAT&quot;,   &quot;ED&quot;,    &quot;EEL&quot;,
+&quot;EGG&quot;,   &quot;EGO&quot;,   &quot;ELI&quot;,   &quot;ELK&quot;,   &quot;ELM&quot;,   &quot;ELY&quot;,   &quot;EM&quot;,    &quot;END&quot;,
+&quot;EST&quot;,   &quot;ETC&quot;,   &quot;EVA&quot;,   &quot;EVE&quot;,   &quot;EWE&quot;,   &quot;EYE&quot;,   &quot;FAD&quot;,   &quot;FAN&quot;,
+&quot;FAR&quot;,   &quot;FAT&quot;,   &quot;FAY&quot;,   &quot;FED&quot;,   &quot;FEE&quot;,   &quot;FEW&quot;,   &quot;FIB&quot;,   &quot;FIG&quot;,
+&quot;FIN&quot;,   &quot;FIR&quot;,   &quot;FIT&quot;,   &quot;FLO&quot;,   &quot;FLY&quot;,   &quot;FOE&quot;,   &quot;FOG&quot;,   &quot;FOR&quot;,
+&quot;FRY&quot;,   &quot;FUM&quot;,   &quot;FUN&quot;,   &quot;FUR&quot;,   &quot;GAB&quot;,   &quot;GAD&quot;,   &quot;GAG&quot;,   &quot;GAL&quot;,
+&quot;GAM&quot;,   &quot;GAP&quot;,   &quot;GAS&quot;,   &quot;GAY&quot;,   &quot;GEE&quot;,   &quot;GEL&quot;,   &quot;GEM&quot;,   &quot;GET&quot;,
+&quot;GIG&quot;,   &quot;GIL&quot;,   &quot;GIN&quot;,   &quot;GO&quot;,    &quot;GOT&quot;,   &quot;GUM&quot;,   &quot;GUN&quot;,   &quot;GUS&quot;,
+&quot;GUT&quot;,   &quot;GUY&quot;,   &quot;GYM&quot;,   &quot;GYP&quot;,   &quot;HA&quot;,    &quot;HAD&quot;,   &quot;HAL&quot;,   &quot;HAM&quot;,
+&quot;HAN&quot;,   &quot;HAP&quot;,   &quot;HAS&quot;,   &quot;HAT&quot;,   &quot;HAW&quot;,   &quot;HAY&quot;,   &quot;HE&quot;,    &quot;HEM&quot;,
+&quot;HEN&quot;,   &quot;HER&quot;,   &quot;HEW&quot;,   &quot;HEY&quot;,   &quot;HI&quot;,    &quot;HID&quot;,   &quot;HIM&quot;,   &quot;HIP&quot;,
+&quot;HIS&quot;,   &quot;HIT&quot;,   &quot;HO&quot;,   &quot;HOB&quot;,   &quot;HOC&quot;,   &quot;HOE&quot;,   &quot;HOG&quot;,   &quot;HOP&quot;,
+&quot;HOT&quot;,   &quot;HOW&quot;,   &quot;HUB&quot;,   &quot;HUE&quot;,   &quot;HUG&quot;,   &quot;HUH&quot;,   &quot;HUM&quot;,   &quot;HUT&quot;,
+&quot;I&quot;,     &quot;ICY&quot;,   &quot;IDA&quot;,   &quot;IF&quot;,    &quot;IKE&quot;,   &quot;ILL&quot;,   &quot;INK&quot;,   &quot;INN&quot;,
+&quot;IO&quot;,    &quot;ION&quot;,   &quot;IQ&quot;,   &quot;IRA&quot;,   &quot;IRE&quot;,   &quot;IRK&quot;,   &quot;IS&quot;,    &quot;IT&quot;,
+&quot;ITS&quot;,   &quot;IVY&quot;,   &quot;JAB&quot;,   &quot;JAG&quot;,   &quot;JAM&quot;,   &quot;JAN&quot;,   &quot;JAR&quot;,   &quot;JAW&quot;,
+&quot;JAY&quot;,   &quot;JET&quot;,   &quot;JIG&quot;,   &quot;JIM&quot;,   &quot;JO&quot;,    &quot;JOB&quot;,   &quot;JOE&quot;,   &quot;JOG&quot;,
+&quot;JOT&quot;,   &quot;JOY&quot;,   &quot;JUG&quot;,   &quot;JUT&quot;,   &quot;KAY&quot;,   &quot;KEG&quot;,   &quot;KEN&quot;,   &quot;KEY&quot;,
+&quot;KID&quot;,   &quot;KIM&quot;,   &quot;KIN&quot;,   &quot;KIT&quot;,   &quot;LA&quot;,    &quot;LAB&quot;,   &quot;LAC&quot;,   &quot;LAD&quot;,
+&quot;LAG&quot;,   &quot;LAM&quot;,   &quot;LAP&quot;,   &quot;LAW&quot;,   &quot;LAY&quot;,   &quot;LEA&quot;,   &quot;LED&quot;,   &quot;LEE&quot;,
+&quot;LEG&quot;,   &quot;LEN&quot;,   &quot;LEO&quot;,   &quot;LET&quot;,   &quot;LEW&quot;,   &quot;LID&quot;,   &quot;LIE&quot;,   &quot;LIN&quot;,
+&quot;LIP&quot;,   &quot;LIT&quot;,   &quot;LO&quot;,   &quot;LOB&quot;,   &quot;LOG&quot;,   &quot;LOP&quot;,   &quot;LOS&quot;,   &quot;LOT&quot;,
+&quot;LOU&quot;,   &quot;LOW&quot;,   &quot;LOY&quot;,   &quot;LUG&quot;,   &quot;LYE&quot;,   &quot;MA&quot;,    &quot;MAC&quot;,   &quot;MAD&quot;,
+&quot;MAE&quot;,   &quot;MAN&quot;,   &quot;MAO&quot;,   &quot;MAP&quot;,   &quot;MAT&quot;,   &quot;MAW&quot;,   &quot;MAY&quot;,   &quot;ME&quot;,
+&quot;MEG&quot;,   &quot;MEL&quot;,   &quot;MEN&quot;,   &quot;MET&quot;,   &quot;MEW&quot;,   &quot;MID&quot;,   &quot;MIN&quot;,   &quot;MIT&quot;,
+&quot;MOB&quot;,   &quot;MOD&quot;,   &quot;MOE&quot;,   &quot;MOO&quot;,   &quot;MOP&quot;,   &quot;MOS&quot;,   &quot;MOT&quot;,   &quot;MOW&quot;,
+&quot;MUD&quot;,   &quot;MUG&quot;,   &quot;MUM&quot;,   &quot;MY&quot;,    &quot;NAB&quot;,   &quot;NAG&quot;,   &quot;NAN&quot;,   &quot;NAP&quot;,
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 19]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4-20" id="page-4-20" href="https://tools.ietf.org/html/rfc2289#page-4-20" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+&quot;NAT&quot;,   &quot;NAY&quot;,   &quot;NE&quot;,   &quot;NED&quot;,   &quot;NEE&quot;,   &quot;NET&quot;,   &quot;NEW&quot;,   &quot;NIB&quot;,
+&quot;NIL&quot;,   &quot;NIP&quot;,   &quot;NIT&quot;,   &quot;NO&quot;,    &quot;NOB&quot;,   &quot;NOD&quot;,   &quot;NON&quot;,   &quot;NOR&quot;,
+&quot;NOT&quot;,   &quot;NOV&quot;,   &quot;NOW&quot;,   &quot;NU&quot;,    &quot;NUN&quot;,   &quot;NUT&quot;,   &quot;O&quot;,     &quot;OAF&quot;,
+&quot;OAK&quot;,   &quot;OAR&quot;,   &quot;OAT&quot;,   &quot;ODD&quot;,   &quot;ODE&quot;,   &quot;OF&quot;,    &quot;OFF&quot;,   &quot;OFT&quot;,
+&quot;OH&quot;,    &quot;OIL&quot;,   &quot;OK&quot;,   &quot;OLD&quot;,   &quot;ON&quot;,    &quot;ONE&quot;,   &quot;OR&quot;,    &quot;ORB&quot;,
+&quot;ORE&quot;,   &quot;ORR&quot;,   &quot;OS&quot;,   &quot;OTT&quot;,   &quot;OUR&quot;,   &quot;OUT&quot;,   &quot;OVA&quot;,   &quot;OW&quot;,
+&quot;OWE&quot;,   &quot;OWL&quot;,   &quot;OWN&quot;,   &quot;OX&quot;,    &quot;PA&quot;,    &quot;PAD&quot;,   &quot;PAL&quot;,   &quot;PAM&quot;,
+&quot;PAN&quot;,   &quot;PAP&quot;,   &quot;PAR&quot;,   &quot;PAT&quot;,   &quot;PAW&quot;,   &quot;PAY&quot;,   &quot;PEA&quot;,   &quot;PEG&quot;,
+&quot;PEN&quot;,   &quot;PEP&quot;,   &quot;PER&quot;,   &quot;PET&quot;,   &quot;PEW&quot;,   &quot;PHI&quot;,   &quot;PI&quot;,    &quot;PIE&quot;,
+&quot;PIN&quot;,   &quot;PIT&quot;,   &quot;PLY&quot;,   &quot;PO&quot;,    &quot;POD&quot;,   &quot;POE&quot;,   &quot;POP&quot;,   &quot;POT&quot;,
+&quot;POW&quot;,   &quot;PRO&quot;,   &quot;PRY&quot;,   &quot;PUB&quot;,   &quot;PUG&quot;,   &quot;PUN&quot;,   &quot;PUP&quot;,   &quot;PUT&quot;,
+&quot;QUO&quot;,   &quot;RAG&quot;,   &quot;RAM&quot;,   &quot;RAN&quot;,   &quot;RAP&quot;,   &quot;RAT&quot;,   &quot;RAW&quot;,   &quot;RAY&quot;,
+&quot;REB&quot;,   &quot;RED&quot;,   &quot;REP&quot;,   &quot;RET&quot;,   &quot;RIB&quot;,   &quot;RID&quot;,   &quot;RIG&quot;,   &quot;RIM&quot;,
+&quot;RIO&quot;,   &quot;RIP&quot;,   &quot;ROB&quot;,   &quot;ROD&quot;,   &quot;ROE&quot;,   &quot;RON&quot;,   &quot;ROT&quot;,   &quot;ROW&quot;,
+&quot;ROY&quot;,   &quot;RUB&quot;,   &quot;RUE&quot;,   &quot;RUG&quot;,   &quot;RUM&quot;,   &quot;RUN&quot;,   &quot;RYE&quot;,   &quot;SAC&quot;,
+&quot;SAD&quot;,   &quot;SAG&quot;,   &quot;SAL&quot;,   &quot;SAM&quot;,   &quot;SAN&quot;,   &quot;SAP&quot;,   &quot;SAT&quot;,   &quot;SAW&quot;,
+&quot;SAY&quot;,   &quot;SEA&quot;,   &quot;SEC&quot;,   &quot;SEE&quot;,   &quot;SEN&quot;,   &quot;SET&quot;,   &quot;SEW&quot;,   &quot;SHE&quot;,
+&quot;SHY&quot;,   &quot;SIN&quot;,   &quot;SIP&quot;,   &quot;SIR&quot;,   &quot;SIS&quot;,   &quot;SIT&quot;,   &quot;SKI&quot;,   &quot;SKY&quot;,
+&quot;SLY&quot;,   &quot;SO&quot;,    &quot;SOB&quot;,   &quot;SOD&quot;,   &quot;SON&quot;,   &quot;SOP&quot;,   &quot;SOW&quot;,   &quot;SOY&quot;,
+&quot;SPA&quot;,   &quot;SPY&quot;,   &quot;SUB&quot;,   &quot;SUD&quot;,   &quot;SUE&quot;,   &quot;SUM&quot;,   &quot;SUN&quot;,   &quot;SUP&quot;,
+&quot;TAB&quot;,   &quot;TAD&quot;,   &quot;TAG&quot;,   &quot;TAN&quot;,   &quot;TAP&quot;,   &quot;TAR&quot;,   &quot;TEA&quot;,   &quot;TED&quot;,
+&quot;TEE&quot;,   &quot;TEN&quot;,   &quot;THE&quot;,   &quot;THY&quot;,   &quot;TIC&quot;,   &quot;TIE&quot;,   &quot;TIM&quot;,   &quot;TIN&quot;,
+&quot;TIP&quot;,   &quot;TO&quot;,    &quot;TOE&quot;,   &quot;TOG&quot;,   &quot;TOM&quot;,   &quot;TON&quot;,   &quot;TOO&quot;,   &quot;TOP&quot;,
+&quot;TOW&quot;,   &quot;TOY&quot;,   &quot;TRY&quot;,   &quot;TUB&quot;,   &quot;TUG&quot;,   &quot;TUM&quot;,   &quot;TUN&quot;,   &quot;TWO&quot;,
+&quot;UN&quot;,    &quot;UP&quot;,    &quot;US&quot;,   &quot;USE&quot;,   &quot;VAN&quot;,   &quot;VAT&quot;,   &quot;VET&quot;,   &quot;VIE&quot;,
+&quot;WAD&quot;,   &quot;WAG&quot;,   &quot;WAR&quot;,   &quot;WAS&quot;,   &quot;WAY&quot;,   &quot;WE&quot;,    &quot;WEB&quot;,   &quot;WED&quot;,
+&quot;WEE&quot;,   &quot;WET&quot;,   &quot;WHO&quot;,   &quot;WHY&quot;,   &quot;WIN&quot;,   &quot;WIT&quot;,   &quot;WOK&quot;,   &quot;WON&quot;,
+&quot;WOO&quot;,   &quot;WOW&quot;,   &quot;WRY&quot;,   &quot;WU&quot;,    &quot;YAM&quot;,   &quot;YAP&quot;,   &quot;YAW&quot;,   &quot;YE&quot;,
+&quot;YEA&quot;,   &quot;YES&quot;,   &quot;YET&quot;,   &quot;YOU&quot;,   &quot;ABED&quot;,  &quot;ABEL&quot;,  &quot;ABET&quot;,  &quot;ABLE&quot;,
+&quot;ABUT&quot;,  &quot;ACHE&quot;,  &quot;ACID&quot;,  &quot;ACME&quot;,  &quot;ACRE&quot;,  &quot;ACTA&quot;,  &quot;ACTS&quot;,  &quot;ADAM&quot;,
+&quot;ADDS&quot;,  &quot;ADEN&quot;,  &quot;AFAR&quot;,  &quot;AFRO&quot;,  &quot;AGEE&quot;,  &quot;AHEM&quot;,  &quot;AHOY&quot;,  &quot;AIDA&quot;,
+&quot;AIDE&quot;,  &quot;AIDS&quot;,  &quot;AIRY&quot;,  &quot;AJAR&quot;,  &quot;AKIN&quot;,  &quot;ALAN&quot;,  &quot;ALEC&quot;,  &quot;ALGA&quot;,
+&quot;ALIA&quot;,  &quot;ALLY&quot;,  &quot;ALMA&quot;,  &quot;ALOE&quot;,  &quot;ALSO&quot;,  &quot;ALTO&quot;,  &quot;ALUM&quot;,  &quot;ALVA&quot;,
+&quot;AMEN&quot;,  &quot;AMES&quot;,  &quot;AMID&quot;,  &quot;AMMO&quot;,  &quot;AMOK&quot;,  &quot;AMOS&quot;,  &quot;AMRA&quot;,  &quot;ANDY&quot;,
+&quot;ANEW&quot;,  &quot;ANNA&quot;,  &quot;ANNE&quot;,  &quot;ANTE&quot;,  &quot;ANTI&quot;,  &quot;AQUA&quot;,  &quot;ARAB&quot;,  &quot;ARCH&quot;,
+&quot;AREA&quot;,  &quot;ARGO&quot;,  &quot;ARID&quot;,  &quot;ARMY&quot;,  &quot;ARTS&quot;,  &quot;ARTY&quot;,  &quot;ASIA&quot;,  &quot;ASKS&quot;,
+&quot;ATOM&quot;,  &quot;AUNT&quot;,  &quot;AURA&quot;,  &quot;AUTO&quot;,  &quot;AVER&quot;,  &quot;AVID&quot;,  &quot;AVIS&quot;,  &quot;AVON&quot;,
+&quot;AVOW&quot;,  &quot;AWAY&quot;,  &quot;AWRY&quot;,  &quot;BABE&quot;,  &quot;BABY&quot;,  &quot;BACH&quot;,  &quot;BACK&quot;,  &quot;BADE&quot;,
+&quot;BAIL&quot;,  &quot;BAIT&quot;,  &quot;BAKE&quot;,  &quot;BALD&quot;,  &quot;BALE&quot;,  &quot;BALI&quot;,  &quot;BALK&quot;,  &quot;BALL&quot;,
+&quot;BALM&quot;,  &quot;BAND&quot;,  &quot;BANE&quot;,  &quot;BANG&quot;,  &quot;BANK&quot;,  &quot;BARB&quot;,  &quot;BARD&quot;,  &quot;BARE&quot;,
+&quot;BARK&quot;,  &quot;BARN&quot;,  &quot;BARR&quot;,  &quot;BASE&quot;,  &quot;BASH&quot;,  &quot;BASK&quot;,  &quot;BASS&quot;,  &quot;BATE&quot;,
+&quot;BATH&quot;,  &quot;BAWD&quot;,  &quot;BAWL&quot;,  &quot;BEAD&quot;,  &quot;BEAK&quot;,  &quot;BEAM&quot;,  &quot;BEAN&quot;,  &quot;BEAR&quot;,
+&quot;BEAT&quot;,  &quot;BEAU&quot;,  &quot;BECK&quot;,  &quot;BEEF&quot;,  &quot;BEEN&quot;,  &quot;BEER&quot;,  &quot;BEET&quot;,  &quot;BELA&quot;,
+&quot;BELL&quot;,  &quot;BELT&quot;,  &quot;BEND&quot;,  &quot;BENT&quot;,  &quot;BERG&quot;,  &quot;BERN&quot;,  &quot;BERT&quot;,  &quot;BESS&quot;,
+&quot;BEST&quot;,  &quot;BETA&quot;,  &quot;BETH&quot;,  &quot;BHOY&quot;,  &quot;BIAS&quot;,  &quot;BIDE&quot;,  &quot;BIEN&quot;,  &quot;BILE&quot;,
+&quot;BILK&quot;,  &quot;BILL&quot;,  &quot;BIND&quot;,  &quot;BING&quot;,  &quot;BIRD&quot;,  &quot;BITE&quot;,  &quot;BITS&quot;,  &quot;BLAB&quot;,
+&quot;BLAT&quot;,  &quot;BLED&quot;,  &quot;BLEW&quot;,  &quot;BLOB&quot;,  &quot;BLOC&quot;,  &quot;BLOT&quot;,  &quot;BLOW&quot;,  &quot;BLUE&quot;,
+&quot;BLUM&quot;,  &quot;BLUR&quot;,  &quot;BOAR&quot;,  &quot;BOAT&quot;,  &quot;BOCA&quot;,  &quot;BOCK&quot;,  &quot;BODE&quot;,  &quot;BODY&quot;,
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 20]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4-21" id="page-4-21" href="https://tools.ietf.org/html/rfc2289#page-4-21" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+&quot;BOGY&quot;,  &quot;BOHR&quot;,  &quot;BOIL&quot;,  &quot;BOLD&quot;,  &quot;BOLO&quot;,  &quot;BOLT&quot;,  &quot;BOMB&quot;,  &quot;BONA&quot;,
+&quot;BOND&quot;,  &quot;BONE&quot;,  &quot;BONG&quot;,  &quot;BONN&quot;,  &quot;BONY&quot;,  &quot;BOOK&quot;,  &quot;BOOM&quot;,  &quot;BOON&quot;,
+&quot;BOOT&quot;,  &quot;BORE&quot;,  &quot;BORG&quot;,  &quot;BORN&quot;,  &quot;BOSE&quot;,  &quot;BOSS&quot;,  &quot;BOTH&quot;,  &quot;BOUT&quot;,
+&quot;BOWL&quot;,  &quot;BOYD&quot;,  &quot;BRAD&quot;,  &quot;BRAE&quot;,  &quot;BRAG&quot;,  &quot;BRAN&quot;,  &quot;BRAY&quot;,  &quot;BRED&quot;,
+&quot;BREW&quot;,  &quot;BRIG&quot;,  &quot;BRIM&quot;,  &quot;BROW&quot;,  &quot;BUCK&quot;,  &quot;BUDD&quot;,  &quot;BUFF&quot;,  &quot;BULB&quot;,
+&quot;BULK&quot;,  &quot;BULL&quot;,  &quot;BUNK&quot;,  &quot;BUNT&quot;,  &quot;BUOY&quot;,  &quot;BURG&quot;,  &quot;BURL&quot;,  &quot;BURN&quot;,
+&quot;BURR&quot;,  &quot;BURT&quot;,  &quot;BURY&quot;,  &quot;BUSH&quot;,  &quot;BUSS&quot;,  &quot;BUST&quot;,  &quot;BUSY&quot;,  &quot;BYTE&quot;,
+&quot;CADY&quot;,  &quot;CAFE&quot;,  &quot;CAGE&quot;,  &quot;CAIN&quot;,  &quot;CAKE&quot;,  &quot;CALF&quot;,  &quot;CALL&quot;,  &quot;CALM&quot;,
+&quot;CAME&quot;,  &quot;CANE&quot;,  &quot;CANT&quot;,  &quot;CARD&quot;,  &quot;CARE&quot;,  &quot;CARL&quot;,  &quot;CARR&quot;,  &quot;CART&quot;,
+&quot;CASE&quot;,  &quot;CASH&quot;,  &quot;CASK&quot;,  &quot;CAST&quot;,  &quot;CAVE&quot;,  &quot;CEIL&quot;,  &quot;CELL&quot;,  &quot;CENT&quot;,
+&quot;CERN&quot;,  &quot;CHAD&quot;,  &quot;CHAR&quot;,  &quot;CHAT&quot;,  &quot;CHAW&quot;,  &quot;CHEF&quot;,  &quot;CHEN&quot;,  &quot;CHEW&quot;,
+&quot;CHIC&quot;,  &quot;CHIN&quot;,  &quot;CHOU&quot;,  &quot;CHOW&quot;,  &quot;CHUB&quot;,  &quot;CHUG&quot;,  &quot;CHUM&quot;,  &quot;CITE&quot;,
+&quot;CITY&quot;,  &quot;CLAD&quot;,  &quot;CLAM&quot;,  &quot;CLAN&quot;,  &quot;CLAW&quot;,  &quot;CLAY&quot;,  &quot;CLOD&quot;,  &quot;CLOG&quot;,
+&quot;CLOT&quot;,  &quot;CLUB&quot;,  &quot;CLUE&quot;,  &quot;COAL&quot;,  &quot;COAT&quot;,  &quot;COCA&quot;,  &quot;COCK&quot;,  &quot;COCO&quot;,
+&quot;CODA&quot;,  &quot;CODE&quot;,  &quot;CODY&quot;,  &quot;COED&quot;,  &quot;COIL&quot;,  &quot;COIN&quot;,  &quot;COKE&quot;,  &quot;COLA&quot;,
+&quot;COLD&quot;,  &quot;COLT&quot;,  &quot;COMA&quot;,  &quot;COMB&quot;,  &quot;COME&quot;,  &quot;COOK&quot;,  &quot;COOL&quot;,  &quot;COON&quot;,
+&quot;COOT&quot;,  &quot;CORD&quot;,  &quot;CORE&quot;,  &quot;CORK&quot;,  &quot;CORN&quot;,  &quot;COST&quot;,  &quot;COVE&quot;,  &quot;COWL&quot;,
+&quot;CRAB&quot;,  &quot;CRAG&quot;,  &quot;CRAM&quot;,  &quot;CRAY&quot;,  &quot;CREW&quot;,  &quot;CRIB&quot;,  &quot;CROW&quot;,  &quot;CRUD&quot;,
+&quot;CUBA&quot;,  &quot;CUBE&quot;,  &quot;CUFF&quot;,  &quot;CULL&quot;,  &quot;CULT&quot;,  &quot;CUNY&quot;,  &quot;CURB&quot;,  &quot;CURD&quot;,
+&quot;CURE&quot;,  &quot;CURL&quot;,  &quot;CURT&quot;,  &quot;CUTS&quot;,  &quot;DADE&quot;,  &quot;DALE&quot;,  &quot;DAME&quot;,  &quot;DANA&quot;,
+&quot;DANE&quot;,  &quot;DANG&quot;,  &quot;DANK&quot;,  &quot;DARE&quot;,  &quot;DARK&quot;,  &quot;DARN&quot;,  &quot;DART&quot;,  &quot;DASH&quot;,
+&quot;DATA&quot;,  &quot;DATE&quot;,  &quot;DAVE&quot;,  &quot;DAVY&quot;,  &quot;DAWN&quot;,  &quot;DAYS&quot;,  &quot;DEAD&quot;,  &quot;DEAF&quot;,
+&quot;DEAL&quot;,  &quot;DEAN&quot;,  &quot;DEAR&quot;,  &quot;DEBT&quot;,  &quot;DECK&quot;,  &quot;DEED&quot;,  &quot;DEEM&quot;,  &quot;DEER&quot;,
+&quot;DEFT&quot;,  &quot;DEFY&quot;,  &quot;DELL&quot;,  &quot;DENT&quot;,  &quot;DENY&quot;,  &quot;DESK&quot;,  &quot;DIAL&quot;,  &quot;DICE&quot;,
+&quot;DIED&quot;,  &quot;DIET&quot;,  &quot;DIME&quot;,  &quot;DINE&quot;,  &quot;DING&quot;,  &quot;DINT&quot;,  &quot;DIRE&quot;,  &quot;DIRT&quot;,
+&quot;DISC&quot;,  &quot;DISH&quot;,  &quot;DISK&quot;,  &quot;DIVE&quot;,  &quot;DOCK&quot;,  &quot;DOES&quot;,  &quot;DOLE&quot;,  &quot;DOLL&quot;,
+&quot;DOLT&quot;,  &quot;DOME&quot;,  &quot;DONE&quot;,  &quot;DOOM&quot;,  &quot;DOOR&quot;,  &quot;DORA&quot;,  &quot;DOSE&quot;,  &quot;DOTE&quot;,
+&quot;DOUG&quot;,  &quot;DOUR&quot;,  &quot;DOVE&quot;,  &quot;DOWN&quot;,  &quot;DRAB&quot;,  &quot;DRAG&quot;,  &quot;DRAM&quot;,  &quot;DRAW&quot;,
+&quot;DREW&quot;,  &quot;DRUB&quot;,  &quot;DRUG&quot;,  &quot;DRUM&quot;,  &quot;DUAL&quot;,  &quot;DUCK&quot;,  &quot;DUCT&quot;,  &quot;DUEL&quot;,
+&quot;DUET&quot;,  &quot;DUKE&quot;,  &quot;DULL&quot;,  &quot;DUMB&quot;,  &quot;DUNE&quot;,  &quot;DUNK&quot;,  &quot;DUSK&quot;,  &quot;DUST&quot;,
+&quot;DUTY&quot;,  &quot;EACH&quot;,  &quot;EARL&quot;,  &quot;EARN&quot;,  &quot;EASE&quot;,  &quot;EAST&quot;,  &quot;EASY&quot;,  &quot;EBEN&quot;,
+&quot;ECHO&quot;,  &quot;EDDY&quot;,  &quot;EDEN&quot;,  &quot;EDGE&quot;,  &quot;EDGY&quot;,  &quot;EDIT&quot;,  &quot;EDNA&quot;,  &quot;EGAN&quot;,
+&quot;ELAN&quot;,  &quot;ELBA&quot;,  &quot;ELLA&quot;,  &quot;ELSE&quot;,  &quot;EMIL&quot;,  &quot;EMIT&quot;,  &quot;EMMA&quot;,  &quot;ENDS&quot;,
+&quot;ERIC&quot;,  &quot;EROS&quot;,  &quot;EVEN&quot;,  &quot;EVER&quot;,  &quot;EVIL&quot;,  &quot;EYED&quot;,  &quot;FACE&quot;,  &quot;FACT&quot;,
+&quot;FADE&quot;,  &quot;FAIL&quot;,  &quot;FAIN&quot;,  &quot;FAIR&quot;,  &quot;FAKE&quot;,  &quot;FALL&quot;,  &quot;FAME&quot;,  &quot;FANG&quot;,
+&quot;FARM&quot;,  &quot;FAST&quot;,  &quot;FATE&quot;,  &quot;FAWN&quot;,  &quot;FEAR&quot;,  &quot;FEAT&quot;,  &quot;FEED&quot;,  &quot;FEEL&quot;,
+&quot;FEET&quot;,  &quot;FELL&quot;,  &quot;FELT&quot;,  &quot;FEND&quot;,  &quot;FERN&quot;,  &quot;FEST&quot;,  &quot;FEUD&quot;,  &quot;FIEF&quot;,
+&quot;FIGS&quot;,  &quot;FILE&quot;,  &quot;FILL&quot;,  &quot;FILM&quot;,  &quot;FIND&quot;,  &quot;FINE&quot;,  &quot;FINK&quot;,  &quot;FIRE&quot;,
+&quot;FIRM&quot;,  &quot;FISH&quot;,  &quot;FISK&quot;,  &quot;FIST&quot;,  &quot;FITS&quot;,  &quot;FIVE&quot;,  &quot;FLAG&quot;,  &quot;FLAK&quot;,
+&quot;FLAM&quot;,  &quot;FLAT&quot;,  &quot;FLAW&quot;,  &quot;FLEA&quot;,  &quot;FLED&quot;,  &quot;FLEW&quot;,  &quot;FLIT&quot;,  &quot;FLOC&quot;,
+&quot;FLOG&quot;,  &quot;FLOW&quot;,  &quot;FLUB&quot;,  &quot;FLUE&quot;,  &quot;FOAL&quot;,  &quot;FOAM&quot;,  &quot;FOGY&quot;,  &quot;FOIL&quot;,
+&quot;FOLD&quot;,  &quot;FOLK&quot;,  &quot;FOND&quot;,  &quot;FONT&quot;,  &quot;FOOD&quot;,  &quot;FOOL&quot;,  &quot;FOOT&quot;,  &quot;FORD&quot;,
+&quot;FORE&quot;,  &quot;FORK&quot;,  &quot;FORM&quot;,  &quot;FORT&quot;,  &quot;FOSS&quot;,  &quot;FOUL&quot;,  &quot;FOUR&quot;,  &quot;FOWL&quot;,
+&quot;FRAU&quot;,  &quot;FRAY&quot;,  &quot;FRED&quot;,  &quot;FREE&quot;,  &quot;FRET&quot;,  &quot;FREY&quot;,  &quot;FROG&quot;,  &quot;FROM&quot;,
+&quot;FUEL&quot;,  &quot;FULL&quot;,  &quot;FUME&quot;,  &quot;FUND&quot;,  &quot;FUNK&quot;,  &quot;FURY&quot;,  &quot;FUSE&quot;,  &quot;FUSS&quot;,
+&quot;GAFF&quot;,  &quot;GAGE&quot;,  &quot;GAIL&quot;,  &quot;GAIN&quot;,  &quot;GAIT&quot;,  &quot;GALA&quot;,  &quot;GALE&quot;,  &quot;GALL&quot;,
+&quot;GALT&quot;,  &quot;GAME&quot;,  &quot;GANG&quot;,  &quot;GARB&quot;,  &quot;GARY&quot;,  &quot;GASH&quot;,  &quot;GATE&quot;,  &quot;GAUL&quot;,
+&quot;GAUR&quot;,  &quot;GAVE&quot;,  &quot;GAWK&quot;,  &quot;GEAR&quot;,  &quot;GELD&quot;,  &quot;GENE&quot;,  &quot;GENT&quot;,  &quot;GERM&quot;,
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 21]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4-22" id="page-4-22" href="https://tools.ietf.org/html/rfc2289#page-4-22" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+&quot;GETS&quot;,  &quot;GIBE&quot;,  &quot;GIFT&quot;,  &quot;GILD&quot;,  &quot;GILL&quot;,  &quot;GILT&quot;,  &quot;GINA&quot;,  &quot;GIRD&quot;,
+&quot;GIRL&quot;,  &quot;GIST&quot;,  &quot;GIVE&quot;,  &quot;GLAD&quot;,  &quot;GLEE&quot;,  &quot;GLEN&quot;,  &quot;GLIB&quot;,  &quot;GLOB&quot;,
+&quot;GLOM&quot;,  &quot;GLOW&quot;,  &quot;GLUE&quot;,  &quot;GLUM&quot;,  &quot;GLUT&quot;,  &quot;GOAD&quot;,  &quot;GOAL&quot;,  &quot;GOAT&quot;,
+&quot;GOER&quot;,  &quot;GOES&quot;,  &quot;GOLD&quot;,  &quot;GOLF&quot;,  &quot;GONE&quot;,  &quot;GONG&quot;,  &quot;GOOD&quot;,  &quot;GOOF&quot;,
+&quot;GORE&quot;,  &quot;GORY&quot;,  &quot;GOSH&quot;,  &quot;GOUT&quot;,  &quot;GOWN&quot;,  &quot;GRAB&quot;,  &quot;GRAD&quot;,  &quot;GRAY&quot;,
+&quot;GREG&quot;,  &quot;GREW&quot;,  &quot;GREY&quot;,  &quot;GRID&quot;,  &quot;GRIM&quot;,  &quot;GRIN&quot;,  &quot;GRIT&quot;,  &quot;GROW&quot;,
+&quot;GRUB&quot;,  &quot;GULF&quot;,  &quot;GULL&quot;,  &quot;GUNK&quot;,  &quot;GURU&quot;,  &quot;GUSH&quot;,  &quot;GUST&quot;,  &quot;GWEN&quot;,
+&quot;GWYN&quot;,  &quot;HAAG&quot;,  &quot;HAAS&quot;,  &quot;HACK&quot;,  &quot;HAIL&quot;,  &quot;HAIR&quot;,  &quot;HALE&quot;,  &quot;HALF&quot;,
+&quot;HALL&quot;,  &quot;HALO&quot;,  &quot;HALT&quot;,  &quot;HAND&quot;,  &quot;HANG&quot;,  &quot;HANK&quot;,  &quot;HANS&quot;,  &quot;HARD&quot;,
+&quot;HARK&quot;,  &quot;HARM&quot;,  &quot;HART&quot;,  &quot;HASH&quot;,  &quot;HAST&quot;,  &quot;HATE&quot;,  &quot;HATH&quot;,  &quot;HAUL&quot;,
+&quot;HAVE&quot;,  &quot;HAWK&quot;,  &quot;HAYS&quot;,  &quot;HEAD&quot;,  &quot;HEAL&quot;,  &quot;HEAR&quot;,  &quot;HEAT&quot;,  &quot;HEBE&quot;,
+&quot;HECK&quot;,  &quot;HEED&quot;,  &quot;HEEL&quot;,  &quot;HEFT&quot;,  &quot;HELD&quot;,  &quot;HELL&quot;,  &quot;HELM&quot;,  &quot;HERB&quot;,
+&quot;HERD&quot;,  &quot;HERE&quot;,  &quot;HERO&quot;,  &quot;HERS&quot;,  &quot;HESS&quot;,  &quot;HEWN&quot;,  &quot;HICK&quot;,  &quot;HIDE&quot;,
+&quot;HIGH&quot;,  &quot;HIKE&quot;,  &quot;HILL&quot;,  &quot;HILT&quot;,  &quot;HIND&quot;,  &quot;HINT&quot;,  &quot;HIRE&quot;,  &quot;HISS&quot;,
+&quot;HIVE&quot;,  &quot;HOBO&quot;,  &quot;HOCK&quot;,  &quot;HOFF&quot;,  &quot;HOLD&quot;,  &quot;HOLE&quot;,  &quot;HOLM&quot;,  &quot;HOLT&quot;,
+&quot;HOME&quot;,  &quot;HONE&quot;,  &quot;HONK&quot;,  &quot;HOOD&quot;,  &quot;HOOF&quot;,  &quot;HOOK&quot;,  &quot;HOOT&quot;,  &quot;HORN&quot;,
+&quot;HOSE&quot;,  &quot;HOST&quot;,  &quot;HOUR&quot;,  &quot;HOVE&quot;,  &quot;HOWE&quot;,  &quot;HOWL&quot;,  &quot;HOYT&quot;,  &quot;HUCK&quot;,
+&quot;HUED&quot;,  &quot;HUFF&quot;,  &quot;HUGE&quot;,  &quot;HUGH&quot;,  &quot;HUGO&quot;,  &quot;HULK&quot;,  &quot;HULL&quot;,  &quot;HUNK&quot;,
+&quot;HUNT&quot;,  &quot;HURD&quot;,  &quot;HURL&quot;,  &quot;HURT&quot;,  &quot;HUSH&quot;,  &quot;HYDE&quot;,  &quot;HYMN&quot;,  &quot;IBIS&quot;,
+&quot;ICON&quot;,  &quot;IDEA&quot;,  &quot;IDLE&quot;,  &quot;IFFY&quot;,  &quot;INCA&quot;,  &quot;INCH&quot;,  &quot;INTO&quot;,  &quot;IONS&quot;,
+&quot;IOTA&quot;,  &quot;IOWA&quot;,  &quot;IRIS&quot;,  &quot;IRMA&quot;,  &quot;IRON&quot;,  &quot;ISLE&quot;,  &quot;ITCH&quot;,  &quot;ITEM&quot;,
+&quot;IVAN&quot;,  &quot;JACK&quot;,  &quot;JADE&quot;,  &quot;JAIL&quot;,  &quot;JAKE&quot;,  &quot;JANE&quot;,  &quot;JAVA&quot;,  &quot;JEAN&quot;,
+&quot;JEFF&quot;,  &quot;JERK&quot;,  &quot;JESS&quot;,  &quot;JEST&quot;,  &quot;JIBE&quot;,  &quot;JILL&quot;,  &quot;JILT&quot;,  &quot;JIVE&quot;,
+&quot;JOAN&quot;,  &quot;JOBS&quot;,  &quot;JOCK&quot;,  &quot;JOEL&quot;,  &quot;JOEY&quot;,  &quot;JOHN&quot;,  &quot;JOIN&quot;,  &quot;JOKE&quot;,
+&quot;JOLT&quot;,  &quot;JOVE&quot;,  &quot;JUDD&quot;,  &quot;JUDE&quot;,  &quot;JUDO&quot;,  &quot;JUDY&quot;,  &quot;JUJU&quot;,  &quot;JUKE&quot;,
+&quot;JULY&quot;,  &quot;JUNE&quot;,  &quot;JUNK&quot;,  &quot;JUNO&quot;,  &quot;JURY&quot;,  &quot;JUST&quot;,  &quot;JUTE&quot;,  &quot;KAHN&quot;,
+&quot;KALE&quot;,  &quot;KANE&quot;,  &quot;KANT&quot;,  &quot;KARL&quot;,  &quot;KATE&quot;,  &quot;KEEL&quot;,  &quot;KEEN&quot;,  &quot;KENO&quot;,
+&quot;KENT&quot;,  &quot;KERN&quot;,  &quot;KERR&quot;,  &quot;KEYS&quot;,  &quot;KICK&quot;,  &quot;KILL&quot;,  &quot;KIND&quot;,  &quot;KING&quot;,
+&quot;KIRK&quot;,  &quot;KISS&quot;,  &quot;KITE&quot;,  &quot;KLAN&quot;,  &quot;KNEE&quot;,  &quot;KNEW&quot;,  &quot;KNIT&quot;,  &quot;KNOB&quot;,
+&quot;KNOT&quot;,  &quot;KNOW&quot;,  &quot;KOCH&quot;,  &quot;KONG&quot;,  &quot;KUDO&quot;,  &quot;KURD&quot;,  &quot;KURT&quot;,  &quot;KYLE&quot;,
+&quot;LACE&quot;,  &quot;LACK&quot;,  &quot;LACY&quot;,  &quot;LADY&quot;,  &quot;LAID&quot;,  &quot;LAIN&quot;,  &quot;LAIR&quot;,  &quot;LAKE&quot;,
+&quot;LAMB&quot;,  &quot;LAME&quot;,  &quot;LAND&quot;,  &quot;LANE&quot;,  &quot;LANG&quot;,  &quot;LARD&quot;,  &quot;LARK&quot;,  &quot;LASS&quot;,
+&quot;LAST&quot;,  &quot;LATE&quot;,  &quot;LAUD&quot;,  &quot;LAVA&quot;,  &quot;LAWN&quot;,  &quot;LAWS&quot;,  &quot;LAYS&quot;,  &quot;LEAD&quot;,
+&quot;LEAF&quot;,  &quot;LEAK&quot;,  &quot;LEAN&quot;,  &quot;LEAR&quot;,  &quot;LEEK&quot;,  &quot;LEER&quot;,  &quot;LEFT&quot;,  &quot;LEND&quot;,
+&quot;LENS&quot;,  &quot;LENT&quot;,  &quot;LEON&quot;,  &quot;LESK&quot;,  &quot;LESS&quot;,  &quot;LEST&quot;,  &quot;LETS&quot;,  &quot;LIAR&quot;,
+&quot;LICE&quot;,  &quot;LICK&quot;,  &quot;LIED&quot;,  &quot;LIEN&quot;,  &quot;LIES&quot;,  &quot;LIEU&quot;,  &quot;LIFE&quot;,  &quot;LIFT&quot;,
+&quot;LIKE&quot;,  &quot;LILA&quot;,  &quot;LILT&quot;,  &quot;LILY&quot;,  &quot;LIMA&quot;,  &quot;LIMB&quot;,  &quot;LIME&quot;,  &quot;LIND&quot;,
+&quot;LINE&quot;,  &quot;LINK&quot;,  &quot;LINT&quot;,  &quot;LION&quot;,  &quot;LISA&quot;,  &quot;LIST&quot;,  &quot;LIVE&quot;,  &quot;LOAD&quot;,
+&quot;LOAF&quot;,  &quot;LOAM&quot;,  &quot;LOAN&quot;,  &quot;LOCK&quot;,  &quot;LOFT&quot;,  &quot;LOGE&quot;,  &quot;LOIS&quot;,  &quot;LOLA&quot;,
+&quot;LONE&quot;,  &quot;LONG&quot;,  &quot;LOOK&quot;,  &quot;LOON&quot;,  &quot;LOOT&quot;,  &quot;LORD&quot;,  &quot;LORE&quot;,  &quot;LOSE&quot;,
+&quot;LOSS&quot;,  &quot;LOST&quot;,  &quot;LOUD&quot;,  &quot;LOVE&quot;,  &quot;LOWE&quot;,  &quot;LUCK&quot;,  &quot;LUCY&quot;,  &quot;LUGE&quot;,
+&quot;LUKE&quot;,  &quot;LULU&quot;,  &quot;LUND&quot;,  &quot;LUNG&quot;,  &quot;LURA&quot;,  &quot;LURE&quot;,  &quot;LURK&quot;,  &quot;LUSH&quot;,
+&quot;LUST&quot;,  &quot;LYLE&quot;,  &quot;LYNN&quot;,  &quot;LYON&quot;,  &quot;LYRA&quot;,  &quot;MACE&quot;,  &quot;MADE&quot;,  &quot;MAGI&quot;,
+&quot;MAID&quot;,  &quot;MAIL&quot;,  &quot;MAIN&quot;,  &quot;MAKE&quot;,  &quot;MALE&quot;,  &quot;MALI&quot;,  &quot;MALL&quot;,  &quot;MALT&quot;,
+&quot;MANA&quot;,  &quot;MANN&quot;,  &quot;MANY&quot;,  &quot;MARC&quot;,  &quot;MARE&quot;,  &quot;MARK&quot;,  &quot;MARS&quot;,  &quot;MART&quot;,
+&quot;MARY&quot;,  &quot;MASH&quot;,  &quot;MASK&quot;,  &quot;MASS&quot;,  &quot;MAST&quot;,  &quot;MATE&quot;,  &quot;MATH&quot;,  &quot;MAUL&quot;,
+&quot;MAYO&quot;,  &quot;MEAD&quot;,  &quot;MEAL&quot;,  &quot;MEAN&quot;,  &quot;MEAT&quot;,  &quot;MEEK&quot;,  &quot;MEET&quot;,  &quot;MELD&quot;,
+&quot;MELT&quot;,  &quot;MEMO&quot;,  &quot;MEND&quot;,  &quot;MENU&quot;,  &quot;MERT&quot;,  &quot;MESH&quot;,  &quot;MESS&quot;,  &quot;MICE&quot;,
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 22]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4-23" id="page-4-23" href="https://tools.ietf.org/html/rfc2289#page-4-23" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+&quot;MIKE&quot;,  &quot;MILD&quot;,  &quot;MILE&quot;,  &quot;MILK&quot;,  &quot;MILL&quot;,  &quot;MILT&quot;,  &quot;MIMI&quot;,  &quot;MIND&quot;,
+&quot;MINE&quot;,  &quot;MINI&quot;,  &quot;MINK&quot;,  &quot;MINT&quot;,  &quot;MIRE&quot;,  &quot;MISS&quot;,  &quot;MIST&quot;,  &quot;MITE&quot;,
+&quot;MITT&quot;,  &quot;MOAN&quot;,  &quot;MOAT&quot;,  &quot;MOCK&quot;,  &quot;MODE&quot;,  &quot;MOLD&quot;,  &quot;MOLE&quot;,  &quot;MOLL&quot;,
+&quot;MOLT&quot;,  &quot;MONA&quot;,  &quot;MONK&quot;,  &quot;MONT&quot;,  &quot;MOOD&quot;,  &quot;MOON&quot;,  &quot;MOOR&quot;,  &quot;MOOT&quot;,
+&quot;MORE&quot;,  &quot;MORN&quot;,  &quot;MORT&quot;,  &quot;MOSS&quot;,  &quot;MOST&quot;,  &quot;MOTH&quot;,  &quot;MOVE&quot;,  &quot;MUCH&quot;,
+&quot;MUCK&quot;,  &quot;MUDD&quot;,  &quot;MUFF&quot;,  &quot;MULE&quot;,  &quot;MULL&quot;,  &quot;MURK&quot;,  &quot;MUSH&quot;,  &quot;MUST&quot;,
+&quot;MUTE&quot;,  &quot;MUTT&quot;,  &quot;MYRA&quot;,  &quot;MYTH&quot;,  &quot;NAGY&quot;,  &quot;NAIL&quot;,  &quot;NAIR&quot;,  &quot;NAME&quot;,
+&quot;NARY&quot;,  &quot;NASH&quot;,  &quot;NAVE&quot;,  &quot;NAVY&quot;,  &quot;NEAL&quot;,  &quot;NEAR&quot;,  &quot;NEAT&quot;,  &quot;NECK&quot;,
+&quot;NEED&quot;,  &quot;NEIL&quot;,  &quot;NELL&quot;,  &quot;NEON&quot;,  &quot;NERO&quot;,  &quot;NESS&quot;,  &quot;NEST&quot;,  &quot;NEWS&quot;,
+&quot;NEWT&quot;,  &quot;NIBS&quot;,  &quot;NICE&quot;,  &quot;NICK&quot;,  &quot;NILE&quot;,  &quot;NINA&quot;,  &quot;NINE&quot;,  &quot;NOAH&quot;,
+&quot;NODE&quot;,  &quot;NOEL&quot;,  &quot;NOLL&quot;,  &quot;NONE&quot;,  &quot;NOOK&quot;,  &quot;NOON&quot;,  &quot;NORM&quot;,  &quot;NOSE&quot;,
+&quot;NOTE&quot;,  &quot;NOUN&quot;,  &quot;NOVA&quot;,  &quot;NUDE&quot;,  &quot;NULL&quot;,  &quot;NUMB&quot;,  &quot;OATH&quot;,  &quot;OBEY&quot;,
+&quot;OBOE&quot;,  &quot;ODIN&quot;,  &quot;OHIO&quot;,  &quot;OILY&quot;,  &quot;OINT&quot;,  &quot;OKAY&quot;,  &quot;OLAF&quot;,  &quot;OLDY&quot;,
+&quot;OLGA&quot;,  &quot;OLIN&quot;,  &quot;OMAN&quot;,  &quot;OMEN&quot;,  &quot;OMIT&quot;,  &quot;ONCE&quot;,  &quot;ONES&quot;,  &quot;ONLY&quot;,
+&quot;ONTO&quot;,  &quot;ONUS&quot;,  &quot;ORAL&quot;,  &quot;ORGY&quot;,  &quot;OSLO&quot;,  &quot;OTIS&quot;,  &quot;OTTO&quot;,  &quot;OUCH&quot;,
+&quot;OUST&quot;,  &quot;OUTS&quot;,  &quot;OVAL&quot;,  &quot;OVEN&quot;,  &quot;OVER&quot;,  &quot;OWLY&quot;,  &quot;OWNS&quot;,  &quot;QUAD&quot;,
+&quot;QUIT&quot;,  &quot;QUOD&quot;,  &quot;RACE&quot;,  &quot;RACK&quot;,  &quot;RACY&quot;,  &quot;RAFT&quot;,  &quot;RAGE&quot;,  &quot;RAID&quot;,
+&quot;RAIL&quot;,  &quot;RAIN&quot;,  &quot;RAKE&quot;,  &quot;RANK&quot;,  &quot;RANT&quot;,  &quot;RARE&quot;,  &quot;RASH&quot;,  &quot;RATE&quot;,
+&quot;RAVE&quot;,  &quot;RAYS&quot;,  &quot;READ&quot;,  &quot;REAL&quot;,  &quot;REAM&quot;,  &quot;REAR&quot;,  &quot;RECK&quot;,  &quot;REED&quot;,
+&quot;REEF&quot;,  &quot;REEK&quot;,  &quot;REEL&quot;,  &quot;REID&quot;,  &quot;REIN&quot;,  &quot;RENA&quot;,  &quot;REND&quot;,  &quot;RENT&quot;,
+&quot;REST&quot;,  &quot;RICE&quot;,  &quot;RICH&quot;,  &quot;RICK&quot;,  &quot;RIDE&quot;,  &quot;RIFT&quot;,  &quot;RILL&quot;,  &quot;RIME&quot;,
+&quot;RING&quot;,  &quot;RINK&quot;,  &quot;RISE&quot;,  &quot;RISK&quot;,  &quot;RITE&quot;,  &quot;ROAD&quot;,  &quot;ROAM&quot;,  &quot;ROAR&quot;,
+&quot;ROBE&quot;,  &quot;ROCK&quot;,  &quot;RODE&quot;,  &quot;ROIL&quot;,  &quot;ROLL&quot;,  &quot;ROME&quot;,  &quot;ROOD&quot;,  &quot;ROOF&quot;,
+&quot;ROOK&quot;,  &quot;ROOM&quot;,  &quot;ROOT&quot;,  &quot;ROSA&quot;,  &quot;ROSE&quot;,  &quot;ROSS&quot;,  &quot;ROSY&quot;,  &quot;ROTH&quot;,
+&quot;ROUT&quot;,  &quot;ROVE&quot;,  &quot;ROWE&quot;,  &quot;ROWS&quot;,  &quot;RUBE&quot;,  &quot;RUBY&quot;,  &quot;RUDE&quot;,  &quot;RUDY&quot;,
+&quot;RUIN&quot;,  &quot;RULE&quot;,  &quot;RUNG&quot;,  &quot;RUNS&quot;,  &quot;RUNT&quot;,  &quot;RUSE&quot;,  &quot;RUSH&quot;,  &quot;RUSK&quot;,
+&quot;RUSS&quot;,  &quot;RUST&quot;,  &quot;RUTH&quot;,  &quot;SACK&quot;,  &quot;SAFE&quot;,  &quot;SAGE&quot;,  &quot;SAID&quot;,  &quot;SAIL&quot;,
+&quot;SALE&quot;,  &quot;SALK&quot;,  &quot;SALT&quot;,  &quot;SAME&quot;,  &quot;SAND&quot;,  &quot;SANE&quot;,  &quot;SANG&quot;,  &quot;SANK&quot;,
+&quot;SARA&quot;,  &quot;SAUL&quot;,  &quot;SAVE&quot;,  &quot;SAYS&quot;,  &quot;SCAN&quot;,  &quot;SCAR&quot;,  &quot;SCAT&quot;,  &quot;SCOT&quot;,
+&quot;SEAL&quot;,  &quot;SEAM&quot;,  &quot;SEAR&quot;,  &quot;SEAT&quot;,  &quot;SEED&quot;,  &quot;SEEK&quot;,  &quot;SEEM&quot;,  &quot;SEEN&quot;,
+&quot;SEES&quot;,  &quot;SELF&quot;,  &quot;SELL&quot;,  &quot;SEND&quot;,  &quot;SENT&quot;,  &quot;SETS&quot;,  &quot;SEWN&quot;,  &quot;SHAG&quot;,
+&quot;SHAM&quot;,  &quot;SHAW&quot;,  &quot;SHAY&quot;,  &quot;SHED&quot;,  &quot;SHIM&quot;,  &quot;SHIN&quot;,  &quot;SHOD&quot;,  &quot;SHOE&quot;,
+&quot;SHOT&quot;,  &quot;SHOW&quot;,  &quot;SHUN&quot;,  &quot;SHUT&quot;,  &quot;SICK&quot;,  &quot;SIDE&quot;,  &quot;SIFT&quot;,  &quot;SIGH&quot;,
+&quot;SIGN&quot;,  &quot;SILK&quot;,  &quot;SILL&quot;,  &quot;SILO&quot;,  &quot;SILT&quot;,  &quot;SINE&quot;,  &quot;SING&quot;,  &quot;SINK&quot;,
+&quot;SIRE&quot;,  &quot;SITE&quot;,  &quot;SITS&quot;,  &quot;SITU&quot;,  &quot;SKAT&quot;,  &quot;SKEW&quot;,  &quot;SKID&quot;,  &quot;SKIM&quot;,
+&quot;SKIN&quot;,  &quot;SKIT&quot;,  &quot;SLAB&quot;,  &quot;SLAM&quot;,  &quot;SLAT&quot;,  &quot;SLAY&quot;,  &quot;SLED&quot;,  &quot;SLEW&quot;,
+&quot;SLID&quot;,  &quot;SLIM&quot;,  &quot;SLIT&quot;,  &quot;SLOB&quot;,  &quot;SLOG&quot;,  &quot;SLOT&quot;,  &quot;SLOW&quot;,  &quot;SLUG&quot;,
+&quot;SLUM&quot;,  &quot;SLUR&quot;,  &quot;SMOG&quot;,  &quot;SMUG&quot;,  &quot;SNAG&quot;,  &quot;SNOB&quot;,  &quot;SNOW&quot;,  &quot;SNUB&quot;,
+&quot;SNUG&quot;,  &quot;SOAK&quot;,  &quot;SOAR&quot;,  &quot;SOCK&quot;,  &quot;SODA&quot;,  &quot;SOFA&quot;,  &quot;SOFT&quot;,  &quot;SOIL&quot;,
+&quot;SOLD&quot;,  &quot;SOME&quot;,  &quot;SONG&quot;,  &quot;SOON&quot;,  &quot;SOOT&quot;,  &quot;SORE&quot;,  &quot;SORT&quot;,  &quot;SOUL&quot;,
+&quot;SOUR&quot;,  &quot;SOWN&quot;,  &quot;STAB&quot;,  &quot;STAG&quot;,  &quot;STAN&quot;,  &quot;STAR&quot;,  &quot;STAY&quot;,  &quot;STEM&quot;,
+&quot;STEW&quot;,  &quot;STIR&quot;,  &quot;STOW&quot;,  &quot;STUB&quot;,  &quot;STUN&quot;,  &quot;SUCH&quot;,  &quot;SUDS&quot;,  &quot;SUIT&quot;,
+&quot;SULK&quot;,  &quot;SUMS&quot;,  &quot;SUNG&quot;,  &quot;SUNK&quot;,  &quot;SURE&quot;,  &quot;SURF&quot;,  &quot;SWAB&quot;,  &quot;SWAG&quot;,
+&quot;SWAM&quot;,  &quot;SWAN&quot;,  &quot;SWAT&quot;,  &quot;SWAY&quot;,  &quot;SWIM&quot;,  &quot;SWUM&quot;,  &quot;TACK&quot;,  &quot;TACT&quot;,
+&quot;TAIL&quot;,  &quot;TAKE&quot;,  &quot;TALE&quot;,  &quot;TALK&quot;,  &quot;TALL&quot;,  &quot;TANK&quot;,  &quot;TASK&quot;,  &quot;TATE&quot;,
+&quot;TAUT&quot;,  &quot;TEAL&quot;,  &quot;TEAM&quot;,  &quot;TEAR&quot;,  &quot;TECH&quot;,  &quot;TEEM&quot;,  &quot;TEEN&quot;,  &quot;TEET&quot;,
+&quot;TELL&quot;,  &quot;TEND&quot;,  &quot;TENT&quot;,  &quot;TERM&quot;,  &quot;TERN&quot;,  &quot;TESS&quot;,  &quot;TEST&quot;,  &quot;THAN&quot;,
+&quot;THAT&quot;,  &quot;THEE&quot;,  &quot;THEM&quot;,  &quot;THEN&quot;,  &quot;THEY&quot;,  &quot;THIN&quot;,  &quot;THIS&quot;,  &quot;THUD&quot;,
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 23]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4-24" id="page-4-24" href="https://tools.ietf.org/html/rfc2289#page-4-24" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+&quot;THUG&quot;,  &quot;TICK&quot;,  &quot;TIDE&quot;,  &quot;TIDY&quot;,  &quot;TIED&quot;,  &quot;TIER&quot;,  &quot;TILE&quot;,  &quot;TILL&quot;,
+&quot;TILT&quot;,  &quot;TIME&quot;,  &quot;TINA&quot;,  &quot;TINE&quot;,  &quot;TINT&quot;,  &quot;TINY&quot;,  &quot;TIRE&quot;,  &quot;TOAD&quot;,
+&quot;TOGO&quot;,  &quot;TOIL&quot;,  &quot;TOLD&quot;,  &quot;TOLL&quot;,  &quot;TONE&quot;,  &quot;TONG&quot;,  &quot;TONY&quot;,  &quot;TOOK&quot;,
+&quot;TOOL&quot;,  &quot;TOOT&quot;,  &quot;TORE&quot;,  &quot;TORN&quot;,  &quot;TOTE&quot;,  &quot;TOUR&quot;,  &quot;TOUT&quot;,  &quot;TOWN&quot;,
+&quot;TRAG&quot;,  &quot;TRAM&quot;,  &quot;TRAY&quot;,  &quot;TREE&quot;,  &quot;TREK&quot;,  &quot;TRIG&quot;,  &quot;TRIM&quot;,  &quot;TRIO&quot;,
+&quot;TROD&quot;,  &quot;TROT&quot;,  &quot;TROY&quot;,  &quot;TRUE&quot;,  &quot;TUBA&quot;,  &quot;TUBE&quot;,  &quot;TUCK&quot;,  &quot;TUFT&quot;,
+&quot;TUNA&quot;,  &quot;TUNE&quot;,  &quot;TUNG&quot;,  &quot;TURF&quot;,  &quot;TURN&quot;,  &quot;TUSK&quot;,  &quot;TWIG&quot;,  &quot;TWIN&quot;,
+&quot;TWIT&quot;,  &quot;ULAN&quot;,  &quot;UNIT&quot;,  &quot;URGE&quot;,  &quot;USED&quot;,  &quot;USER&quot;,  &quot;USES&quot;,  &quot;UTAH&quot;,
+&quot;VAIL&quot;,  &quot;VAIN&quot;,  &quot;VALE&quot;,  &quot;VARY&quot;,  &quot;VASE&quot;,  &quot;VAST&quot;,  &quot;VEAL&quot;,  &quot;VEDA&quot;,
+&quot;VEIL&quot;,  &quot;VEIN&quot;,  &quot;VEND&quot;,  &quot;VENT&quot;,  &quot;VERB&quot;,  &quot;VERY&quot;,  &quot;VETO&quot;,  &quot;VICE&quot;,
+&quot;VIEW&quot;,  &quot;VINE&quot;,  &quot;VISE&quot;,  &quot;VOID&quot;,  &quot;VOLT&quot;,  &quot;VOTE&quot;,  &quot;WACK&quot;,  &quot;WADE&quot;,
+&quot;WAGE&quot;,  &quot;WAIL&quot;,  &quot;WAIT&quot;,  &quot;WAKE&quot;,  &quot;WALE&quot;,  &quot;WALK&quot;,  &quot;WALL&quot;,  &quot;WALT&quot;,
+&quot;WAND&quot;,  &quot;WANE&quot;,  &quot;WANG&quot;,  &quot;WANT&quot;,  &quot;WARD&quot;,  &quot;WARM&quot;,  &quot;WARN&quot;,  &quot;WART&quot;,
+&quot;WASH&quot;,  &quot;WAST&quot;,  &quot;WATS&quot;,  &quot;WATT&quot;,  &quot;WAVE&quot;,  &quot;WAVY&quot;,  &quot;WAYS&quot;,  &quot;WEAK&quot;,
+&quot;WEAL&quot;,  &quot;WEAN&quot;,  &quot;WEAR&quot;,  &quot;WEED&quot;,  &quot;WEEK&quot;,  &quot;WEIR&quot;,  &quot;WELD&quot;,  &quot;WELL&quot;,
+&quot;WELT&quot;,  &quot;WENT&quot;,  &quot;WERE&quot;,  &quot;WERT&quot;,  &quot;WEST&quot;,  &quot;WHAM&quot;,  &quot;WHAT&quot;,  &quot;WHEE&quot;,
+&quot;WHEN&quot;,  &quot;WHET&quot;,  &quot;WHOA&quot;,  &quot;WHOM&quot;,  &quot;WICK&quot;,  &quot;WIFE&quot;,  &quot;WILD&quot;,  &quot;WILL&quot;,
+&quot;WIND&quot;,  &quot;WINE&quot;,  &quot;WING&quot;,  &quot;WINK&quot;,  &quot;WINO&quot;,  &quot;WIRE&quot;,  &quot;WISE&quot;,  &quot;WISH&quot;,
+&quot;WITH&quot;,  &quot;WOLF&quot;,  &quot;WONT&quot;,  &quot;WOOD&quot;,  &quot;WOOL&quot;,  &quot;WORD&quot;,  &quot;WORE&quot;,  &quot;WORK&quot;,
+&quot;WORM&quot;,  &quot;WORN&quot;,  &quot;WOVE&quot;,  &quot;WRIT&quot;,  &quot;WYNN&quot;,  &quot;YALE&quot;,  &quot;YANG&quot;,  &quot;YANK&quot;,
+&quot;YARD&quot;,  &quot;YARN&quot;,  &quot;YAWL&quot;,  &quot;YAWN&quot;,  &quot;YEAH&quot;,  &quot;YEAR&quot;,  &quot;YELL&quot;,  &quot;YOGA&quot;,
+&quot;YOKE&quot;   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Haller                      Standards Track                    [Page 24]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4-25" id="page-4-25" href="https://tools.ietf.org/html/rfc2289#page-4-25" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc2289">RFC 2289</a>               A One-Time Password System          February 1998</span>
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (1998).  All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works.  However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assigns.
+
+   This document and the information contained herein is provided on an
+   &quot;AS IS&quot; basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Haller                      Standards Track                    [Page 25]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

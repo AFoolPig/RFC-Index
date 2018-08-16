@@ -1,0 +1,998 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Relation.Replaces" content="draft-hansen-media-type-suffix-regs" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:6839" /> 
+  <meta name="DC.Date.Issued" content="January, 2013" /> 
+  <meta name="DC.Creator" content="Melnikov, Alexey" /> 
+  <meta name="DC.Creator" content="Hansen, Tony" /> 
+  <meta name="DC.Description.Abstract" content="A content media type name sometimes includes partitioned meta-
+information distinguished by a structured syntax to permit noting an
+attribute of the media as a suffix to the name. This document defines
+several structured syntax suffixes for use with media type
+registrations. In particular, it defines and registers the &quot;+json&quot;,
+&quot;+ber&quot;, &quot;+der&quot;, &quot;+fastinfoset&quot;, &quot;+wbxml&quot; and &quot;+zip&quot; structured syntax
+suffixes, and provides a media type structured syntax suffix
+registration form for the &quot;+xml&quot; structured syntax suffix. This
+document is not an Internet Standards Track specification; it is
+published for informational purposes." /> 
+  <meta name="DC.Title" content="Additional Media Type Structured Syntax Suffixes" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 6839 - Additional Media Type Structured Syntax Suffixes</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgorange" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc6839.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc6839" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-ietf-appsawg-media-type-suffix-regs" title="draft-ietf-appsawg-media-type-suffix-regs">draft-ietf-apps...</a>] [<a href="https://datatracker.ietf.org/doc/rfc6839" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc6839" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc6839" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=6839">Errata</a>]</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo">Updated by: <a href="https://tools.ietf.org/html/rfc7303">7303</a> INFORMATIONAL</span>
+   <br /> 
+   <span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span>
+   <br /> 
+   <pre>Internet Engineering Task Force (IETF)                         T. Hansen
+Request for Comments: 6839                             AT&amp;T Laboratories
+Updates: <a href="https://tools.ietf.org/html/rfc3023">3023</a>                                                A. Melnikov
+Category: Informational                                        Isode Ltd
+ISSN: 2070-1721                                             January 2013
+
+
+            <span class="h1"><h1>Additional Media Type Structured Syntax Suffixes</h1></span>
+
+Abstract
+
+   A content media type name sometimes includes partitioned meta-
+   information distinguished by a structured syntax to permit noting an
+   attribute of the media as a suffix to the name.  This document
+   defines several structured syntax suffixes for use with media type
+   registrations.  In particular, it defines and registers the &quot;+json&quot;,
+   &quot;+ber&quot;, &quot;+der&quot;, &quot;+fastinfoset&quot;, &quot;+wbxml&quot; and &quot;+zip&quot; structured syntax
+   suffixes, and provides a media type structured syntax suffix
+   registration form for the &quot;+xml&quot; structured syntax suffix.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for informational purposes.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Not all documents
+   approved by the IESG are a candidate for any level of Internet
+   Standard; see <a href="https://tools.ietf.org/html/rfc5741#section-2">Section&nbsp;2 of RFC 5741</a>.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   <a href="http://www.rfc-editor.org/info/rfc6839">http://www.rfc-editor.org/info/rfc6839</a>.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hansen &amp; Melnikov             Informational                     [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc6839#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6839">RFC 6839</a>             Additional Media Type Suffixes         January 2013</span>
+
+
+Copyright Notice
+
+   Copyright (c) 2013 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc6839#section-1">1</a>.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc6839#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc6839#section-2">2</a>.  When to Use These Structured Syntax Suffixes . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc6839#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc6839#section-3">3</a>.  Initial Structured Syntax Suffix Definitions . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc6839#page-4">4</a>
+     <a href="https://tools.ietf.org/html/rfc6839#section-3.1">3.1</a>.  The +json Structured Syntax Suffix . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc6839#page-4">4</a>
+     <a href="https://tools.ietf.org/html/rfc6839#section-3.2">3.2</a>.  The +ber Structured Syntax Suffix  . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc6839#page-5">5</a>
+     <a href="https://tools.ietf.org/html/rfc6839#section-3.3">3.3</a>.  The +der Structured Syntax Suffix  . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc6839#page-6">6</a>
+     <a href="https://tools.ietf.org/html/rfc6839#section-3.4">3.4</a>.  The +fastinfoset Structured Syntax Suffix  . . . . . . . .  <a href="https://tools.ietf.org/html/rfc6839#page-7">7</a>
+     <a href="https://tools.ietf.org/html/rfc6839#section-3.5">3.5</a>.  The +wbxml Structured Syntax Suffix  . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc6839#page-9">9</a>
+     <a href="https://tools.ietf.org/html/rfc6839#section-3.6">3.6</a>.  The +zip Structured Syntax Suffix  . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6839#page-10">10</a>
+   <a href="https://tools.ietf.org/html/rfc6839#section-4">4</a>.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6839#page-11">11</a>
+     <a href="https://tools.ietf.org/html/rfc6839#section-4.1">4.1</a>.  The +xml Structured Syntax Suffix  . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6839#page-11">11</a>
+   <a href="https://tools.ietf.org/html/rfc6839#section-5">5</a>.  Security Considerations  . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6839#page-12">12</a>
+   <a href="https://tools.ietf.org/html/rfc6839#section-6">6</a>.  References . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6839#page-13">13</a>
+     <a href="https://tools.ietf.org/html/rfc6839#section-6.1">6.1</a>.  Normative References . . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6839#page-13">13</a>
+     <a href="https://tools.ietf.org/html/rfc6839#section-6.2">6.2</a>.  Informative References . . . . . . . . . . . . . . . . . . <a href="https://tools.ietf.org/html/rfc6839#page-13">13</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hansen &amp; Melnikov             Informational                     [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc6839#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6839">RFC 6839</a>             Additional Media Type Suffixes         January 2013</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc6839#section-1">1</a>. Introduction</h2></span>
+
+   [<a name="ref-RFC3023" id="ref-RFC3023">RFC3023</a>] created the +xml suffix convention that can be used when
+   defining names for media types whose representation uses XML
+   underneath.  That is, they could have been successfully parsed as if
+   the media type had been application/xml in addition to their being
+   parsed as their media type that is using the +xml suffix.  [<a href="https://tools.ietf.org/html/rfc6838" title="&quot;Media Type Specifications and Registration Procedures&quot;">RFC6838</a>]
+   defines the media type &quot;Structured Syntax Suffix Registry&quot; to be used
+   for such structured syntax suffixes.
+
+   A variety of structured syntax suffixes have already been used in
+   some media type registrations, in particular &quot;+json&quot;, &quot;+der&quot;,
+   &quot;+fastinfoset&quot;, and &quot;+wbxml&quot;.  This document defines and registers
+   these structured syntax suffixes in the Structured Syntax Suffix
+   Registry, along with &quot;+ber&quot; and &quot;+zip&quot;.  In addition, this document
+   updates [<a href="https://tools.ietf.org/html/rfc3023" title="&quot;XML Media Types&quot;">RFC3023</a>] to formally register the &quot;+xml&quot; structured syntax
+   suffix according to the procedure defined in [<a href="https://tools.ietf.org/html/rfc6838" title="&quot;Media Type Specifications and Registration Procedures&quot;">RFC6838</a>].
+
+   The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
+   document are to be interpreted as described in [<a href="https://tools.ietf.org/html/rfc2119" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">RFC2119</a>].
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc6839#section-2">2</a>. When to Use These Structured Syntax Suffixes</h2></span>
+
+   Each of the structured syntax suffixes defined in this document is
+   appropriate for use when the media type identifies the semantics of
+   the protocol payload.  That is, knowing the semantics of the specific
+   media type provides for more specific processing of the content than
+   that afforded by generic processing of the underlying representation.
+
+   At the same time, using the suffix allows receivers of the media
+   types to do generic processing of the underlying representation in
+   cases where
+
+      they do not need to perform special handling of the particular
+      semantics of the exact media type, and
+
+      there is no special knowledge needed by such a generic processor
+      in order to parse that underlying representation other than what
+      would be needed to parse any example of that underlying
+      representation.
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hansen &amp; Melnikov             Informational                     [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc6839#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6839">RFC 6839</a>             Additional Media Type Suffixes         January 2013</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc6839#section-3">3</a>. Initial Structured Syntax Suffix Definitions</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-3.1" href="https://tools.ietf.org/html/rfc6839#section-3.1">3.1</a>. The +json Structured Syntax Suffix</h3></span>
+
+   [<a name="ref-RFC4627" id="ref-RFC4627">RFC4627</a>] defines the &quot;application/json&quot; media type.  The suffix
+   &quot;+json&quot; MAY be used with any media type whose representation follows
+   that established for &quot;application/json&quot;.  The media type structured
+   syntax suffix registration form follows.  See [<a href="https://tools.ietf.org/html/rfc6838" title="&quot;Media Type Specifications and Registration Procedures&quot;">RFC6838</a>] for
+   definitions of each of the registration form headings.
+
+   Name:  JavaScript Object Notation (JSON)
+
+   +suffix:  +json
+
+   References:  [<a href="https://tools.ietf.org/html/rfc4627" title="&quot;The application/json Media Type for JavaScript Object Notation (JSON)&quot;">RFC4627</a>]
+
+   Encoding considerations:
+
+      Per [<a href="https://tools.ietf.org/html/rfc4627" title="&quot;The application/json Media Type for JavaScript Object Notation (JSON)&quot;">RFC4627</a>], JSON is allowed to be represented using UTF-8,
+      UTF-16, or UTF-32.  When JSON is written in UTF-8, JSON is 8bit
+      compatible ([<a href="https://tools.ietf.org/html/rfc2045" title="&quot;Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies&quot;">RFC2045</a>]).  When JSON is written in UTF-16 or UTF-32,
+      JSON is binary ([<a href="https://tools.ietf.org/html/rfc2045" title="&quot;Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies&quot;">RFC2045</a>]).
+
+   Fragment identifier considerations:
+
+      The syntax and semantics of fragment identifiers specified for
+      +json SHOULD be as specified for &quot;application/json&quot;.  (At
+      publication of this document, there is no fragment identification
+      syntax defined for &quot;application/json&quot;.)
+
+      The syntax and semantics for fragment identifiers for a specific
+      &quot;xxx/yyy+json&quot; SHOULD be processed as follows:
+
+      For cases defined in +json, where the fragment identifier resolves
+      per the +json rules, then process as specified in +json.
+
+         For cases defined in +json, where the fragment identifier does
+         not resolve per the +json rules, then process as specified in
+         &quot;xxx/yyy+json&quot;.
+
+         For cases not defined in +json, then process as specified in
+         &quot;xxx/yyy+json&quot;.
+
+   Interoperability considerations:  n/a
+
+   Security considerations:  See [<a href="https://tools.ietf.org/html/rfc4627" title="&quot;The application/json Media Type for JavaScript Object Notation (JSON)&quot;">RFC4627</a>]
+
+   Contact:  Apps Area Working Group (apps-discuss@ietf.org)
+
+
+
+<span class="grey">Hansen &amp; Melnikov             Informational                     [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc6839#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6839">RFC 6839</a>             Additional Media Type Suffixes         January 2013</span>
+
+
+   Author/Change controller:
+
+      The Apps Area Working Group.  IESG has change control over this
+      registration.
+
+<span class="h3"><h3><a class="selflink" name="section-3.2" href="https://tools.ietf.org/html/rfc6839#section-3.2">3.2</a>. The +ber Structured Syntax Suffix</h3></span>
+
+   The ITU defined the Basic Encoding Rules (BER) transfer syntax in
+   [<a href="https://tools.ietf.org/html/rfc6839#ref-ITU.X690.2008" title="&quot;Recommendation ITU-T X.690 | ISO/IEC 8825-1 (2008), ASN.1 encoding rules: Specification of basic encoding Rules (BER), Canonical encoding rules (CER) and Distinguished encoding rules (DER)&quot;">ITU.X690.2008</a>].  The suffix &quot;+ber&quot; MAY be used with any media type
+   whose representation follows the BER transfer syntax.  (The Expert
+   Reviewer for media type structured syntax suffix registrations ought
+   to be aware of the relationship between BER and DER to aid in
+   selecting the proper suffix.)  The media type structured syntax
+   suffix registration form for +ber follows:
+
+   Name:  Basic Encoding Rules (BER) transfer syntax
+
+   +suffix:  +ber
+
+   References:  [<a href="https://tools.ietf.org/html/rfc6839#ref-ITU.X690.2008" title="&quot;Recommendation ITU-T X.690 | ISO/IEC 8825-1 (2008), ASN.1 encoding rules: Specification of basic encoding Rules (BER), Canonical encoding rules (CER) and Distinguished encoding rules (DER)&quot;">ITU.X690.2008</a>]
+
+   Encoding considerations:  BER is a binary encoding.
+
+   Fragment identifier considerations:
+
+      At publication of this document, there is no fragment
+      identification syntax defined for +ber.
+
+      The syntax and semantics for fragment identifiers for a specific
+      &quot;xxx/yyy+ber&quot; SHOULD be processed as follows:
+
+         For cases defined in +ber, where the fragment identifier
+         resolves per the +ber rules, then process as specified in +ber.
+
+         For cases defined in +ber, where the fragment identifier does
+         not resolve per the +ber rules, then process as specified in
+         &quot;xxx/yyy+ber&quot;.
+
+         For cases not defined in +ber, then process as specified in
+         &quot;xxx/yyy+ber&quot;.
+
+   Interoperability considerations:  n/a
+
+   Security considerations:
+
+      Each individual media type registered with a +ber suffix can have
+      additional security considerations.
+
+
+
+
+<span class="grey">Hansen &amp; Melnikov             Informational                     [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc6839#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6839">RFC 6839</a>             Additional Media Type Suffixes         January 2013</span>
+
+
+      BER has a type-length-value structure, and it is easy to construct
+      malicious content with invalid length fields that can cause buffer
+      overrun conditions.
+
+      BER allows for arbitrary levels of nesting, which may make it
+      possible to construct malicious content that will cause a stack
+      overflow.
+
+      Interpreters of the BER structures should be aware of these issues
+      and should take appropriate measures to guard against buffer
+      overflows and stack overruns in particular and malicious content
+      in general.
+
+   Contact:  Apps Area Working Group (apps-discuss@ietf.org)
+
+   Author/Change controller:
+
+      The Apps Area Working Group.  IESG has change control over this
+      registration.
+
+<span class="h3"><h3><a class="selflink" name="section-3.3" href="https://tools.ietf.org/html/rfc6839#section-3.3">3.3</a>. The +der Structured Syntax Suffix</h3></span>
+
+   The ITU defined the Distinguished Encoding Rules (DER) transfer
+   syntax in [<a href="https://tools.ietf.org/html/rfc6839#ref-ITU.X690.2008" title="&quot;Recommendation ITU-T X.690 | ISO/IEC 8825-1 (2008), ASN.1 encoding rules: Specification of basic encoding Rules (BER), Canonical encoding rules (CER) and Distinguished encoding rules (DER)&quot;">ITU.X690.2008</a>].  The suffix &quot;+der&quot; MAY be used with any
+   media type whose representation follows the DER transfer syntax.
+   (The Expert Reviewer for media type structured syntax suffix
+   registrations ought to be aware of the relationship between BER and
+   DER to aid in selecting the proper suffix.)  The media type
+   structured syntax suffix registration form for +der follows:
+
+   Name:  Distinguished Encoding Rules (DER) transfer syntax
+
+   +suffix:  +der
+
+   References:  [<a href="https://tools.ietf.org/html/rfc6839#ref-ITU.X690.2008" title="&quot;Recommendation ITU-T X.690 | ISO/IEC 8825-1 (2008), ASN.1 encoding rules: Specification of basic encoding Rules (BER), Canonical encoding rules (CER) and Distinguished encoding rules (DER)&quot;">ITU.X690.2008</a>]
+
+   Encoding considerations:  DER is a binary encoding.
+
+   Fragment identifier considerations:
+
+      At publication of this document, there is no fragment
+      identification syntax defined for +der.
+
+      The syntax and semantics for fragment identifiers for a specific
+      &quot;xxx/yyy+der&quot; SHOULD be processed as follows:
+
+         For cases defined in +der, where the fragment identifier
+         resolves per the +der rules, then process as specified in +der.
+
+
+
+<span class="grey">Hansen &amp; Melnikov             Informational                     [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc6839#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6839">RFC 6839</a>             Additional Media Type Suffixes         January 2013</span>
+
+
+         For cases defined in +der, where the fragment identifier does
+         not resolve per the +der rules, then process as specified in
+         &quot;xxx/yyy+der&quot;.
+
+         For cases not defined in +der, then process as specified in
+         &quot;xxx/yyy+der&quot;.
+
+   Interoperability considerations:  n/a
+
+   Security considerations:
+
+      Each individual media type registered with a +der suffix can have
+      additional security considerations.
+
+      DER has a type-length-value structure, and it is easy to construct
+      malicious content with invalid length fields that can cause buffer
+      overrun conditions.
+
+      DER allows for arbitrary levels of nesting, which may make it
+      possible to construct malicious content that will cause a stack
+      overflow.
+
+      Interpreters of the DER structures should be aware of these issues
+      and should take appropriate measures to guard against buffer
+      overflows and stack overruns in particular and malicious content
+      in general.
+
+   Contact:  Apps Area Working Group (apps-discuss@ietf.org)
+
+   Author/Change controller:
+
+      The Apps Area Working Group.  IESG has change control over this
+      registration.
+
+<span class="h3"><h3><a class="selflink" name="section-3.4" href="https://tools.ietf.org/html/rfc6839#section-3.4">3.4</a>. The +fastinfoset Structured Syntax Suffix</h3></span>
+
+   The ITU defined the Fast Infoset document format as a binary
+   representation of the XML Information Set in [<a href="https://tools.ietf.org/html/rfc6839#ref-ITU.X891.2005" title="&quot;Recommendation ITU-T X.891 | ISO/IEC 24824-1 (2007), Generic applications of ASN.1: Fast infoset&quot;">ITU.X891.2005</a>].  These
+   documents further define the &quot;application/fastinfoset&quot; media type.
+   The suffix &quot;+fastinfoset&quot; MAY be used with any media type whose
+   representation follows that established for &quot;application/
+   fastinfoset&quot;.  The media type structured syntax suffix registration
+   form follows:
+
+   Name:  Fast Infoset document format
+
+   +suffix:  +fastinfoset
+
+
+
+
+<span class="grey">Hansen &amp; Melnikov             Informational                     [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc6839#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6839">RFC 6839</a>             Additional Media Type Suffixes         January 2013</span>
+
+
+   References:  [<a href="https://tools.ietf.org/html/rfc6839#ref-ITU.X891.2005" title="&quot;Recommendation ITU-T X.891 | ISO/IEC 24824-1 (2007), Generic applications of ASN.1: Fast infoset&quot;">ITU.X891.2005</a>]
+
+   Encoding considerations:
+
+      Fast Infoset is a binary encoding.  The binary, quoted-printable,
+      and base64 content-transfer-encodings are suitable for use with
+      Fast Infoset.
+
+   Fragment identifier considerations:
+
+      The syntax and semantics of fragment identifiers specified for
+      +fastinfoset SHOULD be as specified for &quot;application/fastinfoset&quot;.
+      (At publication of this document, there is no fragment
+      identification syntax defined for &quot;application/fastinfoset&quot;.)
+
+      The syntax and semantics for fragment identifiers for a specific
+      &quot;xxx/ yyy+fastinfoset&quot; SHOULD be processed as follows:
+
+         For cases defined in +fastinfoset, where the fragment
+         identifier resolves per the +fastinfoset rules, then process as
+         specified in +fastinfoset.
+
+         For cases defined in +fastinfoset, where the fragment
+         identifier does not resolve per the +fastinfoset rules, then
+         process as specified in &quot;xxx/yyy+fastinfoset&quot;.
+
+         For cases not defined in +fastinfoset, then process as
+         specified in &quot;xxx/ yyy+fastinfoset&quot;.
+
+   Interoperability considerations:  n/a
+
+   Security considerations:
+
+      There are no security considerations inherent in Fast Infoset.
+      Each individual media type registered with a +fastinfoset suffix
+      can have additional security considerations.
+
+   Contact:  Apps Area Working Group (apps-discuss@ietf.org)
+
+   Author/Change controller:
+
+      The Apps Area Working Group.  IESG has change control over this
+      registration.
+
+
+
+
+
+
+
+
+<span class="grey">Hansen &amp; Melnikov             Informational                     [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc6839#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6839">RFC 6839</a>             Additional Media Type Suffixes         January 2013</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-3.5" href="https://tools.ietf.org/html/rfc6839#section-3.5">3.5</a>. The +wbxml Structured Syntax Suffix</h3></span>
+
+   The Wireless Application Protocol (WAP) Forum has defined the WAP
+   Binary XML (WBXML) document format as a binary representation of XML
+   in [<a href="https://tools.ietf.org/html/rfc6839#ref-WBXML" title="&quot;Binary XML Content Format Specification&quot;">WBXML</a>].  This document further defines the &quot;application/
+   vnd.wap.wbxml&quot; media type.  The suffix &quot;+wbxml&quot; MAY be used with any
+   media type whose representation follows that established for
+   &quot;application/vnd.wap.wbxml&quot;.  The media type structured syntax suffix
+   registration form follows:
+
+   Name:  WAP Binary XML (WBXML) document format
+
+   +suffix:  +wbxml
+
+   References:  [<a href="https://tools.ietf.org/html/rfc6839#ref-WBXML" title="&quot;Binary XML Content Format Specification&quot;">WBXML</a>]
+
+   Encoding considerations:  WBXML is a binary encoding.
+
+   Fragment identifier considerations:
+
+      The syntax and semantics of fragment identifiers specified for
+      +wbxml SHOULD be as specified for &quot;application/vnd.wap.wbxml&quot;.
+      (At publication of this document, there is no fragment
+      identification syntax defined for &quot;application/vnd.wap.wbxml&quot;.)
+
+      The syntax and semantics for fragment identifiers for a specific
+      &quot;xxx/yyy+wbxml&quot; SHOULD be processed as follows:
+
+         For cases defined in +wbxml, where the fragment identifier
+         resolves per the +wbxml rules, then process as specified in
+         +wbxml.
+
+         For cases defined in +wbxml, where the fragment identifier does
+         not resolve per the +wbxml rules, then process as specified in
+         &quot;xxx/yyy+wbxml&quot;.
+
+         For cases not defined in +wbxml, then process as specified in
+         &quot;xxx/yyy+wbxml&quot;.
+
+   Interoperability considerations:  n/a
+
+   Security considerations:
+
+      There are no security considerations inherent in WBXML.  Each
+      individual media type registered with a +wbxml suffix can have
+      additional security considerations.
+
+   Contact:  Apps Area Working Group (apps-discuss@ietf.org)
+
+
+
+<span class="grey">Hansen &amp; Melnikov             Informational                     [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc6839#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6839">RFC 6839</a>             Additional Media Type Suffixes         January 2013</span>
+
+
+   Author/Change controller:
+
+      The Apps Area Working Group.  IESG has change control over this
+      registration.
+
+<span class="h3"><h3><a class="selflink" name="section-3.6" href="https://tools.ietf.org/html/rfc6839#section-3.6">3.6</a>. The +zip Structured Syntax Suffix</h3></span>
+
+   The ZIP format is a public domain, cross-platform, interoperable file
+   storage and transfer format, originally defined by PKWARE, Inc.; it
+   supports compression and encryption and is used as the underlying
+   representation by a variety of file formats.  The media type
+   &quot;application/zip&quot; has been registered for such files.  The suffix
+   &quot;+zip&quot; MAY be used with any media type whose representation follows
+   that established for &quot;application/zip&quot;.  The media type structured
+   syntax suffix registration form follows:
+
+   Name:  ZIP file storage and transfer format
+
+   +suffix:  +zip
+
+   References:  [<a href="https://tools.ietf.org/html/rfc6839#ref-ZIP" title="&quot;APPNOTE.TXT - .ZIP File Format Specification&quot;">ZIP</a>]
+
+   Encoding considerations:  ZIP is a binary encoding.
+
+   Fragment identifier considerations:
+
+      The syntax and semantics of fragment identifiers specified for
+      +zip SHOULD be as specified for &quot;application/zip&quot;.  (At
+      publication of this document, there is no fragment identification
+      syntax defined for &quot;application/zip&quot;.)
+
+      The syntax and semantics for fragment identifiers for a specific
+      &quot;xxx/yyy+zip&quot; SHOULD be processed as follows:
+
+         For cases defined in +zip, where the fragment identifier
+         resolves per the +zip rules, then process as specified in +zip.
+
+         For cases defined in +zip, where the fragment identifier does
+         not resolve per the +zip rules, then process as specified in
+         &quot;xxx/yyy+zip&quot;.
+
+         For cases not defined in +zip, then process as specified in
+         &quot;xxx/yyy+zip&quot;.
+
+   Interoperability considerations:  n/a
+
+
+
+
+
+
+<span class="grey">Hansen &amp; Melnikov             Informational                    [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc6839#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6839">RFC 6839</a>             Additional Media Type Suffixes         January 2013</span>
+
+
+   Security considerations:
+
+      IP files support two forms of encryption: Strong Encryption and
+      AES 128-bit, 192-bit, and 256-bit encryption; see the
+      specification for further details.  Each individual media type
+      registered with a +zip suffix can have additional security
+      considerations.
+
+   Contact:  Apps Area Working Group (apps-discuss@ietf.org)
+
+   Author/Change controller:  The Apps Area Working Group.  IESG has
+      change control over this registration.
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc6839#section-4">4</a>. IANA Considerations</h2></span>
+
+   See the media type structured syntax suffix registration forms in
+   Sections <a href="https://tools.ietf.org/html/rfc6839#section-3.1">3.1</a> - <a href="https://tools.ietf.org/html/rfc6839#section-3.6">3.6</a>.
+
+<span class="h3"><h3><a class="selflink" name="section-4.1" href="https://tools.ietf.org/html/rfc6839#section-4.1">4.1</a>. The +xml Structured Syntax Suffix</h3></span>
+
+   The following structured syntax suffix registration for &quot;+xml&quot; shall
+   be used to reflect the information found in [<a href="https://tools.ietf.org/html/rfc3023" title="&quot;XML Media Types&quot;">RFC3023</a>], with the
+   addition of fragment identifier considerations.  (Note that [<a href="https://tools.ietf.org/html/rfc3023" title="&quot;XML Media Types&quot;">RFC3023</a>]
+   is in the process of being updated by [<a href="https://tools.ietf.org/html/rfc6839#ref-XML-MEDIATYPES" title="&quot;XML Media Types&quot;">XML-MEDIATYPES</a>].)
+
+   Name:  Extensible Markup Language (XML)
+
+   +suffix:  +xml
+
+   References:  [<a href="https://tools.ietf.org/html/rfc3023" title="&quot;XML Media Types&quot;">RFC3023</a>]
+
+   Encoding considerations:
+
+      Per [<a href="https://tools.ietf.org/html/rfc3023" title="&quot;XML Media Types&quot;">RFC3023</a>], XML is allowed to be represented using both 7-bit
+      and 8-bit encodings.  When XML is written in UTF-8, XML is 8bit
+      compatible ([<a href="https://tools.ietf.org/html/rfc2045" title="&quot;Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies&quot;">RFC2045</a>]).  When XML is written in UTF-16 or UTF-32,
+      XML is binary ([<a href="https://tools.ietf.org/html/rfc2045" title="&quot;Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies&quot;">RFC2045</a>]).
+
+   Fragment identifier considerations:
+
+      The syntax and semantics of fragment identifiers specified for
+      +xml SHOULD be as specified for &quot;application/xml&quot;.  (At
+      publication of this document, the fragment identification syntax
+      considerations for &quot;application/xml&quot; are defined in [<a href="https://tools.ietf.org/html/rfc3023" title="&quot;XML Media Types&quot;">RFC3023</a>],
+      Sections <a href="https://tools.ietf.org/html/rfc6839#section-5">5</a> and <a href="https://tools.ietf.org/html/rfc6839#section-7">7</a>.)
+
+
+
+
+
+
+<span class="grey">Hansen &amp; Melnikov             Informational                    [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc6839#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6839">RFC 6839</a>             Additional Media Type Suffixes         January 2013</span>
+
+
+      The syntax and semantics for fragment identifiers for a specific
+      &quot;xxx/yyy+xml&quot; SHOULD be processed as follows:
+
+         For cases defined in +xml, where the fragment identifier
+         resolves per the +xml rules, then process as specified in +xml.
+
+         For cases defined in +xml, where the fragment identifier does
+         not resolve per the +xml rules, then process as specified in
+         &quot;xxx/yyy+xml&quot;.
+
+         For cases not defined in +xml, then process as specified in
+         &quot;xxx/yyy+xml&quot;.
+
+   Interoperability considerations:  See [<a href="https://tools.ietf.org/html/rfc3023" title="&quot;XML Media Types&quot;">RFC3023</a>].
+
+   Security considerations:  See [<a href="https://tools.ietf.org/html/rfc3023" title="&quot;XML Media Types&quot;">RFC3023</a>]
+
+   Contact:  Apps Area Working Group (apps-discuss@ietf.org)
+
+   Author/Change controller:
+
+      The Apps Area Working Group.  IESG has change control over this
+      registration.
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc6839#section-5">5</a>. Security Considerations</h2></span>
+
+   See the Security Considerations sections found in the media type
+   structured syntax suffix registration forms from Sections <a href="https://tools.ietf.org/html/rfc6839#section-3">3</a> and <a href="https://tools.ietf.org/html/rfc6839#section-4">4</a>.
+
+   When updating a +&lt;suffix&gt; registration, care should be taken to
+   review all previously-registered xxx/yyy+&lt;suffix&gt; media types as to
+   whether they might be affected by the updated +&lt;suffix&gt; registration.
+   Because the generic fragment identifier processing rules take
+   precedence over media-type-specific rules, introducing new or
+   changing existing definitions may break the existing registrations of
+   specific media types, as well as particular implementations of
+   applications that process affected media types.  Such changes can
+   introduce interoperability and security issues.
+
+   When updating the fragment identifier processing rules for a specific
+   xxx/yyy+&lt;suffix&gt; media type, care should be taken to review the
+   generic fragment identifier processing rules for the +&lt;suffix&gt;
+   registration and not introduce any conflicts.  Because the generic
+   fragment identifier processing rules take precedence over media-type-
+   specific rules, such conflicting processing requirements should be
+   ignored by an implementation, but such conflicts can introduce
+   interoperability and security issues.
+
+
+
+
+<span class="grey">Hansen &amp; Melnikov             Informational                    [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-13" id="page-13" href="https://tools.ietf.org/html/rfc6839#page-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6839">RFC 6839</a>             Additional Media Type Suffixes         January 2013</span>
+
+
+   Note that [<a href="https://tools.ietf.org/html/rfc6839#ref-FRAGID-BP" title="&quot;Best Practices for Fragment Identifiers and Media Type Definitions&quot;">FRAGID-BP</a>] provides additional advice to designers of
+   fragment identifier rules for media type suffixes and specific media
+   types.
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc6839#section-6">6</a>. References</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-6.1" href="https://tools.ietf.org/html/rfc6839#section-6.1">6.1</a>. Normative References</h3></span>
+
+   [<a name="ref-RFC4627" id="ref-RFC4627">RFC4627</a>]  Crockford, D., &quot;The application/json Media Type for
+              JavaScript Object Notation (JSON)&quot;, <a href="https://tools.ietf.org/html/rfc4627">RFC 4627</a>, July 2006.
+
+   [<a name="ref-ITU.X690.2008" id="ref-ITU.X690.2008">ITU.X690.2008</a>]
+              International Telecommunications Union, &quot;Recommendation
+              ITU-T X.690 | ISO/IEC 8825-1 (2008), ASN.1 encoding rules:
+              Specification of basic encoding Rules (BER), Canonical
+              encoding rules (CER) and Distinguished encoding rules
+              (DER)&quot;, ITU-T Recommendation X.690, November 2008.
+
+   [<a name="ref-ITU.X891.2005" id="ref-ITU.X891.2005">ITU.X891.2005</a>]
+              International Telecommunications Union, &quot;Recommendation
+              ITU-T X.891 | ISO/IEC 24824-1 (2007), Generic applications
+              of ASN.1: Fast infoset&quot;, ITU-T Recommendation X.891,
+              May 2005.
+
+   [<a name="ref-WBXML" id="ref-WBXML">WBXML</a>]    Open Mobile Alliance, &quot;Binary XML Content Format
+              Specification&quot;, OMA Wireless Access Protocol WAP-192-
+              WBXML-20010725-a, July 2001.
+
+   [<a name="ref-ZIP" id="ref-ZIP">ZIP</a>]      PKWARE, Inc., &quot;APPNOTE.TXT - .ZIP File Format
+              Specification&quot;, PKWARE .ZIP File Format Specification -
+              Version 6.3.2, September 2007.
+
+   [<a name="ref-RFC2045" id="ref-RFC2045">RFC2045</a>]  Freed, N. and N. Borenstein, &quot;Multipurpose Internet Mail
+              Extensions (MIME) Part One: Format of Internet Message
+              Bodies&quot;, <a href="https://tools.ietf.org/html/rfc2045">RFC 2045</a>, November 1996.
+
+   [<a name="ref-RFC2119" id="ref-RFC2119">RFC2119</a>]  Bradner, S., &quot;Key words for use in RFCs to Indicate
+              Requirement Levels&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>, March 1997.
+
+   [<a name="ref-RFC3023" id="ref-RFC3023">RFC3023</a>]  Murata, M., St. Laurent, S., and D. Kohn, &quot;XML Media
+              Types&quot;, <a href="https://tools.ietf.org/html/rfc3023">RFC 3023</a>, January 2001.
+
+<span class="h3"><h3><a class="selflink" name="section-6.2" href="https://tools.ietf.org/html/rfc6839#section-6.2">6.2</a>. Informative References</h3></span>
+
+   [<a name="ref-RFC6838" id="ref-RFC6838">RFC6838</a>]  Freed, N., Klensin, J., and T. Hansen, &quot;Media Type
+              Specifications and Registration Procedures&quot;, <a href="https://tools.ietf.org/html/bcp13">BCP 13</a>,
+              <a href="https://tools.ietf.org/html/rfc6838">RFC 6838</a>, January 2013.
+
+
+
+
+<span class="grey">Hansen &amp; Melnikov             Informational                    [Page 13]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-14" id="page-14" href="https://tools.ietf.org/html/rfc6839#page-14" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc6839">RFC 6839</a>             Additional Media Type Suffixes         January 2013</span>
+
+
+   [<a name="ref-FRAGID-BP" id="ref-FRAGID-BP">FRAGID-BP</a>]
+              Tennison, J., &quot;Best Practices for Fragment Identifiers and
+              Media Type Definitions&quot;, July 2012,
+              &lt;<a href="http://www.w3.org/TR/fragid-best-practices/">http://www.w3.org/TR/fragid-best-practices/</a>&gt;.
+
+   [<a name="ref-XML-MEDIATYPES" id="ref-XML-MEDIATYPES">XML-MEDIATYPES</a>]
+              Lilley, C., Makoto, M., Melnikov, A., and H. Thompson,
+              &quot;XML Media Types&quot;, Work in Progress, November 2012.
+
+Authors' Addresses
+
+   Tony Hansen
+   AT&amp;T Laboratories
+   200 Laurel Ave. South
+   Middletown, NJ  07748
+   USA
+
+   EMail: tony+sss@maillennium.att.com
+
+
+   Alexey Melnikov
+   Isode Ltd
+   5 Castle Business Village
+   36 Station Road
+   Hampton, Middlesex  TW12 2BX
+   UK
+
+   EMail: Alexey.Melnikov@isode.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hansen &amp; Melnikov             Informational                    [Page 14]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

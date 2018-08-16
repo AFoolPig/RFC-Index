@@ -1,0 +1,1401 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:4153" /> 
+  <meta name="DC.Description.Abstract" content="This document specifies rules for defining voucher properties in XML
+syntax. A voucher is a logical entity that represents a right to claim
+goods or services. A voucher can be used to transfer a wide range of
+electronic values, including coupons, tickets, loyalty points, and
+gift certificates, which often have to be processed in the course of
+payment and/or delivery transactions. This memo provides information
+for the Internet community." /> 
+  <meta name="DC.Creator" content="Terada, Masayuki" /> 
+  <meta name="DC.Creator" content="3rd, Donald E. Eastlake" /> 
+  <meta name="DC.Creator" content="Fujimura, Ko" /> 
+  <meta name="DC.Date.Issued" content="September, 2005" /> 
+  <meta name="DC.Title" content="XML Voucher: Generic Voucher Language" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 4153 - XML Voucher: Generic Voucher Language</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgorange" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc4153.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc4153" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-ietf-trade-voucher-lang" title="draft-ietf-trade-voucher-lang">draft-ietf-trad...</a>] [<a href="https://datatracker.ietf.org/doc/rfc4153" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc4153" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc4153" title="Side-by-side diff">Diff2</a>] </span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> INFORMATIONAL</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <pre>Network Working Group                                        K. Fujimura
+Request for Comments: 4153                                           NTT
+Category: Informational                                        M. Terada
+                                                              NTT DoCoMo
+                                                         D. Eastlake 3rd
+                                                   Motorola Laboratories
+                                                          September 2005
+
+
+                 <span class="h1"><h1>XML Voucher: Generic Voucher Language</h1></span>
+
+Status of This Memo
+
+   This memo provides information for the Internet community.  It does
+   not specify an Internet standard of any kind.  Distribution of this
+   memo is unlimited.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2005).
+
+Abstract
+
+   This document specifies rules for defining voucher properties in XML
+   syntax.  A voucher is a logical entity that represents a right to
+   claim goods or services.  A voucher can be used to transfer a wide
+   range of electronic values, including coupons, tickets, loyalty
+   points, and gift certificates, which often have to be processed in
+   the course of payment and/or delivery transactions.
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc4153#section-1">1</a>.  Introduction .................................................  <a href="https://tools.ietf.org/html/rfc4153#page-2">2</a>
+   <a href="https://tools.ietf.org/html/rfc4153#section-2">2</a>.  Processing Model .............................................  <a href="https://tools.ietf.org/html/rfc4153#page-2">2</a>
+   <a href="https://tools.ietf.org/html/rfc4153#section-3">3</a>.  Trust Model ..................................................  <a href="https://tools.ietf.org/html/rfc4153#page-4">4</a>
+   <a href="https://tools.ietf.org/html/rfc4153#section-4">4</a>.  Component Structure ..........................................  <a href="https://tools.ietf.org/html/rfc4153#page-4">4</a>
+   <a href="https://tools.ietf.org/html/rfc4153#section-5">5</a>.  Syntax Overview and Examples .................................  <a href="https://tools.ietf.org/html/rfc4153#page-6">6</a>
+   <a href="https://tools.ietf.org/html/rfc4153#section-6">6</a>.  Syntax and Semantics .........................................  <a href="https://tools.ietf.org/html/rfc4153#page-8">8</a>
+       <a href="https://tools.ietf.org/html/rfc4153#section-6.1">6.1</a>. &lt;Voucher&gt; ...............................................  <a href="https://tools.ietf.org/html/rfc4153#page-8">8</a>
+       <a href="https://tools.ietf.org/html/rfc4153#section-6.2">6.2</a>. &lt;Title&gt; .................................................  <a href="https://tools.ietf.org/html/rfc4153#page-9">9</a>
+       <a href="https://tools.ietf.org/html/rfc4153#section-6.3">6.3</a>. &lt;Description&gt; ...........................................  <a href="https://tools.ietf.org/html/rfc4153#page-9">9</a>
+       <a href="https://tools.ietf.org/html/rfc4153#section-6.4">6.4</a>. &lt;Provider&gt; ..............................................  <a href="https://tools.ietf.org/html/rfc4153#page-9">9</a>
+       <a href="https://tools.ietf.org/html/rfc4153#section-6.5">6.5</a>. &lt;Issuer&gt; ................................................ <a href="https://tools.ietf.org/html/rfc4153#page-10">10</a>
+       <a href="https://tools.ietf.org/html/rfc4153#section-6.6">6.6</a>. &lt;Holder&gt; ................................................ <a href="https://tools.ietf.org/html/rfc4153#page-10">10</a>
+       <a href="https://tools.ietf.org/html/rfc4153#section-6.7">6.7</a>. &lt;Collector&gt; ............................................. <a href="https://tools.ietf.org/html/rfc4153#page-11">11</a>
+       <a href="https://tools.ietf.org/html/rfc4153#section-6.8">6.8</a>. &lt;Value&gt; ................................................. <a href="https://tools.ietf.org/html/rfc4153#page-11">11</a>
+            <a href="https://tools.ietf.org/html/rfc4153#section-6.8.1">6.8.1</a>. &lt;Ratio&gt; .......................................... <a href="https://tools.ietf.org/html/rfc4153#page-13">13</a>
+            <a href="https://tools.ietf.org/html/rfc4153#section-6.8.2">6.8.2</a>. &lt;Fixed&gt; .......................................... <a href="https://tools.ietf.org/html/rfc4153#page-13">13</a>
+
+
+
+<span class="grey">Fujimura, et al.             Informational                      [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc4153#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+       <a href="https://tools.ietf.org/html/rfc4153#section-6.9">6.9</a>. &lt;Merchandise&gt; ........................................... <a href="https://tools.ietf.org/html/rfc4153#page-14">14</a>
+       <a href="https://tools.ietf.org/html/rfc4153#section-6.10">6.10</a>. &lt;ValidPeriod&gt; .......................................... <a href="https://tools.ietf.org/html/rfc4153#page-14">14</a>
+       <a href="https://tools.ietf.org/html/rfc4153#section-6.11">6.11</a>. &lt;Conditions&gt; ........................................... <a href="https://tools.ietf.org/html/rfc4153#page-15">15</a>
+   <a href="https://tools.ietf.org/html/rfc4153#section-7">7</a>.  IANA Considerations .......................................... <a href="https://tools.ietf.org/html/rfc4153#page-15">15</a>
+   <a href="https://tools.ietf.org/html/rfc4153#section-8">8</a>.  VTS Schema Example ........................................... <a href="https://tools.ietf.org/html/rfc4153#page-18">18</a>
+   <a href="https://tools.ietf.org/html/rfc4153#section-9">9</a>.  Security Considerations ...................................... <a href="https://tools.ietf.org/html/rfc4153#page-18">18</a>
+   <a href="https://tools.ietf.org/html/rfc4153#section-10">10</a>. Acknowledgements ............................................. <a href="https://tools.ietf.org/html/rfc4153#page-19">19</a>
+   <a href="https://tools.ietf.org/html/rfc4153#section-11">11</a>. Normative References ......................................... <a href="https://tools.ietf.org/html/rfc4153#page-19">19</a>
+   <a href="https://tools.ietf.org/html/rfc4153#section-12">12</a>. Informative References ....................................... <a href="https://tools.ietf.org/html/rfc4153#page-20">20</a>
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc4153#section-1">1</a>. Introduction</h2></span>
+
+   This document specifies rules for defining voucher properties in XML
+   syntax.  The motivation and background of the specification are
+   described in [<a href="https://tools.ietf.org/html/rfc4153#ref-VTS" title="&quot;Requirements and Design for Voucher Trading System (VTS)&quot;">VTS</a>].
+
+   A voucher is a logical entity that represents a certain right and
+   that is logically managed by the Voucher Trading System (VTS).  A
+   voucher is generated by the issuer, traded among users, and finally
+   collected by the collector using VTS.
+
+   This document defines the syntax and semantics of the Voucher
+   Component, which defines voucher meaning and processing rules in XML
+   syntax [<a href="https://tools.ietf.org/html/rfc4153#ref-XML" title="&quot;Extensible Mark Up Language (XML) 1.0 (Second Edition)&quot;">XML</a>].  A Voucher Component defines the properties that must
+   be satisfied to allow the voucher to be processed by VTS or other
+   trading systems; e.g., a wallet or merchant system.  VTS definitions
+   and models are also defined in [<a href="https://tools.ietf.org/html/rfc4153#ref-VTS" title="&quot;Requirements and Design for Voucher Trading System (VTS)&quot;">VTS</a>].
+
+   Note: This document uses &quot;voucher&quot; as an &quot;instance of voucher&quot;, whose
+   meaning is defined by the Voucher Component.  In other words, a
+   Voucher Component is NOT a voucher, and multiple vouchers can be
+   issued and managed by the VTS using the same Voucher Component.
+
+   The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
+   document are to be interpreted as described in [<a href="https://tools.ietf.org/html/rfc2119" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">RFC2119</a>]
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc4153#section-2">2</a>. Processing Model</h2></span>
+
+   There are several ways of implementing VTS and technologies are
+   continually changing.  For discount coupons or event tickets, for
+   example, the smartcard-based offline VTS is often preferred, whereas
+   for bonds or securities, the centralized online VTS is preferred.  It
+   is impractical to define standard protocols for issuing,
+   transferring, or redeeming vouchers at this time.
+
+
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                      [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc4153#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+   To provide implementation flexibility, this document assumes a
+   modular wallet architecture that allows multiple VTSes to be added as
+   plug-ins.  In this architecture, instead of specifying a standard
+   voucher transfer protocol, two specifications, Voucher Component and
+   VTS-API, are standardized (Figure 1).
+
+   After the sender and receiver agree on which vouchers are to be
+   traded and which VTS is to be used, the issuing system or wallet
+   system requests the corresponding VTS plug-in to permit the issue,
+   transfer, or redeem transactions to be performed via the VTS API.
+   The VTS then rewrites the ownership of the vouchers using the VTS-
+   specific protocol.  Finally, a completion event is sent to the wallet
+   systems or issuing/collecting systems.
+
+   This document describes the Voucher Component specification.  The
+   VTS-API specification is defined in [<a href="https://tools.ietf.org/html/rfc4153#ref-VTS-API" title="&quot;Voucher Trading System Application Programming Interface (VTS-API)&quot;">VTS-API</a>].
+
+   Sender wallet/Issuing system      Receiver wallet/Collecting system
+   +---------------------------+       +---------------------------+
+   |                           |       |                           |
+   |  |                    Voucher Component                    |  |
+   |  |            (Specifies VTS Provider and Promise)         |  |
+   |  |--------------------------------------------------------&gt;|  |
+   |  |                        |       |                        |  |
+   |  |         Intention to receive and payment (option)       |  |
+   |  |&lt;- - - - - - - - - - - - - - - - - - - - - - - - - - - - |  |
+   |  |                        |       |                        |  |
+   |  |                        |       |                        |  |
+   |  | Issue/transfer/  VTS   |       |   VTS      Register    |  |
+   |  | redeem request   plug-in       |   plug-in  Listener(*1)|  |
+   |  |------------------&gt;|    |       |    |&lt;------------------|  |
+   |  | (VTS-API)         |&lt;- - - - - - - -&gt;|         (VTS-API) |  |
+   |  |                   | VTS-specific    |                   |  |
+   |  |                   | protocol if VTS |                   |  |
+   |  |                   | is distributed  |                   |  |
+   |  |  Result           |&lt;- - - - - - - -&gt;|       Notify(*2)  |  |
+   |  |&lt;------------------|    |       |    |------------------&gt;|  |
+   +---------------------------+       +---------------------------+
+
+   (*1) Registration is optional.  Note also that the VTS plug-ins are
+        usually pre-registered when the wallet or collecting system
+        is started.
+
+   (*2) If a listener is registered.
+
+           Figure 1. Wallet architecture with VTS plug-ins
+
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                      [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc4153#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc4153#section-3">3</a>. Trust Model</h2></span>
+
+   A voucher is trusted if the Issuer and VTS Provider are trusted, as
+   the Issuer is responsible for the contents of the voucher and the VTS
+   Provider is responsible for preventing ownership from being assigned
+   to multiple users.
+
+   The trust level required for the Issuer and VTS Provider depends on
+   the type (or Promise) of the voucher.  To provide the information
+   needed for verification, the conditions of the Issuer and VTS
+   Provider are specified in the Voucher Component and given as input to
+   the verifier; e.g., wallet system or other software.  The trust of a
+   voucher is thus verified through the Voucher Component.  This model
+   enables trading partners to verify their trust in the voucher
+   regardless of their trust in the partners.
+
+   This document assumes that the Voucher Component is the root of
+   trust.  If a malicious user could alter the Voucher Component, a
+   forged voucher could be verified as valid.
+
+   When a Voucher Component is delivered from the trusted VTS Provider,
+   Issuer, or trusted third party, a secure communication channel (e.g.,
+   [<a href="https://tools.ietf.org/html/rfc4153#ref-TLS" title="&quot;The TLS Protocol Version 1.0&quot;">TLS</a>], [<a href="https://tools.ietf.org/html/rfc4153#ref-IPSEC" title="&quot;IP Security Document Roadmap&quot;">IPSEC</a>], or object security, such as [<a href="https://tools.ietf.org/html/rfc4153#ref-XMLDSIG" title="&quot;(Extensible Markup Language) XML-Signature Syntax and Processing&quot;">XMLDSIG</a>]) should be used
+   to prevent alteration during the delivery.
+
+   Note: The Voucher Component does not have to be sent from the sender
+   of the voucher.  Note also that a set of trusted Voucher Components
+   can be downloaded before a transaction is conducted.
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc4153#section-4">4</a>. Component Structure</h2></span>
+
+   The Voucher Component provides the information needed to identify the
+   monetary value or merchandize rendered when the voucher is redeemed.
+   It includes
+
+   o how much value/items can be claimed in exchange for the voucher,
+      and
+
+   o restrictions applied to the voucher
+
+      - participants (VTS Provider, Issuer, Holder, and Collector),
+
+      - objects (merchandise) to be claimed,
+
+      - time when valid (validity period), and
+
+      - others.
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                      [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc4153#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+   The Voucher Component also provides common properties useful for
+   displaying and manipulating the contents of wallet systems.  It
+   includes the title and description of each voucher.
+
+   The Voucher Component contains the following components:
+
+   Title Component
+
+      Provides the title of the voucher.  This is mainly for listing the
+      entities stored in a wallet system.
+
+   Description Component
+
+      Provides a short description of the voucher.  This is mainly for
+      listing the entities stored in a wallet system.
+
+   Provider Component
+
+      Provides restrictions on which VTS Provider (or VTS plug-in) can
+      be used for trading the voucher.
+
+   Issuer Component
+
+      Provides restrictions on the Issuer of the voucher.
+
+   Holder Component
+
+      Provides restrictions on the Holder of the voucher.
+
+   Collector Component
+
+      Provides restrictions on the Collector of the voucher.
+
+   Value Component
+
+      Provides the value of each voucher.  There are two types of
+      values: fixed and ratio values.  For a fixed value, the currency
+      and the figure is specified.  For a ratio value, the discount
+      ratio of the corresponding merchandize is specified.
+
+      The Value Component also indicates the number of vouchers to be
+      redeemed for claiming the merchandise or monetary value specified
+      in the Merchandise Component or Value Component.  If &quot;n&quot; (&gt;0) is
+      specified, the merchandize or monetary value can be claimed in
+      exchange for &quot;n sheets of&quot; vouchers.  If &quot;0&quot; is specified, it can
+      be used repeatedly.
+
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                      [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc4153#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+   Merchandise Component
+
+      Provides restrictions on the object to be claimed.  The domain-
+      specific meaning of the voucher (e.g., reference number of the
+      merchandize or seat number for an event ticket) is specified to
+      identify the merchandize rendered when the voucher is redeemed.
+
+   ValidPeriod Component
+
+      Provides restrictions on the validity period of the voucher; i.e.,
+      start date and end date.
+
+   Condition Component
+
+      Provides any other applicable restrictions.  This is intended to
+      cover contracts between the issuer and holder of the voucher in
+      natural language form.
+
+   Using the above Components, semantics for diverse types of vouchers
+   can be defined as shown in Table 1.
+
+   +----------------+--------------------------------+---------------+
+   |                |             Value              |  Restrictions |
+   |                +-----+---------------+----------+---------------+
+   |   Examples     |Ratio|    Fixed      |Number    |  Merchandise  |
+   |                |     +------+--------+needed for|               |
+   |                |     |Amount|Currency|redemption|               |
+   +----------------+-----+------+--------+----------+---------------+
+   |Gift certificate|     |   25 |  USD   |        1 |(Not specified)|
+   |Loyalty point   |     |    1 |  AUD   |       10 |(Not specified)|
+   |Member card     |  20%|      |        |        0 |(Not specified)|
+   |Coupon          |  30%|      |        |        1 |Beef 500g      |
+   |Event ticket    | 100%|      |        |        1 |Hall A, S ,K23 |
+   |Exchange ticket | 100%|      |        |        1 |ISBN:0071355014|
+   +----------------+-----+------+--------+----------+---------------+
+
+          Table 1. Examples of vouchers and their properties
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc4153#section-5">5</a>. Syntax Overview and Examples</h2></span>
+
+   This section provides an overview and examples of Voucher Components.
+   The formal syntax and semantics are found in Sections <a href="https://tools.ietf.org/html/rfc4153#section-6">6</a> and <a href="https://tools.ietf.org/html/rfc4153#section-7">7</a>.
+
+   Voucher Components are represented by the &lt;Voucher&gt; element, which
+   has the following structure (where &quot;?&quot; denotes zero or one
+   occurrence):
+
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                      [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc4153#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+      &lt;Voucher&gt;
+        (Title)
+        (Description)?
+        (Provider)
+        (Issuer)?
+        (Holder)?
+        (Collector)?
+        (Value)
+        (Merchandise)?
+        (ValidPeriod)?
+        (Conditions)?
+      &lt;/Voucher&gt;
+
+   An example of a Voucher Component is described below.  This is an
+   example of a five-dollar discount coupon for specific merchandize, a
+   book with ISBN number 0071355014.  The coupon is valid from April 1,
+   2001, to March 31, 2002.  To claim this offer, one voucher must be
+   spent.
+
+      &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+      &lt;Voucher xmlns=&quot;urn:ietf:params:xml:ns:vts-lang&quot;
+               xmlns:vts=&quot;http://www.example.com/vts&quot;&gt;
+        &lt;Title&gt;IOTP Book Coupon&lt;/Title&gt;
+        &lt;Description&gt;$5 off IOTP Book&lt;/Description&gt;
+        &lt;Provider name=&quot;Voucher Exchanger 2002&quot;&gt;
+          &lt;vts:Version&gt;VE2.31&lt;/vts:Version&gt;
+        &lt;/Provider&gt;
+        &lt;Issuer name=&quot;Alice Book Center, Ltd.&quot;&gt;
+          &lt;vts:KeyInfo&gt;
+            1DA8DFCF95521014BBB7171B95545E8D61AE803F
+          &lt;/vts:KeyInfo&gt;
+        &lt;/Issuer&gt;
+        &lt;Collector name=&quot;Alice Book Center, Ltd.&quot;/&gt;
+        &lt;Value type=&quot;discount&quot; spend=&quot;1&quot;&gt;
+          &lt;Fixed amount=&quot;5&quot; currency=&quot;USD&quot;/&gt;
+        &lt;/Value&gt;
+        &lt;Merchandise&gt;
+          &lt;bk:Book xmlns:bk=&quot;http://www.example.com/bk&quot;
+                   bk:isbn=&quot;0071355014&quot;/&gt;
+        &lt;/Merchandise&gt;
+        &lt;ValidPeriod start=&quot;2002-04-01&quot; end=&quot;2003-03-31&quot;/&gt;
+        &lt;Conditions&gt;
+          The value of this coupon is subject to tax.
+        &lt;/Conditions&gt;
+      &lt;/Voucher&gt;
+
+
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                      [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc4153#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc4153#section-6">6</a>. Syntax and Semantics</h2></span>
+
+   The general structure of an XML Voucher Component is described in
+   <a href="https://tools.ietf.org/html/rfc4153#section-4">Section 4</a>.  This section details the Voucher Component features.
+   Features described in this section MUST be implemented unless
+   otherwise indicated.  The syntax is defined via [<a href="https://tools.ietf.org/html/rfc4153#ref-XML-Schema-1" title="&quot;XML Schema Part 1: Structures W3C Recommendation.&quot;">XML-Schema-1</a>]
+   [<a href="https://tools.ietf.org/html/rfc4153#ref-XML-Schema-2" title="&quot;XML Schema Part 2: Datatypes W3C Recommendation.&quot;">XML-Schema-2</a>].  For clarity, unqualified elements in schema
+   definitions are in the XML schema namespace:
+
+      xmlns=&quot;http://www.w3.org/2001/XMLSchema&quot;
+
+   References to XML Voucher schema defined herein use the prefix &quot;gvl&quot;
+   and are in the namespace:
+
+      xmlns:gvl=&quot;urn:ietf:params:xml:ns:vts-lang&quot;
+
+   This namespace URI for elements defined by this document is a URN
+   [<a href="https://tools.ietf.org/html/rfc4153#ref-URN" title="&quot;URN Syntax&quot;">URN</a>] that uses the namespace identifier 'ietf', defined by
+   [<a href="https://tools.ietf.org/html/rfc4153#ref-URN-NS-IETF" title="&quot;A URN Namespace for IETF Documents&quot;">URN-NS-IETF</a>] and extended by [<a href="https://tools.ietf.org/html/rfc4153#ref-XML-Registry" title="&quot;The IETF XML Registry&quot;">XML-Registry</a>].
+
+   This namespace is also used for unqualified elements in voucher
+   examples.
+
+<span class="h3"><h3><a class="selflink" name="section-6.1" href="https://tools.ietf.org/html/rfc4153#section-6.1">6.1</a>. &lt;Voucher&gt;</h3></span>
+
+   The &lt;Voucher&gt; element contains &lt;Title&gt;, &lt;Provider&gt;, and &lt;Value&gt;
+   elements and optionally contains &lt;Description&gt;, &lt;Issuer&gt;, &lt;Holder&gt;,
+   &lt;Collector&gt;, &lt;ValidPeriod&gt;, and &lt;Condition&gt; elements.  These sub-
+   elements are defined in the following sections.
+
+   The &lt;Voucher&gt; element is defined by the following schema:
+
+      &lt;element name=&quot;Voucher&quot; type=&quot;gvl:VoucherType&quot;/&gt;
+      &lt;complexType name=&quot;VoucherType&quot;&gt;
+       &lt;sequence&gt;
+        &lt;element ref=&quot;gvl:Title&quot;/&gt;
+        &lt;element ref=&quot;gvl:Description&quot; minOccurs=&quot;0&quot;/&gt;
+        &lt;element ref=&quot;gvl:Provider&quot;/&gt;
+        &lt;element ref=&quot;gvl:Issuer&quot; minOccurs=&quot;0&quot;/&gt;
+        &lt;element ref=&quot;gvl:Holder&quot; minOccurs=&quot;0&quot;/&gt;
+        &lt;element ref=&quot;gvl:Collector&quot; minOccurs=&quot;0&quot;/&gt;
+        &lt;element ref=&quot;gvl:Value&quot;/&gt;
+        &lt;element ref=&quot;gvl:Merchandise&quot; minOccurs=&quot;0&quot;/&gt;
+        &lt;element ref=&quot;gvl:ValidPeriod&quot; minOccurs=&quot;0&quot;/&gt;
+        &lt;element ref=&quot;gvl:Conditions&quot;  minOccurs=&quot;0&quot;/&gt;
+       &lt;/sequence&gt;
+      &lt;/complexType&gt;
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                      [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc4153#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-6.2" href="https://tools.ietf.org/html/rfc4153#section-6.2">6.2</a>. &lt;Title&gt;</h3></span>
+
+   The &lt;Title&gt; element contains a simpletext title of the voucher.  This
+   is mainly for listing the entities stored in a wallet system.
+
+   The &lt;Title&gt; element has no attribute.
+
+   The &lt;Title&gt; element is defined by the following schema:
+
+      &lt;element name=&quot;Title&quot; type=&quot;string&quot;/&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-6.3" href="https://tools.ietf.org/html/rfc4153#section-6.3">6.3</a>. &lt;Description&gt;</h3></span>
+
+   The &lt;Description&gt; element contains a simpletext description of the
+   voucher.  This is mainly for listing the entities stored in a wallet
+   system.
+
+   The &lt;Description&gt; element has no attribute.
+
+   The &lt;Description&gt; element is defined by the following schema:
+
+      &lt;element name=&quot;Description&quot; type=&quot;string&quot;/&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-6.4" href="https://tools.ietf.org/html/rfc4153#section-6.4">6.4</a>. &lt;Provider&gt;</h3></span>
+
+   The &lt;Provider&gt; element may contain any element that is used to
+   specify or restrict the VTS Provider of the voucher.  The sub-
+   elements contained in this element depend on the implementation of
+   the VTS.
+
+   An implementation of a wallet system may use this information to
+   identify and/or authenticate the VTS Provider when the VTS plug-in is
+   registered (see Section 7 of [<a href="https://tools.ietf.org/html/rfc4153#ref-VTS-API" title="&quot;Voucher Trading System Application Programming Interface (VTS-API)&quot;">VTS-API</a>]).  These implementation-
+   specific elements of the VTS can be extended using [<a href="https://tools.ietf.org/html/rfc4153#ref-XML-ns" title="&quot;Namespaces in XML&quot;">XML-ns</a>].  An
+   example of such a schema definition is described in <a href="https://tools.ietf.org/html/rfc4153#section-8">Section 8</a>.
+
+   The &lt;Provider&gt; element has a string-type &quot;name&quot; attribute that is
+   used to specify the name of the VTS Provider.
+
+   The &lt;Provider&gt; element is defined by the following schema:
+
+      &lt;element name=&quot;Provider&quot; type=&quot;gvl:RoleType&quot;/&gt;
+      &lt;complexType name=&quot;RoleType&quot; mixed=&quot;true&quot;&gt;
+       &lt;sequence&gt;
+        &lt;any namespace=&quot;##any&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;/&gt;
+       &lt;/sequence&gt;
+       &lt;attribute name=&quot;name&quot; type=&quot;string&quot;/&gt;
+      &lt;/complexType&gt;
+
+
+
+<span class="grey">Fujimura, et al.             Informational                      [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc4153#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-6.5" href="https://tools.ietf.org/html/rfc4153#section-6.5">6.5</a>. &lt;Issuer&gt;</h3></span>
+
+   The &lt;Issuer&gt; element may contain any element that is used to specify
+   or restrict the Issuer of the voucher.
+
+   The Issuer of the voucher is generally managed by the VTS [<a href="https://tools.ietf.org/html/rfc4153#ref-VTS-API" title="&quot;Voucher Trading System Application Programming Interface (VTS-API)&quot;">VTS-API</a>].
+   There is no need to specify the Issuer of the voucher using this
+   element if there are no restrictions on the Issuer.
+
+   An implementation of a VTS may use this element to describe the
+   authentication data and/or qualification information of the Issuer.
+   This implementation-specific information can be extended through
+   sub-elements using [<a href="https://tools.ietf.org/html/rfc4153#ref-XML-ns" title="&quot;Namespaces in XML&quot;">XML-ns</a>].  An example of such a schema definition
+   is described in <a href="https://tools.ietf.org/html/rfc4153#section-8">Section 8</a>.
+
+   The &lt;Issuer&gt; element has a string-type &quot;name&quot; attribute that is used
+   to specify the name of the Issuer.
+
+   The &lt;Issuer&gt; element is defined by the following schema:
+
+      &lt;element name=&quot;Issuer&quot; type=&quot;gvl:RoleType&quot;/&gt;
+
+   The &lt;RoleType&gt; element type is defined in <a href="https://tools.ietf.org/html/rfc4153#section-6.4">Section 6.4</a>.
+
+   If the &lt;Issuer&gt; element is omitted, it MUST be interpreted that there
+   are no restrictions on the Issuer.
+
+<span class="h3"><h3><a class="selflink" name="section-6.6" href="https://tools.ietf.org/html/rfc4153#section-6.6">6.6</a>. &lt;Holder&gt;</h3></span>
+
+   The &lt;Holder&gt; element may contain any element that is used to specify
+   or restrict the Holder of the voucher.
+
+   The Holder of the voucher is generally managed by the VTS [<a href="https://tools.ietf.org/html/rfc4153#ref-VTS-API" title="&quot;Voucher Trading System Application Programming Interface (VTS-API)&quot;">VTS-API</a>].
+   There is no need to specify the Holder of the voucher using this
+   element if there are no restrictions on the Holder.
+
+   An implementation of a VTS may use this element to describe the
+   authentication data and/or qualification information of the Holder.
+   This implementation-specific information can be extended through
+   sub-elements using [<a href="https://tools.ietf.org/html/rfc4153#ref-XML-ns" title="&quot;Namespaces in XML&quot;">XML-ns</a>].
+
+   The &lt;Holder&gt; element has a string-type &quot;name&quot; attribute that is used
+   to specify the name of the Holder.
+
+
+
+
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                     [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc4153#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+   The &lt;Holder&gt; element is defined by the following schema:
+
+      &lt;element name=&quot;Holder&quot; type=&quot;gvl:RoleType&quot;/&gt;
+
+   The &lt;RoleType&gt; element type is defined in <a href="https://tools.ietf.org/html/rfc4153#section-6.4">Section 6.4</a>.
+
+   If the &lt;Holder&gt; element is omitted, it MUST be interpreted that there
+   are no restrictions on the Holder.
+
+<span class="h3"><h3><a class="selflink" name="section-6.7" href="https://tools.ietf.org/html/rfc4153#section-6.7">6.7</a>. &lt;Collector&gt;</h3></span>
+
+   The &lt;Collector&gt; element may contain any element that is used to
+   specify or restrict the Collector of the voucher.
+
+   There is no need to specify the Collector of the voucher using this
+   element if there are no restrictions on the Collector.
+
+   An implementation of a VTS may use this element to describe the
+   authentication data and/or qualification information of the
+   Collector.  This implementation-specific information can be extended
+   through sub-elements using [<a href="https://tools.ietf.org/html/rfc4153#ref-XML-ns" title="&quot;Namespaces in XML&quot;">XML-ns</a>].
+
+   The &lt;Collector&gt; element has a string-type &quot;name&quot; attribute that is
+   used to specify the name of the Collector.
+
+   The &lt;Collector&gt; element is defined by the following schema:
+
+      &lt;element name=&quot;Collector&quot; type=&quot;gvl:RoleType&quot;/&gt;
+
+   The &lt;RoleType&gt; element type is defined in <a href="https://tools.ietf.org/html/rfc4153#section-6.4">Section 6.4</a>.
+
+   If the &lt;Collector&gt; element is omitted, it MUST be interpreted that
+   there are no restrictions on the Collector.
+
+<span class="h3"><h3><a class="selflink" name="section-6.8" href="https://tools.ietf.org/html/rfc4153#section-6.8">6.8</a>. &lt;Value&gt;</h3></span>
+
+   The &lt;Value&gt; element optionally contains a &lt;Fixed&gt; or &lt;Ratio&gt; element
+   but not both.  These sub-elements are defined in the following
+   sections.
+
+   The &lt;Value&gt; element has a &quot;type&quot; attribute that is used to specify
+   the value process type.  This attribute is provided to calculate the
+   amount paid when the vouchers are redeemed at Merchant site, etc.
+
+
+
+
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                     [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc4153#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+   The following identifiers are defined for the &quot;type&quot; attribute.
+
+   Exchange: Items specified in the &lt;Merchandise&gt; element can be claimed
+      in exchange for the voucher.  If this type is selected, neither
+      the &lt;Ratio&gt; nor the &lt;Fixed&gt; element MUST be specified.  Note that
+      this value process type has the same meaning as:
+
+      &lt;Value type=&quot;discount&quot;&gt;&lt;Ratio percentage=&quot;100&quot;/&gt;&lt;/Value&gt;
+
+   Discount: Items specified in the &lt;Merchandise&gt; element can be
+      purchased at the discount price calculated by the &lt;Ratio&gt; or
+      &lt;Fixed&gt; element.
+
+   Monetary: Items specified in the &lt;Merchandise&gt; element can be
+      purchased using the value of the voucher.  (Note: if the
+      &lt;Merchandise&gt; element is not specified, the voucher can be used
+      for any purchase.)  If this type is selected, the &lt;Fixed&gt; element
+      MUST be specified.
+
+   The &lt;Value&gt; element also has a &quot;spend&quot; attribute that is used to
+   specify the number of vouchers to be redeemed for claiming the goods,
+   services, or monetary value specified.  For example, if &quot;n&quot; (&gt;0) is
+   specified, goods can be claimed in exchange for &quot;n sheets of&quot;
+   vouchers.  (Note: Multiple vouchers for the same Voucher Component
+   must exist in this case.)  If &quot;0&quot; is specified, it can be used
+   repeatedly.
+
+   If the &quot;spend&quot; attribute or the whole element is omitted, it MUST be
+   interpreted that &quot;1&quot; is specified for the &quot;spend&quot; attribute.
+
+   The &lt;Value&gt; element is defined by the following schema:
+
+      &lt;element name=&quot;Value&quot; type=&quot;gvl:ValueType&quot;/&gt;
+      &lt;complexType name=&quot;ValueType&quot;&gt;
+       &lt;sequence minOccurs=&quot;0&quot;&gt;
+        &lt;choice&gt;
+         &lt;element name=&quot;Ratio&quot; type=&quot;gvl:RatioValueType&quot;/&gt;
+         &lt;element name=&quot;Fixed&quot; type=&quot;gvl:FixedValueType&quot;/&gt;
+        &lt;/choice&gt;
+       &lt;/sequence&gt;
+       &lt;attribute name=&quot;type&quot; type=&quot;gvl:ValueProcessType&quot;
+                  use=&quot;required&quot;/&gt;
+       &lt;attribute name=&quot;spend&quot; type=&quot;nonNegativeInteger&quot;
+                  default=&quot;1&quot;/&gt;
+      &lt;/complexType&gt;
+
+
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                     [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-13" id="page-13" href="https://tools.ietf.org/html/rfc4153#page-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+   The &lt;ValueProcessType&gt; element type is defined by the following
+   schema:
+
+      &lt;simpleType name=&quot;ValueProcessType&quot;&gt;
+       &lt;restriction base=&quot;string&quot;&gt;
+        &lt;enumeration value=&quot;exchange&quot;/&gt;
+        &lt;enumeration value=&quot;discount&quot;/&gt;
+        &lt;enumeration value=&quot;monetary&quot;/&gt;
+       &lt;/restriction&gt;
+      &lt;/simpleType&gt;
+
+<span class="h4"><h4><a class="selflink" name="section-6.8.1" href="https://tools.ietf.org/html/rfc4153#section-6.8.1">6.8.1</a>. &lt;Ratio&gt;</h4></span>
+
+   The &lt;Ratio&gt; element does not contain any contents.
+
+   The &lt;Ratio&gt; element has a &quot;percentage&quot; attribute that is used to
+   specify the discount ratio of the price of the corresponding
+   merchandize in percentage.
+
+   The &lt;RatioValueType&gt; element type is defined by the following schema:
+
+      &lt;complexType name=&quot;RatioValueType&quot;&gt;
+       &lt;attribute name=&quot;percentage&quot; use=&quot;required&quot;&gt;
+        &lt;simpleType&gt;
+         &lt;restriction base=&quot;float&quot;&gt;
+          &lt;maxInclusive value=&quot;100&quot;/&gt;
+         &lt;/restriction&gt;
+        &lt;/simpleType&gt;
+       &lt;/attribute&gt;
+      &lt;/complexType&gt;
+
+<span class="h4"><h4><a class="selflink" name="section-6.8.2" href="https://tools.ietf.org/html/rfc4153#section-6.8.2">6.8.2</a>. &lt;Fixed&gt;</h4></span>
+
+   The &lt;Fixed&gt; element does not contain any contents.
+
+   The &lt;Fixed&gt; element has &quot;currency&quot; and &quot;amount&quot; attributes and
+   optionally a &quot;decimalPower&quot; attribute as follows:
+
+   Currency: Provides the unit of the monetary value in the three letter
+      ISO currency code [<a href="https://tools.ietf.org/html/rfc4153#ref-ISO4217" title="&quot;Codes for the representation of currencies and funds&quot;">ISO4217</a>].  For example, US dollars is &quot;USD&quot;.
+
+   Amount: Provides the amount of the monetary value per voucher.
+
+   DecimalPower: Provides the number of decimal digits from the decimal
+      point applied to the base for the &quot;amount&quot; attribute above.  If
+      the &quot;decimalPower&quot; attribute is omitted, it MUST be interpreted
+      that &quot;0&quot; is specified for the &quot;decimalPower&quot; attribute.
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                     [Page 13]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-14" id="page-14" href="https://tools.ietf.org/html/rfc4153#page-14" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+   For example, with a dollar currency denominated in cents, &quot;1&quot; is
+   specified for the &quot;amount&quot; attribute, and &quot;-2&quot; is specified for the
+   &quot;decimalPower&quot; attribute.  Alternately, &quot;0.01&quot; is specified for the
+   &quot;amount&quot; attribute, and the &quot;decimalPower&quot; attribute is omitted.
+
+   The &lt;FixedValueType&gt; type is defined follows:
+
+      &lt;complexType name=&quot;FixedValueType&quot;&gt;
+       &lt;attribute name=&quot;currency&quot; type=&quot;string&quot; use=&quot;required&quot;/&gt;
+       &lt;attribute name=&quot;amount&quot; type=&quot;float&quot; use=&quot;required&quot;/&gt;
+       &lt;attribute name=&quot;decimalPower&quot; type=&quot;short&quot; default=&quot;0&quot;/&gt;
+      &lt;/complexType&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-6.9" href="https://tools.ietf.org/html/rfc4153#section-6.9">6.9</a>. &lt;Merchandise&gt;</h3></span>
+
+   The &lt;Merchandise&gt; element may contain any element used to specify or
+   restrict the goods or services rendered when the voucher is redeemed.
+   The sub-elements contained in this element depend on the application
+   of the voucher and are left to the other domain-specific
+   specifications.  Domain-specific elements can be extended as sub-
+   elements using [<a href="https://tools.ietf.org/html/rfc4153#ref-XML-ns" title="&quot;Namespaces in XML&quot;">XML-ns</a>].
+
+   This element is intended to be interpreted by a collecting system.
+   An implementation of a wallet system does not have to use this
+   element.  Any restrictions applied should also be described in the
+   &lt;Description&gt; element or the &lt;Conditions&gt; elements in natural
+   language form to enable users to check the restrictions.
+
+   The &lt;Merchandise&gt; element does not have any attribute.
+
+   The &lt;Merchandise&gt; element is defined by the following schema:
+
+      &lt;element name=&quot;Merchandise&quot; type=&quot;gvl:MerchandiseType&quot;/&gt;
+      &lt;complexType name=&quot;MerchandiseType&quot; mixed=&quot;true&quot;&gt;
+       &lt;sequence&gt;
+        &lt;any namespace=&quot;##any&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;/&gt;
+       &lt;/sequence&gt;
+      &lt;/complexType&gt;
+
+<span class="h3"><h3><a class="selflink" name="section-6.10" href="https://tools.ietf.org/html/rfc4153#section-6.10">6.10</a>. &lt;ValidPeriod&gt;</h3></span>
+
+   The &lt;ValidPeriod&gt; element does not contain any contents.
+
+   The &lt;ValidPeriod&gt; element has dateTime-type &quot;start&quot; and &quot;end&quot;
+   attributes that are used to place limits on the validity of the
+   voucher.
+
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                     [Page 14]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-15" id="page-15" href="https://tools.ietf.org/html/rfc4153#page-15" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+   The &lt;ValidPeriod&gt; element is defined by the following schema:
+
+      &lt;element name=&quot;ValidPeriod&quot; type=&quot;gvl:ValidPeriodType&quot;/&gt;
+      &lt;complexType name=&quot;ValidPeriodType&quot;&gt;
+        &lt;attribute name=&quot;start&quot; type=&quot;dateTime&quot;/&gt;
+        &lt;attribute name=&quot;end&quot; type=&quot;dateTime&quot;/&gt;
+      &lt;/complexType&gt;
+
+   If the &quot;start&quot; attribute is omitted, it MUST be interpreted that the
+   voucher is valid on any date up to that specified by the end
+   attribute (inclusive).  If the &quot;end&quot; attribute is omitted, it MUST be
+   interpreted that the voucher is valid from the start attribute with
+   no expiry.  If neither attribute is specified or the whole element is
+   omitted, it MUST be interpreted that the voucher is valid at any
+   time.
+
+<span class="h3"><h3><a class="selflink" name="section-6.11" href="https://tools.ietf.org/html/rfc4153#section-6.11">6.11</a>. &lt;Conditions&gt;</h3></span>
+
+   The &lt;Conditions&gt; element contains any other restrictions or
+   conditions applied.  This is intended to cover contracts between the
+   issuer and the holder of the voucher in natural language form.
+
+   An implementation of a wallet system SHOULD provide a means of
+   displaying the text in this element.
+
+   The &lt;Conditions&gt; element has no attribute.
+
+   The &lt;Conditions&gt; element is defined by the following schema:
+
+      &lt;element name=&quot;Conditions&quot; type=&quot;string&quot;/&gt;
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc4153#section-7">7</a>. IANA Considerations</h2></span>
+
+   This document uses URNs to describe XML namespaces and XML schemas
+   conforming to a registry mechanism described in [<a href="https://tools.ietf.org/html/rfc4153#ref-XML-Registry" title="&quot;The IETF XML Registry&quot;">XML-Registry</a>].  IANA
+   has registered two URI assignments.
+
+   Registration request for the vts-lang namespace:
+
+   URI: urn:ietf:params:xml:ns:vts-lang
+
+   Registrant Contact: See the &quot;Authors' Addresses&quot; section of this
+   document.
+
+   XML: None.  Namespace URIs do not represent an XML specification.
+
+
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                     [Page 15]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-16" id="page-16" href="https://tools.ietf.org/html/rfc4153#page-16" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+   Registration request for the vts-lang XML schema:
+
+   URI: urn:ietf:params:xml:schema:vts-lang
+
+   Registrant Contact: See the &quot;Authors' Addresses&quot; section of this
+   document.
+
+   XML:
+      BEGIN
+      &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+
+      &lt;schema
+        targetNamespace=&quot;urn:ietf:params:xml:ns:vts-lang&quot;
+        xmlns:gvl=&quot;urn:ietf:params:xml:ns:vts-lang&quot;
+        xmlns=&quot;http://www.w3.org/2001/XMLSchema&quot;
+        elementFormDefault=&quot;qualified&quot;&gt;
+
+      &lt;element name=&quot;Voucher&quot; type=&quot;gvl:VoucherType&quot;/&gt;
+      &lt;complexType name=&quot;VoucherType&quot;&gt;
+       &lt;sequence&gt;
+        &lt;element ref=&quot;gvl:Title&quot;/&gt;
+        &lt;element ref=&quot;gvl:Description&quot; minOccurs=&quot;0&quot;/&gt;
+        &lt;element ref=&quot;gvl:Provider&quot;/&gt;
+        &lt;element ref=&quot;gvl:Issuer&quot; minOccurs=&quot;0&quot;/&gt;
+        &lt;element ref=&quot;gvl:Holder&quot; minOccurs=&quot;0&quot;/&gt;
+        &lt;element ref=&quot;gvl:Collector&quot; minOccurs=&quot;0&quot;/&gt;
+        &lt;element ref=&quot;gvl:Value&quot;/&gt;
+        &lt;element ref=&quot;gvl:Merchandise&quot; minOccurs=&quot;0&quot;/&gt;
+        &lt;element ref=&quot;gvl:ValidPeriod&quot; minOccurs=&quot;0&quot;/&gt;
+        &lt;element ref=&quot;gvl:Conditions&quot;  minOccurs=&quot;0&quot;/&gt;
+       &lt;/sequence&gt;
+      &lt;/complexType&gt;
+
+      &lt;element name=&quot;Title&quot; type=&quot;string&quot;/&gt;
+
+      &lt;element name=&quot;Description&quot; type=&quot;string&quot;/&gt;
+
+      &lt;element name=&quot;Provider&quot; type=&quot;gvl:RoleType&quot;/&gt;
+      &lt;element name=&quot;Issuer&quot;   type=&quot;gvl:RoleType&quot;/&gt;
+      &lt;element name=&quot;Holder&quot;   type=&quot;gvl:RoleType&quot;/&gt;
+      &lt;element name=&quot;Collector&quot;   type=&quot;gvl:RoleType&quot;/&gt;
+      &lt;complexType name=&quot;RoleType&quot; mixed=&quot;true&quot;&gt;
+       &lt;sequence&gt;
+        &lt;any namespace=&quot;##any&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;/&gt;
+       &lt;/sequence&gt;
+       &lt;attribute name=&quot;name&quot; type=&quot;string&quot;/&gt;
+      &lt;/complexType&gt;
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                     [Page 16]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-17" id="page-17" href="https://tools.ietf.org/html/rfc4153#page-17" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+      &lt;element name=&quot;Value&quot; type=&quot;gvl:ValueType&quot;/&gt;
+      &lt;complexType name=&quot;ValueType&quot;&gt;
+       &lt;sequence minOccurs=&quot;0&quot;&gt;
+        &lt;choice&gt;
+         &lt;element name=&quot;Ratio&quot; type=&quot;gvl:RatioValueType&quot;/&gt;
+         &lt;element name=&quot;Fixed&quot; type=&quot;gvl:FixedValueType&quot;/&gt;
+        &lt;/choice&gt;
+       &lt;/sequence&gt;
+       &lt;attribute name=&quot;type&quot; type=&quot;gvl:ValueProcessType&quot;
+                  use=&quot;required&quot;/&gt;
+       &lt;attribute name=&quot;spend&quot; type=&quot;nonNegativeInteger&quot;
+                  default=&quot;1&quot;/&gt;
+      &lt;/complexType&gt;
+
+      &lt;simpleType name=&quot;ValueProcessType&quot;&gt;
+       &lt;restriction base=&quot;string&quot;&gt;
+        &lt;enumeration value=&quot;exchange&quot;/&gt;
+        &lt;enumeration value=&quot;discount&quot;/&gt;
+        &lt;enumeration value=&quot;monetary&quot;/&gt;
+       &lt;/restriction&gt;
+      &lt;/simpleType&gt;
+
+      &lt;complexType name=&quot;RatioValueType&quot;&gt;
+       &lt;attribute name=&quot;percentage&quot; use=&quot;required&quot;&gt;
+        &lt;simpleType&gt;
+         &lt;restriction base=&quot;float&quot;&gt;
+          &lt;maxInclusive value=&quot;100&quot;/&gt;
+         &lt;/restriction&gt;
+        &lt;/simpleType&gt;
+       &lt;/attribute&gt;
+      &lt;/complexType&gt;
+
+      &lt;complexType name=&quot;FixedValueType&quot;&gt;
+       &lt;attribute name=&quot;currency&quot; type=&quot;string&quot; use=&quot;required&quot;/&gt;
+       &lt;attribute name=&quot;amount&quot; type=&quot;float&quot; use=&quot;required&quot;/&gt;
+       &lt;attribute name=&quot;decimalPower&quot; type=&quot;short&quot; default=&quot;0&quot;/&gt;
+      &lt;/complexType&gt;
+
+      &lt;element name=&quot;Merchandise&quot; type=&quot;gvl:MerchandiseType&quot;/&gt;
+      &lt;complexType name=&quot;MerchandiseType&quot; mixed=&quot;true&quot;&gt;
+       &lt;sequence&gt;
+        &lt;any namespace=&quot;##any&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;/&gt;
+       &lt;/sequence&gt;
+      &lt;/complexType&gt;
+
+      &lt;element name=&quot;ValidPeriod&quot; type=&quot;gvl:ValidPeriodType&quot;/&gt;
+      &lt;complexType name=&quot;ValidPeriodType&quot;&gt;
+        &lt;attribute name=&quot;start&quot; type=&quot;dateTime&quot;/&gt;
+
+
+
+<span class="grey">Fujimura, et al.             Informational                     [Page 17]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-18" id="page-18" href="https://tools.ietf.org/html/rfc4153#page-18" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+        &lt;attribute name=&quot;end&quot; type=&quot;dateTime&quot;/&gt;
+      &lt;/complexType&gt;
+
+      &lt;element name=&quot;Conditions&quot; type=&quot;string&quot;/&gt;
+     &lt;/schema&gt;
+     END
+
+<span class="h2"><h2><a class="selflink" name="section-8" href="https://tools.ietf.org/html/rfc4153#section-8">8</a>. VTS Schema Example</h2></span>
+
+   An example of the schema definition for a VTS implementation is
+   described below.
+
+      &lt;?xml version=&quot;1.0&quot;?&gt;
+
+      &lt;schema
+       targetNamespace=&quot;http://www.example.com/vts&quot;
+       xmlns:vts=&quot;http://www.example.com/vts&quot;
+       xmlns=&quot;http://www.w3.org/2001/XMLSchema&quot;
+       elementFormDefault=&quot;qualified&quot;&gt;
+
+       &lt;element name=&quot;Version&quot; type=&quot;string&quot;/&gt;
+       &lt;element name=&quot;KeyInfo&quot; type=&quot;hexBinary&quot;/&gt;
+      &lt;/schema&gt;
+
+   Using this schema definition, the &lt;vts:Version&gt; can be used for
+   specifying the VTS version number, and the &lt;vts:KeyInfo&gt; element can
+   be used for specifying the Issuer in the Voucher Component, as shown
+   in <a href="https://tools.ietf.org/html/rfc4153#section-5">Section 5</a>.
+
+<span class="h2"><h2><a class="selflink" name="section-9" href="https://tools.ietf.org/html/rfc4153#section-9">9</a>. Security Considerations</h2></span>
+
+   The VTS must provide a means to prevent forgery, alteration,
+   duplicate-redemption, reproduction of a voucher, and non-repudiation
+   of transactions, as described in Section 3.2 of [<a href="https://tools.ietf.org/html/rfc4153#ref-VTS" title="&quot;Requirements and Design for Voucher Trading System (VTS)&quot;">VTS</a>].  This will
+   commonly require the presence of a unique serial number or the like
+   in each Voucher instance, usually outside the Voucher Component.
+   These security requirements, however, mainly follow the VTS plug-ins
+   and their protocols.  This document assumes that the VTS plug-ins are
+   trusted and are installed by some means; e.g., manually checked as
+   are other download applications.
+
+   The Voucher Component, however, defines restrictions on the VTS
+   Provider (or VTS plug-in), and, if this information is altered,
+   incorrect VTS plug-ins not accepted by the issuer could be used,
+   allowing a forged voucher to be verified as if it were valid.  To
+   prevent this situation, the Voucher Component should be stored and
+
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                     [Page 18]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-19" id="page-19" href="https://tools.ietf.org/html/rfc4153#page-19" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+   acquired securely; e.g., downloaded from a trusted party using a
+   secure communication channel, such as [<a href="https://tools.ietf.org/html/rfc4153#ref-TLS" title="&quot;The TLS Protocol Version 1.0&quot;">TLS</a>] or [<a href="https://tools.ietf.org/html/rfc4153#ref-IPSEC" title="&quot;IP Security Document Roadmap&quot;">IPSEC</a>], or secured by
+   the digital signature of a trusted party [<a href="https://tools.ietf.org/html/rfc4153#ref-XMLDSIG" title="&quot;(Extensible Markup Language) XML-Signature Syntax and Processing&quot;">XMLDSIG</a>].
+
+<span class="h2"><h2><a class="selflink" name="section-10" href="https://tools.ietf.org/html/rfc4153#section-10">10</a>. Acknowledgements</h2></span>
+
+   The following persons, in alphabetic order, contributed substantially
+   to the material herein:
+
+      Ian Grigg
+      Renato Iannella
+      Yoshiaki Nakajima
+
+<span class="h2"><h2><a class="selflink" name="section-11" href="https://tools.ietf.org/html/rfc4153#section-11">11</a>. Normative References</h2></span>
+
+   [<a name="ref-ISO4217" id="ref-ISO4217">ISO4217</a>]      &quot;Codes for the representation of currencies and
+                  funds&quot;, ISO 4217, 1995.
+
+   [<a name="ref-RFC2119" id="ref-RFC2119">RFC2119</a>]      Bradner, S., &quot;Key words for use in RFCs to Indicate
+                  Requirement Levels&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>, March 1997.
+
+   [<a name="ref-URN" id="ref-URN">URN</a>]          Moats, R., &quot;URN Syntax&quot;, <a href="https://tools.ietf.org/html/rfc2141">RFC 2141</a>, May 1997.
+
+   [<a name="ref-URN-NS-IETF" id="ref-URN-NS-IETF">URN-NS-IETF</a>]  Moats, R., &quot;A URN Namespace for IETF Documents&quot;, <a href="https://tools.ietf.org/html/rfc2648">RFC</a>
+                  <a href="https://tools.ietf.org/html/rfc2648">2648</a>, August 1999.
+
+   [<a name="ref-XML" id="ref-XML">XML</a>]          &quot;Extensible Mark Up Language (XML) 1.0 (Second
+                  Edition)&quot;, A W3C Recommendation,
+                  &lt;<a href="http://www.w3.org/TR/REC-xml">http://www.w3.org/TR/REC-xml</a>&gt;, October 2000.
+
+   [<a name="ref-XML-ns" id="ref-XML-ns">XML-ns</a>]       &quot;Namespaces in XML&quot;, A W3C Recommendation,
+                  &lt;<a href="http://www.w3.org/TR/REC-xml-names">http://www.w3.org/TR/REC-xml-names</a>&gt;, January 1999.
+
+   [<a name="ref-XML-Registry" id="ref-XML-Registry">XML-Registry</a>] Mealling, M., &quot;The IETF XML Registry&quot;, <a href="https://tools.ietf.org/html/bcp81">BCP 81</a>, <a href="https://tools.ietf.org/html/rfc3688">RFC</a>
+                  <a href="https://tools.ietf.org/html/rfc3688">3688</a>, January 2004.
+
+   [<a name="ref-XML-Schema-1" id="ref-XML-Schema-1">XML-Schema-1</a>] Thompson, H., Beech, D., Maloney, M., and N.
+                  Mendelsohn, &quot;XML Schema Part 1: Structures W3C
+                  Recommendation.&quot;, &lt;<a href="http://www.w3.org/TR/xmlschema-1/">http://www.w3.org/TR/xmlschema-1/</a>&gt;,
+                  May 2001.
+
+   [<a name="ref-XML-Schema-2" id="ref-XML-Schema-2">XML-Schema-2</a>] Biron, P. and A. Malhotra, &quot;XML Schema Part 2:
+                  Datatypes W3C Recommendation.&quot;,
+                  &lt;<a href="http://www.w3.org/TR/xmlschema-2/">http://www.w3.org/TR/xmlschema-2/</a>&gt;, May 2001.
+
+
+
+
+
+
+
+<span class="grey">Fujimura, et al.             Informational                     [Page 19]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-20" id="page-20" href="https://tools.ietf.org/html/rfc4153#page-20" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-12" href="https://tools.ietf.org/html/rfc4153#section-12">12</a>. Informative References</h2></span>
+
+   [<a name="ref-VTS" id="ref-VTS">VTS</a>]          Fujimura, K. and D. Eastlake, &quot;Requirements and Design
+                  for Voucher Trading System (VTS)&quot;, <a href="https://tools.ietf.org/html/rfc3506">RFC 3506</a>, March
+                  2003.
+
+   [<a name="ref-IPSEC" id="ref-IPSEC">IPSEC</a>]        Thayer, R., Doraswamy, N., and R. Glenn, &quot;IP Security
+                  Document Roadmap&quot;, <a href="https://tools.ietf.org/html/rfc2411">RFC 2411</a>, November 1998.
+
+   [<a name="ref-TLS" id="ref-TLS">TLS</a>]          Dierks, T. and C. Allen, &quot;The TLS Protocol Version
+                  1.0&quot;, <a href="https://tools.ietf.org/html/rfc2246">RFC 2246</a>, January 1999.
+
+   [<a name="ref-VTS-API" id="ref-VTS-API">VTS-API</a>]      Terada, M. and K. Fujimura, &quot;Voucher Trading System
+                  Application Programming Interface (VTS-API)&quot;, <a href="https://tools.ietf.org/html/rfc4154">RFC</a>
+                  <a href="https://tools.ietf.org/html/rfc4154">4154</a>, September 2005.
+
+   [<a name="ref-XMLDSIG" id="ref-XMLDSIG">XMLDSIG</a>]      Eastlake 3rd, D., Reagle, J., and D. Solo,
+                  &quot;(Extensible Markup Language) XML-Signature Syntax and
+                  Processing&quot;, <a href="https://tools.ietf.org/html/rfc3275">RFC 3275</a>, March 2002.
+
+Authors' Addresses
+
+   Ko Fujimura
+   NTT Corporation
+   1-1 Hikari-no-oka, Yokosuka-shi, Kanagawa, 239-0847 JAPAN
+
+   Phone: +81-(0)46-859-3053
+   Fax:   +81-(0)46-855-1730
+   EMail: fujimura.ko@lab.ntt.co.jp
+
+
+   Masayuki Terada
+   NTT DoCoMo, Inc.
+   3-5 Hikari-no-oka, Yokosuka-shi, Kanagawa, 239-8536 JAPAN
+
+   Phone: +81-(0)46-840-3809
+   Fax:   +81-(0)46-840-3705
+   EMail: te@rex.yrp.nttdocomo.co.jp
+
+
+   Donald E. Eastlake 3rd
+   Motorola Laboratories
+   155 Beaver Street
+   Milford, MA 01757 USA
+
+   Phone: 1-508-786-7554 (work)
+          1-508-634-2066 (home)
+   EMail: Donald.Eastlake@motorola.com
+
+
+
+<span class="grey">Fujimura, et al.             Informational                     [Page 20]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-21" id="page-21" href="https://tools.ietf.org/html/rfc4153#page-21" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc4153">RFC 4153</a>         XML Voucher: Generic Voucher Language    September 2005</span>
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2005).
+
+   This document is subject to the rights, licenses and restrictions
+   contained in <a href="https://tools.ietf.org/html/bcp78">BCP 78</a>, and except as set forth therein, the authors
+   retain all their rights.
+
+   This document and the information contained herein are provided on an
+   &quot;AS IS&quot; basis and THE CONTRIBUTOR, THE ORGANIZATION HE/SHE REPRESENTS
+   OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY AND THE INTERNET
+   ENGINEERING TASK FORCE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED,
+   INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE
+   INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
+   WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Intellectual Property
+
+   The IETF takes no position regarding the validity or scope of any
+   Intellectual Property Rights or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; nor does it represent that it has
+   made any independent effort to identify any such rights.  Information
+   on the procedures with respect to rights in RFC documents can be
+   found in <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and <a href="https://tools.ietf.org/html/bcp79">BCP 79</a>.
+
+   Copies of IPR disclosures made to the IETF Secretariat and any
+   assurances of licenses to be made available, or the result of an
+   attempt made to obtain a general license or permission for the use of
+   such proprietary rights by implementers or users of this
+   specification can be obtained from the IETF on-line IPR repository at
+   <a href="http://www.ietf.org/ipr">http://www.ietf.org/ipr</a>.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights that may cover technology that may be required to implement
+   this standard.  Please address the information to the IETF at ietf-
+   ipr@ietf.org.
+
+Acknowledgement
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+
+
+
+Fujimura, et al.             Informational                     [Page 21]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>

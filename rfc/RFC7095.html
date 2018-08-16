@@ -1,0 +1,1863 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="robots" content="index,follow" /> 
+  <meta name="creator" content="rfcmarkup version 1.127" /> 
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
+  <meta name="DC.Relation.Replaces" content="draft-kewisch-vcard-in-json" /> 
+  <meta name="DC.Identifier" content="urn:ietf:rfc:7095" /> 
+  <meta name="DC.Date.Issued" content="January, 2014" /> 
+  <meta name="DC.Creator" content="Philipp Kewisch &lt;mozilla@kewis.ch&gt;" /> 
+  <meta name="DC.Description.Abstract" content="This specification defines &quot;jCard&quot;, a JSON format for vCard data. The
+vCard data format is a text format for representing and exchanging
+information about individuals and other entities, for example,
+telephone numbers, email addresses, structured names, and delivery
+addresses. JSON is a lightweight, text-based, language- independent
+data interchange format commonly used in Internet applications." /> 
+  <meta name="DC.Title" content="jCard: The JSON Format for vCard" /> 
+  <link rel="icon" href="/images/rfc.png" type="image/png" /> 
+  <link rel="shortcut icon" href="/images/rfc.png" type="image/png" /> 
+  <title>RFC 7095 - jCard: The JSON Format for vCard</title> 
+  <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0 1px; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style> 
+  <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script> 
+ </head> 
+ <body onload="addHeaderTags()"> 
+  <div class="content"> 
+   <div style="height: 13px;"> 
+    <div onmouseover="this.style.cursor='pointer';" onclick="showElem('legend');" onmouseout="hideElem('legend')" style="height: 6px; position: absolute;" class="pre noprint docinfo bgblue" title="Click for colour legend."> 
+    </div> 
+    <div id="legend" class="docinfo noprint pre legend" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; " onmouseover="showElem('legend');" onmouseout="hideElem('legend');"> 
+    </div> 
+   </div> 
+   <span class="pre noprint docinfo top">[<a href="https://tools.ietf.org/html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/rfc/rfc7095.txt" title="Plaintext version of this document">txt</a>|<a href="https://tools.ietf.org/pdf/rfc7095" title="PDF version of this document">pdf</a>] [<a href="https://tools.ietf.org/html/draft-ietf-jcardcal-jcard" title="draft-ietf-jcardcal-jcard">draft-ietf-jcar...</a>] [<a href="https://datatracker.ietf.org/doc/rfc7095" title="IESG Datatracker information for this document">Tracker</a>] [<a href="https://tools.ietf.org/rfcdiff?difftype=--hwdiff&amp;url2=rfc7095" title="Inline diff (wdiff)">Diff1</a>] [<a href="https://tools.ietf.org/rfcdiff?url2=rfc7095" title="Side-by-side diff">Diff2</a>] </span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <span class="pre noprint docinfo"> PROPOSED STANDARD</span>
+   <br /> 
+   <span class="pre noprint docinfo"> </span>
+   <br /> 
+   <pre>Internet Engineering Task Force (IETF)                        P. Kewisch
+Request for Comments: 7095                                       Mozilla
+Category: Standards Track                                   January 2014
+ISSN: 2070-1721
+
+
+                    <span class="h1"><h1>jCard: The JSON Format for vCard</h1></span>
+
+Abstract
+
+   This specification defines &quot;jCard&quot;, a JSON format for vCard data.
+   The vCard data format is a text format for representing and
+   exchanging information about individuals and other entities, for
+   example, telephone numbers, email addresses, structured names, and
+   delivery addresses.  JSON is a lightweight, text-based, language-
+   independent data interchange format commonly used in Internet
+   applications.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in <a href="https://tools.ietf.org/html/rfc5741#section-2">Section&nbsp;2 of RFC 5741</a>.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   <a href="http://www.rfc-editor.org/info/rfc7095">http://www.rfc-editor.org/info/rfc7095</a>.
+
+Copyright Notice
+
+   Copyright (c) 2014 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href="https://tools.ietf.org/html/bcp78">BCP 78</a> and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                    [Page 1]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-2" id="page-2" href="https://tools.ietf.org/html/rfc7095#page-2" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+Table of Contents
+
+   <a href="https://tools.ietf.org/html/rfc7095#section-1">1</a>.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7095#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc7095#section-2">2</a>.  Conventions Used in This Document . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7095#page-3">3</a>
+   <a href="https://tools.ietf.org/html/rfc7095#section-3">3</a>.  Converting from vCard to jCard  . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7095#page-4">4</a>
+     <a href="https://tools.ietf.org/html/rfc7095#section-3.1">3.1</a>.  Pre-processing  . . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7095#page-4">4</a>
+     3.2.  jCard Object and Syntactic Entities (<a href="https://tools.ietf.org/html/rfc6350">RFC 6350</a>, Sections
+           <a href="https://tools.ietf.org/html/rfc7095#section-6.1.1">6.1.1</a> and 6.1.2)  . . . . . . . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7095#page-5">5</a>
+     <a href="https://tools.ietf.org/html/rfc7095#section-3.3">3.3</a>.  Properties (<a href="https://tools.ietf.org/html/rfc6350#section-6">RFC 6350, Section&nbsp;6</a>)  . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7095#page-5">5</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.3.1">3.3.1</a>.  Special Cases for Properties  . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7095#page-7">7</a>
+         <a href="https://tools.ietf.org/html/rfc7095#section-3.3.1.1">3.3.1.1</a>.  The VERSION Property  . . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7095#page-7">7</a>
+         <a href="https://tools.ietf.org/html/rfc7095#section-3.3.1.2">3.3.1.2</a>.  Grouping of Properties  . . . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7095#page-7">7</a>
+         <a href="https://tools.ietf.org/html/rfc7095#section-3.3.1.3">3.3.1.3</a>.  Structured Property Values  . . . . . . . . . . .   <a href="https://tools.ietf.org/html/rfc7095#page-8">8</a>
+     <a href="https://tools.ietf.org/html/rfc7095#section-3.4">3.4</a>.  Parameters (<a href="https://tools.ietf.org/html/rfc6350#section-5">RFC 6350, Section&nbsp;5</a>)  . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-10">10</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.4.1">3.4.1</a>.  VALUE Parameter . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-10">10</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.4.2">3.4.2</a>.  Multi-Valued Parameters . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-11">11</a>
+     <a href="https://tools.ietf.org/html/rfc7095#section-3.5">3.5</a>.  Values (<a href="https://tools.ietf.org/html/rfc6350#section-4">RFC 6350, Section&nbsp;4</a>)  . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-11">11</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.5.1">3.5.1</a>.  Text (<a href="https://tools.ietf.org/html/rfc6350#section-4.1">RFC 6350, Section&nbsp;4.1</a>)  . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-12">12</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.5.2">3.5.2</a>.  URI (<a href="https://tools.ietf.org/html/rfc6350#section-4.2">RFC 6350, Section&nbsp;4.2</a>) . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-12">12</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.5.3">3.5.3</a>.  Date (<a href="https://tools.ietf.org/html/rfc6350#section-4.3.1">RFC 6350, Section&nbsp;4.3.1</a>)  . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-12">12</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.5.4">3.5.4</a>.  Time (<a href="https://tools.ietf.org/html/rfc6350#section-4.3.2">RFC 6350, Section&nbsp;4.3.2</a>)  . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-13">13</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.5.5">3.5.5</a>.  Date-Time (<a href="https://tools.ietf.org/html/rfc6350#section-4.3.3">RFC 6350, Section&nbsp;4.3.3</a>) . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-14">14</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.5.6">3.5.6</a>.  Date and/or Time (<a href="https://tools.ietf.org/html/rfc6350#section-4.3.4">RFC 6350, Section&nbsp;4.3.4</a>)  . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-16">16</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.5.7">3.5.7</a>.  Timestamp (<a href="https://tools.ietf.org/html/rfc6350#section-4.3.5">RFC 6350, Section&nbsp;4.3.5</a>) . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-16">16</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.5.8">3.5.8</a>.  Boolean (<a href="https://tools.ietf.org/html/rfc6350#section-4.4">RFC 6350, Section&nbsp;4.4</a>) . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-17">17</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.5.9">3.5.9</a>.  Integer (<a href="https://tools.ietf.org/html/rfc6350#section-4.5">RFC 6350, Section&nbsp;4.5</a>) . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-17">17</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.5.10">3.5.10</a>. Float (<a href="https://tools.ietf.org/html/rfc6350#section-4.6">RFC 6350, Section&nbsp;4.6</a>) . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-17">17</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.5.11">3.5.11</a>. UTC Offset (<a href="https://tools.ietf.org/html/rfc6350#section-4.7">RFC 6350, Section&nbsp;4.7</a>)  . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-18">18</a>
+       <a href="https://tools.ietf.org/html/rfc7095#section-3.5.12">3.5.12</a>. Language Tag (<a href="https://tools.ietf.org/html/rfc6350#section-4.8">RFC 6350, Section&nbsp;4.8</a>)  . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-18">18</a>
+     <a href="https://tools.ietf.org/html/rfc7095#section-3.6">3.6</a>.  Extensions (<a href="https://tools.ietf.org/html/rfc6350#section-6.10">RFC 6350, Section&nbsp;6.10</a>) . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-18">18</a>
+   <a href="https://tools.ietf.org/html/rfc7095#section-4">4</a>.  Converting from jCard into vCard  . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-19">19</a>
+   <a href="https://tools.ietf.org/html/rfc7095#section-5">5</a>.  Handling Unrecognized Properties or Parameters  . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-19">19</a>
+     <a href="https://tools.ietf.org/html/rfc7095#section-5.1">5.1</a>.  Converting vCard into jCard . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-19">19</a>
+     <a href="https://tools.ietf.org/html/rfc7095#section-5.2">5.2</a>.  Converting jCard into vCard . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-20">20</a>
+     <a href="https://tools.ietf.org/html/rfc7095#section-5.3">5.3</a>.  Examples  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-20">20</a>
+   <a href="https://tools.ietf.org/html/rfc7095#section-6">6</a>.  Security Considerations . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-21">21</a>
+   <a href="https://tools.ietf.org/html/rfc7095#section-7">7</a>.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-22">22</a>
+     <a href="https://tools.ietf.org/html/rfc7095#section-7.1">7.1</a>.  GROUP vCard Parameter . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-23">23</a>
+     <a href="https://tools.ietf.org/html/rfc7095#section-7.2">7.2</a>.  UNKNOWN vCard Value Data Type . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-24">24</a>
+   <a href="https://tools.ietf.org/html/rfc7095#section-8">8</a>.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-24">24</a>
+   <a href="https://tools.ietf.org/html/rfc7095#section-9">9</a>.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-24">24</a>
+     <a href="https://tools.ietf.org/html/rfc7095#section-9.1">9.1</a>.  Normative References  . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-24">24</a>
+     <a href="https://tools.ietf.org/html/rfc7095#section-9.2">9.2</a>.  Informative References  . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-25">25</a>
+   <a href="https://tools.ietf.org/html/rfc7095#appendix-A">Appendix A</a>.  ABNF Syntax  . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-26">26</a>
+   <a href="https://tools.ietf.org/html/rfc7095#appendix-B">Appendix B</a>.  Examples . . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-27">27</a>
+     <a href="https://tools.ietf.org/html/rfc7095#appendix-B.1">B.1</a>.  Example: vCard of the Author of <a href="https://tools.ietf.org/html/rfc6350">RFC 6350</a>  . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-27">27</a>
+       <a href="https://tools.ietf.org/html/rfc7095#appendix-B.1.1">B.1.1</a>.  vCard Data  . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-27">27</a>
+       <a href="https://tools.ietf.org/html/rfc7095#appendix-B.1.2">B.1.2</a>.  jCard Data  . . . . . . . . . . . . . . . . . . . . .  <a href="https://tools.ietf.org/html/rfc7095#page-28">28</a>
+
+
+
+<span class="grey">Kewisch                      Standards Track                    [Page 2]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-3" id="page-3" href="https://tools.ietf.org/html/rfc7095#page-3" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-1" href="https://tools.ietf.org/html/rfc7095#section-1">1</a>. Introduction</h2></span>
+
+   The vCard data format [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>] provides for the capture and exchange
+   of information normally stored within an address book or directory
+   application.  The vCard format has gone through multiple revisions,
+   most recently vCard 4.
+
+   As certain similarities exist between vCard and the iCalendar data
+   format [<a href="https://tools.ietf.org/html/rfc5545" title="&quot;Internet Calendaring and Scheduling Core Object Specification (iCalendar)&quot;">RFC5545</a>], there is also an effort to define a JSON-based data
+   format for calendar information called jCal [<a href="https://tools.ietf.org/html/rfc7095#ref-JCAL" title="&quot;jCal: The JSON format for iCalendar&quot;">JCAL</a>] that parallels the
+   format defined in this specification.  The term &quot;JSON&quot; describes the
+   JavaScript Object Notation defined in [<a href="https://tools.ietf.org/html/rfc4627" title="&quot;The application/json Media Type for JavaScript Object Notation (JSON)&quot;">RFC4627</a>].
+
+   The purpose of this specification is to define &quot;jCard&quot;, a JSON format
+   for vCard data.  One main advantage to using a JSON-based format over
+   the classic vCard format is easier processing for JavaScript-based
+   widgets and libraries, especially in the scope of web-based
+   applications.
+
+   The key design considerations are essentially the same as those for
+   [<a href="https://tools.ietf.org/html/rfc7095#ref-JCAL" title="&quot;jCal: The JSON format for iCalendar&quot;">JCAL</a>] and [<a href="https://tools.ietf.org/html/rfc6321" title="&quot;xCal: The XML Format for iCalendar&quot;">RFC6321</a>], that is:
+
+      Round-tripping (converting a vCard instance to jCard and back)
+      will give the same semantic result as the starting point.  For
+      example, all components, properties, and property parameters are
+      guaranteed to be preserved.
+
+      The Ordering of elements and the case of property and parameter
+      names will not necessarily be preserved.
+
+      The vCard data semantics are to be preserved, allowing a simple
+      consumer to easily browse the data in jCard.  A full understanding
+      of vCard is still required in order to modify and/or fully
+      comprehend the directory data.
+
+      Extensions to the underlying vCard specification must not lead to
+      requiring an update to jCard.
+
+<span class="h2"><h2><a class="selflink" name="section-2" href="https://tools.ietf.org/html/rfc7095#section-2">2</a>. Conventions Used in This Document</h2></span>
+
+   The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
+   document are to be interpreted as described in [<a href="https://tools.ietf.org/html/rfc2119" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">RFC2119</a>].
+
+   The underlying format used for jCard is JSON.  Consequently, the
+   terms &quot;object&quot; and &quot;array&quot; as well as the four primitive types
+   (strings, numbers, booleans, and null) are to be interpreted as
+   described in <a href="https://tools.ietf.org/html/rfc4627#section-1">Section&nbsp;1 of [RFC4627]</a>.
+
+
+
+<span class="grey">Kewisch                      Standards Track                    [Page 3]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-4" id="page-4" href="https://tools.ietf.org/html/rfc7095#page-4" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   Some examples in this document contain &quot;partial&quot; JSON documents used
+   for illustrative purposes.  In these examples, three periods &quot;...&quot;
+   are used to indicate a portion of the document that has been removed
+   for compactness.
+
+<span class="h2"><h2><a class="selflink" name="section-3" href="https://tools.ietf.org/html/rfc7095#section-3">3</a>. Converting from vCard to jCard</h2></span>
+
+   This section describes how vCard objects are converted to jCard using
+   a simple mapping between the vCard data model and JSON elements.
+
+   In [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], vCard objects are comprised of a set of &quot;properties&quot;,
+   &quot;parameters&quot;, and &quot;values&quot;.  The top level of a vCard object contains
+   &quot;properties&quot;.  A &quot;property&quot; has a &quot;value&quot; and a set of zero or more
+   &quot;parameters&quot;.  Each of these entities has a representation in jCard,
+   defined in the following sections.  The representation of a vCard
+   object in JSON will be named &quot;jCard object&quot; throughout this document.
+
+<span class="h3"><h3><a class="selflink" name="section-3.1" href="https://tools.ietf.org/html/rfc7095#section-3.1">3.1</a>. Pre-processing</h3></span>
+
+   vCard uses a line-folding mechanism to limit lines of data to a
+   maximum line length (typically 75 octets) to ensure maximum
+   likelihood of preserving data integrity as it is transported via
+   various means (e.g., email) -- see <a href="https://tools.ietf.org/html/rfc6350#section-3.2">Section&nbsp;3.2 of [RFC6350]</a>.
+
+   vCard data uses an &quot;escape&quot; character sequence for text values and
+   property parameter values.  See <a href="https://tools.ietf.org/html/rfc6350#section-3.4">Section&nbsp;3.4 of [RFC6350]</a> as well as
+   [<a href="https://tools.ietf.org/html/rfc6868" title="&quot;Parameter Value Encoding in iCalendar and vCard&quot;">RFC6868</a>].
+
+   When converting from vCard to jCard, first vCard lines MUST be
+   unfolded.  Afterwards, any vCard escaping MUST be unescaped.
+   Finally, JSON escaping (e.g., for control characters) MUST be
+   applied.
+
+   The reverse order applies when converting from jCard to vCard.
+   First, JSON escaping MUST be unescaped.  Afterwards, vCard escaping
+   MUST be applied.  Finally, long lines SHOULD be folded as described
+   in [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>].
+
+   One key difference in the formatting of values used in vCard and
+   jCard is that in jCard the specification uses date/time values
+   aligned with the extended format of [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>], which is more
+   commonly used in Internet applications that make use of the JSON
+   format.  The sections of this document describing the various date
+   and time formats contain more information on the use of the complete
+   representation, reduced accuracy, or truncated representation.
+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                    [Page 4]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-5" id="page-5" href="https://tools.ietf.org/html/rfc7095#page-5" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+<span class="h3"><h3><a class="selflink" name="section-3.2" href="https://tools.ietf.org/html/rfc7095#section-3.2">3.2</a>. jCard Object and Syntactic Entities (<a href="https://tools.ietf.org/html/rfc6350">RFC 6350</a>, Sections <a href="https://tools.ietf.org/html/rfc7095#section-6.1.1">6.1.1</a> and</h3></span>
+<span class="h3"><h3> 6.1.2)</h3></span>
+
+   In Sections <a href="https://tools.ietf.org/html/rfc7095#section-6.1.1">6.1.1</a> and <a href="https://tools.ietf.org/html/rfc7095#section-6.1.2">6.1.2</a> of [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], the BEGIN and END
+   properties delimit a syntactic vCard entity.  In jCard, each
+   syntactic entity is represented by an array with two elements and is
+   named &quot;jCard object&quot;.  The first element is the string &quot;vcard&quot;, and
+   the second element is an array of jCard properties as described in
+   <a href="https://tools.ietf.org/html/rfc7095#section-3.3">Section 3.3</a>, belonging to the entity.
+
+   Although [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>] defines BEGIN and END to be properties, they MUST
+   NOT appear as properties of the jCard.  Instead, the jCard object is
+   sufficient to define a vCard entity.  When converting from jCard to
+   vCard, the BEGIN and END properties MUST be added to enclose the
+   properties of the jCard object.
+
+   Example:
+
+   [&quot;vcard&quot;, [
+     /* Add properties in place of this comment */
+     ]
+   ]
+
+   Consumers of this format wishing to define content that can represent
+   multiple jCard objects within the same JSON document can use a simple
+   JSON array, each element being a single jCard object.
+
+<span class="h3"><h3><a class="selflink" name="section-3.3" href="https://tools.ietf.org/html/rfc7095#section-3.3">3.3</a>. Properties (<a href="https://tools.ietf.org/html/rfc6350#section-6">RFC 6350, Section&nbsp;6</a>)</h3></span>
+
+   Each individual vCard property is represented in jCard by an array
+   with three fixed elements, followed by one or more additional
+   elements, depending on if the property is a multi-valued property as
+   described in <a href="https://tools.ietf.org/html/rfc6350#section-3.3">Section&nbsp;3.3 of [RFC6350]</a>.
+
+   The array consists of the following fixed elements:
+
+   1.  The name of the property, as a lowercase string.  The vCard
+       format specifies that property names are case insensitive and
+       recommends that they be rendered in uppercase.  In jCard, they
+       MUST be in lowercase.
+
+   2.  An object containing the parameters as described in <a href="https://tools.ietf.org/html/rfc7095#section-3.4">Section 3.4</a>.
+       If the property has no parameters, an empty object is used to
+       represent that.
+
+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                    [Page 5]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-6" id="page-6" href="https://tools.ietf.org/html/rfc7095#page-6" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   3.  The type identifier string of the value, in lowercase.  It is
+       important that parsers check this to determine the data type of
+       the value and that they do not rely on assumptions.  For example,
+       for structured values, the data type will be &quot;array&quot;.
+
+   The remaining elements of the array are used for one or more values
+   of the property.  For single-value properties, the array has exactly
+   four elements; for multi-valued properties, each value is another
+   element, and there can be any number of additional elements.
+
+   In the following example, the &quot;categories&quot; property is multi-valued
+   and has two values, while all other properties are single-valued:
+
+   [&quot;vcard&quot;,
+     [
+       [&quot;version&quot;, {}, &quot;text&quot;, &quot;4.0&quot;],
+       [&quot;fn&quot;, {}, &quot;text&quot;, &quot;John Doe&quot;],
+       [&quot;gender&quot;, {}, &quot;text&quot;, &quot;M&quot;],
+       [&quot;categories&quot;, {}, &quot;text&quot;, &quot;computers&quot;, &quot;cameras&quot;],
+       ...
+     ]
+   ]
+
+   As described in <a href="https://tools.ietf.org/html/rfc7095#section-3.3.1.3">Section 3.3.1.3</a>, a property value may be a structured
+   property value, in which case it is represented as an array
+   encapsulated in the array that represents the overall property.
+
+   Strictly speaking, this means that the property value is not
+   represented in the format indicated by the type identifier but by an
+   array instead.  However, the values inside the encapsulated array are
+   of the format identified by the type identifier.
+
+   The above also holds for multi-valued properties, where some of the
+   values may be structured property values and therefore are
+   represented as an encapsulated array.
+
+   A special case is where a value in an encapsulated array consists of
+   multiple components itself, in which case it is represented as yet
+   another nested array, with elements matching the value type.
+   <a href="https://tools.ietf.org/html/rfc7095#section-3.3.1.3">Section 3.3.1.3</a> describes this in more detail.
+
+   The above illustrates that it's important for the parser to check the
+   format of each property value, as it might either directly match the
+   value type, or it might be a structured value where nested
+   subelements match the value type.
+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                    [Page 6]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-7" id="page-7" href="https://tools.ietf.org/html/rfc7095#page-7" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+<span class="h4"><h4><a class="selflink" name="section-3.3.1" href="https://tools.ietf.org/html/rfc7095#section-3.3.1">3.3.1</a>. Special Cases for Properties</h4></span>
+
+   This section describes some properties that have special handling
+   when converting to jCard.
+
+<span class="h5"><h5><a class="selflink" name="section-3.3.1.1" href="https://tools.ietf.org/html/rfc7095#section-3.3.1.1">3.3.1.1</a>. The VERSION Property</h5></span>
+
+   The vCard format specification [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>] defines the &quot;VERSION&quot;
+   property to be mandatory.  The jCard &quot;version&quot; property MUST be
+   represented in the corresponding jCard component, with the same value
+   as in the vCard. vCards that conform to <a href="https://tools.ietf.org/html/rfc6350">RFC 6350</a> will contain the
+   value &quot;4.0&quot;.
+
+   Also in accordance to [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], the &quot;version&quot; property MUST be the
+   first element of the array containing the properties of a jCard.
+
+<span class="h5"><h5><a class="selflink" name="section-3.3.1.2" href="https://tools.ietf.org/html/rfc7095#section-3.3.1.2">3.3.1.2</a>. Grouping of Properties</h5></span>
+
+   In vCard [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], related properties can be grouped together using
+   a grouping construct.  The grouping is accomplished by adding a
+   prefix (which consists of the group name followed by a dot) to the
+   property name.
+
+   In jCard, the same grouping is achieved through a &quot;group&quot; parameter
+   that holds the group name.  In jCard, a property name therefore MUST
+   NOT be prefixed by a group name.
+
+   The &quot;GROUP&quot; parameter MUST NOT be used in vCard; as per [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], it
+   is merely registered to reserve the parameter, avoiding collisions.
+   Formal registration of the &quot;GROUP&quot; parameter is described in
+   <a href="https://tools.ietf.org/html/rfc7095#section-7.1">Section 7.1</a>.
+
+<span class="h6"><h6><a class="selflink" name="section-3.3.1.2.1" href="https://tools.ietf.org/html/rfc7095#section-3.3.1.2.1">3.3.1.2.1</a>. Group Conversion Rules</h6></span>
+
+   In jCard, the parameter's value is a single opaque string.
+   Conversion rules are as follows:
+
+   o  From vCard to jCard, the group construct (see <a href="https://tools.ietf.org/html/rfc6350#section-3.3">[RFC6350],
+      Section&nbsp;3.3</a>) is removed.  In its place, the &quot;group&quot; parameter is
+      used.  Its value is a string corresponding to the group name,
+      which is case insensitive both in vCard and jCard.  The name's
+      case SHOULD be converted into lowercase.
+
+   o  When converting from jCard to vCard, the value of the &quot;group&quot;
+      parameter followed by a dot is prefixed to the property name, and
+      the &quot;group&quot; parameter is discarded.  The &quot;GROUP&quot; parameter MUST
+      NOT appear in the resulting vCard.  Following the recommendations
+      in [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], the name's case SHOULD be converted into uppercase.
+
+
+
+<span class="grey">Kewisch                      Standards Track                    [Page 7]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-8" id="page-8" href="https://tools.ietf.org/html/rfc7095#page-8" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   Example:
+
+   CONTACT.FN:Mr. John Q. Public\, Esq.
+
+   is equivalent to:
+
+   [ &quot;fn&quot;, { &quot;group&quot;: &quot;CONTACT&quot; }, &quot;text&quot;, &quot;Mr. John Q. Public, Esq.&quot; ]
+
+<span class="h5"><h5><a class="selflink" name="section-3.3.1.3" href="https://tools.ietf.org/html/rfc7095#section-3.3.1.3">3.3.1.3</a>. Structured Property Values</h5></span>
+
+   The vCard specification defines properties with structured values,
+   for example, &quot;GENDER&quot; or &quot;ADR&quot;.  In vCard, a structured text value
+   consists of one or multiple text components, delimited by the
+   SEMICOLON character.  Its equivalent in jCard is a structured
+   property value, which is an array containing one element for each
+   text component, with empty/missing text components represented by
+   zero-length strings.
+
+   vCard Example:
+
+   ADR:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
+
+   jCard Example:
+
+   [&quot;adr&quot;, {}, &quot;text&quot;,
+     [
+     &quot;&quot;, &quot;&quot;, &quot;123 Main Street&quot;,
+     &quot;Any Town&quot;, &quot;CA&quot;, &quot;91921-1234&quot;, &quot;U.S.A.&quot;
+     ]
+   ]
+
+   Some vCard properties, for example, ADR, also allow a structured
+   value element that itself has multiple values.  In this case, the
+   element of the array describing the structured value is itself an
+   array with one element for each of the component's multiple values.
+
+   vCard Example:
+
+   ADR:;;My Street,Left Side,Second Shack;Hometown;PA;18252;U.S.A.
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                    [Page 8]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-9" id="page-9" href="https://tools.ietf.org/html/rfc7095#page-9" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   jCard Example:
+
+   [&quot;adr&quot;, {}, &quot;text&quot;,
+     [
+     &quot;&quot;, &quot;&quot;,
+     [&quot;My Street&quot;, &quot;Left Side&quot;, &quot;Second Shack&quot;],
+     &quot;Hometown&quot;, &quot;PA&quot;, &quot;18252&quot;, &quot;U.S.A.&quot;
+     ]
+   ]
+
+   In both cases, the array element values MUST have the primitive type
+   that matches the jCard type identifier.  In [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], there are only
+   structured text values and thus only JSON strings are used.  For
+   example, extensions may define structured number or boolean values,
+   where JSON number or boolean types MUST be used.
+
+   Although it is allowed for a structured property value to hold just
+   one component, it is RECOMMENDED to represent it as a single text
+   value instead, omitting the array completely.  Nevertheless, a simple
+   implementation MAY choose to retain the array, with a single text
+   value as its element.
+
+   Similarly, structured values that consist of two text components with
+   one being optional (for example, &quot;GENDER&quot;) can be represented as a
+   single text value.  Therefore, parsers of jCard data SHOULD check
+   even known property values for structured information by considering
+   the JSON data type of the value, which can be an array or a primitive
+   value.  This is especially important for languages where accessing
+   array members is done by the same construct as accessing characters
+   of a string.
+
+   Examples:
+
+   [&quot;gender&quot;, {}, &quot;text&quot;, [&quot;F&quot;, &quot;grrrl&quot;] ],
+   [&quot;gender&quot;, {}, &quot;text&quot;, &quot;M&quot; ]
+
+   Per <a href="https://tools.ietf.org/html/rfc6350#section-6.3.1">Section&nbsp;6.3.1 of [RFC6350]</a>, the component separator MUST be
+   specified even if the component value is missing.  Similarly, the
+   jCard array containing the structured data MUST contain all required
+   elements, even if they are empty.
+
+   vCard Example:
+
+   ADR;LABEL=&quot;123 Maple Ave\nSuite 901\nVancouver BC\nA1B 2C9\nCan
+    ada&quot;:;;;;;;
+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                    [Page 9]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-10" id="page-10" href="https://tools.ietf.org/html/rfc7095#page-10" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   jCard Example:
+
+   [&quot;adr&quot;,
+    {&quot;label&quot;:&quot;123 Maple Ave\nSuite 901\nVancouver BC\nA1B 2C9\nCanada&quot;},
+    &quot;text&quot;,
+    [&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;]
+   ]
+
+<span class="h3"><h3><a class="selflink" name="section-3.4" href="https://tools.ietf.org/html/rfc7095#section-3.4">3.4</a>. Parameters (<a href="https://tools.ietf.org/html/rfc6350#section-5">RFC 6350, Section&nbsp;5</a>)</h3></span>
+
+   Property parameters are represented as a JSON object where each key-
+   value pair represents the vCard parameter name and its value.  The
+   name of the parameter MUST be in lowercase; the original case of the
+   parameter value MUST be preserved.  For example, the &quot;LANGUAGE&quot;
+   property parameter is represented in jCard by the &quot;language&quot; key.
+   Any new vCard parameters added in the future will be converted in the
+   same way.
+
+   Example:
+
+   [&quot;role&quot;, { &quot;language&quot;: &quot;tr&quot; }, &quot;text&quot;, &quot;roca&quot;],
+
+<span class="h4"><h4><a class="selflink" name="section-3.4.1" href="https://tools.ietf.org/html/rfc7095#section-3.4.1">3.4.1</a>. VALUE Parameter</h4></span>
+
+   vCard defines a &quot;VALUE&quot; property parameter (<a href="https://tools.ietf.org/html/rfc6350#section-5.2">Section&nbsp;5.2 of
+   [RFC6350]</a>).  This property parameter MUST NOT be added to the
+   parameters object.  Instead, the value type is signaled through the
+   type identifier in the third element of the array describing the
+   property.  When converting a property from vCard to jCard, the value
+   type is determined as follows:
+
+   1.  If the property has a &quot;VALUE&quot; parameter, that parameter's value
+       is used as the value type.
+
+   2.  If the property has no &quot;VALUE&quot; parameter but has a default value
+       type, the default value type is used.
+
+   3.  If the property has no &quot;VALUE&quot; parameter and has no default value
+       type, &quot;unknown&quot; is used.
+
+   Converting from jCard into vCard is done as follows:
+
+   1.  If the property's value type is &quot;unknown&quot;, no &quot;VALUE&quot; parameter
+       is included.
+
+   2.  If the property's value type is the default type for that
+       property, no &quot;VALUE&quot; parameter is included.
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 10]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-11" id="page-11" href="https://tools.ietf.org/html/rfc7095#page-11" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   3.  Otherwise, a &quot;VALUE&quot; parameter is included, and the value type is
+       used as the parameter value.
+
+   See <a href="https://tools.ietf.org/html/rfc7095#section-5">Section 5</a> for information on handling unknown value types.
+
+<span class="h4"><h4><a class="selflink" name="section-3.4.2" href="https://tools.ietf.org/html/rfc7095#section-3.4.2">3.4.2</a>. Multi-Valued Parameters</h4></span>
+
+   In [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], some parameters allow using a comma-separated list of
+   values.  To ease processing in jCard, the value for such parameters
+   MUST be represented in an array containing the separated values.  The
+   array elements MUST be string values.  Single-value parameters SHOULD
+   be represented using a single string value, although a more simple
+   implementation might prefer an array with one string element.  An
+   example of such a parameter is the vCard &quot;SORT-AS&quot; parameter; more
+   such parameters may be added in extensions.
+
+   The vCard specification requires encapsulation between DQUOTE
+   characters if a parameter value contains a colon, a semicolon, or a
+   comma.  These extra DQUOTE characters do not belong to the actual
+   parameter value and hence are not included when the parameter is
+   converted to jCard.
+
+   Example:
+
+   [&quot;vcard&quot;,
+     [
+       [&quot;version&quot;, {}, &quot;text&quot;, &quot;4.0&quot;],
+       [&quot;n&quot;,
+        { &quot;sort-as&quot;: [&quot;Harten&quot;, &quot;Rene&quot;] },
+        &quot;text&quot;,
+        [&quot;van der Harten&quot;, &quot;Rene&quot;, &quot;J.&quot;, &quot;Sir&quot;, &quot;R.D.O.N.&quot;]
+       ],
+       [&quot;fn&quot;, {}, &quot;text&quot;, &quot;Rene van der Harten&quot;]
+       ...
+     ]
+   ]
+
+<span class="h3"><h3><a class="selflink" name="section-3.5" href="https://tools.ietf.org/html/rfc7095#section-3.5">3.5</a>. Values (<a href="https://tools.ietf.org/html/rfc6350#section-4">RFC 6350, Section&nbsp;4</a>)</h3></span>
+
+   The following subsections specify how vCard property value data types
+   (which are defined in <a href="https://tools.ietf.org/html/rfc6350#section-4">Section&nbsp;4 of [RFC6350]</a>) are represented in
+   jCard.
+
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 11]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-12" id="page-12" href="https://tools.ietf.org/html/rfc7095#page-12" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.1" href="https://tools.ietf.org/html/rfc7095#section-3.5.1">3.5.1</a>. Text (<a href="https://tools.ietf.org/html/rfc6350#section-4.1">RFC 6350, Section&nbsp;4.1</a>)</h4></span>
+
+   Description:  vCard &quot;TEXT&quot; property values are represented by a
+      property with the type identifier &quot;text&quot;.  The value elements are
+      JSON strings.  For details on structured text values, see
+      <a href="https://tools.ietf.org/html/rfc7095#section-3.3.1.3">Section 3.3.1.3</a>.
+
+   Example:
+
+   [&quot;kind&quot;, {}, &quot;text&quot;, &quot;group&quot;]
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.2" href="https://tools.ietf.org/html/rfc7095#section-3.5.2">3.5.2</a>. URI (<a href="https://tools.ietf.org/html/rfc6350#section-4.2">RFC 6350, Section&nbsp;4.2</a>)</h4></span>
+
+   Description:  vCard &quot;URI&quot; property values are represented by a
+      property with the type identifier &quot;uri&quot;.  The value elements are
+      JSON strings.
+
+   Example:
+
+   [&quot;source&quot;, {}, &quot;uri&quot;, &quot;ldap://ldap.example.com/cn=babs%20jensen&quot;]
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.3" href="https://tools.ietf.org/html/rfc7095#section-3.5.3">3.5.3</a>. Date (<a href="https://tools.ietf.org/html/rfc6350#section-4.3.1">RFC 6350, Section&nbsp;4.3.1</a>)</h4></span>
+
+   Description:  vCard &quot;DATE&quot; property values are represented by a
+      property with the type identifier &quot;date&quot;.  The value elements are
+      JSON strings with the same date value specified by [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], but
+      represented using the extended format specified in
+      [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>], Section 4.1.2.  If the complete representation is
+      not used, the same date format restrictions regarding reduced
+      accuracy, truncated representation, and expanded representation
+      noted in <a href="https://tools.ietf.org/html/rfc6350#section-4.3.1">[RFC6350], Section&nbsp;4.3.1</a> apply.  Whenever the extended
+      format is not applicable, the basic format MUST be used.
+
+   ABNF syntax:
+
+   date-complete = year &quot;-&quot; month &quot;-&quot; day ;YYYY-MM-DD
+
+   date-noreduc = date-complete
+              / &quot;--&quot; month &quot;-&quot; day ; --MM-DD
+              / &quot;---&quot; day          ; ---DDD
+
+   date = date-noreduc
+      / year; YYYY
+      / year &quot;-&quot; month ; YYYY-MM
+      / &quot;--&quot; month     ; --MM
+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 12]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-13" id="page-13" href="https://tools.ietf.org/html/rfc7095#page-13" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   Examples:
+
+   [&quot;bday&quot;, {}, &quot;date&quot;, &quot;1985-04-12&quot;],
+   [&quot;bday&quot;, {}, &quot;date&quot;, &quot;1985-04&quot;],
+   [&quot;bday&quot;, {}, &quot;date&quot;, &quot;1985&quot;],
+   [&quot;bday&quot;, {}, &quot;date&quot;, &quot;--04-12&quot;],
+   [&quot;bday&quot;, {}, &quot;date&quot;, &quot;---12&quot;]
+
+   This table contains possible conversions between the vCard DATE
+   format and jCard date.  This information is just an example and not a
+   formal specification of the syntax.  The specification can be found
+   in [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2000" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2000</a>] and [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>].
+
+                   +-----------+----------+------------+
+                   |           | vCard    | jCard      |
+                   +-----------+----------+------------+
+                   | Complete  | 19850412 | 1985-04-12 |
+                   |           |          |            |
+                   | Reduced   | 1985-04  | 1985-04    |
+                   |           |          |            |
+                   | Reduced   | 1985     | 1985       |
+                   |           |          |            |
+                   | Truncated | --0412   | --04-12    |
+                   |           |          |            |
+                   | Truncated | --04     | --04       |
+                   |           |          |            |
+                   | Truncated | ---12    | ---12      |
+                   +-----------+----------+------------+
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.4" href="https://tools.ietf.org/html/rfc7095#section-3.5.4">3.5.4</a>. Time (<a href="https://tools.ietf.org/html/rfc6350#section-4.3.2">RFC 6350, Section&nbsp;4.3.2</a>)</h4></span>
+
+   Description:  vCard &quot;TIME&quot; property values are represented by a
+      property with the type identifier &quot;time&quot;.  The value elements are
+      JSON strings with the same time value specified by [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], but
+      represented using the extended format specified in
+      [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>], Section 4.2.  If the complete representation is
+      not used, the same time format restrictions regarding reduced
+      accuracy, decimal fraction, and truncated representation noted in
+      <a href="https://tools.ietf.org/html/rfc6350#section-4.3.2">[RFC6350], Section&nbsp;4.3.2</a> apply.  Whenever the extended format is
+      not applicable, the basic format MUST be used.  The seconds value
+      of 60 MUST only be used to account for positive &quot;leap&quot; seconds,
+      and the midnight hour is always represented by 00, never 24.
+      Fractions of a second are not supported by this format.  In jCard,
+      UTC offsets are permitted within a time value; note that this
+      differs from jCal [<a href="https://tools.ietf.org/html/rfc7095#ref-JCAL" title="&quot;jCal: The JSON format for iCalendar&quot;">JCAL</a>], where they are not permitted.
+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 13]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-14" id="page-14" href="https://tools.ietf.org/html/rfc7095#page-14" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   ABNF syntax:
+
+   time-notrunc =  hour [&quot;:&quot; minute [&quot;:&quot; second]] [zone]
+
+   time = time-notrunc
+      / &quot;-&quot; minute &quot;:&quot; second [zone]; -mm:ss
+      / &quot;-&quot; minute [zone]; -mm
+      / &quot;--&quot; second [zone]; --ss
+
+   Examples:
+
+   [&quot;x-time-local&quot;, {}, &quot;time&quot;, &quot;12:30:00&quot;],
+   [&quot;x-time-utc&quot;, {}, &quot;time&quot;, &quot;12:30:00Z&quot;],
+   [&quot;x-time-offset&quot;, {}, &quot;time&quot;, &quot;12:30:00-08:00&quot;],
+   [&quot;x-time-reduced&quot;, {}, &quot;time&quot;, &quot;23&quot;],
+   [&quot;x-time-truncated&quot;, {}, &quot;time&quot;, &quot;-30&quot;]
+
+   This table contains possible conversions between the vCard TIME
+   format and jCard time.  This information is just an example and not a
+   formal specification of the syntax.  The specification can be found
+   in [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2000" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2000</a>] and [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>].
+
+                     +-----------+--------+----------+
+                     |           | vCard  | jCard    |
+                     +-----------+--------+----------+
+                     | Complete  | 232050 | 23:20:50 |
+                     |           |        |          |
+                     | Reduced   | 2320   | 23:20    |
+                     |           |        |          |
+                     | Reduced   | 23     | 23       |
+                     |           |        |          |
+                     | Truncated | -2050  | -20:50   |
+                     |           |        |          |
+                     | Truncated | -20    | -20      |
+                     |           |        |          |
+                     | Truncated | --50   | --50     |
+                     +-----------+--------+----------+
+
+   Also, all combinations may have any zone designator appended, as in
+   the complete representation.
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.5" href="https://tools.ietf.org/html/rfc7095#section-3.5.5">3.5.5</a>. Date-Time (<a href="https://tools.ietf.org/html/rfc6350#section-4.3.3">RFC 6350, Section&nbsp;4.3.3</a>)</h4></span>
+
+   Description:  vCard &quot;DATE-TIME&quot; property values are represented by a
+      property with the type identifier &quot;date-time&quot;.  The value elements
+      are JSON strings with the same date value specified by [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>],
+      but represented using the extended format specified in
+      [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>], Section 4.3.  If the complete representation is
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 14]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-15" id="page-15" href="https://tools.ietf.org/html/rfc7095#page-15" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+      not used, the same date and time format restrictions noted in
+      Sections <a href="https://tools.ietf.org/html/rfc7095#section-3.5.3">3.5.3</a> and <a href="https://tools.ietf.org/html/rfc7095#section-3.5.4">3.5.4</a> apply.  Just as described in [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>],
+      truncation of the date part is permitted.
+
+   Example:
+
+   [&quot;anniversary&quot;, {}, &quot;date-time&quot;, &quot;2013-02-14T12:30:00&quot;],
+   [&quot;anniversary&quot;, {}, &quot;date-time&quot;, &quot;2013-01-10T19:00:00Z&quot;],
+   [&quot;anniversary&quot;, {}, &quot;date-time&quot;, &quot;2013-08-15T09:45:00+01:00&quot;],
+   [&quot;anniversary&quot;, {}, &quot;date-time&quot;, &quot;---15T09:45:00+01:00&quot;]
+
+   This table contains possible conversions between the vCard DATE-TIME
+   format and jCard date-time.  This information is just an example and
+   not a formal specification of the syntax.  The specification can be
+   found in [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2000" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2000</a>] and [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>].
+
+   +----------------+----------------------+---------------------------+
+   | Representation | vCard                | jCard                     |
+   +----------------+----------------------+---------------------------+
+   | Complete       | 19850412T232050      | 1985-04-12T23:20:50       |
+   |                |                      |                           |
+   | Complete       | 19850412T232050Z     | 1985-04-12T23:20:50Z      |
+   |                |                      |                           |
+   | Complete       | 19850412T232050+0400 | 1985-04-12T23:20:50+04:00 |
+   |                |                      |                           |
+   | Complete       | 19850412T232050+04   | 1985-04-12T23:20:50+04    |
+   |                |                      |                           |
+   | Reduced        | 19850412T2320        | 1985-04-12T23:20          |
+   |                |                      |                           |
+   | Reduced        | 19850412T23          | 1985-04-12T23             |
+   |                |                      |                           |
+   | Truncated and  | --0412T2320          | --04-12T23:20             |
+   | Reduced        |                      |                           |
+   |                |                      |                           |
+   | Truncated and  | --04T2320            | --04T23:20                |
+   | Reduced        |                      |                           |
+   |                |                      |                           |
+   | Truncated and  | ---12T2320           | ---12T23:20               |
+   | Reduced        |                      |                           |
+   |                |                      |                           |
+   | Truncated and  | --0412T2320          | --04-12T23:20             |
+   | Reduced        |                      |                           |
+   |                |                      |                           |
+   | Truncated and  | --04T23              | --04T23                   |
+   | Reduced        |                      |                           |
+   +----------------+----------------------+---------------------------+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 15]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-16" id="page-16" href="https://tools.ietf.org/html/rfc7095#page-16" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   As specified in [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2000" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2000</a>], the lower-order components may not
+   be omitted in the date part (reduced accuracy) and the higher-order
+   components may not be omitted in the time part (truncation).  Also,
+   all combinations may have any zone designator appended, as in the
+   complete representation.
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.6" href="https://tools.ietf.org/html/rfc7095#section-3.5.6">3.5.6</a>. Date and/or Time (<a href="https://tools.ietf.org/html/rfc6350#section-4.3.4">RFC 6350, Section&nbsp;4.3.4</a>)</h4></span>
+
+   Description:  vCard &quot;DATE-AND-OR-TIME&quot; property values are
+      represented by a property with the type identifier &quot;date-and-or-
+      time&quot;.  The value elements are either a date-time (<a href="https://tools.ietf.org/html/rfc7095#section-3.5.5">Section 3.5.5</a>),
+      a date (<a href="https://tools.ietf.org/html/rfc7095#section-3.5.3">Section 3.5.3</a>), or a time (<a href="https://tools.ietf.org/html/rfc7095#section-3.5.4">Section 3.5.4</a>) value.  Just as
+      described in <a href="https://tools.ietf.org/html/rfc6350#section-4.3.4">Section&nbsp;4.3.4 of [RFC6350]</a>, a stand-alone time value
+      MUST always be preceded by a &quot;T&quot;.
+
+   Example:
+
+   [&quot;bday&quot;, {}, &quot;date-and-or-time&quot;, &quot;2013-02-14T12:30:00&quot;],
+   [&quot;bday&quot;, {}, &quot;date-and-or-time&quot;, &quot;---22T14:00&quot;]
+   [&quot;bday&quot;, {}, &quot;date-and-or-time&quot;, &quot;1985&quot;],
+   [&quot;bday&quot;, {}, &quot;date-and-or-time&quot;, &quot;T12:30&quot;]
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.7" href="https://tools.ietf.org/html/rfc7095#section-3.5.7">3.5.7</a>. Timestamp (<a href="https://tools.ietf.org/html/rfc6350#section-4.3.5">RFC 6350, Section&nbsp;4.3.5</a>)</h4></span>
+
+   Description:  vCard &quot;TIMESTAMP&quot; property values are represented by a
+      property with the type identifier &quot;timestamp&quot;.  The value elements
+      are JSON strings with the same timestamp value specified by
+      [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], but represented using the extended format and complete
+      representation specified in [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>], Section 4.3.2.
+
+   Example:
+
+   [&quot;rev&quot;, {}, &quot;timestamp&quot;, &quot;2013-02-14T12:30:00&quot;],
+   [&quot;rev&quot;, {}, &quot;timestamp&quot;, &quot;2013-02-14T12:30:00Z&quot;],
+   [&quot;rev&quot;, {}, &quot;timestamp&quot;, &quot;2013-02-14T12:30:00-05&quot;],
+   [&quot;rev&quot;, {}, &quot;timestamp&quot;, &quot;2013-02-14T12:30:00-05:00&quot;]
+
+   This table contains possible conversions between the vCard TIMESTAMP
+   format and jCard timestamp.  This information is just an example and
+   not a formal specification of the syntax.  The specification can be
+   found in [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2000" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2000</a>] and [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>].
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 16]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-17" id="page-17" href="https://tools.ietf.org/html/rfc7095#page-17" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   +----------------+----------------------+---------------------------+
+   | Representation | vCard                | jCard                     |
+   +----------------+----------------------+---------------------------+
+   | Complete       | 19850412T232050      | 1985-04-12T23:20:50       |
+   |                |                      |                           |
+   | Complete       | 19850412T232050Z     | 1985-04-12T23:20:50Z      |
+   |                |                      |                           |
+   | Complete       | 19850412T232050+0400 | 1985-04-12T23:20:50+04:00 |
+   |                |                      |                           |
+   | Complete       | 19850412T232050+04   | 1985-04-12T23:20:50+04    |
+   +----------------+----------------------+---------------------------+
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.8" href="https://tools.ietf.org/html/rfc7095#section-3.5.8">3.5.8</a>. Boolean (<a href="https://tools.ietf.org/html/rfc6350#section-4.4">RFC 6350, Section&nbsp;4.4</a>)</h4></span>
+
+   Description:  vCard &quot;BOOLEAN&quot; property values are represented by a
+      property with the type identifier &quot;boolean&quot;.  The value element is
+      a JSON boolean value.
+
+   Example:
+
+   [&quot;x-non-smoking&quot;, {}, &quot;boolean&quot;, true]
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.9" href="https://tools.ietf.org/html/rfc7095#section-3.5.9">3.5.9</a>. Integer (<a href="https://tools.ietf.org/html/rfc6350#section-4.5">RFC 6350, Section&nbsp;4.5</a>)</h4></span>
+
+   Description:  vCard &quot;INTEGER&quot; property values are represented by a
+      property with the type identifier &quot;integer&quot;.  The value elements
+      are JSON primitive number values.
+
+   Examples:
+
+   [&quot;x-karma-points&quot;, {}, &quot;integer&quot;, 42]
+
+   JSON allows decimals (e.g., 3.14) and exponents (e.g., 2e10) to be
+   used in numeric values.  jCard does not prohibit this for &quot;integer&quot;
+   property values.  However, since vCard does not support decimals or
+   exponents in integers, any decimals and exponents MUST be eliminated
+   when converting an &quot;integer&quot; value type property from jCard to vCard.
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.10" href="https://tools.ietf.org/html/rfc7095#section-3.5.10">3.5.10</a>. Float (<a href="https://tools.ietf.org/html/rfc6350#section-4.6">RFC 6350, Section&nbsp;4.6</a>)</h4></span>
+
+   Description:  vCard &quot;FLOAT&quot; property values are represented by a
+      property with the type identifier &quot;float&quot;.  The value elements are
+      JSON primitive number values.
+
+   Example:
+
+   [&quot;x-grade&quot;, {}, &quot;float&quot;, 1.3]
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 17]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-18" id="page-18" href="https://tools.ietf.org/html/rfc7095#page-18" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   JSON allows exponents (e.g., 2e10) to be used in numeric values.
+   jCard does not prohibit this for &quot;float&quot; property values.  However,
+   since vCard does not support exponents in floats, any exponents MUST
+   be eliminated when converting a &quot;float&quot; value type property from
+   jCard to vCard.
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.11" href="https://tools.ietf.org/html/rfc7095#section-3.5.11">3.5.11</a>. UTC Offset (<a href="https://tools.ietf.org/html/rfc6350#section-4.7">RFC 6350, Section&nbsp;4.7</a>)</h4></span>
+
+   Description:  vCard &quot;UTC-OFFSET&quot; property values are represented by a
+      property with the type identifier &quot;utc-offset&quot;.  The value
+      elements are JSON strings with the same UTC offset value specified
+      by [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], with the exception that the hour and minute
+      components are separated by a &quot;:&quot; character, for consistency with
+      the [<a href="https://tools.ietf.org/html/rfc7095#ref-ISO.8601.2004" title="&quot;Data elements and interchange formats -- Information interchange -- Representation of dates and times&quot;">ISO.8601.2004</a>] timezone offset, extended format.
+
+   Example:
+
+   // Note: [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>] mentions use of utc-offset
+   // for the TZ property as NOT RECOMMENDED
+   [&quot;tz&quot;, {}, &quot;utc-offset&quot;, &quot;-05:00&quot;]
+
+<span class="h4"><h4><a class="selflink" name="section-3.5.12" href="https://tools.ietf.org/html/rfc7095#section-3.5.12">3.5.12</a>. Language Tag (<a href="https://tools.ietf.org/html/rfc6350#section-4.8">RFC 6350, Section&nbsp;4.8</a>)</h4></span>
+
+   Description:  vCard &quot;LANGUAGE-TAG&quot; property values are represented by
+      a property with the type identifier &quot;language-tag&quot;.  The value
+      elements are JSON strings containing a single language-tag, as
+      defined in [<a href="https://tools.ietf.org/html/rfc5646" title="&quot;Tags for Identifying Languages&quot;">RFC5646</a>].
+
+   Example:
+
+   [&quot;lang&quot;, {}, &quot;language-tag&quot;, &quot;de&quot;]
+
+<span class="h3"><h3><a class="selflink" name="section-3.6" href="https://tools.ietf.org/html/rfc7095#section-3.6">3.6</a>. Extensions (<a href="https://tools.ietf.org/html/rfc6350#section-6.10">RFC 6350, Section&nbsp;6.10</a>)</h3></span>
+
+   vCard extension properties and property parameters (those with an
+   &quot;X-&quot; prefix in their name) are handled in the same way as other
+   properties and property parameters: the property is represented by an
+   array, the property parameter represented by an object.  The property
+   or parameter name uses the same name as for the vCard extension, but
+   in lowercase.  For example, the &quot;X-FOO&quot; property in vCard turns into
+   the &quot;x-foo&quot; jCard property.  See <a href="https://tools.ietf.org/html/rfc7095#section-5">Section 5</a> for how to deal with
+   default values for unrecognized extension properties or property
+   parameters.
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 18]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-19" id="page-19" href="https://tools.ietf.org/html/rfc7095#page-19" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+<span class="h2"><h2><a class="selflink" name="section-4" href="https://tools.ietf.org/html/rfc7095#section-4">4</a>. Converting from jCard into vCard</h2></span>
+
+   When converting property and property parameter values, the names
+   SHOULD be converted to uppercase.  Although vCard names are case
+   insensitive, common practice is to keep them all uppercase following
+   the actual definitions in [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>].
+
+   Character escaping and line folding MUST be applied to the resulting
+   vCard data as required by [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>] and [<a href="https://tools.ietf.org/html/rfc6868" title="&quot;Parameter Value Encoding in iCalendar and vCard&quot;">RFC6868</a>].
+
+   When converting to vCard, the &quot;VALUE&quot; parameter MUST be added to
+   properties whose default value type is unknown but do not have a
+   jCard type identifier &quot;unknown&quot;.  The &quot;VALUE&quot; parameter MAY be
+   omitted for properties using the default value type.  The &quot;VALUE&quot;
+   parameter MUST be omitted for properties that have the jCard type
+   identifier &quot;unknown&quot;.
+
+<span class="h2"><h2><a class="selflink" name="section-5" href="https://tools.ietf.org/html/rfc7095#section-5">5</a>. Handling Unrecognized Properties or Parameters</h2></span>
+
+   In vCard, properties can have one or more value types as specified by
+   their definition, with one of those values being defined as the
+   default.  When a property uses its default value type, the &quot;VALUE&quot;
+   property parameter does not need to be specified on the property.
+   For example, &quot;BDAY&quot;'s default value type is &quot;date-and-or-time&quot;, so
+   &quot;VALUE=date-and-or-time&quot; need not be set as a property parameter.
+   However, &quot;BDAY&quot; also allows a &quot;text&quot; value to be specified, and if
+   that is used, &quot;VALUE=text&quot; has to be set as a property parameter.
+
+   When new properties are defined or &quot;X-&quot; properties used, a vCard-to-
+   jCard converter might not recognize them, and not know what the
+   appropriate default value types are, yet it needs to be able to
+   preserve the values.  A similar issue arises for unrecognized
+   property parameters.
+
+   In jCard, a new &quot;unknown&quot; property value type is introduced.  Its
+   purpose is to allow preserving unknown property values when round-
+   tripping between jCard and vCard.  To avoid collisions, this
+   specification reserves the &quot;UNKNOWN&quot; property value type in vCard.
+   It MUST NOT be used in any vCard as specified by [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], nor any
+   extensions to it.  The type is hence registered to the &quot;vCard Value
+   Data Types&quot; registry; see <a href="https://tools.ietf.org/html/rfc7095#section-7.2">Section 7.2</a>.
+
+<span class="h3"><h3><a class="selflink" name="section-5.1" href="https://tools.ietf.org/html/rfc7095#section-5.1">5.1</a>. Converting vCard into jCard</h3></span>
+
+   Any property that does not include a &quot;VALUE&quot; property parameter and
+   whose default value type is not known MUST be converted to a
+   primitive JSON string.  The content of that string is the unprocessed
+   value text.  Also, value type MUST be set to &quot;unknown&quot;.
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 19]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-20" id="page-20" href="https://tools.ietf.org/html/rfc7095#page-20" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   To correctly implement this format, it's critical to use the value
+   type &quot;unknown&quot; when the default value type is not known.  If this
+   requirement is ignored and, for example, &quot;text&quot; is used, additional
+   escaping may occur that breaks round-tripping values.
+
+   Any unrecognized property parameter MUST be converted to a string
+   value, with its content set to the property parameter value text,
+   treated as if it were a &quot;TEXT&quot; value.
+
+<span class="h3"><h3><a class="selflink" name="section-5.2" href="https://tools.ietf.org/html/rfc7095#section-5.2">5.2</a>. Converting jCard into vCard</h3></span>
+
+   In jCard, the value type is always explicitly specified.  It is
+   converted to vCard using the vCard &quot;VALUE&quot; parameter, except in the
+   following two cases:
+
+   o  If the value type specified in jCard matches the default value
+      type in vCard, the &quot;VALUE&quot; parameter MAY be omitted.
+
+   o  If the value type specified in jCard is set to &quot;unknown&quot;, the
+      &quot;VALUE&quot; parameter MUST NOT be specified.  The value MUST be taken
+      over in vCard without processing.
+
+<span class="h3"><h3><a class="selflink" name="section-5.3" href="https://tools.ietf.org/html/rfc7095#section-5.3">5.3</a>. Examples</h3></span>
+
+   The following is an example of an unrecognized vCard property (that
+   uses a &quot;URI&quot; value as its default), and the equivalent jCard
+   representation of that property.
+
+   vCard:
+
+   X-COMPLAINT-URI:mailto:abuse@example.org
+
+   jCard:
+
+   [&quot;x-complaint-uri&quot;, {}, &quot;unknown&quot;, &quot;mailto:abuse@example.org&quot;]
+
+   The following is an example of how to cope with jCard data where the
+   parser was unable to identify the value type.  Note how the &quot;unknown&quot;
+   value type is not added to the vCard data, and escaping, aside from
+   standard JSON string escaping, is not processed.
+
+   jCard:
+
+   [&quot;x-coffee-data&quot;, {}, &quot;unknown&quot;, &quot;Stenophylla;Guinea\\,Africa&quot;]
+
+   vCard:
+
+   X-COFFEE-DATA:Stenophylla;Guinea\,Africa
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 20]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-21" id="page-21" href="https://tools.ietf.org/html/rfc7095#page-21" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   There are no standard properties in [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>] that have a default
+   type of integer.  Consequently, this example uses the following
+   extended property that we treat as having a default type (namely,
+   integer) known to the parser in order to illustrate how a property
+   with a known default type would be transformed.
+
+   jCard:
+
+   [&quot;x-karma-points&quot;, {}, &quot;integer&quot;, 95]
+
+   vCard:
+
+   X-KARMA-POINTS:95
+
+   The following is an example of an unrecognized vCard property
+   parameter (that uses a &quot;FLOAT&quot; value as its default) specified on a
+   recognized vCard property, and the equivalent jCard representation of
+   that property and property parameter.
+
+   vCard:
+
+   GENDER;X-PROBABILITY=0.8:M
+
+   jCard:
+
+   [&quot;gender&quot;, { &quot;x-probability&quot;: &quot;0.8&quot; }, &quot;text&quot;, &quot;M&quot;]
+
+<span class="h2"><h2><a class="selflink" name="section-6" href="https://tools.ietf.org/html/rfc7095#section-6">6</a>. Security Considerations</h2></span>
+
+   This specification defines how vCard data can be &quot;translated&quot; between
+   two different data formats -- the original text format and JSON --
+   with a one-to-one mapping to ensure all the semantic data in one
+   format (properties, parameters, and values) are preserved in the
+   other.  It does not change the semantic meaning of the underlying
+   data itself, or impose or remove any security considerations that
+   apply to the underlying data.
+
+   The use of JSON as a format does have its own inherent security risks
+   as discussed in <a href="https://tools.ietf.org/html/rfc4627#section-7">Section&nbsp;7 of [RFC4627]</a>.  Even though JSON is
+   considered a safe subset of JavaScript, it should be kept in mind
+   that a flaw in the parser for JSON data could still impose a threat
+   that doesn't arise with conventional vCard data.
+
+   With this in mind when using jCard, the parser for JSON data should
+   be aware of the security implications.  For example, the use of
+   JavaScript's eval() function is only allowed using the regular
+   expression in <a href="https://tools.ietf.org/html/rfc4627#section-6">Section&nbsp;6 of [RFC4627]</a>.  A native parser with full
+   awareness of the JSON format should be preferred.
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 21]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-22" id="page-22" href="https://tools.ietf.org/html/rfc7095#page-22" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   In addition, it is expected that this new format will result in vCard
+   data being more widely disseminated (e.g., with use in web
+   applications rather than just dedicated &quot;contact managers&quot;).
+
+   In all cases, application developers have to conform to the semantics
+   of the vCard data as defined by [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>] and associated extensions,
+   and all of the security considerations described in <a href="https://tools.ietf.org/html/rfc6350#section-9">Section&nbsp;9 of
+   [RFC6350]</a>, or any associated extensions, are applicable.
+
+<span class="h2"><h2><a class="selflink" name="section-7" href="https://tools.ietf.org/html/rfc7095#section-7">7</a>. IANA Considerations</h2></span>
+
+   This document defines a MIME media type for use with vCard in JSON
+   data.  This media type SHOULD be used for the transfer of calendaring
+   data in JSON.
+
+   Type name:  application
+
+   Subtype name:  vcard+json
+
+   Required parameters:  none
+
+   Optional parameters:  &quot;version&quot;, as defined for the text/vcard media
+      type in <a href="https://tools.ietf.org/html/rfc6350#section-10.1">[RFC6350], Section&nbsp;10.1</a>.
+
+   Encoding considerations:  Same as encoding considerations of
+      application/json as specified in <a href="https://tools.ietf.org/html/rfc4627#section-6">[RFC4627], Section&nbsp;6</a>.
+
+   Security considerations:  See <a href="https://tools.ietf.org/html/rfc7095#section-6">Section 6</a>.
+
+   Interoperability considerations:  This media type provides an
+      alternative format for vCard data based on JSON.
+
+   Published specification:  This specification.
+
+   Applications which use this media type:  Applications that currently
+      make use of the text/vcard media type can use this as an
+      alternative.  Similarly, applications that use the application/
+      json media type to transfer directory data can use this to further
+      specify the content.
+
+   Fragment identifier considerations:  N/A
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 22]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-23" id="page-23" href="https://tools.ietf.org/html/rfc7095#page-23" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   Additional information:
+
+      Deprecated alias names for this type:  N/A
+
+      Magic number(s):  N/A
+
+      File extension(s):  N/A
+
+      Macintosh file type code(s):  N/A
+
+   Person &amp; email address to contact for further information:
+      vcarddav@ietf.org
+
+   Intended usage:  COMMON
+
+   Restrictions on usage:  There are no restrictions on where this media
+      type can be used.
+
+   Author:  See the &quot;Author's Address&quot; section of this document.
+
+   Change controller:  IETF
+
+<span class="h3"><h3><a class="selflink" name="section-7.1" href="https://tools.ietf.org/html/rfc7095#section-7.1">7.1</a>. GROUP vCard Parameter</h3></span>
+
+   IANA has added the &quot;GROUP&quot; parameter to the &quot;vCard Parameters&quot;
+   registry, initialized in <a href="https://tools.ietf.org/html/rfc6350#section-10.3.2">Section&nbsp;10.3.2 of [RFC6350]</a>.  Usage of the
+   &quot;GROUP&quot; parameter is further described in <a href="https://tools.ietf.org/html/rfc7095#section-3.3.1.2">Section 3.3.1.2</a> of this
+   document.
+
+   Namespace:  &lt;empty&gt;
+
+   Parameter name:  GROUP
+
+   Purpose:  To simplify the jCard format.
+
+   Description:  The &quot;GROUP&quot; parameter is reserved for the exclusive use
+      of the jCard format described in this document.  It MUST NOT be
+      used in plain vCard [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>], nor in xCard [<a href="https://tools.ietf.org/html/rfc6351" title="&quot;xCard: vCard XML Representation&quot;">RFC6351</a>].
+
+   Format definition:  When converting from jCard to vCard, the value of
+      the &quot;GROUP&quot; parameter is used as part of the property name.
+      Therefore, the value is restricted to characters allowed in
+      property names, namely ALPHA, DIGIT, and &quot;-&quot; characters.  When
+      used, the &quot;GROUP&quot; parameter MUST NOT be empty.
+
+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 23]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-24" id="page-24" href="https://tools.ietf.org/html/rfc7095#page-24" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   Example:  As this registration serves as a reservation of the &quot;GROUP&quot;
+      parameter so that it is not used in vCard, there is no applicable
+      vCard example.  Examples of its usage in jCard can be found in
+      this document.
+
+<span class="h3"><h3><a class="selflink" name="section-7.2" href="https://tools.ietf.org/html/rfc7095#section-7.2">7.2</a>. UNKNOWN vCard Value Data Type</h3></span>
+
+   IANA has added the &quot;UNKNOWN&quot; value data type to the &quot;vCard Value Data
+   Types&quot; registry, initialized in <a href="https://tools.ietf.org/html/rfc6350#section-10.3.3">Section&nbsp;10.3.3 of [RFC6350]</a>.  Usage
+   of the &quot;UNKNOWN&quot; type is further described in <a href="https://tools.ietf.org/html/rfc7095#section-5">Section 5</a> of this
+   document.
+
+   Value name:  UNKNOWN
+
+   Purpose:  To allow preserving property values whose default value
+      type is not known during round-tripping between jCard and vCard.
+
+   Format definition:  (Not applicable)
+
+   Description:  The &quot;UNKNOWN&quot; value data type is reserved for the
+      exclusive use of the jCard format.  It MUST NOT be used in plain
+      vCard [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>].
+
+   Example:  As this registration serves as a reservation of the
+      &quot;UNKNOWN&quot; type so that it is not used in vCard, there is no
+      applicable vCard example.  Examples of its usage in jCard can be
+      found in this document.
+
+<span class="h2"><h2><a class="selflink" name="section-8" href="https://tools.ietf.org/html/rfc7095#section-8">8</a>. Acknowledgments</h2></span>
+
+   The author would like to thank the following for their valuable
+   contributions: Cyrus Daboo, Mike Douglass, William Gill, Erwin Rehme,
+   Dave Thewlis, Simon Perreault, Michael Angstadt, Peter Saint-Andre,
+   Bert Greevenbosch, and Javier Godoy.  This specification originated
+   from the work of the XML-JSON technical committee of the Calendaring
+   and Scheduling Consortium.
+
+<span class="h2"><h2><a class="selflink" name="section-9" href="https://tools.ietf.org/html/rfc7095#section-9">9</a>. References</h2></span>
+
+<span class="h3"><h3><a class="selflink" name="section-9.1" href="https://tools.ietf.org/html/rfc7095#section-9.1">9.1</a>. Normative References</h3></span>
+
+   [<a name="ref-ISO.8601.2000" id="ref-ISO.8601.2000">ISO.8601.2000</a>]
+              International Organization for Standardization, &quot;Data
+              elements and interchange formats -- Information
+              interchange -- Representation of dates and times&quot;, ISO
+              8601, December 2000.
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 24]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-25" id="page-25" href="https://tools.ietf.org/html/rfc7095#page-25" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   [<a name="ref-ISO.8601.2004" id="ref-ISO.8601.2004">ISO.8601.2004</a>]
+              International Organization for Standardization, &quot;Data
+              elements and interchange formats -- Information
+              interchange -- Representation of dates and times&quot;, ISO
+              8601, December 2004.
+
+   [<a name="ref-RFC2119" id="ref-RFC2119">RFC2119</a>]  Bradner, S., &quot;Key words for use in RFCs to Indicate
+              Requirement Levels&quot;, <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>, <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>, March 1997.
+
+   [<a name="ref-RFC4627" id="ref-RFC4627">RFC4627</a>]  Crockford, D., &quot;The application/json Media Type for
+              JavaScript Object Notation (JSON)&quot;, <a href="https://tools.ietf.org/html/rfc4627">RFC 4627</a>, July 2006.
+
+   [<a name="ref-RFC5234" id="ref-RFC5234">RFC5234</a>]  Crocker, D. and P. Overell, &quot;Augmented BNF for Syntax
+              Specifications: ABNF&quot;, STD 68, <a href="https://tools.ietf.org/html/rfc5234">RFC 5234</a>, January 2008.
+
+   [<a name="ref-RFC5646" id="ref-RFC5646">RFC5646</a>]  Phillips, A. and M. Davis, &quot;Tags for Identifying
+              Languages&quot;, <a href="https://tools.ietf.org/html/bcp47">BCP 47</a>, <a href="https://tools.ietf.org/html/rfc5646">RFC 5646</a>, September 2009.
+
+   [<a name="ref-RFC6350" id="ref-RFC6350">RFC6350</a>]  Perreault, S., &quot;vCard Format Specification&quot;, <a href="https://tools.ietf.org/html/rfc6350">RFC 6350</a>,
+              August 2011.
+
+   [<a name="ref-RFC6868" id="ref-RFC6868">RFC6868</a>]  Daboo, C., &quot;Parameter Value Encoding in iCalendar and
+              vCard&quot;, <a href="https://tools.ietf.org/html/rfc6868">RFC 6868</a>, February 2013.
+
+<span class="h3"><h3><a class="selflink" name="section-9.2" href="https://tools.ietf.org/html/rfc7095#section-9.2">9.2</a>. Informative References</h3></span>
+
+   [<a name="ref-JCAL" id="ref-JCAL">JCAL</a>]     Kewisch, P., Daboo, C., and M. Douglass, &quot;jCal: The JSON
+              format for iCalendar&quot;, Work in Progress, December 2013.
+
+   [<a name="ref-RFC5545" id="ref-RFC5545">RFC5545</a>]  Desruisseaux, B., &quot;Internet Calendaring and Scheduling
+              Core Object Specification (iCalendar)&quot;, <a href="https://tools.ietf.org/html/rfc5545">RFC 5545</a>,
+              September 2009.
+
+   [<a name="ref-RFC6321" id="ref-RFC6321">RFC6321</a>]  Daboo, C., Douglass, M., and S. Lees, &quot;xCal: The XML
+              Format for iCalendar&quot;, <a href="https://tools.ietf.org/html/rfc6321">RFC 6321</a>, August 2011.
+
+   [<a name="ref-RFC6351" id="ref-RFC6351">RFC6351</a>]  Perreault, S., &quot;xCard: vCard XML Representation&quot;, <a href="https://tools.ietf.org/html/rfc6351">RFC</a>
+              <a href="https://tools.ietf.org/html/rfc6351">6351</a>, August 2011.
+
+   [<a name="ref-calconnect-artifacts" id="ref-calconnect-artifacts">calconnect-artifacts</a>]
+              The Calendaring and Scheduling Consortium, &quot;Code Artifacts
+              and Schemas&quot;, &lt;<a href="http://www.calconnect.org/artifacts.shtml">http://www.calconnect.org/artifacts.shtml</a>&gt;.
+
+
+
+
+
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 25]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-26" id="page-26" href="https://tools.ietf.org/html/rfc7095#page-26" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+<span class="h2"><h2><a class="selflink" name="appendix-A" href="https://tools.ietf.org/html/rfc7095#appendix-A">Appendix A</a>. ABNF Syntax</h2></span>
+
+   Below is the ABNF syntax as per [<a href="https://tools.ietf.org/html/rfc5234" title="&quot;Augmented BNF for Syntax Specifications: ABNF&quot;">RFC5234</a>] for vCard in JSON.  ABNF
+   symbols not described here are taken from [<a href="https://tools.ietf.org/html/rfc4627" title="&quot;The application/json Media Type for JavaScript Object Notation (JSON)&quot;">RFC4627</a>].  The syntax is
+   non-normative and given for reference only.
+
+   The numeric section numbers given in the comments refer to sections
+   in [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>].  Additional semantic restrictions apply, especially
+   regarding the allowed properties and subcomponents per component.
+   Details on these restrictions can be found in this document and
+   [<a href="https://tools.ietf.org/html/rfc6350" title="&quot;vCard Format Specification&quot;">RFC6350</a>].
+
+   Additional ABNF syntax may be available on the Internet at
+   [<a href="https://tools.ietf.org/html/rfc7095#ref-calconnect-artifacts" title="&quot;Code Artifacts and Schemas&quot;">calconnect-artifacts</a>].
+
+   ; A jCard object uses the name &quot;vcard&quot; and a properties array.
+   ; Restrictions to which properties may be specified are to
+   ; be taken from <a href="https://tools.ietf.org/html/rfc6350">RFC 6350</a>.
+   jcardobject = begin-array
+                 DQUOTE component-name DQUOTE value-separator
+                 properties-array
+                 end-array
+
+   ; A jCard property consists of the name string, parameters object,
+   ; type string, and one or more values as specified in this document.
+   property = begin-array
+              DQUOTE property-name DQUOTE value-separator
+              params-object value-separator
+              DQUOTE type-name DQUOTE
+              property-value *(value-separator property-value)
+              end-array
+   properties-array = begin-array
+                      [ property *(value-separator property) ]
+                      end-array
+
+   ; Property values depend on the type-name. Aside from the value types
+   ; mentioned here, extensions may make use of other JSON value types.
+   property-value = simple-prop-value / structured-prop-value
+   simple-prop-value = string / number / true / false
+   structured-prop-value =
+       begin-array
+       [ structured-element *(value-separator structured-element) ]
+       end-array
+
+   ; Each structured element may have multiple values if
+   ; semantically allowed.
+   structured-element = simple-prop-value / structured-multi-prop
+
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 26]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-27" id="page-27" href="https://tools.ietf.org/html/rfc7095#page-27" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   structured-multi-prop =
+       begin-array
+       [ simple-prop-value *(value-separator simple-prop-value) ]
+       end-array
+
+   ; The jCard params-object is a JSON object that follows the semantic
+   ; guidelines described in this document.
+   params-object = begin-object
+                   [ params-member *(value-separator params-member) ]
+                   end-object
+   params-member = DQUOTE param-name DQUOTE name-separator param-value
+   param-value = string / param-multi
+   param-multi = begin-array
+                 [ string *(value-separator string) ]
+                 end-array
+
+   ; The type MUST be a valid type as described by this document. New
+   ; value types can be added by extensions.
+   type-name = &quot;text&quot; / &quot;uri&quot; / &quot;date&quot; / &quot;time&quot; / &quot;date-time&quot; /
+               &quot;boolean&quot; / &quot;integer&quot; / &quot;float&quot; / &quot;utc-offset&quot; /
+               &quot;language-tag&quot; / x-type
+
+   ; Property, parameter, and type names MUST be lowercase. Additional
+   ; semantic restrictions apply as described by this document and
+   ; <a href="https://tools.ietf.org/html/rfc6350">RFC 6350</a>.
+   component-name = lowercase-name
+   property-name = lowercase-name
+   param-name = lowercase-name
+   x-type = lowercase-name
+   lowercase-name = 1*(%x61-7A / DIGIT / &quot;-&quot;)
+
+<span class="h2"><h2><a class="selflink" name="appendix-B" href="https://tools.ietf.org/html/rfc7095#appendix-B">Appendix B</a>. Examples</h2></span>
+
+   This section contains an example of a vCard object with its jCard
+   representation.
+
+<span class="h3"><h3><a class="selflink" name="appendix-B.1" href="https://tools.ietf.org/html/rfc7095#appendix-B.1">B.1</a>. Example: vCard of the Author of <a href="https://tools.ietf.org/html/rfc6350">RFC 6350</a></h3></span>
+
+<span class="h4"><h4><a class="selflink" name="appendix-B.1.1" href="https://tools.ietf.org/html/rfc7095#appendix-B.1.1">B.1.1</a>. vCard Data</h4></span>
+
+   BEGIN:VCARD
+   VERSION:4.0
+   FN:Simon Perreault
+   N:Perreault;Simon;;;ing. jr,M.Sc.
+   BDAY:--0203
+   ANNIVERSARY:20090808T1430-0500
+   GENDER:M
+   LANG;PREF=1:fr
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 27]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-28" id="page-28" href="https://tools.ietf.org/html/rfc7095#page-28" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+   LANG;PREF=2:en
+   ORG;TYPE=work:Viagenie
+   ADR;TYPE=work:;Suite D2-630;2875 Laurier;
+    Quebec;QC;G1V 2M2;Canada
+   TEL;VALUE=uri;TYPE=&quot;work,voice&quot;;PREF=1:tel:+1-418-656-9254;ext=102
+   TEL;VALUE=uri;TYPE=&quot;work,cell,voice,video,text&quot;:tel:+1-418-262-6501
+   EMAIL;TYPE=work:simon.perreault@viagenie.ca
+   GEO;TYPE=work:geo:46.772673,-71.282945
+   KEY;TYPE=work;VALUE=uri:
+    <a href="http://www.viagenie.ca/simon.perreault/simon.asc">http://www.viagenie.ca/simon.perreault/simon.asc</a>
+   TZ:-0500
+   URL;TYPE=home:http://nomis80.org
+   END:VCARD
+
+<span class="h4"><h4><a class="selflink" name="appendix-B.1.2" href="https://tools.ietf.org/html/rfc7095#appendix-B.1.2">B.1.2</a>. jCard Data</h4></span>
+
+   [&quot;vcard&quot;,
+     [
+       [&quot;version&quot;, {}, &quot;text&quot;, &quot;4.0&quot;],
+       [&quot;fn&quot;, {}, &quot;text&quot;, &quot;Simon Perreault&quot;],
+       [&quot;n&quot;,
+         {},
+         &quot;text&quot;,
+         [&quot;Perreault&quot;, &quot;Simon&quot;, &quot;&quot;, &quot;&quot;, [&quot;ing. jr&quot;, &quot;M.Sc.&quot;]]
+       ],
+       [&quot;bday&quot;, {}, &quot;date-and-or-time&quot;, &quot;--02-03&quot;],
+       [&quot;anniversary&quot;,
+         {},
+         &quot;date-and-or-time&quot;,
+         &quot;2009-08-08T14:30:00-05:00&quot;
+       ],
+       [&quot;gender&quot;, {}, &quot;text&quot;, &quot;M&quot;],
+       [&quot;lang&quot;, { &quot;pref&quot;: &quot;1&quot; }, &quot;language-tag&quot;, &quot;fr&quot;],
+       [&quot;lang&quot;, { &quot;pref&quot;: &quot;2&quot; }, &quot;language-tag&quot;, &quot;en&quot;],
+       [&quot;org&quot;, { &quot;type&quot;: &quot;work&quot; }, &quot;text&quot;, &quot;Viagenie&quot;],
+       [&quot;adr&quot;,
+          { &quot;type&quot;: &quot;work&quot; },
+          &quot;text&quot;,
+          [
+           &quot;&quot;,
+           &quot;Suite D2-630&quot;,
+           &quot;2875 Laurier&quot;,
+           &quot;Quebec&quot;,
+           &quot;QC&quot;,
+           &quot;G1V 2M2&quot;,
+           &quot;Canada&quot;
+          ]
+       ],
+
+
+
+<span class="grey">Kewisch                      Standards Track                   [Page 28]</span></pre> 
+   <hr class="noprint" style="width: 96ex;" align="left" />
+   <!--NewPage-->
+   <pre class="newpage"><a name="page-29" id="page-29" href="https://tools.ietf.org/html/rfc7095#page-29" class="invisible"> </a>
+<span class="grey"><a href="https://tools.ietf.org/html/rfc7095">RFC 7095</a>                          jCard                     January 2014</span>
+
+
+       [&quot;tel&quot;,
+         { &quot;type&quot;: [&quot;work&quot;, &quot;voice&quot;], &quot;pref&quot;: &quot;1&quot; },
+         &quot;uri&quot;,
+         &quot;tel:+1-418-656-9254;ext=102&quot;
+       ],
+       [&quot;tel&quot;,
+         { &quot;type&quot;: [&quot;work&quot;, &quot;cell&quot;, &quot;voice&quot;, &quot;video&quot;, &quot;text&quot;] },
+         &quot;uri&quot;,
+         &quot;tel:+1-418-262-6501&quot;
+       ],
+       [&quot;email&quot;,
+         { &quot;type&quot;: &quot;work&quot; },
+         &quot;text&quot;,
+         &quot;simon.perreault@viagenie.ca&quot;
+       ],
+       [&quot;geo&quot;, { &quot;type&quot;: &quot;work&quot; }, &quot;uri&quot;, &quot;geo:46.772673,-71.282945&quot;],
+       [&quot;key&quot;,
+         { &quot;type&quot;: &quot;work&quot; },
+         &quot;uri&quot;,
+         &quot;<a href="http://www.viagenie.ca/simon.perreault/simon.asc">http://www.viagenie.ca/simon.perreault/simon.asc</a>&quot;
+       ],
+       [&quot;tz&quot;, {}, &quot;utc-offset&quot;, &quot;-05:00&quot;],
+       [&quot;url&quot;, { &quot;type&quot;: &quot;home&quot; }, &quot;uri&quot;, &quot;<a href="http://nomis80.org">http://nomis80.org</a>&quot;]
+     ]
+   ]
+
+Author's Address
+
+   Philipp Kewisch
+   Mozilla Corporation
+   650 Castro Street, Suite 300
+   Mountain View, CA  94041
+   USA
+
+   EMail: mozilla@kewis.ch
+   URI:   <a href="http://www.mozilla.org/">http://www.mozilla.org/</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Kewisch                      Standards Track                   [Page 29]
+
+</pre>
+   <br /> 
+   <span class="noprint"><small><small>Html markup produced by rfcmarkup 1.127, available from <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a> </small></small></span> 
+  </div> 
+ </body>
+</html>
